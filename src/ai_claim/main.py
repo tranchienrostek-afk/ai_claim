@@ -81,14 +81,30 @@ def health() -> dict[str, object]:
             chat_deployment=SETTINGS.azure_openai_chat_deployment,
         )
     )
+    
+    # Check dependencies with short timeout
+    neo4j = neo4j_health()
+    pathway = _http_health(f"{SETTINGS.pathway_api_base_url.rstrip('/')}/health", timeout_seconds=2.0)
+    azure_proxy = _http_health(f"{SETTINGS.azure_proxy_base_url.rstrip('/')}/health", timeout_seconds=2.0)
+    
+    dependencies_ok = (
+        neo4j.get("status") == "ready" and 
+        pathway.get("status") == "up" and 
+        azure_proxy.get("status") == "up"
+    )
+    
     return {
-        "status": "ok",
+        "status": "ok" if dependencies_ok else "degraded",
+        "dependencies": {
+            "neo4j": neo4j.get("status"),
+            "pathway": pathway.get("status"),
+            "azure_proxy": azure_proxy.get("status"),
+        },
+        "azure_openai_configured": backend.is_configured(),
         "project_root": str(SETTINGS.project_root),
         "pathway_api_base_url": SETTINGS.pathway_api_base_url,
         "router_base_url": SETTINGS.router_base_url,
         "azure_proxy_base_url": SETTINGS.azure_proxy_base_url,
-        "max_upload_bytes": SETTINGS.max_upload_bytes,
-        "azure_openai_configured": backend.is_configured(),
     }
 
 

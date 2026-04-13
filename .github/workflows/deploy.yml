@@ -58,17 +58,30 @@ jobs:
 
       - name: Health check
         run: |
-          echo "Containers:"
+          echo "Checking container status..."
           docker ps --filter name=ai_claim --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
           echo ""
           for i in $(seq 1 30); do
             if curl -sf http://localhost:9780/health > /dev/null 2>&1; then
-              echo "ai_claim is UP"
+              echo "ai_claim is responding"
               curl -s http://localhost:9780/health
+              echo ""
               exit 0
             fi
             sleep 2
           done
           echo "Health check failed after 60s"
-          docker compose logs --tail 30
           exit 1
+
+      - name: Smoke test
+        run: |
+          echo "Ensuring test dependencies are installed on runner host..."
+          pip install httpx --quiet
+          echo "Running business logic smoke tests..."
+          python scripts/deploy_smoke_test.py
+
+      - name: On failure
+        if: failure()
+        run: |
+          echo "Deployment or tests failed. Printing logs..."
+          docker compose logs --tail 200
