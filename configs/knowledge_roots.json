@@ -1,0 +1,61 @@
+{
+  "version": "1.0",
+  "roots": [
+    {
+      "key": "protocols",
+      "label_vi": "Phác đồ",
+      "path": "data/knowledge/protocols",
+      "accepted_types": ["pdf", "txt", "md"],
+      "graph_target": "ontology_v2"
+    },
+    {
+      "key": "insurance_rules",
+      "label_vi": "Quy tắc bảo hiểm",
+      "path": "data/knowledge/insurance_rules",
+      "accepted_types": ["pdf", "docx", "txt", "md", "xlsx"],
+      "graph_target": "claims_insights_insurance_v1"
+    },
+    {
+      "key": "benefit_tables",
+      "label_vi": "Bảng quyền lợi",
+      "path": "data/knowledge/benefit_tables",
+      "accepted_types": ["xlsx", "csv", "xlsm"],
+      "graph_target": "claims_insights_insurance_v1"
+    },
+    {
+      "key": "service_tables",
+      "label_vi": "Danh mục dịch vụ",
+      "path": "data/knowledge/service_tables",
+      "accepted_types": ["xlsx", "csv", "xlsm"],
+      "graph_target": "claims_insights_explorer_v1"
+    },
+    {
+      "key": "symptom_tables",
+      "label_vi": "Bảng triệu chứng và dấu hiệu",
+      "path": "data/knowledge/symptom_tables",
+      "accepted_types": ["xlsx", "csv", "txt", "md"],
+      "graph_target": "claims_insights_explorer_v1"
+    },
+    {
+      "key": "diseases",
+      "label_vi": "Thư mục bệnh",
+      "path": "data/knowledge/diseases",
+      "accepted_types": ["dir"],
+      "graph_target": "mixed"
+    },
+    {
+      "key": "legal_documents",
+      "label_vi": "Văn bản pháp lý",
+      "path": "data/knowledge/legal_documents",
+      "accepted_types": ["pdf", "docx", "txt", "md"],
+      "graph_target": "claims_insights_insurance_v1"
+    },
+    {
+      "key": "adjuster_notes",
+      "label_vi": "Ghi chú thẩm định viên",
+      "path": "data/knowledge/adjuster_notes",
+      "accepted_types": ["md", "txt", "json"],
+      "graph_target": "memory"
+    }
+  ]
+}

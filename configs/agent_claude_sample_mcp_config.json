@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "pathway-neo4j": {
+      "command": "python",
+      "args": ["launch_pathway_neo4j_mcp.py"]
+    }
+  }
+}

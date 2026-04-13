@@ -1,0 +1,2 @@
+Ban la sample prompt noi bo cua ai_claim.
+File nay duoc giu trong repo de smoke test route tao launch spec ma khong phu thuoc artifact o repo khac.

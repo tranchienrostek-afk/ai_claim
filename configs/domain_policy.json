@@ -1,0 +1,67 @@
+{
+  "policy_id": "medical_insurance_domain_lock_v1",
+  "description_vi": "Khoa agent vao domain y te va bao hiem, khong cho lang thang khoi Neo4j va knowledge roots da cap phep.",
+  "allowed_builtin_tools": [
+    "Read",
+    "Bash"
+  ],
+  "allowed_mcp_tools": [
+    "mcp__pathway-neo4j__graph_operating_health",
+    "mcp__pathway-neo4j__graph_operating_report",
+    "mcp__pathway-neo4j__graph_operating_search",
+    "mcp__pathway-neo4j__list_recent_ci_diseases",
+    "mcp__pathway-neo4j__query_benefits_for_contract",
+    "mcp__pathway-neo4j__query_ci_disease_snapshot",
+    "mcp__pathway-neo4j__query_clinical_service_info",
+    "mcp__pathway-neo4j__query_contract_stats",
+    "mcp__pathway-neo4j__query_contracts_by_insurer",
+    "mcp__pathway-neo4j__query_disease_services",
+    "mcp__pathway-neo4j__query_exclusion_by_reason_text",
+    "mcp__pathway-neo4j__query_exclusions_by_contract",
+    "mcp__pathway-neo4j__query_plan_coverage_for_benefit",
+    "mcp__pathway-neo4j__query_plans_for_contract",
+    "mcp__pathway-neo4j__query_rulebook_by_insurer",
+    "mcp__pathway-neo4j__query_service_exclusions",
+    "mcp__pathway-neo4j__trace_service_evidence"
+  ],
+  "disallowed_builtin_tools": [
+    "Edit",
+    "Write",
+    "MultiEdit",
+    "NotebookEdit",
+    "WebFetch",
+    "WebSearch",
+    "TodoWrite",
+    "ToolSearchTool",
+    "Agent",
+    "Task",
+    "SkillTool"
+  ],
+  "allowed_knowledge_roots": [
+    "data/knowledge/protocols",
+    "data/knowledge/insurance_rules",
+    "data/knowledge/benefit_tables",
+    "data/knowledge/service_tables",
+    "data/knowledge/symptom_tables",
+    "data/knowledge/diseases",
+    "data/knowledge/legal_documents",
+    "data/knowledge/adjuster_notes"
+  ],
+  "allowed_domains": [
+    "medical",
+    "insurance",
+    "contract",
+    "legal"
+  ],
+  "decision_requirements": [
+    "Mọi quyết định phải có evidence.",
+    "Mọi quyết định phải nói rõ tầng y khoa và tầng bảo hiểm.",
+    "Không đủ evidence thì trả review hoặc insufficient_evidence.",
+    "Không được tự ý dùng tri thức ngoài graph khi chưa ghi rõ là suy luận."
+  ],
+  "azure_openai_profile": {
+    "provider": "azure_openai",
+    "reasoning_model_env": "AZURE_OPENAI_CHAT_DEPLOYMENT",
+    "embedding_model_env": "AZURE_OPENAI_EMBEDDING_DEPLOYMENT"
+  }
+}

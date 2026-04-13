@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ai_claim Dashboard</title>
+  <style>
+    :root {
+      --bg: #f4f1e8;
+      --card: #fffdf8;
+      --ink: #1d2a33;
+      --muted: #60707e;
+      --accent: #0f766e;
+      --accent-2: #c2410c;
+      --line: #ddd2bf;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(15,118,110,0.12), transparent 28%),
+        radial-gradient(circle at left bottom, rgba(194,65,12,0.10), transparent 30%),
+        var(--bg);
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 42px;
+      line-height: 1.05;
+    }
+    .lead {
+      margin: 0 0 24px;
+      color: var(--muted);
+      max-width: 920px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 12px 30px rgba(29,42,51,0.06);
+    }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+    .eyebrow {
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .stat {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 4px 0;
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: white;
+      font: inherit;
+    }
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    button {
+      margin-top: 12px;
+      margin-right: 8px;
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--accent);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .inline-check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      color: var(--muted);
+    }
+    .inline-check input {
+      width: auto;
+      padding: 0;
+      margin: 0;
+    }
+    @media (max-width: 920px) {
+      .span-4, .span-6, .span-8, .span-12 { grid-column: span 12; }
+      h1 { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>ai_claim dashboard</h1>
+    <p class="lead">
+      Bang dieu khien van hanh cho bai toan tri thuc y te, bao hiem, ingest vao Neo4j, duel runtime va truy vet impact.
+    </p>
+    <div class="grid">
+      <section class="card span-4">
+        <div class="eyebrow">Health</div>
+        <div id="healthStat" class="stat">...</div>
+        <div id="healthMeta"></div>
+      </section>
+      <section class="card span-4">
+        <div class="eyebrow">Domain Policy</div>
+        <div id="toolCount" class="stat">...</div>
+        <div id="policyMeta"></div>
+      </section>
+      <section class="card span-4">
+        <div class="eyebrow">Knowledge Roots</div>
+        <div id="rootCount" class="stat">...</div>
+        <div id="layoutMeta"></div>
+      </section>
+
+      <section class="card span-6">
+        <div class="eyebrow">System Stack</div>
+        <pre id="systemStatusOutput">Chua tai stack status.</pre>
+      </section>
+      <section class="card span-6">
+        <div class="eyebrow">Production Readiness</div>
+        <pre id="readinessOutput">Chua tai readiness.</pre>
+      </section>
+
+      <section class="card span-6">
+        <div class="eyebrow">Kien truc</div>
+        <div id="architecture"></div>
+      </section>
+      <section class="card span-6">
+        <div class="eyebrow">Ingest Support Matrix</div>
+        <pre id="supportMatrixOutput">Chua tai support matrix.</pre>
+      </section>
+
+      <section class="card span-6">
+        <div class="eyebrow">Benchmark Analyzer</div>
+        <label for="runDir">Run dir</label>
+        <input id="runDir" value="D:\desktop_folder\01_claudecodeleak\pathway\notebooklm\data\duel_runs\pathway_vs_agent_claude\20260409_224555_duel_meniere_001" />
+        <button id="loadBenchmark">Phan tich run</button>
+      </section>
+      <section class="card span-6">
+        <div class="eyebrow">Live Duel Runner</div>
+        <label for="duelCase">Case file</label>
+        <input id="duelCase" value="D:\desktop_folder\01_claudecodeleak\ai_claim\data\benchmarks\sample_case_meniere.json" />
+        <button id="runDuel">Chay duel live</button>
+      </section>
+
+      <section class="card span-6">
+        <div class="eyebrow">Knowledge Registry</div>
+        <label for="rootKey">Root key</label>
+        <select id="rootKey"></select>
+        <label for="uploadFile">Upload file vao local registry</label>
+        <input id="uploadFile" type="file" />
+        <button id="uploadKnowledge">Upload vao root</button>
+        <button id="scanKnowledge">Scan knowledge roots</button>
+        <pre id="knowledgeOutput">Chua scan.</pre>
+      </section>
+
+      <section class="card span-6">
+        <div class="eyebrow">Pathway Ingest Bridge</div>
+        <label for="bridgeRootKey">Root key</label>
+        <select id="bridgeRootKey"></select>
+        <label for="bridgeNamespace">Namespace</label>
+        <input id="bridgeNamespace" value="ontology_v2" />
+        <div class="inline-check"><input id="bridgeAutoIngest" type="checkbox" checked /><span>Auto ingest</span></div>
+        <div class="inline-check"><input id="bridgeWait" type="checkbox" /><span>Cho pipeline chay xong</span></div>
+        <label for="bridgeFile">Upload file vao local + Pathway</label>
+        <input id="bridgeFile" type="file" />
+        <button id="bridgeUpload">Bridge upload</button>
+        <pre id="bridgeOutput">Chua bridge asset.</pre>
+      </section>
+
+      <section class="card span-6">
+        <div class="eyebrow">Knowledge Surface</div>
+        <label for="surfaceQuery">Query</label>
+        <input id="surfaceQuery" value="Meniere MRI ENG thinh luc" />
+        <label for="surfaceDiseaseKey">Disease key</label>
+        <input id="surfaceDiseaseKey" value="H81_0_meniere" />
+        <button id="searchSurface">Tim trong notes/feedback/benchmark</button>
+        <pre id="surfaceOutput">Chua tim kiem.</pre>
+      </section>
+
+      <section class="card span-6">
+        <div class="eyebrow">Pathway Asset Trace</div>
+        <label for="pathwayAssetId">Pathway asset id</label>
+        <input id="pathwayAssetId" value="" />
+        <button id="loadPathwayImpact">Impact report</button>
+        <button id="loadPathwayTrace">Graph trace</button>
+        <button id="loadPathwayText">Text workspace</button>
+        <pre id="pathwayAssetOutput">Chua tai asset Pathway.</pre>
+      </section>
+
+      <section class="card span-12">
+        <div class="eyebrow">Benchmark Summary</div>
+        <pre id="benchmarkOutput">Chua tai du lieu.</pre>
+      </section>
+      <section class="card span-12">
+        <div class="eyebrow">Live Duel Output</div>
+        <pre id="duelOutput">Chua chay duel.</pre>
+      </section>
+      <section class="card span-12">
+        <div class="eyebrow">Root Summary</div>
+        <pre id="rootSummaryOutput">Chua tai root summary.</pre>
+      </section>
+      <section class="card span-12">
+        <div class="eyebrow">Neo4j Mapping Key Audit</div>
+        <pre id="mappingAuditOutput">Chua tai mapping audit.</pre>
+      </section>
+      <section class="card span-12">
+        <div class="eyebrow">Knowledge Assets</div>
+        <pre id="assetOutput">Chua tai asset.</pre>
+      </section>
+    </div>
+  </div>
+  <script>
+    async function loadJson(url) {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(await response.text());
+      }
+      return response.json();
+    }
+
+    async function boot() {
+      const health = await loadJson("/health");
+      document.getElementById("healthStat").textContent = health.status;
+      document.getElementById("healthMeta").textContent =
+        "Azure OpenAI configured: " + String(health.azure_openai_configured) +
+        " | Max upload bytes: " + String(health.max_upload_bytes);
+
+      const policy = await loadJson("/api/domain-policy");
+      document.getElementById("toolCount").textContent =
+        String(policy.allowed_builtin_tools.length + policy.allowed_mcp_tools.length) + " tools";
+      document.getElementById("policyMeta").innerHTML =
+        "<ul><li>Built-in: " + policy.allowed_builtin_tools.join(", ") +
+        "</li><li>MCP: " + policy.allowed_mcp_tools.length + " tool</li></ul>";
+
+      const layout = await loadJson("/api/knowledge-layout");
+      document.getElementById("rootCount").textContent = String(layout.roots.length) + " roots";
+      document.getElementById("layoutMeta").innerHTML =
+        "<ul>" + layout.roots.map(item => "<li>" + item.key + " -> " + item.graph_target + "</li>").join("") + "</ul>";
+      populateRootSelects(layout.roots);
+
+      const architecture = await loadJson("/api/architecture");
+      document.getElementById("architecture").innerHTML =
+        "<ul>" + architecture.runtime_layers.map(item => "<li>" + item + "</li>").join("") + "</ul>";
+
+      const support = await loadJson("/api/ingest/support-matrix");
+      document.getElementById("supportMatrixOutput").textContent = JSON.stringify(support, null, 2);
+      await loadSystemStatus();
+      await loadRootSummary();
+      await loadMappingAudit();
+      await loadReadiness();
+    }
+
+    function populateRootSelects(roots) {
+      const rootSelect = document.getElementById("rootKey");
+      const bridgeSelect = document.getElementById("bridgeRootKey");
+      rootSelect.innerHTML = "";
+      bridgeSelect.innerHTML = "";
+      for (const root of roots) {
+        const opt = document.createElement("option");
+        opt.value = root.key;
+        opt.textContent = `${root.key} -> ${root.graph_target}`;
+        rootSelect.appendChild(opt);
+        const opt2 = document.createElement("option");
+        opt2.value = root.key;
+        opt2.textContent = `${root.key} -> ${root.graph_target}`;
+        bridgeSelect.appendChild(opt2);
+      }
+      rootSelect.value = "protocols";
+      bridgeSelect.value = "protocols";
+    }
+
+    async function loadSystemStatus() {
+      const payload = await loadJson("/api/system/status");
+      document.getElementById("systemStatusOutput").textContent = JSON.stringify(payload, null, 2);
+    }
+
+    async function loadRootSummary() {
+      const payload = await loadJson("/api/knowledge/root-summary");
+      document.getElementById("rootSummaryOutput").textContent = JSON.stringify(payload, null, 2);
+    }
+
+    async function loadMappingAudit() {
+      const payload = await loadJson("/api/neo4j/mapping-key-audit");
+      document.getElementById("mappingAuditOutput").textContent = JSON.stringify(payload, null, 2);
+    }
+
+    async function loadReadiness() {
+      const payload = await loadJson("/api/production-readiness");
+      document.getElementById("readinessOutput").textContent = JSON.stringify(payload, null, 2);
+    }
+
+    async function loadBenchmark() {
+      const runDir = document.getElementById("runDir").value;
+      const payload = await loadJson("/api/benchmark/summary?run_dir=" + encodeURIComponent(runDir));
+      document.getElementById("benchmarkOutput").textContent = JSON.stringify(payload, null, 2);
+    }
+
+    async function loadAssets() {
+      const payload = await loadJson("/api/knowledge/assets");
+      document.getElementById("assetOutput").textContent = JSON.stringify(payload, null, 2);
+    }
+
+    async function searchSurface() {
+      const query = document.getElementById("surfaceQuery").value;
+      const diseaseKey = document.getElementById("surfaceDiseaseKey").value;
+      const payload = await loadJson(
+        "/api/knowledge/surface/search?query=" + encodeURIComponent(query) +
+        "&disease_key=" + encodeURIComponent(diseaseKey)
+      );
+      document.getElementById("surfaceOutput").textContent = JSON.stringify(payload, null, 2);
+    }
+
+    async function runDuel() {
+      const caseFile = document.getElementById("duelCase").value;
+      const duelResponse = await fetch("/api/duel/run", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ case_file: caseFile }),
+      });
+      if (!duelResponse.ok) {
+        throw new Error(await duelResponse.text());
+      }
+      const payload = await duelResponse.json();
+      document.getElementById("duelOutput").textContent = JSON.stringify(payload, null, 2);
+    }
+
+    async function scanKnowledge() {
+      const response = await fetch("/api/knowledge/scan", { method: "POST" });
+      if (!response.ok) {
+        throw new Error(await response.text());
+      }
+      const payload = await response.json();
+      document.getElementById("knowledgeOutput").textContent = JSON.stringify(payload, null, 2);
+      await loadAssets();
+      await loadRootSummary();
+      await loadReadiness();
+    }
+
+    async function uploadKnowledge() {
+      const rootKey = document.getElementById("rootKey").value;
+      const fileInput = document.getElementById("uploadFile");
+      const file = fileInput.files[0];
+      if (!file) {
+        throw new Error("Chua chon file.");
+      }
+      const form = new FormData();
+      form.append("root_key", rootKey);
+      form.append("file", file);
+      const response = await fetch("/api/knowledge/upload", {
+        method: "POST",
+        body: form,
+      });
+      if (!response.ok) {
+        throw new Error(await response.text());
+      }
+      const payload = await response.json();
+      document.getElementById("knowledgeOutput").textContent = JSON.stringify(payload, null, 2);
+      await loadAssets();
+      await loadRootSummary();
+      await loadReadiness();
+    }
+
+    async function bridgeUpload() {
+      const rootKey = document.getElementById("bridgeRootKey").value;
+      const namespace = document.getElementById("bridgeNamespace").value;
+      const autoIngest = document.getElementById("bridgeAutoIngest").checked;
+      const waitForCompletion = document.getElementById("bridgeWait").checked;
+      const fileInput = document.getElementById("bridgeFile");
+      const file = fileInput.files[0];
+      if (!file) {
+        throw new Error("Chua chon file bridge.");
+      }
+      const form = new FormData();
+      form.append("root_key", rootKey);
+      form.append("namespace", namespace);
+      form.append("auto_ingest", String(autoIngest));
+      form.append("wait_for_completion", String(waitForCompletion));
+      form.append("file", file);
+      const response = await fetch("/api/knowledge/bridge-upload", {
+        method: "POST",
+        body: form,
+      });
+      if (!response.ok) {
+        throw new Error(await response.text());
+      }
+      const payload = await response.json();
+      document.getElementById("bridgeOutput").textContent = JSON.stringify(payload, null, 2);
+      const pathwayAssetId = payload.pathway?.asset?.asset_id || "";
+      if (pathwayAssetId) {
+        document.getElementById("pathwayAssetId").value = pathwayAssetId;
+      }
+      await loadAssets();
+      await loadRootSummary();
+      await loadReadiness();
+    }
+
+    async function loadPathwayAsset(kind) {
+      const assetId = document.getElementById("pathwayAssetId").value;
+      if (!assetId) {
+        throw new Error("Chua co Pathway asset id.");
+      }
+      const path = kind === "impact"
+        ? `/api/pathway/knowledge/assets/${encodeURIComponent(assetId)}/impact-report`
+        : kind === "trace"
+        ? `/api/pathway/knowledge/assets/${encodeURIComponent(assetId)}/graph-trace`
+        : `/api/pathway/knowledge/assets/${encodeURIComponent(assetId)}/text-workspace`;
+      const payload = await loadJson(path);
+      document.getElementById("pathwayAssetOutput").textContent = JSON.stringify(payload, null, 2);
+    }
+
+    document.getElementById("loadBenchmark").addEventListener("click", () => {
+      loadBenchmark().catch(err => {
+        document.getElementById("benchmarkOutput").textContent = String(err);
+      });
+    });
+
+    document.getElementById("scanKnowledge").addEventListener("click", () => {
+      scanKnowledge().catch(err => {
+        document.getElementById("knowledgeOutput").textContent = String(err);
+      });
+    });
+
+    document.getElementById("uploadKnowledge").addEventListener("click", () => {
+      uploadKnowledge().catch(err => {
+        document.getElementById("knowledgeOutput").textContent = String(err);
+      });
+    });
+
+    document.getElementById("bridgeUpload").addEventListener("click", () => {
+      bridgeUpload().catch(err => {
+        document.getElementById("bridgeOutput").textContent = String(err);
+      });
+    });
+
+    document.getElementById("searchSurface").addEventListener("click", () => {
+      searchSurface().catch(err => {
+        document.getElementById("surfaceOutput").textContent = String(err);
+      });
+    });
+
+    document.getElementById("runDuel").addEventListener("click", () => {
+      runDuel().catch(err => {
+        document.getElementById("duelOutput").textContent = String(err);
+      });
+    });
+
+    document.getElementById("loadPathwayImpact").addEventListener("click", () => {
+      loadPathwayAsset("impact").catch(err => {
+        document.getElementById("pathwayAssetOutput").textContent = String(err);
+      });
+    });
+
+    document.getElementById("loadPathwayTrace").addEventListener("click", () => {
+      loadPathwayAsset("trace").catch(err => {
+        document.getElementById("pathwayAssetOutput").textContent = String(err);
+      });
+    });
+
+    document.getElementById("loadPathwayText").addEventListener("click", () => {
+      loadPathwayAsset("text").catch(err => {
+        document.getElementById("pathwayAssetOutput").textContent = String(err);
+      });
+    });
+
+    boot().catch(err => {
+      document.body.innerHTML += "<pre>" + String(err) + "</pre>";
+    });
+    loadAssets().catch(() => {});
+  </script>
+</body>
+</html>
