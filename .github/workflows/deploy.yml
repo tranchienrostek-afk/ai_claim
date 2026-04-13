@@ -19,20 +19,42 @@ jobs:
           docker --version
           docker compose version
 
+      - name: Create .env
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+        run: |
+          if [ -n "$ENV_FILE" ]; then
+            printf "%s" "$ENV_FILE" > .env
+            echo "Successfully created .env from GitHub Secrets."
+          elif [ -f /home/runner/.env.ai_claim ]; then
+            cp /home/runner/.env.ai_claim .env
+            echo "Copied .env from host fallback."
+          else
+            touch .env
+            echo "WARNING: No ENV_FILE secret or host .env found. Using empty .env (fail fast expected)."
+          fi
+
+      - name: Validate env
+        run: |
+          if [ ! -s .env ]; then
+            echo "Error: .env is empty or missing!"
+            exit 1
+          fi
+          # Check for critical keys to avoid half-alive deployment
+          CRITICAL_KEYS=("AZURE_OPENAI_API_KEY" "NEO4J_URI" "PATHWAY_API_BASE_URL")
+          for key in "${CRITICAL_KEYS[@]}"; do
+            if ! grep -q "^$key=" .env; then
+              echo "Error: Critical key $key is missing in .env!"
+              exit 1
+            fi
+          done
+          echo "Environment validation passed."
+
       - name: Build and deploy
         run: |
           cd $GITHUB_WORKSPACE
-          if [ ! -f .env ]; then
-            echo ".env not found in checkout — checking deploy dir"
-            if [ -f /home/runner/workspace/ai_claim/.env ]; then
-              cp /home/runner/workspace/ai_claim/.env .env
-              echo "Copied .env from deploy dir"
-            else
-              echo "WARNING: No .env found anywhere, app may fail to start"
-            fi
-          fi
-          docker compose down || true
-          docker compose up -d --build
+          docker compose --env-file .env down || true
+          docker compose --env-file .env up -d --build
 
       - name: Health check
         run: |
