@@ -62,8 +62,8 @@ if __name__ == "__main__":
         success = False
     
     if success:
-        print("\n✅ All smoke tests passed!")
+        print("\n[OK] All smoke tests passed!")
         sys.exit(0)
     else:
-        print("\n❌ Smoke tests failed!")
+        print("\n[FAIL] Smoke tests failed!")
         sys.exit(1)

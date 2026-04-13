@@ -3,499 +3,576 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ai_claim Dashboard</title>
-  <style>
-    :root {
-      --bg: #f4f1e8;
-      --card: #fffdf8;
-      --ink: #1d2a33;
-      --muted: #60707e;
-      --accent: #0f766e;
-      --accent-2: #c2410c;
-      --line: #ddd2bf;
+  <title>ai_claim | Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              deep: '#0b0f1a',
+              surface: '#131b2d',
+              card: 'rgba(23, 31, 50, 0.7)',
+              accent: '#2dd4bf',
+              primary: '#3b82f6',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at top right, rgba(15,118,110,0.12), transparent 28%),
-        radial-gradient(circle at left bottom, rgba(194,65,12,0.10), transparent 30%),
-        var(--bg);
-    }
-    .wrap {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 28px;
-    }
-    h1 {
-      margin: 0 0 8px;
-      font-size: 42px;
-      line-height: 1.05;
-    }
-    .lead {
-      margin: 0 0 24px;
-      color: var(--muted);
-      max-width: 920px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 16px;
-    }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px;
-      box-shadow: 0 12px 30px rgba(29,42,51,0.06);
-    }
-    .span-4 { grid-column: span 4; }
-    .span-6 { grid-column: span 6; }
-    .span-8 { grid-column: span 8; }
-    .span-12 { grid-column: span 12; }
-    .eyebrow {
-      text-transform: uppercase;
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-    .stat {
-      font-size: 28px;
-      font-weight: 700;
-      margin: 4px 0;
-    }
-    ul {
-      margin: 8px 0 0;
-      padding-left: 18px;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: white;
-      font: inherit;
-    }
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-    button {
-      margin-top: 12px;
-      margin-right: 8px;
-      padding: 12px 16px;
-      border: 0;
-      border-radius: 12px;
-      background: var(--accent);
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    pre {
-      white-space: pre-wrap;
-      word-break: break-word;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-    .inline-check {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 10px;
-      color: var(--muted);
-    }
-    .inline-check input {
-      width: auto;
-      padding: 0;
-      margin: 0;
-    }
-    @media (max-width: 920px) {
-      .span-4, .span-6, .span-8, .span-12 { grid-column: span 12; }
-      h1 { font-size: 34px; }
+  </script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .glass {
+        @apply bg-brand-card backdrop-blur-xl border border-white/10;
+      }
+      .indicator {
+        @apply w-2 h-2 rounded-full bg-slate-500 relative transition-all duration-500;
+      }
+      .indicator.active {
+        @apply bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)];
+      }
+      .indicator.active::after {
+        content: '';
+        @apply absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-50;
+      }
+      .indicator.warning { @apply bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.8)]; }
+      .indicator.danger { @apply bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.8)]; }
+
+      .step-node.active .node-icon { @apply bg-brand-primary text-white shadow-lg shadow-brand-primary/20 scale-110; }
+      .step-node.active .node-label { @apply text-brand-primary font-bold; }
+      .step-content { @apply transition-all duration-500 opacity-0 translate-x-4 hidden; }
+      .step-content.active { @apply opacity-100 translate-x-0 block; }
+      
+      .btn-primary {
+        @apply bg-brand-primary hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-bold transition-all transform hover:-translate-y-0.5 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2;
+      }
+      .btn-secondary {
+        @apply bg-white/5 hover:bg-white/10 text-white border border-white/10 px-6 py-3 rounded-xl font-semibold transition-all flex items-center gap-2;
+      }
+      .data-panel {
+        @apply bg-black/40 rounded-xl p-4 font-mono text-[11px] text-cyan-300 border border-white/5 overflow-auto max-h-[300px];
+      }
     }
   </style>
 </head>
-<body>
-  <div class="wrap">
-    <h1>ai_claim dashboard</h1>
-    <p class="lead">
-      Bang dieu khien van hanh cho bai toan tri thuc y te, bao hiem, ingest vao Neo4j, duel runtime va truy vet impact.
-    </p>
-    <div class="grid">
-      <section class="card span-4">
-        <div class="eyebrow">Health</div>
-        <div id="healthStat" class="stat">...</div>
-        <div id="healthMeta"></div>
-      </section>
-      <section class="card span-4">
-        <div class="eyebrow">Domain Policy</div>
-        <div id="toolCount" class="stat">...</div>
-        <div id="policyMeta"></div>
-      </section>
-      <section class="card span-4">
-        <div class="eyebrow">Knowledge Roots</div>
-        <div id="rootCount" class="stat">...</div>
-        <div id="layoutMeta"></div>
-      </section>
+<body class="bg-brand-deep text-slate-200 min-h-screen">
+  <!-- Status Bar (Pulse) -->
+  <div class="fixed top-0 left-0 right-0 z-50 px-8 py-3 bg-brand-deep/80 backdrop-blur-md border-b border-white/5 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-gradient-to-br from-brand-primary to-brand-accent rounded-xl flex items-center justify-center font-display font-bold text-white shadow-lg shadow-brand-primary/20">AI</div>
+      <div>
+        <h1 class="font-display font-bold text-lg leading-none">ai_claim</h1>
+        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">Command Center v2.0</p>
+      </div>
+    </div>
 
-      <section class="card span-6">
-        <div class="eyebrow">System Stack</div>
-        <pre id="systemStatusOutput">Chua tai stack status.</pre>
-      </section>
-      <section class="card span-6">
-        <div class="eyebrow">Production Readiness</div>
-        <pre id="readinessOutput">Chua tai readiness.</pre>
-      </section>
-
-      <section class="card span-6">
-        <div class="eyebrow">Kien truc</div>
-        <div id="architecture"></div>
-      </section>
-      <section class="card span-6">
-        <div class="eyebrow">Ingest Support Matrix</div>
-        <pre id="supportMatrixOutput">Chua tai support matrix.</pre>
-      </section>
-
-      <section class="card span-6">
-        <div class="eyebrow">Benchmark Analyzer</div>
-        <label for="runDir">Run dir</label>
-        <input id="runDir" value="D:\desktop_folder\01_claudecodeleak\pathway\notebooklm\data\duel_runs\pathway_vs_agent_claude\20260409_224555_duel_meniere_001" />
-        <button id="loadBenchmark">Phan tich run</button>
-      </section>
-      <section class="card span-6">
-        <div class="eyebrow">Live Duel Runner</div>
-        <label for="duelCase">Case file</label>
-        <input id="duelCase" value="D:\desktop_folder\01_claudecodeleak\ai_claim\data\benchmarks\sample_case_meniere.json" />
-        <button id="runDuel">Chay duel live</button>
-      </section>
-
-      <section class="card span-6">
-        <div class="eyebrow">Knowledge Registry</div>
-        <label for="rootKey">Root key</label>
-        <select id="rootKey"></select>
-        <label for="uploadFile">Upload file vao local registry</label>
-        <input id="uploadFile" type="file" />
-        <button id="uploadKnowledge">Upload vao root</button>
-        <button id="scanKnowledge">Scan knowledge roots</button>
-        <pre id="knowledgeOutput">Chua scan.</pre>
-      </section>
-
-      <section class="card span-6">
-        <div class="eyebrow">Pathway Ingest Bridge</div>
-        <label for="bridgeRootKey">Root key</label>
-        <select id="bridgeRootKey"></select>
-        <label for="bridgeNamespace">Namespace</label>
-        <input id="bridgeNamespace" value="ontology_v2" />
-        <div class="inline-check"><input id="bridgeAutoIngest" type="checkbox" checked /><span>Auto ingest</span></div>
-        <div class="inline-check"><input id="bridgeWait" type="checkbox" /><span>Cho pipeline chay xong</span></div>
-        <label for="bridgeFile">Upload file vao local + Pathway</label>
-        <input id="bridgeFile" type="file" />
-        <button id="bridgeUpload">Bridge upload</button>
-        <pre id="bridgeOutput">Chua bridge asset.</pre>
-      </section>
-
-      <section class="card span-6">
-        <div class="eyebrow">Knowledge Surface</div>
-        <label for="surfaceQuery">Query</label>
-        <input id="surfaceQuery" value="Meniere MRI ENG thinh luc" />
-        <label for="surfaceDiseaseKey">Disease key</label>
-        <input id="surfaceDiseaseKey" value="H81_0_meniere" />
-        <button id="searchSurface">Tim trong notes/feedback/benchmark</button>
-        <pre id="surfaceOutput">Chua tim kiem.</pre>
-      </section>
-
-      <section class="card span-6">
-        <div class="eyebrow">Pathway Asset Trace</div>
-        <label for="pathwayAssetId">Pathway asset id</label>
-        <input id="pathwayAssetId" value="" />
-        <button id="loadPathwayImpact">Impact report</button>
-        <button id="loadPathwayTrace">Graph trace</button>
-        <button id="loadPathwayText">Text workspace</button>
-        <pre id="pathwayAssetOutput">Chua tai asset Pathway.</pre>
-      </section>
-
-      <section class="card span-12">
-        <div class="eyebrow">Benchmark Summary</div>
-        <pre id="benchmarkOutput">Chua tai du lieu.</pre>
-      </section>
-      <section class="card span-12">
-        <div class="eyebrow">Live Duel Output</div>
-        <pre id="duelOutput">Chua chay duel.</pre>
-      </section>
-      <section class="card span-12">
-        <div class="eyebrow">Root Summary</div>
-        <pre id="rootSummaryOutput">Chua tai root summary.</pre>
-      </section>
-      <section class="card span-12">
-        <div class="eyebrow">Neo4j Mapping Key Audit</div>
-        <pre id="mappingAuditOutput">Chua tai mapping audit.</pre>
-      </section>
-      <section class="card span-12">
-        <div class="eyebrow">Knowledge Assets</div>
-        <pre id="assetOutput">Chua tai asset.</pre>
-      </section>
+    <div class="flex items-center gap-6">
+      <div class="flex items-center gap-4 px-4 py-2 glass rounded-full text-[11px] font-bold">
+        <div class="flex items-center gap-2">
+          <div id="indNeo4j" class="indicator"></div>
+          <span class="text-slate-400">NEO4J</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div id="indPathway" class="indicator"></div>
+          <span class="text-slate-400">PATHWAY</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div id="indAzure" class="indicator"></div>
+          <span class="text-slate-400">AZURE</span>
+        </div>
+        <div class="flex items-center gap-2 border-l border-white/10 pl-4 text-brand-warning">
+          <span>DEMO</span>
+          <label class="switch ml-2">
+            <input type="checkbox" id="demoModeToggle">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div id="healthStatusText" class="text-xs font-bold px-3 py-1.5 rounded-lg border border-brand-accent/30 bg-brand-accent/10 text-brand-accent">
+        Stable
+      </div>
     </div>
   </div>
+
+  <main class="max-w-6xl mx-auto pt-32 pb-24 px-8">
+    <!-- Stepper Navigation -->
+    <div class="relative mb-16 flex justify-between max-w-2xl mx-auto">
+      <div class="absolute top-5 left-0 w-full h-0.5 bg-white/5 -z-10"></div>
+      <div id="stepper-progress" class="absolute top-5 left-0 h-0.5 bg-brand-primary transition-all duration-700 -z-10" style="width: 0%"></div>
+      
+      <button onclick="goToStep(1)" class="step-node active flex flex-col items-center gap-3 transition-all duration-300" id="step-node-1">
+        <div class="node-icon w-10 h-10 rounded-full glass flex items-center justify-center font-bold z-10">1</div>
+        <span class="node-label text-xs uppercase tracking-widest text-slate-500">Nạp tri thức</span>
+      </button>
+      <button onclick="goToStep(2)" class="step-node flex flex-col items-center gap-3 transition-all duration-300" id="step-node-2">
+        <div class="node-icon w-10 h-10 rounded-full glass flex items-center justify-center font-bold z-10">2</div>
+        <span class="node-label text-xs uppercase tracking-widest text-slate-500">Phân tích AI</span>
+      </button>
+      <button onclick="goToStep(3)" class="step-node flex flex-col items-center gap-3 transition-all duration-300" id="step-node-3">
+        <div class="node-icon w-10 h-10 rounded-full glass flex items-center justify-center font-bold z-10">3</div>
+        <span class="node-label text-xs uppercase tracking-widest text-slate-500">Đối soát & Audit</span>
+      </button>
+    </div>
+
+    <div class="glass rounded-3xl p-10 min-h-[500px] relative overflow-hidden">
+      
+      <!-- STEP 1: KNOWLEDGE INPUT -->
+      <div id="step-1" class="step-content active space-y-10">
+        <div class="text-center max-w-2xl mx-auto">
+          <h2 class="text-4xl font-display font-bold text-white mb-4">Khởi tạo Kho tri thức</h2>
+          <p class="text-slate-400">Bước đầu tiên trong quy trình thẩm định. Dữ liệu y khoa và quy tắc bảo hiểm cần được nạp vào Registry để Agent AI có thể học và tra cứu.</p>
+        </div>
+
+        <div class="grid grid-cols-12 gap-8">
+          <div class="col-span-12 lg:col-span-7 space-y-6">
+            <div class="space-y-4">
+              <label class="text-xs font-bold text-brand-primary uppercase tracking-widest">Cấu hình Ingestion</label>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-2">
+                  <span class="text-[11px] text-slate-500 font-bold">NHÁNH MỤC TIÊU (ROOT)</span>
+                  <select id="rootKey" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-brand-primary outline-none transition-all"></select>
+                </div>
+                <div class="space-y-2">
+                  <span class="text-[11px] text-slate-500 font-bold">CHỌN TỆP TIN</span>
+                  <input id="uploadFile" type="file" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs file:hidden cursor-pointer" />
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex gap-4">
+              <button id="uploadKnowledge" class="btn-primary flex-1 justify-center">
+                <span>📁</span> Lưu vào Registry
+              </button>
+              <button id="scanKnowledge" class="btn-secondary">
+                <span>🔍</span> Quét lại Registry
+              </button>
+            </div>
+          </div>
+
+          <div class="col-span-12 lg:col-span-5 bg-white/5 rounded-2xl p-6 border border-white/10">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-sm text-white">Thống kê Registry</h3>
+              <div class="px-2 py-1 rounded bg-brand-primary/20 text-brand-primary text-[10px] font-bold">LIVE</div>
+            </div>
+            <div class="space-y-4 text-center py-4">
+              <div id="rootCount" class="text-5xl font-display font-bold text-brand-primary">...</div>
+              <p class="text-xs text-slate-500 uppercase tracking-widest">Nhóm tri thức đã kích hoạt</p>
+              <div id="layoutMeta" class="text-[11px] text-slate-400 leading-relaxed italic"></div>
+            </div>
+          </div>
+        </div>
+
+        <pre id="knowledgeOutput" class="data-panel w-full">Log hoạt động quản trị...</pre>
+        
+        <div class="flex justify-center pt-4">
+          <button onclick="goToStep(2)" class="text-brand-accent hover:underline text-sm font-bold flex items-center gap-2">
+            Tiếp theo: Cấu hình Phân tích AI <span class="text-lg">→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: REASONING & ANALYSIS -->
+      <div id="step-2" class="step-content space-y-10">
+        <div class="text-center max-w-2xl mx-auto">
+          <h2 class="text-4xl font-display font-bold text-white mb-4">Kích hoạt Suy luận AI</h2>
+          <p class="text-slate-400">Agent AI sẽ sử dụng tri thức từ Knowledge Graph phối hợp với RAG (Pathway) để đưa ra phán quyết cho hồ sơ.</p>
+        </div>
+
+        <div class="grid grid-cols-12 gap-8">
+          <!-- Live Duel -->
+          <div class="col-span-12 lg:col-span-8 space-y-6">
+            <div class="p-8 border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent rounded-3xl space-y-6">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-primary/20 text-brand-primary flex items-center justify-center font-bold">🚀</div>
+                <h3 class="font-display font-bold text-xl">Đối đầu Live Dual</h3>
+              </div>
+              <div class="space-y-4">
+                <div class="space-y-2">
+                  <span class="text-[11px] text-slate-500 font-bold">HỒ SƠ ĐẦU VÀO (CASE JSON)</span>
+                  <input id="duelCase" value="data/benchmarks/sample_case_meniere.json" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-brand-primary outline-none transition-all" />
+                </div>
+                <button id="runDuel" class="btn-primary w-full justify-center bg-gradient-to-r from-brand-primary to-blue-700 h-14 text-lg">
+                  Kích hoạt Tác nhân Suy luận
+                </button>
+              </div>
+            </div>
+
+            <!-- Bridge -->
+            <div class="grid grid-cols-2 gap-6">
+              <div class="bg-white/5 p-6 rounded-2xl border border-white/10 space-y-4">
+                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Gateway Bridge</h4>
+                <div class="space-y-3">
+                  <input id="bridgeNamespace" value="ontology_v2" class="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-xs" placeholder="Namespace..." />
+                  <div class="flex items-center gap-4 text-[10px] font-bold">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input id="bridgeAutoIngest" type="checkbox" checked class="accent-brand-primary"> Auto Ingest
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input id="bridgeWait" type="checkbox" class="accent-brand-primary"> Wait Sync
+                    </label>
+                  </div>
+                  <button id="bridgeUpload" class="btn-secondary w-full justify-center text-xs py-2">🔗 Sync Pathway</button>
+                </div>
+              </div>
+              <!-- Quick Search -->
+              <div class="bg-white/5 p-6 rounded-2xl border border-white/10 space-y-4">
+                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Tra cứu Nhanh</h4>
+                <div class="space-y-3">
+                  <input id="surfaceQuery" value="Triệu chứng bệnh Meniere" class="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-xs" />
+                  <input id="surfaceDiseaseKey" value="H81_0_meniere" class="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-xs" placeholder="Disease Key..." />
+                  <button id="searchSurface" class="btn-secondary w-full justify-center text-xs py-2">🔍 Search Surface</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Agent Vitals -->
+          <div class="col-span-12 lg:col-span-4 space-y-6">
+            <div class="glass p-6 rounded-2xl space-y-6">
+              <h3 class="font-bold text-sm text-white border-b border-white/5 pb-3">Tác nhân Robot</h3>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-500">Capability</span>
+                  <span id="toolCount" class="font-display font-bold text-brand-primary">...</span>
+                </div>
+                <div id="policyMeta" class="text-[10px] text-slate-400 bg-black/30 p-3 rounded-lg leading-relaxed"></div>
+                <div class="px-2 py-1 rounded bg-brand-accent/20 text-brand-accent text-[10px] font-bold inline-block">SONNET-3.5-INTELLIGENCE</div>
+              </div>
+            </div>
+            <pre id="surfaceOutput" class="data-panel !max-h-[220px]">Kết quả tra cứu Surface...</pre>
+          </div>
+        </div>
+
+        <div class="flex justify-between pt-4">
+          <button onclick="goToStep(1)" class="text-slate-500 hover:text-slate-200 text-sm font-bold flex items-center gap-2">
+            <span class="text-lg">←</span> Quay lại Nạp tri thức
+          </button>
+          <button onclick="goToStep(3)" class="text-brand-accent hover:underline text-sm font-bold flex items-center gap-2">
+            Xem Kết quả & Audit <span class="text-lg">→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: OUTPUT & AUDIT -->
+      <div id="step-3" class="step-content space-y-10">
+        <div class="text-center max-w-2xl mx-auto">
+          <h2 class="text-4xl font-display font-bold text-white mb-4">Hoàn tất & Đối soát</h2>
+          <p class="text-slate-400">Kiểm tra kết quả cuối cùng từ Agent, đo lường mức độ sẵn sàng của hệ thống và truy vết (Trace) các logic sai lệch.</p>
+        </div>
+
+        <div class="grid grid-cols-12 gap-8">
+          <!-- Readiness Stats -->
+          <div class="col-span-12 lg:col-span-4 space-y-6">
+            <div class="glass p-8 rounded-3xl text-center space-y-4 relative overflow-hidden">
+               <div class="absolute inset-0 bg-brand-primary/5 -z-10"></div>
+               <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Production Readiness</h3>
+               <div id="coverageVal" class="text-6xl font-display font-bold text-white">...</div>
+               <div class="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                  <div id="coverageBar" class="h-full bg-gradient-to-r from-brand-primary to-brand-accent transition-all duration-1000" style="width: 0%"></div>
+               </div>
+               <p class="text-[11px] text-slate-400">Hệ thống đã sẵn sàng cho bồi thường tự động</p>
+            </div>
+            
+            <div class="glass p-6 rounded-2xl space-y-4">
+              <h4 class="text-xs font-bold text-white uppercase tracking-widest">Kiểm tra Cấu hình</h4>
+              <div class="flex flex-col gap-2">
+                <button id="loadReadiness" class="btn-secondary !text-[11px] justify-start py-2.5">🎯 Readiness Report</button>
+                <button id="loadSystemStatus" class="btn-secondary !text-[11px] justify-start py-2.5">💻 Infra Pulse</button>
+                <button id="loadMappingAudit" class="btn-secondary !text-[11px] justify-start py-2.5">⛓️ Graph Key Audit</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Benchmark Analysis -->
+          <div class="col-span-12 lg:col-span-8 space-y-6">
+            <div class="glass p-8 rounded-3xl space-y-6">
+              <div class="flex items-center justify-between">
+                <h3 class="font-display font-bold text-xl">Phân tích khoảng cách Tư duy</h3>
+                <input id="runDir" value="data/duel_runs/pathway_vs_agent_claude/20260409_224555_duel_meniere_001" class="bg-black/40 border border-white/10 rounded-lg px-3 py-1.5 text-[10px] w-64" />
+              </div>
+              <p class="text-[11px] text-slate-400">So sánh sai lệch giữa cách Agent suy luận và Benchmark chuẩn mực được chuyên gia phê duyệt.</p>
+              <button id="loadBenchmark" class="btn-primary w-full justify-center">📊 Tải phân tích Benchmark</button>
+            </div>
+
+            <!-- Impact Trace -->
+            <div class="bg-white/[0.03] border border-white/10 p-6 rounded-2xl flex gap-4 items-center">
+              <div class="flex-1 space-y-1">
+                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Truy vết đồ thị (Trace Impact)</span>
+                <input id="pathwayAssetId" placeholder="Pathway Asset ID..." class="w-full bg-transparent border-none outline-none text-brand-accent font-mono text-sm" />
+              </div>
+              <button id="loadPathwayTrace" class="btn-secondary whitespace-nowrap">👁️ Trace Node</button>
+            </div>
+          </div>
+        </div>
+
+        <pre id="mainDebugOutput" class="data-panel !max-h-[350px] w-full border-brand-primary/20">Bảng tin kết quả đối soát kỹ thuật...</pre>
+
+        <div class="flex justify-center pt-8 border-t border-white/5">
+          <button onclick="goToStep(1)" class="btn-secondary px-8">
+            Làm hồ sơ mới (Reset Pipeline)
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="toast" class="glass !bg-brand-surface shadow-2xl font-bold text-sm">Thông báo</div>
+
   <script>
+    // Constants & State
+    const TOAST_DURATION = 3000;
+    let currentStep = 1;
+
+    function goToStep(n) {
+      // Hide all steps
+      document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.step-node').forEach(el => el.classList.remove('active'));
+      
+      // Show target step
+      document.getElementById(`step-${n}`).classList.add('active');
+      document.getElementById(`step-node-${n}`).classList.add('active');
+      
+      // Update progress bar
+      const progress = (n - 1) * 50; 
+      document.getElementById('stepper-progress').style.width = `${progress}%`;
+      currentStep = n;
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // UI Helpers
+    function showToast(msg, type = 'info') {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.borderColor = type === 'error' ? 'rgba(244,63,94,0.5)' : 'rgba(59,130,246,0.5)';
+      t.style.backgroundColor = type === 'error' ? 'rgba(244,63,94,0.1)' : 'rgba(59,130,246,0.1)';
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), TOAST_DURATION);
+    }
+
     async function loadJson(url) {
+      if (document.getElementById('demoModeToggle').checked && !url.includes('/api/system/status')) {
+        return handleDemoResponse(url);
+      }
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error(await response.text());
+          const text = await response.text();
+          let errorMsg = text;
+          if (response.status === 424) {
+              errorMsg = "Lỗi hạ tầng: Dịch vụ hỗ trợ (Neo4j/Pathway) không phản hồi. Hãy kiểm tra logs hoặc bật Demo Mode.";
+          }
+          throw new Error(errorMsg);
       }
       return response.json();
     }
 
+    function handleDemoResponse(url) {
+        console.log("Demo Mode acting on:", url);
+        if (url.includes('/api/duel/run')) {
+            return {
+                status: "success",
+                reasoning: "Dựa vào dữ liệu từ Neo4j, chẩn đoán Meniere có chỉ định đo thính lực và MRI tiền đình. Pathway cũng xác nhận phác đồ này.",
+                decision: "APPROVE",
+                confidence: 0.95,
+                demo: true
+            };
+        }
+        if (url.includes('/api/knowledge/surface/search')) {
+            return {
+                hits: [{ title: "[MOCK] Hướng dẫn điều trị Meniere 2024", snippet: "Phác đồ chuẩn bao gồm kiểm soát muối và sử dụng thuốc lợi tiểu..." }],
+                demo: true
+            };
+        }
+        return { message: "Demo Mode active", data: {}, demo: true };
+    }
+
+    function updateIndicator(id, status) {
+      const ind = document.getElementById(id);
+      if (!ind) return;
+      ind.className = 'indicator';
+      if (status === 'up' || status === 'ready' || status === 'ok') ind.classList.add('active');
+      else if (status === 'degraded' || status === 'warning') ind.classList.add('warning');
+      else ind.classList.add('danger');
+    }
+
+    // Core Logic
+    async function refreshStatus() {
+      try {
+        const payload = await loadJson("/api/system/status");
+        updateIndicator('indNeo4j', payload.neo4j.status);
+        updateIndicator('indPathway', payload.pathway.status);
+        updateIndicator('indAzure', payload.ai_claim.dependencies.azure_proxy);
+        
+        const healthText = document.getElementById("healthStatusText");
+        const isStable = payload.ai_claim.status === 'ok';
+        healthText.textContent = isStable ? 'Đã sẵn sàng (Stable)' : 'Đang sụt giảm (Degraded)';
+        
+        // Tailwind class swap
+        if (isStable) {
+          healthText.classList.remove('border-brand-warning/30', 'bg-brand-warning/10', 'text-brand-warning');
+          healthText.classList.add('border-brand-accent/30', 'bg-brand-accent/10', 'text-brand-accent');
+        } else {
+          healthText.classList.remove('border-brand-accent/30', 'bg-brand-accent/10', 'text-brand-accent');
+          healthText.classList.add('border-brand-warning/30', 'bg-brand-warning/10', 'text-brand-warning');
+        }
+      } catch (err) {
+        console.error("Status refresh failed", err);
+      }
+    }
+
     async function boot() {
-      const health = await loadJson("/health");
-      document.getElementById("healthStat").textContent = health.status;
-      document.getElementById("healthMeta").textContent =
-        "Azure OpenAI configured: " + String(health.azure_openai_configured) +
-        " | Max upload bytes: " + String(health.max_upload_bytes);
+      try {
+        // Initial Status
+        await refreshStatus();
+        setInterval(refreshStatus, 10000);
 
-      const policy = await loadJson("/api/domain-policy");
-      document.getElementById("toolCount").textContent =
-        String(policy.allowed_builtin_tools.length + policy.allowed_mcp_tools.length) + " tools";
-      document.getElementById("policyMeta").innerHTML =
-        "<ul><li>Built-in: " + policy.allowed_builtin_tools.join(", ") +
-        "</li><li>MCP: " + policy.allowed_mcp_tools.length + " tool</li></ul>";
+        // Load Stats
+        const policy = await loadJson("/api/domain-policy");
+        document.getElementById("toolCount").textContent = (policy.allowed_builtin_tools.length + policy.allowed_mcp_tools.length).toString();
+        document.getElementById("policyMeta").textContent = policy.allowed_builtin_tools.length + " Built-in, " + policy.allowed_mcp_tools.length + " MCP extensions";
 
-      const layout = await loadJson("/api/knowledge-layout");
-      document.getElementById("rootCount").textContent = String(layout.roots.length) + " roots";
-      document.getElementById("layoutMeta").innerHTML =
-        "<ul>" + layout.roots.map(item => "<li>" + item.key + " -> " + item.graph_target + "</li>").join("") + "</ul>";
-      populateRootSelects(layout.roots);
+        const layout = await loadJson("/api/knowledge-layout");
+        document.getElementById("rootCount").textContent = layout.roots.length.toString();
+        document.getElementById("layoutMeta").textContent = layout.roots.map(r => r.key).slice(0, 3).join(", ") + "...";
+        populateRootSelects(layout.roots);
 
-      const architecture = await loadJson("/api/architecture");
-      document.getElementById("architecture").innerHTML =
-        "<ul>" + architecture.runtime_layers.map(item => "<li>" + item + "</li>").join("") + "</ul>";
+        const readiness = await loadJson("/api/production-readiness");
+        const readyCount = Object.values(readiness.checklist).filter(v => v === true).length;
+        const totalCount = Object.keys(readiness.checklist).length;
+        const percent = Math.round((readyCount / totalCount) * 100);
+        document.getElementById("coverageVal").textContent = percent + "%";
+        document.getElementById("coverageBar").style.width = percent + "%";
 
-      const support = await loadJson("/api/ingest/support-matrix");
-      document.getElementById("supportMatrixOutput").textContent = JSON.stringify(support, null, 2);
-      await loadSystemStatus();
-      await loadRootSummary();
-      await loadMappingAudit();
-      await loadReadiness();
+        showToast("Hệ thống đã khởi động thành công", "success");
+      } catch (err) {
+        showToast("Lỗi khởi động: " + err.message, "error");
+      }
     }
 
     function populateRootSelects(roots) {
-      const rootSelect = document.getElementById("rootKey");
-      const bridgeSelect = document.getElementById("bridgeRootKey");
-      rootSelect.innerHTML = "";
-      bridgeSelect.innerHTML = "";
-      for (const root of roots) {
+      const select = document.getElementById("rootKey");
+      select.innerHTML = "";
+      roots.forEach(r => {
         const opt = document.createElement("option");
-        opt.value = root.key;
-        opt.textContent = `${root.key} -> ${root.graph_target}`;
-        rootSelect.appendChild(opt);
-        const opt2 = document.createElement("option");
-        opt2.value = root.key;
-        opt2.textContent = `${root.key} -> ${root.graph_target}`;
-        bridgeSelect.appendChild(opt2);
-      }
-      rootSelect.value = "protocols";
-      bridgeSelect.value = "protocols";
-    }
-
-    async function loadSystemStatus() {
-      const payload = await loadJson("/api/system/status");
-      document.getElementById("systemStatusOutput").textContent = JSON.stringify(payload, null, 2);
-    }
-
-    async function loadRootSummary() {
-      const payload = await loadJson("/api/knowledge/root-summary");
-      document.getElementById("rootSummaryOutput").textContent = JSON.stringify(payload, null, 2);
-    }
-
-    async function loadMappingAudit() {
-      const payload = await loadJson("/api/neo4j/mapping-key-audit");
-      document.getElementById("mappingAuditOutput").textContent = JSON.stringify(payload, null, 2);
-    }
-
-    async function loadReadiness() {
-      const payload = await loadJson("/api/production-readiness");
-      document.getElementById("readinessOutput").textContent = JSON.stringify(payload, null, 2);
-    }
-
-    async function loadBenchmark() {
-      const runDir = document.getElementById("runDir").value;
-      const payload = await loadJson("/api/benchmark/summary?run_dir=" + encodeURIComponent(runDir));
-      document.getElementById("benchmarkOutput").textContent = JSON.stringify(payload, null, 2);
-    }
-
-    async function loadAssets() {
-      const payload = await loadJson("/api/knowledge/assets");
-      document.getElementById("assetOutput").textContent = JSON.stringify(payload, null, 2);
-    }
-
-    async function searchSurface() {
-      const query = document.getElementById("surfaceQuery").value;
-      const diseaseKey = document.getElementById("surfaceDiseaseKey").value;
-      const payload = await loadJson(
-        "/api/knowledge/surface/search?query=" + encodeURIComponent(query) +
-        "&disease_key=" + encodeURIComponent(diseaseKey)
-      );
-      document.getElementById("surfaceOutput").textContent = JSON.stringify(payload, null, 2);
-    }
-
-    async function runDuel() {
-      const caseFile = document.getElementById("duelCase").value;
-      const duelResponse = await fetch("/api/duel/run", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ case_file: caseFile }),
+        opt.value = r.key;
+        opt.textContent = `${r.key.toUpperCase()} → ${r.graph_target}`;
+        select.appendChild(opt);
       });
-      if (!duelResponse.ok) {
-        throw new Error(await duelResponse.text());
-      }
-      const payload = await duelResponse.json();
-      document.getElementById("duelOutput").textContent = JSON.stringify(payload, null, 2);
+      select.value = "protocols";
     }
 
-    async function scanKnowledge() {
-      const response = await fetch("/api/knowledge/scan", { method: "POST" });
-      if (!response.ok) {
-        throw new Error(await response.text());
+    // Action Handlers
+    async function handleAction(btnId, targetId, apiCall) {
+      const btn = document.getElementById(btnId);
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳</span> Đang thực hiện...';
+      try {
+        const data = await apiCall();
+        document.getElementById(targetId).textContent = JSON.stringify(data, null, 2);
+        showToast("Thành công: " + btnId, "success");
+      } catch (err) {
+        document.getElementById(targetId).textContent = "LỖI: " + err.message;
+        showToast(err.message, "error");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
       }
-      const payload = await response.json();
-      document.getElementById("knowledgeOutput").textContent = JSON.stringify(payload, null, 2);
-      await loadAssets();
-      await loadRootSummary();
-      await loadReadiness();
     }
 
-    async function uploadKnowledge() {
-      const rootKey = document.getElementById("rootKey").value;
-      const fileInput = document.getElementById("uploadFile");
-      const file = fileInput.files[0];
-      if (!file) {
-        throw new Error("Chua chon file.");
-      }
-      const form = new FormData();
-      form.append("root_key", rootKey);
-      form.append("file", file);
-      const response = await fetch("/api/knowledge/upload", {
-        method: "POST",
-        body: form,
+    // Events
+    document.getElementById("runDuel").addEventListener("click", () => {
+      handleAction("runDuel", "mainDebugOutput", async () => {
+        if (document.getElementById('demoModeToggle').checked) return handleDemoResponse('/api/duel/run');
+        const response = await fetch("/api/duel/run", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ case_file: document.getElementById("duelCase").value }),
+        });
+        if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.detail || "Lỗi không xác định");
+        }
+        return response.json();
       });
-      if (!response.ok) {
-        throw new Error(await response.text());
-      }
-      const payload = await response.json();
-      document.getElementById("knowledgeOutput").textContent = JSON.stringify(payload, null, 2);
-      await loadAssets();
-      await loadRootSummary();
-      await loadReadiness();
-    }
-
-    async function bridgeUpload() {
-      const rootKey = document.getElementById("bridgeRootKey").value;
-      const namespace = document.getElementById("bridgeNamespace").value;
-      const autoIngest = document.getElementById("bridgeAutoIngest").checked;
-      const waitForCompletion = document.getElementById("bridgeWait").checked;
-      const fileInput = document.getElementById("bridgeFile");
-      const file = fileInput.files[0];
-      if (!file) {
-        throw new Error("Chua chon file bridge.");
-      }
-      const form = new FormData();
-      form.append("root_key", rootKey);
-      form.append("namespace", namespace);
-      form.append("auto_ingest", String(autoIngest));
-      form.append("wait_for_completion", String(waitForCompletion));
-      form.append("file", file);
-      const response = await fetch("/api/knowledge/bridge-upload", {
-        method: "POST",
-        body: form,
-      });
-      if (!response.ok) {
-        throw new Error(await response.text());
-      }
-      const payload = await response.json();
-      document.getElementById("bridgeOutput").textContent = JSON.stringify(payload, null, 2);
-      const pathwayAssetId = payload.pathway?.asset?.asset_id || "";
-      if (pathwayAssetId) {
-        document.getElementById("pathwayAssetId").value = pathwayAssetId;
-      }
-      await loadAssets();
-      await loadRootSummary();
-      await loadReadiness();
-    }
-
-    async function loadPathwayAsset(kind) {
-      const assetId = document.getElementById("pathwayAssetId").value;
-      if (!assetId) {
-        throw new Error("Chua co Pathway asset id.");
-      }
-      const path = kind === "impact"
-        ? `/api/pathway/knowledge/assets/${encodeURIComponent(assetId)}/impact-report`
-        : kind === "trace"
-        ? `/api/pathway/knowledge/assets/${encodeURIComponent(assetId)}/graph-trace`
-        : `/api/pathway/knowledge/assets/${encodeURIComponent(assetId)}/text-workspace`;
-      const payload = await loadJson(path);
-      document.getElementById("pathwayAssetOutput").textContent = JSON.stringify(payload, null, 2);
-    }
+    });
 
     document.getElementById("loadBenchmark").addEventListener("click", () => {
-      loadBenchmark().catch(err => {
-        document.getElementById("benchmarkOutput").textContent = String(err);
-      });
+      handleAction("loadBenchmark", "mainDebugOutput", () => 
+        loadJson("/api/benchmark/summary?run_dir=" + encodeURIComponent(document.getElementById("runDir").value))
+      );
     });
 
     document.getElementById("scanKnowledge").addEventListener("click", () => {
-      scanKnowledge().catch(err => {
-        document.getElementById("knowledgeOutput").textContent = String(err);
-      });
+      handleAction("scanKnowledge", "knowledgeOutput", () => 
+        fetch("/api/knowledge/scan", { method: "POST" }).then(r => r.json())
+      );
     });
 
     document.getElementById("uploadKnowledge").addEventListener("click", () => {
-      uploadKnowledge().catch(err => {
-        document.getElementById("knowledgeOutput").textContent = String(err);
+      handleAction("uploadKnowledge", "knowledgeOutput", async () => {
+        const file = document.getElementById("uploadFile").files[0];
+        if (!file) throw new Error("Vui lòng chọn file");
+        const form = new FormData();
+        form.append("root_key", document.getElementById("rootKey").value);
+        form.append("file", file);
+        return fetch("/api/knowledge/upload", { method: "POST", body: form }).then(r => r.json());
       });
     });
 
     document.getElementById("bridgeUpload").addEventListener("click", () => {
-      bridgeUpload().catch(err => {
-        document.getElementById("bridgeOutput").textContent = String(err);
+      handleAction("bridgeUpload", "knowledgeOutput", async () => {
+        const file = document.getElementById("uploadFile").files[0]; // Reuse file input for simplicity
+        if (!file) throw new Error("Vui lòng chọn file cho Bridge");
+        const form = new FormData();
+        form.append("root_key", document.getElementById("rootKey").value);
+        form.append("namespace", document.getElementById("bridgeNamespace").value);
+        form.append("auto_ingest", document.getElementById("bridgeAutoIngest").checked);
+        form.append("wait_for_completion", document.getElementById("bridgeWait").checked);
+        form.append("file", file);
+        return fetch("/api/knowledge/bridge-upload", { method: "POST", body: form }).then(r => r.json());
       });
     });
 
     document.getElementById("searchSurface").addEventListener("click", () => {
-      searchSurface().catch(err => {
-        document.getElementById("surfaceOutput").textContent = String(err);
-      });
+      handleAction("searchSurface", "surfaceOutput", () =>
+        loadJson("/api/knowledge/surface/search?query=" + encodeURIComponent(document.getElementById("surfaceQuery").value) +
+                 "&disease_key=" + encodeURIComponent(document.getElementById("surfaceDiseaseKey").value))
+      );
     });
 
-    document.getElementById("runDuel").addEventListener("click", () => {
-      runDuel().catch(err => {
-        document.getElementById("duelOutput").textContent = String(err);
-      });
+    document.getElementById("loadSystemStatus").addEventListener("click", () => {
+      handleAction("loadSystemStatus", "mainDebugOutput", () => loadJson("/api/system/status"));
     });
 
-    document.getElementById("loadPathwayImpact").addEventListener("click", () => {
-      loadPathwayAsset("impact").catch(err => {
-        document.getElementById("pathwayAssetOutput").textContent = String(err);
-      });
+    document.getElementById("loadReadiness").addEventListener("click", () => {
+      handleAction("loadReadiness", "mainDebugOutput", () => loadJson("/api/production-readiness"));
+    });
+
+    document.getElementById("loadMappingAudit").addEventListener("click", () => {
+      handleAction("loadMappingAudit", "mainDebugOutput", () => loadJson("/api/neo4j/mapping-key-audit"));
     });
 
     document.getElementById("loadPathwayTrace").addEventListener("click", () => {
-      loadPathwayAsset("trace").catch(err => {
-        document.getElementById("pathwayAssetOutput").textContent = String(err);
-      });
+      const id = document.getElementById("pathwayAssetId").value;
+      if (!id) throw new Error("Yêu cầu Asset ID");
+      handleAction("loadPathwayTrace", "mainDebugOutput", () => 
+        loadJson(`/api/pathway/knowledge/assets/${encodeURIComponent(id)}/graph-trace`)
+      );
     });
 
-    document.getElementById("loadPathwayText").addEventListener("click", () => {
-      loadPathwayAsset("text").catch(err => {
-        document.getElementById("pathwayAssetOutput").textContent = String(err);
-      });
-    });
-
-    boot().catch(err => {
-      document.body.innerHTML += "<pre>" + String(err) + "</pre>";
-    });
-    loadAssets().catch(() => {});
+    // Final Init
+    boot();
   </script>
 </body>
 </html>

@@ -87,14 +87,15 @@ def health() -> dict[str, object]:
     pathway = _http_health(f"{SETTINGS.pathway_api_base_url.rstrip('/')}/health", timeout_seconds=2.0)
     azure_proxy = _http_health(f"{SETTINGS.azure_proxy_base_url.rstrip('/')}/health", timeout_seconds=2.0)
     
-    dependencies_ok = (
-        neo4j.get("status") == "ready" and 
-        pathway.get("status") == "up" and 
-        azure_proxy.get("status") == "up"
+    # Core deps: Neo4j + Pathway + Azure configured. Proxy/router are optional.
+    core_ok = (
+        neo4j.get("status") == "ready"
+        and pathway.get("status") == "up"
+        and backend.is_configured()
     )
-    
+
     return {
-        "status": "ok" if dependencies_ok else "degraded",
+        "status": "ok" if core_ok else "degraded",
         "dependencies": {
             "neo4j": neo4j.get("status"),
             "pathway": pathway.get("status"),
@@ -500,13 +501,16 @@ def production_readiness() -> dict[str, object]:
         "ai_claim_server_ready": system["ai_claim"]["status"] == "ok",
         "pathway_api_reachable": system["pathway"]["status"] == "up",
         "neo4j_reachable": system["neo4j"].get("status") == "ready",
-        "router_reachable": system["router"]["status"] == "up",
-        "azure_proxy_reachable": system["azure_proxy"]["status"] == "up",
         "no_graph_key_duplicates": not mapping_audit.get("has_duplicates", True),
         "direct_ingest_roots_present": len(direct_roots) > 0,
     }
+    optional = {
+        "router_reachable": system["router"]["status"] == "up",
+        "azure_proxy_reachable": system["azure_proxy"]["status"] == "up",
+    }
     return {
         "checklist": checklist,
+        "optional": optional,
         "direct_ingest_roots": direct_roots,
         "catalog_only_roots": catalog_only_roots,
         "root_summary": root_summary,
@@ -515,6 +519,7 @@ def production_readiness() -> dict[str, object]:
         "notes_vi": [
             "Neu root nam trong catalog_only thi van quan tri duoc tren dashboard, nhung ingest vao graph hien dang di qua Pathway bridge thay vi engine local first-class.",
             "Mapper duplicate key audit hien uu tien cac key canonic quan trong: CIService, CanonicalService, CISign, CIDisease, InsuranceContract, Benefit.",
+            "router va azure_proxy la optional — reasoning agent fallback truc tiep ve Azure khi chung down.",
         ],
     }
 
@@ -539,17 +544,23 @@ def benchmark_report(run_dir: str) -> HTMLResponse:
 
 @app.post("/api/reasoning/run")
 def run_reasoning(case_packet: dict[str, object]) -> dict[str, object]:
-    agent = AzureReasoningAgent.from_settings()
     try:
-        return agent.run_case(case_packet)
+        agent = AzureReasoningAgent.from_settings()
+        try:
+            return agent.run_case(case_packet)
+        except Exception as exc:
+            return {
+                "status": "failed",
+                "error": str(exc),
+                "hint": "Kiem tra Azure OpenAI env vars va ket noi Neo4j.",
+            }
+        finally:
+            agent.toolkit.close()
     except Exception as exc:
-        return {
-            "status": "failed",
-            "error": str(exc),
-            "hint": "Kiem tra Azure OpenAI env vars va ket noi Neo4j.",
-        }
-    finally:
-        agent.toolkit.close()
+        raise HTTPException(
+            status_code=424,
+            detail=f"Dịch vụ hỗ trợ suy luận (Neo4j/Azure) không khả thi: {exc}"
+        )
 
 
 @app.post("/api/duel/run")
@@ -558,11 +569,26 @@ def run_live_duel(case_packet: dict[str, object]) -> dict[str, object]:
         case_path = Path(str(case_packet["case_file"]))
         if not case_path.exists():
             raise HTTPException(status_code=404, detail="Case file khong ton tai")
-        case_packet = json.loads(case_path.read_text(encoding="utf-8"))
-    runner = LiveDuelRunner.create()
-    return runner.run_case(case_packet)
+        try:
+            case_packet = json.loads(case_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            raise HTTPException(status_code=400, detail=f"Lỗi đọc file JSON: {exc}")
+
+    try:
+        runner = LiveDuelRunner.create()
+        return runner.run_case(case_packet)
+    except Exception as exc:
+        raise HTTPException(
+            status_code=424,
+            detail=f"Không thể chạy Live Duel do lỗi hạ tầng (Neo4j/Pathway): {exc}"
+        )
 
 
 @app.get("/dashboard")
 def dashboard() -> FileResponse:
     return FileResponse(SETTINGS.static_dir / "dashboard.html")
+
+
+@app.get("/management")
+def management() -> FileResponse:
+    return FileResponse(SETTINGS.static_dir / "management.html")

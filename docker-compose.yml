@@ -9,6 +9,7 @@ services:
       - .env
     volumes:
       - ./data/knowledge:/app/data/knowledge
+      - ./src:/app/src
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9780/health"]
       interval: 30s

@@ -34,8 +34,19 @@ class Neo4jToolkit:
         self.driver.close()
 
     def _run(self, query: str, **params: Any) -> list[dict[str, Any]]:
-        with self.driver.session() as session:
-            return [dict(record) for record in session.run(query, **params)]
+        try:
+            with self.driver.session() as session:
+                return [dict(record) for record in session.run(query, **params)]
+        except Exception as exc:
+            # Re-raise with a clear message if it's a connectivity issue
+            raise RuntimeError(f"Neo4j Query Failed: {exc}") from exc
+
+    def check_connection(self) -> bool:
+        try:
+            self.driver.verify_connectivity()
+            return True
+        except Exception:
+            return False
 
     def _labels(self) -> set[str]:
         rows = self._run("CALL db.labels() YIELD label RETURN collect(label) AS labels")
@@ -430,6 +441,30 @@ class Neo4jToolkit:
             service_code=service_code,
         )
         return rows[0] if rows else {}
+
+    def upsert_service_nodes(self, services: list[dict[str, Any]]) -> dict[str, Any]:
+        """Bulk upsert CIService nodes using service_code as key."""
+        query = """
+        UNWIND $batch AS item
+        MERGE (s:CIService {service_code: item.service_code})
+        SET s += item,
+            s.updated_at = datetime()
+        RETURN count(s) AS count
+        """
+        results = self._run(query, batch=services)
+        return {"upserted": results[0]["count"] if results else 0}
+
+    def upsert_benefit_nodes(self, benefits: list[dict[str, Any]]) -> dict[str, Any]:
+        """Bulk upsert Benefit nodes using entry_id as key."""
+        query = """
+        UNWIND $batch AS item
+        MERGE (b:Benefit {entry_id: item.entry_id, namespace: 'claims_insights_insurance_v1'})
+        SET b += item,
+            b.updated_at = datetime()
+        RETURN count(b) AS count
+        """
+        results = self._run(query, batch=benefits)
+        return {"upserted": results[0]["count"] if results else 0}
 
     def trace_service_evidence(self, service_name: str, disease_id: str = "", contract_id: str = "") -> dict[str, Any]:
         medical_hits = self._run(

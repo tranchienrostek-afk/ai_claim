@@ -14,21 +14,20 @@ from .settings import SETTINGS
 
 
 SYSTEM_PROMPT = """
-Ban la medical-insurance reasoning agent bi khoa domain.
+Ban la medical-insurance reasoning agent bac cao, chuyen gia ve "Con duong kinh nghiem".
 
 Nhiem vu:
-- Tach rieng tang y khoa va tang bao hiem.
-- Neu graph chua du evidence, duoc phep doc knowledge surface noi bo trong ai_claim de lay note, benchmark, feedback va workspace guide.
-- Khong du bang chung thi tra review hoac insufficient_evidence.
-- Moi ket luan phai dan chung ro evidence surface.
-- Uu tien tool truoc khi suy luan.
-- Output cuoi cung phai la JSON hop le.
+1. TOI GIAN SUY LUAN: Khong di vong vo. Dung "Con duong kinh nghiem" de xac dinh ngay cac node quan trong (Protocol, Service, Exclusion).
+2. TACH RIENG TANG: Tach biet ro rang tang Y khoa (Medical) va tang Bao hiem (Insurance).
+3. BANG CHUNG CHI TIET: Moi ket luan phai co "Evidence Trace" cuc ky chi tiet (trich dan dieu khoan, chi so can lam sang, ma dich vu) de tham dinh vien co the trace va audit.
+4. TOI UU HOA TIM KIEM: Chi tim nhung gi thuc su can thiet de ra quyet dinh. Neu da du bang chung, hay vao ket luan ngay.
+5. TRA VE JSON: Output cuoi cung phai la JSON hop le.
 
-JSON cuoi cung phai theo form:
+JSON format:
 {
   "case_id": "",
-  "active_diseases": [{"name": "", "basis": ""}],
-  "differentials": [{"name": "", "basis": ""}],
+  "reasoning_path": "Mo ta tom tat con duong suy luan toi uu da di qua",
+  "active_diseases": [{"name": "", "basis": "Bang chung y khoa chi tiet"}],
   "line_results": [
     {
       "line_no": 1,
@@ -36,13 +35,12 @@ JSON cuoi cung phai theo form:
       "medical_decision": "approve|deny|review|uncertain",
       "insurance_decision": "approve|deny|partial_pay|review|uncertain",
       "final_decision": "approve|deny|partial_pay|review|uncertain",
-      "service_role": "",
-      "reasoning": "",
-      "evidence": []
+      "reasoning": "Giai thich ngan gon nhung du y",
+      "evidence": ["Trich dan tung bang chung, tung dong trong phac do hoac hop dong"]
     }
   ],
-  "claim_level_decision": "",
-  "claim_level_reasoning": "",
+  "claim_level_decision": "approve|deny|review",
+  "claim_level_reasoning": "Tong hop ly do cuoi cung",
   "needs_human_review": true
 }
 """
@@ -366,10 +364,24 @@ class AzureReasoningAgent:
 
         disease_key = self._derive_disease_key(case_packet)
         workspace_seed_hits = self._seed_workspace_context(case_packet, disease_key)
+
+        # Determine base_url: use 9router if configured AND reachable, else direct Azure
+        effective_base_url = None
+        router_url = SETTINGS.router_base_url
+        if router_url:
+            import httpx
+            try:
+                with httpx.Client(timeout=2.0) as probe:
+                    probe.get(f"{router_url.rstrip('/')}/v1/models")
+                effective_base_url = f"{router_url.rstrip('/')}/v1"
+            except Exception:
+                pass  # router unreachable, fall back to direct Azure
+
         client = AzureOpenAI(
             api_key=self.backend.config.api_key,
             api_version=self.backend.config.api_version,
             azure_endpoint=self.backend.config.endpoint,
+            base_url=effective_base_url,
         )
         messages: list[dict[str, Any]] = [
             {"role": "system", "content": SYSTEM_PROMPT},
@@ -402,7 +414,7 @@ class AzureReasoningAgent:
                 tools=TOOL_SPECS,
                 tool_choice="auto",
                 temperature=0.1,
-                max_tokens=2200,
+                max_tokens=4096,
                 response_format={"type": "json_object"},
             )
             llm_call_count += 1
