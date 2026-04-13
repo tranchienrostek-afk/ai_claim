@@ -1,0 +1,17 @@
+services:
+  ai_claim:
+    build: .
+    container_name: ai_claim
+    restart: unless-stopped
+    ports:
+      - "9780:9780"
+    env_file:
+      - .env
+    volumes:
+      - ./data/knowledge:/app/data/knowledge
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9780/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s

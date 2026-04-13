@@ -1,0 +1,45 @@
+name: Deploy to Cloud
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            set -e
+            cd ${{ secrets.DEPLOY_PATH }}
+
+            # Pull latest code
+            if [ -d .git ]; then
+              git fetch origin main
+              git reset --hard origin/main
+            else
+              git clone https://github.com/tranchienrostek-afk/ai_claim.git .
+            fi
+
+            # Build and restart
+            docker compose down || true
+            docker compose up -d --build
+
+            # Health check (wait up to 30s)
+            echo "Waiting for health check..."
+            for i in $(seq 1 15); do
+              if curl -sf http://localhost:9780/health > /dev/null 2>&1; then
+                echo "ai_claim is UP"
+                curl -s http://localhost:9780/health | python3 -m json.tool
+                exit 0
+              fi
+              sleep 2
+            done
+            echo "WARNING: health check timed out"
+            docker compose logs --tail 20
+            exit 1
