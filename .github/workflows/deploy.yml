@@ -12,10 +12,17 @@ jobs:
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.DEPLOY_HOST }}
+          port: ${{ secrets.DEPLOY_PORT || 22 }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
+          timeout: 60s
+          command_timeout: 10m
           script: |
             set -e
+            echo "=== Connected to $(hostname) ==="
+
+            # Ensure deploy path exists
+            mkdir -p ${{ secrets.DEPLOY_PATH }}
             cd ${{ secrets.DEPLOY_PATH }}
 
             # Pull latest code
@@ -26,13 +33,24 @@ jobs:
               git clone https://github.com/tranchienrostek-afk/ai_claim.git .
             fi
 
+            # Verify .env exists
+            if [ ! -f .env ]; then
+              echo "ERROR: .env not found at ${{ secrets.DEPLOY_PATH }}/.env"
+              echo "Create it from configs/app.env.example before deploying."
+              exit 1
+            fi
+
             # Build and restart
             docker compose down || true
             docker compose up -d --build
 
-            # Health check (wait up to 30s)
-            echo "Waiting for health check..."
-            for i in $(seq 1 15); do
+            # Diagnostics
+            echo "=== Docker status ==="
+            docker ps --filter name=ai_claim
+
+            # Health check (wait up to 60s)
+            echo "=== Health check ==="
+            for i in $(seq 1 30); do
               if curl -sf http://localhost:9780/health > /dev/null 2>&1; then
                 echo "ai_claim is UP"
                 curl -s http://localhost:9780/health | python3 -m json.tool
@@ -41,5 +59,5 @@ jobs:
               sleep 2
             done
             echo "WARNING: health check timed out"
-            docker compose logs --tail 20
+            docker compose logs --tail 30
             exit 1
