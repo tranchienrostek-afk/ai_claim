@@ -1,4 +1,4 @@
-name: Deploy to Cloud
+name: Deploy
 
 on:
   push:
@@ -8,65 +8,45 @@ jobs:
   deploy:
     runs-on: [self-hosted, Linux, X64]
 
-    env:
-      DEPLOY_DIR: /home/runner/workspace/ai_claim
-
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Sync to deploy directory
+      - name: Debug
         run: |
-          set -e
-          echo "=== Deploy on $(hostname) ==="
+          echo "Runner: $(whoami)@$(hostname)"
+          echo "Workspace: $GITHUB_WORKSPACE"
+          docker --version
+          docker compose version
 
-          # Ensure deploy dir exists
-          mkdir -p $DEPLOY_DIR
-
-          # Sync code (rsync from checkout to deploy dir)
-          rsync -a --delete \
-            --exclude='.env' \
-            --exclude='data/runtime/' \
-            --exclude='data/duel_runs/' \
-            --exclude='data/imported_runs/' \
-            --exclude='data/benchmarks/' \
-            --exclude='graphify-out/' \
-            $GITHUB_WORKSPACE/ $DEPLOY_DIR/
-
-          echo "Code synced to $DEPLOY_DIR"
-
-      - name: Verify .env
+      - name: Build and deploy
         run: |
-          if [ ! -f $DEPLOY_DIR/.env ]; then
-            echo "ERROR: .env not found at $DEPLOY_DIR/.env"
-            echo "Create it first:"
-            echo "  cp $DEPLOY_DIR/configs/app.env.example $DEPLOY_DIR/.env"
-            echo "  nano $DEPLOY_DIR/.env  # fill real values"
-            exit 1
+          cd $GITHUB_WORKSPACE
+          if [ ! -f .env ]; then
+            echo ".env not found in checkout — checking deploy dir"
+            if [ -f /home/runner/workspace/ai_claim/.env ]; then
+              cp /home/runner/workspace/ai_claim/.env .env
+              echo "Copied .env from deploy dir"
+            else
+              echo "WARNING: No .env found anywhere, app may fail to start"
+            fi
           fi
-          echo ".env found"
-
-      - name: Build and restart
-        run: |
-          cd $DEPLOY_DIR
           docker compose down || true
           docker compose up -d --build
 
       - name: Health check
         run: |
-          echo "=== Docker status ==="
-          docker ps --filter name=ai_claim
-
-          echo "=== Waiting for health check ==="
+          echo "Containers:"
+          docker ps --filter name=ai_claim --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+          echo ""
           for i in $(seq 1 30); do
             if curl -sf http://localhost:9780/health > /dev/null 2>&1; then
               echo "ai_claim is UP"
-              curl -s http://localhost:9780/health | python3 -m json.tool
+              curl -s http://localhost:9780/health
               exit 0
             fi
             sleep 2
           done
-
-          echo "FAILED: health check timed out after 60s"
-          cd $DEPLOY_DIR && docker compose logs --tail 30
+          echo "Health check failed after 60s"
+          docker compose logs --tail 30
           exit 1
