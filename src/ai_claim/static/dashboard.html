@@ -1,578 +1,806 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ai_claim | Command Center</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              deep: '#0b0f1a',
-              surface: '#131b2d',
-              card: 'rgba(23, 31, 50, 0.7)',
-              accent: '#2dd4bf',
-              primary: '#3b82f6',
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-  <style type="text/tailwindcss">
-    @layer components {
-      .glass {
-        @apply bg-brand-card backdrop-blur-xl border border-white/10;
-      }
-      .indicator {
-        @apply w-2 h-2 rounded-full bg-slate-500 relative transition-all duration-500;
-      }
-      .indicator.active {
-        @apply bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)];
-      }
-      .indicator.active::after {
-        content: '';
-        @apply absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-50;
-      }
-      .indicator.warning { @apply bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.8)]; }
-      .indicator.danger { @apply bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.8)]; }
-
-      .step-node.active .node-icon { @apply bg-brand-primary text-white shadow-lg shadow-brand-primary/20 scale-110; }
-      .step-node.active .node-label { @apply text-brand-primary font-bold; }
-      .step-content { @apply transition-all duration-500 opacity-0 translate-x-4 hidden; }
-      .step-content.active { @apply opacity-100 translate-x-0 block; }
-      
-      .btn-primary {
-        @apply bg-brand-primary hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-bold transition-all transform hover:-translate-y-0.5 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2;
-      }
-      .btn-secondary {
-        @apply bg-white/5 hover:bg-white/10 text-white border border-white/10 px-6 py-3 rounded-xl font-semibold transition-all flex items-center gap-2;
-      }
-      .data-panel {
-        @apply bg-black/40 rounded-xl p-4 font-mono text-[11px] text-cyan-300 border border-white/5 overflow-auto max-h-[300px];
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Claim | Command Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        .glass-card { background: #fff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgb(0 0 0 / 0.06); }
+        .mgmt-card { border-top: 3px solid #2563eb; }
+        .row-hover:hover { background-color: #f1f5f9; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-entry { animation: fadeIn 0.3s ease-out forwards; }
+        .view-panel { display: none; }
+        .view-panel.active { display: flex; }
+        .nav-btn.active { color: #2563eb; background: #eff6ff; }
+        .indicator { width: 8px; height: 8px; border-radius: 50%; background: #94a3b8; transition: all 0.4s; }
+        .indicator.up { background: #22c55e; box-shadow: 0 0 8px rgba(34,197,94,0.6); }
+        .indicator.down { background: #ef4444; box-shadow: 0 0 8px rgba(239,68,68,0.5); }
+        .indicator.degraded { background: #f59e0b; box-shadow: 0 0 8px rgba(245,158,11,0.5); }
+        .data-panel { background: #0f172a; color: #67e8f9; border-radius: 12px; padding: 16px; font-family: 'Courier New', monospace; font-size: 11px; overflow: auto; max-height: 320px; border: 1px solid #1e293b; }
+        .dropzone { border: 2px dashed #93c5fd; background: #eff6ff; transition: all 0.2s; }
+        .dropzone.dragover { border-color: #2563eb; background: #dbeafe; }
+        .toast { position: fixed; bottom: 24px; right: 24px; padding: 12px 20px; border-radius: 12px; font-weight: 600; font-size: 13px; z-index: 100; transform: translateY(100px); opacity: 0; transition: all 0.3s; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+    </style>
 </head>
-<body class="bg-brand-deep text-slate-200 min-h-screen">
-  <!-- Status Bar (Pulse) -->
-  <div class="fixed top-0 left-0 right-0 z-50 px-8 py-3 bg-brand-deep/80 backdrop-blur-md border-b border-white/5 flex justify-between items-center">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 bg-gradient-to-br from-brand-primary to-brand-accent rounded-xl flex items-center justify-center font-display font-bold text-white shadow-lg shadow-brand-primary/20">AI</div>
-      <div>
-        <h1 class="font-display font-bold text-lg leading-none">ai_claim</h1>
-        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">Command Center v2.0</p>
-      </div>
-    </div>
+<body class="h-screen flex flex-col overflow-hidden">
 
-    <div class="flex items-center gap-6">
-      <div class="flex items-center gap-4 px-4 py-2 glass rounded-full text-[11px] font-bold">
-        <div class="flex items-center gap-2">
-          <div id="indNeo4j" class="indicator"></div>
-          <span class="text-slate-400">NEO4J</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <div id="indPathway" class="indicator"></div>
-          <span class="text-slate-400">PATHWAY</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <div id="indAzure" class="indicator"></div>
-          <span class="text-slate-400">AZURE</span>
-        </div>
-        <div class="flex items-center gap-2 border-l border-white/10 pl-4 text-brand-warning">
-          <span>DEMO</span>
-          <label class="switch ml-2">
-            <input type="checkbox" id="demoModeToggle">
-            <span class="slider"></span>
-          </label>
-        </div>
-      </div>
-      <div id="healthStatusText" class="text-xs font-bold px-3 py-1.5 rounded-lg border border-brand-accent/30 bg-brand-accent/10 text-brand-accent">
-        Stable
-      </div>
-    </div>
-  </div>
-
-  <main class="max-w-6xl mx-auto pt-32 pb-24 px-8">
-    <!-- Stepper Navigation -->
-    <div class="relative mb-16 flex justify-between max-w-2xl mx-auto">
-      <div class="absolute top-5 left-0 w-full h-0.5 bg-white/5 -z-10"></div>
-      <div id="stepper-progress" class="absolute top-5 left-0 h-0.5 bg-brand-primary transition-all duration-700 -z-10" style="width: 0%"></div>
-      
-      <button onclick="goToStep(1)" class="step-node active flex flex-col items-center gap-3 transition-all duration-300" id="step-node-1">
-        <div class="node-icon w-10 h-10 rounded-full glass flex items-center justify-center font-bold z-10">1</div>
-        <span class="node-label text-xs uppercase tracking-widest text-slate-500">Nạp tri thức</span>
-      </button>
-      <button onclick="goToStep(2)" class="step-node flex flex-col items-center gap-3 transition-all duration-300" id="step-node-2">
-        <div class="node-icon w-10 h-10 rounded-full glass flex items-center justify-center font-bold z-10">2</div>
-        <span class="node-label text-xs uppercase tracking-widest text-slate-500">Phân tích AI</span>
-      </button>
-      <button onclick="goToStep(3)" class="step-node flex flex-col items-center gap-3 transition-all duration-300" id="step-node-3">
-        <div class="node-icon w-10 h-10 rounded-full glass flex items-center justify-center font-bold z-10">3</div>
-        <span class="node-label text-xs uppercase tracking-widest text-slate-500">Đối soát & Audit</span>
-      </button>
-    </div>
-
-    <div class="glass rounded-3xl p-10 min-h-[500px] relative overflow-hidden">
-      
-      <!-- STEP 1: KNOWLEDGE INPUT -->
-      <div id="step-1" class="step-content active space-y-10">
-        <div class="text-center max-w-2xl mx-auto">
-          <h2 class="text-4xl font-display font-bold text-white mb-4">Khởi tạo Kho tri thức</h2>
-          <p class="text-slate-400">Bước đầu tiên trong quy trình thẩm định. Dữ liệu y khoa và quy tắc bảo hiểm cần được nạp vào Registry để Agent AI có thể học và tra cứu.</p>
+    <!-- ========== HEADER ========== -->
+    <header class="bg-white border-b border-slate-200 h-14 flex items-center justify-between px-6 shrink-0 shadow-sm z-30">
+        <div class="flex items-center gap-3">
+            <div class="bg-blue-600 text-white w-9 h-9 flex items-center justify-center rounded-xl shadow-lg shadow-blue-200 font-bold text-sm">AI</div>
+            <div>
+                <h1 class="text-sm font-bold text-slate-800 tracking-tight">AI CLAIM <span class="text-blue-600">COMMAND CENTER</span></h1>
+                <p class="text-[9px] text-slate-400 font-semibold uppercase tracking-widest">Medical &amp; Insurance Reasoning Platform</p>
+            </div>
         </div>
 
-        <div class="grid grid-cols-12 gap-8">
-          <div class="col-span-12 lg:col-span-7 space-y-6">
-            <div class="space-y-4">
-              <label class="text-xs font-bold text-brand-primary uppercase tracking-widest">Cấu hình Ingestion</label>
-              <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-2">
-                  <span class="text-[11px] text-slate-500 font-bold">NHÁNH MỤC TIÊU (ROOT)</span>
-                  <select id="rootKey" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-brand-primary outline-none transition-all"></select>
+        <div class="flex items-center gap-5">
+            <!-- Health Indicators -->
+            <div class="flex items-center gap-4 px-4 py-1.5 bg-slate-50 rounded-full border border-slate-200 text-[10px] font-bold">
+                <div class="flex items-center gap-1.5">
+                    <div id="indNeo4j" class="indicator"></div><span class="text-slate-500">NEO4J</span>
                 </div>
-                <div class="space-y-2">
-                  <span class="text-[11px] text-slate-500 font-bold">CHỌN TỆP TIN</span>
-                  <input id="uploadFile" type="file" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs file:hidden cursor-pointer" />
+                <div class="flex items-center gap-1.5">
+                    <div id="indPathway" class="indicator"></div><span class="text-slate-500">PATHWAY</span>
                 </div>
-              </div>
-            </div>
-            
-            <div class="flex gap-4">
-              <button id="uploadKnowledge" class="btn-primary flex-1 justify-center">
-                <span>📁</span> Lưu vào Registry
-              </button>
-              <button id="scanKnowledge" class="btn-secondary">
-                <span>🔍</span> Quét lại Registry
-              </button>
-            </div>
-          </div>
-
-          <div class="col-span-12 lg:col-span-5 bg-white/5 rounded-2xl p-6 border border-white/10">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="font-bold text-sm text-white">Thống kê Registry</h3>
-              <div class="px-2 py-1 rounded bg-brand-primary/20 text-brand-primary text-[10px] font-bold">LIVE</div>
-            </div>
-            <div class="space-y-4 text-center py-4">
-              <div id="rootCount" class="text-5xl font-display font-bold text-brand-primary">...</div>
-              <p class="text-xs text-slate-500 uppercase tracking-widest">Nhóm tri thức đã kích hoạt</p>
-              <div id="layoutMeta" class="text-[11px] text-slate-400 leading-relaxed italic"></div>
-            </div>
-          </div>
-        </div>
-
-        <pre id="knowledgeOutput" class="data-panel w-full">Log hoạt động quản trị...</pre>
-        
-        <div class="flex justify-center pt-4">
-          <button onclick="goToStep(2)" class="text-brand-accent hover:underline text-sm font-bold flex items-center gap-2">
-            Tiếp theo: Cấu hình Phân tích AI <span class="text-lg">→</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- STEP 2: REASONING & ANALYSIS -->
-      <div id="step-2" class="step-content space-y-10">
-        <div class="text-center max-w-2xl mx-auto">
-          <h2 class="text-4xl font-display font-bold text-white mb-4">Kích hoạt Suy luận AI</h2>
-          <p class="text-slate-400">Agent AI sẽ sử dụng tri thức từ Knowledge Graph phối hợp với RAG (Pathway) để đưa ra phán quyết cho hồ sơ.</p>
-        </div>
-
-        <div class="grid grid-cols-12 gap-8">
-          <!-- Live Duel -->
-          <div class="col-span-12 lg:col-span-8 space-y-6">
-            <div class="p-8 border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent rounded-3xl space-y-6">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-brand-primary/20 text-brand-primary flex items-center justify-center font-bold">🚀</div>
-                <h3 class="font-display font-bold text-xl">Đối đầu Live Dual</h3>
-              </div>
-              <div class="space-y-4">
-                <div class="space-y-2">
-                  <span class="text-[11px] text-slate-500 font-bold">HỒ SƠ ĐẦU VÀO (CASE JSON)</span>
-                  <input id="duelCase" value="data/benchmarks/sample_case_meniere.json" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-brand-primary outline-none transition-all" />
+                <div class="flex items-center gap-1.5">
+                    <div id="indAzure" class="indicator"></div><span class="text-slate-500">AZURE</span>
                 </div>
-                <button id="runDuel" class="btn-primary w-full justify-center bg-gradient-to-r from-brand-primary to-blue-700 h-14 text-lg">
-                  Kích hoạt Tác nhân Suy luận
+            </div>
+            <div id="healthBadge" class="text-[10px] font-bold px-3 py-1 rounded-lg border border-emerald-200 bg-emerald-50 text-emerald-700">Stable</div>
+            <label class="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 cursor-pointer select-none">
+                DEMO <input type="checkbox" id="demoToggle" class="accent-blue-600 ml-1">
+            </label>
+        </div>
+    </header>
+
+    <div class="flex-1 flex overflow-hidden">
+
+        <!-- ========== SIDEBAR ========== -->
+        <nav class="w-[72px] bg-white border-r border-slate-200 flex flex-col items-center py-6 gap-2 shrink-0">
+            <button onclick="showView('overview')" class="nav-btn active w-11 h-11 rounded-xl flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all" title="Tong quan" data-view="overview">
+                <i class="fa-solid fa-chart-pie text-lg"></i>
+            </button>
+            <button onclick="showView('documents')" class="nav-btn w-11 h-11 rounded-xl flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all" title="Tai lieu" data-view="documents">
+                <i class="fa-solid fa-file-medical text-lg"></i>
+            </button>
+            <button onclick="showView('graph')" class="nav-btn w-11 h-11 rounded-xl flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all" title="Neo4j Graph" data-view="graph">
+                <i class="fa-solid fa-diagram-project text-lg"></i>
+            </button>
+            <button onclick="showView('reasoning')" class="nav-btn w-11 h-11 rounded-xl flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all" title="Suy luan AI" data-view="reasoning">
+                <i class="fa-solid fa-brain text-lg"></i>
+            </button>
+            <button onclick="showView('audit')" class="nav-btn w-11 h-11 rounded-xl flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all" title="Doi soat" data-view="audit">
+                <i class="fa-solid fa-shield-halved text-lg"></i>
+            </button>
+            <div class="mt-auto">
+                <button onclick="showView('settings')" class="nav-btn w-11 h-11 rounded-xl flex items-center justify-center text-slate-300 hover:text-slate-600 transition-all" title="Cau hinh" data-view="settings">
+                    <i class="fa-solid fa-gear text-lg"></i>
                 </button>
-              </div>
             </div>
+        </nav>
 
-            <!-- Bridge -->
-            <div class="grid grid-cols-2 gap-6">
-              <div class="bg-white/5 p-6 rounded-2xl border border-white/10 space-y-4">
-                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Gateway Bridge</h4>
-                <div class="space-y-3">
-                  <input id="bridgeNamespace" value="ontology_v2" class="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-xs" placeholder="Namespace..." />
-                  <div class="flex items-center gap-4 text-[10px] font-bold">
-                    <label class="flex items-center gap-2 cursor-pointer">
-                      <input id="bridgeAutoIngest" type="checkbox" checked class="accent-brand-primary"> Auto Ingest
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                      <input id="bridgeWait" type="checkbox" class="accent-brand-primary"> Wait Sync
-                    </label>
-                  </div>
-                  <button id="bridgeUpload" class="btn-secondary w-full justify-center text-xs py-2">🔗 Sync Pathway</button>
+        <!-- ========== MAIN CONTENT ========== -->
+        <main class="flex-1 overflow-y-auto p-6 bg-slate-50/80">
+
+            <!-- ===== VIEW 1: OVERVIEW ===== -->
+            <div id="view-overview" class="view-panel active flex-col gap-6">
+                <h2 class="text-lg font-bold text-slate-800 mb-1">Tong quan He thong</h2>
+
+                <!-- KPI Row -->
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="glass-card rounded-2xl p-5 text-center">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Knowledge Roots</p>
+                        <div id="kpiRoots" class="text-3xl font-bold text-blue-600">...</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-5 text-center">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Neo4j Nodes</p>
+                        <div id="kpiNodes" class="text-3xl font-bold text-blue-600">...</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-5 text-center">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Agent Tools</p>
+                        <div id="kpiTools" class="text-3xl font-bold text-blue-600">...</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-5 text-center">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Production Ready</p>
+                        <div id="kpiReady" class="text-3xl font-bold text-emerald-600">...</div>
+                        <div class="w-full h-1.5 bg-slate-100 rounded-full mt-2 overflow-hidden">
+                            <div id="kpiReadyBar" class="h-full bg-emerald-500 transition-all duration-700" style="width:0%"></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <!-- Quick Search -->
-              <div class="bg-white/5 p-6 rounded-2xl border border-white/10 space-y-4">
-                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Tra cứu Nhanh</h4>
-                <div class="space-y-3">
-                  <input id="surfaceQuery" value="Triệu chứng bệnh Meniere" class="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-xs" />
-                  <input id="surfaceDiseaseKey" value="H81_0_meniere" class="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-xs" placeholder="Disease Key..." />
-                  <button id="searchSurface" class="btn-secondary w-full justify-center text-xs py-2">🔍 Search Surface</button>
+
+                <!-- System Status + Root Summary -->
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-5 glass-card rounded-2xl p-5">
+                        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Trang thai Dich vu</h3>
+                        <div id="svcStatus" class="space-y-3">
+                            <div class="flex justify-between items-center text-xs"><span class="text-slate-600 font-medium">ai_claim</span><span class="font-bold text-slate-400">...</span></div>
+                            <div class="flex justify-between items-center text-xs"><span class="text-slate-600 font-medium">Pathway API</span><span class="font-bold text-slate-400">...</span></div>
+                            <div class="flex justify-between items-center text-xs"><span class="text-slate-600 font-medium">Neo4j</span><span class="font-bold text-slate-400">...</span></div>
+                            <div class="flex justify-between items-center text-xs"><span class="text-slate-600 font-medium">Azure Proxy</span><span class="font-bold text-slate-400">...</span></div>
+                            <div class="flex justify-between items-center text-xs"><span class="text-slate-600 font-medium">9Router</span><span class="font-bold text-slate-400">...</span></div>
+                        </div>
+                    </div>
+                    <div class="col-span-7 glass-card rounded-2xl p-5">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Knowledge Roots</h3>
+                            <button onclick="scanRegistry()" class="text-[10px] px-3 py-1 bg-blue-50 text-blue-600 rounded-lg font-bold hover:bg-blue-100 transition-all"><i class="fa-solid fa-rotate mr-1"></i>Scan</button>
+                        </div>
+                        <div id="rootSummaryTable" class="space-y-2 text-xs"></div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
 
-          <!-- Agent Vitals -->
-          <div class="col-span-12 lg:col-span-4 space-y-6">
-            <div class="glass p-6 rounded-2xl space-y-6">
-              <h3 class="font-bold text-sm text-white border-b border-white/5 pb-3">Tác nhân Robot</h3>
-              <div class="space-y-4">
-                <div class="flex justify-between items-center text-sm">
-                  <span class="text-slate-500">Capability</span>
-                  <span id="toolCount" class="font-display font-bold text-brand-primary">...</span>
+                <!-- Benchmark Coverage -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Benchmark Disease Coverage (Neo4j)</h3>
+                    <div id="benchmarkCoverage" class="grid grid-cols-4 gap-3"></div>
                 </div>
-                <div id="policyMeta" class="text-[10px] text-slate-400 bg-black/30 p-3 rounded-lg leading-relaxed"></div>
-                <div class="px-2 py-1 rounded bg-brand-accent/20 text-brand-accent text-[10px] font-bold inline-block">SONNET-3.5-INTELLIGENCE</div>
-              </div>
-            </div>
-            <pre id="surfaceOutput" class="data-panel !max-h-[220px]">Kết quả tra cứu Surface...</pre>
-          </div>
-        </div>
-
-        <div class="flex justify-between pt-4">
-          <button onclick="goToStep(1)" class="text-slate-500 hover:text-slate-200 text-sm font-bold flex items-center gap-2">
-            <span class="text-lg">←</span> Quay lại Nạp tri thức
-          </button>
-          <button onclick="goToStep(3)" class="text-brand-accent hover:underline text-sm font-bold flex items-center gap-2">
-            Xem Kết quả & Audit <span class="text-lg">→</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- STEP 3: OUTPUT & AUDIT -->
-      <div id="step-3" class="step-content space-y-10">
-        <div class="text-center max-w-2xl mx-auto">
-          <h2 class="text-4xl font-display font-bold text-white mb-4">Hoàn tất & Đối soát</h2>
-          <p class="text-slate-400">Kiểm tra kết quả cuối cùng từ Agent, đo lường mức độ sẵn sàng của hệ thống và truy vết (Trace) các logic sai lệch.</p>
-        </div>
-
-        <div class="grid grid-cols-12 gap-8">
-          <!-- Readiness Stats -->
-          <div class="col-span-12 lg:col-span-4 space-y-6">
-            <div class="glass p-8 rounded-3xl text-center space-y-4 relative overflow-hidden">
-               <div class="absolute inset-0 bg-brand-primary/5 -z-10"></div>
-               <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Production Readiness</h3>
-               <div id="coverageVal" class="text-6xl font-display font-bold text-white">...</div>
-               <div class="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                  <div id="coverageBar" class="h-full bg-gradient-to-r from-brand-primary to-brand-accent transition-all duration-1000" style="width: 0%"></div>
-               </div>
-               <p class="text-[11px] text-slate-400">Hệ thống đã sẵn sàng cho bồi thường tự động</p>
-            </div>
-            
-            <div class="glass p-6 rounded-2xl space-y-4">
-              <h4 class="text-xs font-bold text-white uppercase tracking-widest">Kiểm tra Cấu hình</h4>
-              <div class="flex flex-col gap-2">
-                <button id="loadReadiness" class="btn-secondary !text-[11px] justify-start py-2.5">🎯 Readiness Report</button>
-                <button id="loadSystemStatus" class="btn-secondary !text-[11px] justify-start py-2.5">💻 Infra Pulse</button>
-                <button id="loadMappingAudit" class="btn-secondary !text-[11px] justify-start py-2.5">⛓️ Graph Key Audit</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Benchmark Analysis -->
-          <div class="col-span-12 lg:col-span-8 space-y-6">
-            <div class="glass p-8 rounded-3xl space-y-6">
-              <div class="flex items-center justify-between">
-                <h3 class="font-display font-bold text-xl">Phân tích khoảng cách Tư duy</h3>
-                <input id="runDir" value="data/duel_runs/pathway_vs_agent_claude/20260409_224555_duel_meniere_001" class="bg-black/40 border border-white/10 rounded-lg px-3 py-1.5 text-[10px] w-64" />
-              </div>
-              <p class="text-[11px] text-slate-400">So sánh sai lệch giữa cách Agent suy luận và Benchmark chuẩn mực được chuyên gia phê duyệt.</p>
-              <button id="loadBenchmark" class="btn-primary w-full justify-center">📊 Tải phân tích Benchmark</button>
             </div>
 
-            <!-- Impact Trace -->
-            <div class="bg-white/[0.03] border border-white/10 p-6 rounded-2xl flex gap-4 items-center">
-              <div class="flex-1 space-y-1">
-                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Truy vết đồ thị (Trace Impact)</span>
-                <input id="pathwayAssetId" placeholder="Pathway Asset ID..." class="w-full bg-transparent border-none outline-none text-brand-accent font-mono text-sm" />
-              </div>
-              <button id="loadPathwayTrace" class="btn-secondary whitespace-nowrap">👁️ Trace Node</button>
+            <!-- ===== VIEW 2: DOCUMENTS ===== -->
+            <div id="view-documents" class="view-panel flex-col gap-6">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-lg font-bold text-slate-800">Quan ly Tai lieu</h2>
+                    <div class="flex gap-2">
+                        <input id="docSearch" type="text" placeholder="Tim kiem tai lieu..." class="text-xs px-4 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-100 w-64">
+                        <button onclick="loadAssets()" class="p-2 bg-slate-100 rounded-xl text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-all" title="Refresh"><i class="fa-solid fa-rotate"></i></button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-12 gap-6">
+                    <!-- Asset Table -->
+                    <div class="col-span-8 glass-card mgmt-card rounded-2xl p-5 flex flex-col" style="max-height:calc(100vh - 200px)">
+                        <div class="flex-1 overflow-y-auto">
+                            <table class="w-full text-left">
+                                <thead>
+                                    <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
+                                        <th class="pb-3 px-3">Ten File</th>
+                                        <th class="pb-3 px-3">Loai</th>
+                                        <th class="pb-3 px-3">Namespace</th>
+                                        <th class="pb-3 px-3">Phien ban</th>
+                                        <th class="pb-3 px-3">Kich thuoc</th>
+                                        <th class="pb-3 px-3 text-right">Thao Tac</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="assetTable"></tbody>
+                            </table>
+                        </div>
+                        <div id="assetPaging" class="flex justify-between items-center pt-3 border-t border-slate-100 text-[10px] text-slate-400 font-bold mt-2"></div>
+                    </div>
+
+                    <!-- Upload + Mapper -->
+                    <div class="col-span-4 flex flex-col gap-4">
+                        <!-- Upload -->
+                        <div class="glass-card rounded-2xl p-5">
+                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">Nap Tai lieu</h3>
+                            <div class="space-y-3">
+                                <select id="uploadRoot" class="w-full text-xs px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-100"></select>
+                                <div id="dropZone" class="dropzone rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-2 cursor-pointer">
+                                    <i class="fa-solid fa-cloud-arrow-up text-2xl text-blue-400"></i>
+                                    <p class="text-xs font-bold text-blue-700">Keo tha file vao day</p>
+                                    <p class="text-[10px] text-blue-500">PDF, XLSX, CSV, DOCX, TXT, MD</p>
+                                    <input id="fileInput" type="file" class="hidden" multiple>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button id="btnUploadLocal" class="w-full text-[10px] py-2 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all">Luu Registry</button>
+                                    <button id="btnBridgeUpload" class="w-full text-[10px] py-2 bg-slate-800 text-white rounded-xl font-bold hover:bg-slate-900 transition-all">Bridge Neo4j</button>
+                                </div>
+                                <div class="flex items-center justify-between text-[10px]">
+                                    <span class="text-slate-400 font-bold">Auto-ingest</span>
+                                    <input id="autoIngestToggle" type="checkbox" checked class="accent-blue-600">
+                                </div>
+                                <div class="flex items-center gap-2 text-[10px]">
+                                    <span class="text-slate-400 font-bold">Namespace:</span>
+                                    <input id="bridgeNs" value="ontology_v2" class="flex-1 px-2 py-1 border border-slate-200 rounded-lg text-[10px]">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mapper Monitor -->
+                        <div class="glass-card rounded-2xl p-5">
+                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">Neo4j Mapper</h3>
+                            <div id="mapperStatus" class="space-y-2"></div>
+                        </div>
+                    </div>
+                </div>
+                <pre id="docOutput" class="data-panel">Log hoat dong...</pre>
             </div>
-          </div>
-        </div>
 
-        <pre id="mainDebugOutput" class="data-panel !max-h-[350px] w-full border-brand-primary/20">Bảng tin kết quả đối soát kỹ thuật...</pre>
+            <!-- ===== VIEW 3: GRAPH ===== -->
+            <div id="view-graph" class="view-panel flex-col gap-6">
+                <h2 class="text-lg font-bold text-slate-800">Neo4j Knowledge Graph</h2>
 
-        <div class="flex justify-center pt-8 border-t border-white/5">
-          <button onclick="goToStep(1)" class="btn-secondary px-8">
-            Làm hồ sơ mới (Reset Pipeline)
-          </button>
-        </div>
-      </div>
+                <div class="grid grid-cols-12 gap-4">
+                    <!-- Graph Health -->
+                    <div class="col-span-4 glass-card rounded-2xl p-5">
+                        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Graph Health</h3>
+                        <div id="graphHealth" class="space-y-3"></div>
+                    </div>
 
+                    <!-- Key Audit -->
+                    <div class="col-span-8 glass-card mgmt-card rounded-2xl p-5">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Mapping Key Audit</h3>
+                            <button onclick="loadKeyAudit()" class="text-[10px] px-3 py-1 bg-blue-50 text-blue-600 rounded-lg font-bold hover:bg-blue-100"><i class="fa-solid fa-rotate mr-1"></i>Refresh</button>
+                        </div>
+                        <div id="keyAuditGrid" class="grid grid-cols-3 gap-3"></div>
+                    </div>
+                </div>
+
+                <!-- Disease-Service Coverage -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Disease-Service Lookup</h3>
+                    <div class="flex gap-3 mb-4">
+                        <input id="graphIcd" placeholder="ICD code (vd: J18.9)" class="text-xs px-3 py-2 border border-slate-200 rounded-xl w-48 focus:outline-none focus:ring-2 focus:ring-blue-100">
+                        <input id="graphDisease" placeholder="Ten benh..." class="text-xs px-3 py-2 border border-slate-200 rounded-xl flex-1 focus:outline-none focus:ring-2 focus:ring-blue-100">
+                        <button onclick="lookupDiseaseSvc()" class="text-xs px-4 py-2 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700"><i class="fa-solid fa-search mr-1"></i>Tra cuu</button>
+                    </div>
+                    <pre id="graphOutput" class="data-panel">Ket qua tra cuu graph...</pre>
+                </div>
+
+                <!-- Ingest Support Matrix -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Ingest Support Matrix</h3>
+                    <div id="ingestMatrix" class="overflow-x-auto"></div>
+                </div>
+            </div>
+
+            <!-- ===== VIEW 4: REASONING ===== -->
+            <div id="view-reasoning" class="view-panel flex-col gap-6">
+                <h2 class="text-lg font-bold text-slate-800">Suy luan AI</h2>
+
+                <div class="grid grid-cols-12 gap-6">
+                    <!-- Reasoning Runner -->
+                    <div class="col-span-8 space-y-4">
+                        <div class="glass-card mgmt-card rounded-2xl p-6 space-y-4">
+                            <h3 class="text-sm font-bold text-slate-700"><i class="fa-solid fa-brain mr-2 text-blue-600"></i>Kich hoat Tac nhan Suy luan</h3>
+                            <p class="text-[11px] text-slate-400">Agent AI su dung Knowledge Graph + Azure OpenAI de phan tich ho so boi thuong.</p>
+                            <div class="space-y-3">
+                                <div class="flex gap-3">
+                                    <select id="reasonMode" class="text-xs px-3 py-2 border border-slate-200 rounded-xl">
+                                        <option value="duel">Live Duel (ai_claim vs Pathway)</option>
+                                        <option value="reason">Reasoning Only</option>
+                                    </select>
+                                    <input id="caseInput" value="data/benchmarks/sample_case_meniere.json" class="flex-1 text-xs px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-100">
+                                </div>
+                                <button id="btnRunReasoning" class="w-full py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all text-sm"><i class="fa-solid fa-play mr-2"></i>Chay Suy luan</button>
+                            </div>
+                        </div>
+
+                        <!-- Surface Search -->
+                        <div class="glass-card rounded-2xl p-5 space-y-3">
+                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Tra cuu Knowledge Surface</h3>
+                            <div class="flex gap-3">
+                                <input id="surfQ" placeholder="Trieu chung benh Meniere..." class="flex-1 text-xs px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-100">
+                                <input id="surfDisease" placeholder="Disease key..." class="w-40 text-xs px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-100">
+                                <button onclick="searchSurface()" class="text-xs px-4 py-2 bg-slate-800 text-white rounded-xl font-bold hover:bg-slate-900"><i class="fa-solid fa-search mr-1"></i>Tim</button>
+                            </div>
+                            <pre id="surfOutput" class="data-panel !max-h-[180px]">Ket qua surface...</pre>
+                        </div>
+                    </div>
+
+                    <!-- Agent Vitals -->
+                    <div class="col-span-4 space-y-4">
+                        <div class="glass-card rounded-2xl p-5">
+                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">Agent Profile</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between text-xs"><span class="text-slate-500">Tools</span><span id="agentTools" class="font-bold text-blue-600">...</span></div>
+                                <div class="flex justify-between text-xs"><span class="text-slate-500">Built-in</span><span id="agentBuiltin" class="font-bold text-slate-600">...</span></div>
+                                <div class="flex justify-between text-xs"><span class="text-slate-500">MCP</span><span id="agentMcp" class="font-bold text-slate-600">...</span></div>
+                                <div class="flex justify-between text-xs"><span class="text-slate-500">Model</span><span class="font-bold text-slate-600">Azure GPT-4o-mini</span></div>
+                                <div class="flex justify-between text-xs"><span class="text-slate-500">Max Turns</span><span class="font-bold text-slate-600">10</span></div>
+                                <div class="flex justify-between text-xs"><span class="text-slate-500">Temp</span><span class="font-bold text-slate-600">0.1</span></div>
+                            </div>
+                        </div>
+                        <div class="glass-card rounded-2xl p-5">
+                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">Domain Policy</h3>
+                            <div id="policyInfo" class="text-[10px] text-slate-500 leading-relaxed space-y-1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <pre id="reasonOutput" class="data-panel !max-h-[400px]">Ket qua suy luan...</pre>
+            </div>
+
+            <!-- ===== VIEW 5: AUDIT ===== -->
+            <div id="view-audit" class="view-panel flex-col gap-6">
+                <h2 class="text-lg font-bold text-slate-800">Doi soat &amp; Benchmark</h2>
+
+                <div class="grid grid-cols-12 gap-4">
+                    <!-- Production Readiness -->
+                    <div class="col-span-4 glass-card rounded-2xl p-6 text-center space-y-3">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Production Readiness</p>
+                        <div id="auditPct" class="text-5xl font-bold text-emerald-600">...</div>
+                        <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                            <div id="auditBar" class="h-full bg-emerald-500 transition-all duration-700" style="width:0%"></div>
+                        </div>
+                        <div id="auditChecklist" class="text-left space-y-1 mt-4"></div>
+                    </div>
+
+                    <!-- Benchmark -->
+                    <div class="col-span-8 space-y-4">
+                        <div class="glass-card mgmt-card rounded-2xl p-5 space-y-4">
+                            <h3 class="text-sm font-bold text-slate-700"><i class="fa-solid fa-chart-column mr-2 text-blue-600"></i>Phan tich Benchmark</h3>
+                            <div class="flex gap-3">
+                                <input id="auditRunDir" value="data/duel_runs/pathway_vs_agent_claude/20260409_224555_duel_meniere_001" class="flex-1 text-xs px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-100">
+                                <button onclick="loadBenchmark()" class="text-xs px-4 py-2 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700"><i class="fa-solid fa-chart-bar mr-1"></i>Phan tich</button>
+                            </div>
+                        </div>
+
+                        <!-- Pathway Trace -->
+                        <div class="glass-card rounded-2xl p-5 space-y-3">
+                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Truy vet Do thi (Trace Impact)</h3>
+                            <div class="flex gap-3">
+                                <input id="traceAssetId" placeholder="Pathway Asset ID..." class="flex-1 text-xs px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-100">
+                                <button onclick="loadTrace()" class="text-xs px-4 py-2 bg-slate-800 text-white rounded-xl font-bold hover:bg-slate-900"><i class="fa-solid fa-eye mr-1"></i>Trace</button>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="flex gap-3">
+                            <button onclick="loadSystemFull()" class="flex-1 glass-card rounded-xl py-2.5 text-xs font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-all"><i class="fa-solid fa-server mr-1"></i> Infra Pulse</button>
+                            <button onclick="loadReadiness()" class="flex-1 glass-card rounded-xl py-2.5 text-xs font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-all"><i class="fa-solid fa-clipboard-check mr-1"></i> Readiness</button>
+                            <button onclick="loadKeyAudit()" class="flex-1 glass-card rounded-xl py-2.5 text-xs font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-all"><i class="fa-solid fa-link mr-1"></i> Key Audit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <pre id="auditOutput" class="data-panel !max-h-[350px]">Ket qua doi soat...</pre>
+            </div>
+
+            <!-- ===== VIEW 6: SETTINGS ===== -->
+            <div id="view-settings" class="view-panel flex-col gap-6">
+                <h2 class="text-lg font-bold text-slate-800">Cau hinh He thong</h2>
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Ket noi</h3>
+                    <div id="settingsInfo" class="space-y-2 text-xs text-slate-600"></div>
+                </div>
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Architecture</h3>
+                    <pre id="archOutput" class="data-panel"></pre>
+                </div>
+            </div>
+
+        </main>
     </div>
-  </main>
 
-  <div id="toast" class="glass !bg-brand-surface shadow-2xl font-bold text-sm">Thông báo</div>
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-white border-t border-slate-200 h-9 px-6 flex items-center justify-between shrink-0 text-[9px] font-semibold text-slate-400 uppercase tracking-widest z-10">
+        <div class="flex gap-6">
+            <span><i class="fa-solid fa-server mr-1"></i> ai_claim v0.1.0</span>
+            <span id="footerSync"><i class="fa-solid fa-clock mr-1"></i> Last Sync: --</span>
+        </div>
+        <div class="flex gap-4">
+            <span class="text-blue-500 cursor-pointer hover:underline" onclick="showView('settings')">API Reference</span>
+        </div>
+    </footer>
 
-  <script>
-    // Constants & State
-    const TOAST_DURATION = 3000;
-    let currentStep = 1;
+    <!-- Toast -->
+    <div id="toast" class="toast bg-white border border-slate-200 shadow-lg text-slate-700">...</div>
 
-    function goToStep(n) {
-      // Hide all steps
-      document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.step-node').forEach(el => el.classList.remove('active'));
-      
-      // Show target step
-      document.getElementById(`step-${n}`).classList.add('active');
-      document.getElementById(`step-node-${n}`).classList.add('active');
-      
-      // Update progress bar
-      const progress = (n - 1) * 50; 
-      document.getElementById('stepper-progress').style.width = `${progress}%`;
-      currentStep = n;
-      
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+<script>
+// ========== GLOBALS ==========
+let currentView = 'overview';
+let assetCache = [];
 
-    // UI Helpers
-    function showToast(msg, type = 'info') {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.style.borderColor = type === 'error' ? 'rgba(244,63,94,0.5)' : 'rgba(59,130,246,0.5)';
-      t.style.backgroundColor = type === 'error' ? 'rgba(244,63,94,0.1)' : 'rgba(59,130,246,0.1)';
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), TOAST_DURATION);
-    }
+// ========== NAVIGATION ==========
+function showView(name) {
+    document.querySelectorAll('.view-panel').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+    const panel = document.getElementById('view-' + name);
+    if (panel) panel.classList.add('active');
+    const btn = document.querySelector(`.nav-btn[data-view="${name}"]`);
+    if (btn) btn.classList.add('active');
+    currentView = name;
+    // Lazy load on first visit
+    if (name === 'documents' && !assetCache.length) loadAssets();
+    if (name === 'graph') { loadGraphHealth(); loadKeyAudit(); loadIngestMatrix(); }
+    if (name === 'reasoning') loadPolicy();
+    if (name === 'audit') loadReadiness();
+    if (name === 'settings') loadSettings();
+}
 
-    async function loadJson(url) {
-      if (document.getElementById('demoModeToggle').checked && !url.includes('/api/system/status')) {
-        return handleDemoResponse(url);
-      }
-      const response = await fetch(url);
-      if (!response.ok) {
-          const text = await response.text();
-          let errorMsg = text;
-          if (response.status === 424) {
-              errorMsg = "Lỗi hạ tầng: Dịch vụ hỗ trợ (Neo4j/Pathway) không phản hồi. Hãy kiểm tra logs hoặc bật Demo Mode.";
-          }
-          throw new Error(errorMsg);
-      }
-      return response.json();
-    }
+// ========== HELPERS ==========
+function toast(msg, type) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.borderColor = type === 'error' ? '#fca5a5' : '#93c5fd';
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+}
 
-    function handleDemoResponse(url) {
-        console.log("Demo Mode acting on:", url);
-        if (url.includes('/api/duel/run')) {
-            return {
-                status: "success",
-                reasoning: "Dựa vào dữ liệu từ Neo4j, chẩn đoán Meniere có chỉ định đo thính lực và MRI tiền đình. Pathway cũng xác nhận phác đồ này.",
-                decision: "APPROVE",
-                confidence: 0.95,
-                demo: true
-            };
-        }
-        if (url.includes('/api/knowledge/surface/search')) {
-            return {
-                hits: [{ title: "[MOCK] Hướng dẫn điều trị Meniere 2024", snippet: "Phác đồ chuẩn bao gồm kiểm soát muối và sử dụng thuốc lợi tiểu..." }],
-                demo: true
-            };
-        }
-        return { message: "Demo Mode active", data: {}, demo: true };
-    }
+function statusBadge(s) {
+    const colors = { up: 'bg-emerald-100 text-emerald-700', ready: 'bg-emerald-100 text-emerald-700', ok: 'bg-emerald-100 text-emerald-700', down: 'bg-red-100 text-red-600', unavailable: 'bg-red-100 text-red-600', degraded: 'bg-amber-100 text-amber-700', error: 'bg-red-100 text-red-600' };
+    const c = colors[s] || 'bg-slate-100 text-slate-500';
+    return `<span class="px-2 py-0.5 rounded text-[10px] font-bold ${c}">${(s||'?').toUpperCase()}</span>`;
+}
 
-    function updateIndicator(id, status) {
-      const ind = document.getElementById(id);
-      if (!ind) return;
-      ind.className = 'indicator';
-      if (status === 'up' || status === 'ready' || status === 'ok') ind.classList.add('active');
-      else if (status === 'degraded' || status === 'warning') ind.classList.add('warning');
-      else ind.classList.add('danger');
-    }
+function updateInd(id, s) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.className = 'indicator';
+    if (s === 'up' || s === 'ready' || s === 'ok') el.classList.add('up');
+    else if (s === 'degraded') el.classList.add('degraded');
+    else el.classList.add('down');
+}
 
-    // Core Logic
-    async function refreshStatus() {
-      try {
-        const payload = await loadJson("/api/system/status");
-        updateIndicator('indNeo4j', payload.neo4j.status);
-        updateIndicator('indPathway', payload.pathway.status);
-        updateIndicator('indAzure', payload.ai_claim.dependencies.azure_proxy);
-        
-        const healthText = document.getElementById("healthStatusText");
-        const isStable = payload.ai_claim.status === 'ok';
-        healthText.textContent = isStable ? 'Đã sẵn sàng (Stable)' : 'Đang sụt giảm (Degraded)';
-        
-        // Tailwind class swap
-        if (isStable) {
-          healthText.classList.remove('border-brand-warning/30', 'bg-brand-warning/10', 'text-brand-warning');
-          healthText.classList.add('border-brand-accent/30', 'bg-brand-accent/10', 'text-brand-accent');
-        } else {
-          healthText.classList.remove('border-brand-accent/30', 'bg-brand-accent/10', 'text-brand-accent');
-          healthText.classList.add('border-brand-warning/30', 'bg-brand-warning/10', 'text-brand-warning');
-        }
-      } catch (err) {
-        console.error("Status refresh failed", err);
-      }
-    }
+function fmtBytes(b) { if (!b) return '-'; if (b < 1024) return b + ' B'; if (b < 1048576) return (b/1024).toFixed(1) + ' KB'; return (b/1048576).toFixed(1) + ' MB'; }
 
-    async function boot() {
-      try {
-        // Initial Status
+async function api(url, opts) {
+    if (document.getElementById('demoToggle').checked && !url.includes('/api/system/status')) return demoResponse(url);
+    const r = await fetch(url, opts);
+    if (!r.ok) { const t = await r.text(); throw new Error(t); }
+    return r.json();
+}
+
+function demoResponse(url) {
+    if (url.includes('/api/duel/run') || url.includes('/api/reasoning/run')) return { status: "demo", result: { claim_level_decision: "approve", reasoning_path: "[DEMO] Con duong kinh nghiem...", needs_human_review: true }, tool_call_count: 4, llm_call_count: 3, duration_ms: 2100 };
+    if (url.includes('/api/knowledge/surface/search')) return { hits: [{ title: "[DEMO] Phac do Meniere 2024", snippet: "Kiem soat muoi va thuoc loi tieu..." }] };
+    return { message: "Demo mode", demo: true };
+}
+
+// ========== BOOT ==========
+async function boot() {
+    try {
         await refreshStatus();
-        setInterval(refreshStatus, 10000);
-
-        // Load Stats
-        const policy = await loadJson("/api/domain-policy");
-        document.getElementById("toolCount").textContent = (policy.allowed_builtin_tools.length + policy.allowed_mcp_tools.length).toString();
-        document.getElementById("policyMeta").textContent = policy.allowed_builtin_tools.length + " Built-in, " + policy.allowed_mcp_tools.length + " MCP extensions";
-
-        const layout = await loadJson("/api/knowledge-layout");
-        document.getElementById("rootCount").textContent = layout.roots.length.toString();
-        document.getElementById("layoutMeta").textContent = layout.roots.map(r => r.key).slice(0, 3).join(", ") + "...";
-        populateRootSelects(layout.roots);
-
-        const readiness = await loadJson("/api/production-readiness");
-        const readyCount = Object.values(readiness.checklist).filter(v => v === true).length;
-        const totalCount = Object.keys(readiness.checklist).length;
-        const percent = Math.round((readyCount / totalCount) * 100);
-        document.getElementById("coverageVal").textContent = percent + "%";
-        document.getElementById("coverageBar").style.width = percent + "%";
-
-        showToast("Hệ thống đã khởi động thành công", "success");
-      } catch (err) {
-        showToast("Lỗi khởi động: " + err.message, "error");
-      }
+        setInterval(refreshStatus, 12000);
+        await loadOverview();
+        toast('He thong san sang', 'ok');
+    } catch (e) {
+        toast('Loi khoi dong: ' + e.message, 'error');
     }
+}
 
-    function populateRootSelects(roots) {
-      const select = document.getElementById("rootKey");
-      select.innerHTML = "";
-      roots.forEach(r => {
-        const opt = document.createElement("option");
-        opt.value = r.key;
-        opt.textContent = `${r.key.toUpperCase()} → ${r.graph_target}`;
-        select.appendChild(opt);
-      });
-      select.value = "protocols";
-    }
-
-    // Action Handlers
-    async function handleAction(btnId, targetId, apiCall) {
-      const btn = document.getElementById(btnId);
-      const originalText = btn.innerHTML;
-      btn.disabled = true;
-      btn.innerHTML = '<span>⏳</span> Đang thực hiện...';
-      try {
-        const data = await apiCall();
-        document.getElementById(targetId).textContent = JSON.stringify(data, null, 2);
-        showToast("Thành công: " + btnId, "success");
-      } catch (err) {
-        document.getElementById(targetId).textContent = "LỖI: " + err.message;
-        showToast(err.message, "error");
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = originalText;
-      }
-    }
-
-    // Events
-    document.getElementById("runDuel").addEventListener("click", () => {
-      handleAction("runDuel", "mainDebugOutput", async () => {
-        if (document.getElementById('demoModeToggle').checked) return handleDemoResponse('/api/duel/run');
-        const response = await fetch("/api/duel/run", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ case_file: document.getElementById("duelCase").value }),
-        });
-        if (!response.ok) {
-            const data = await response.json();
-            throw new Error(data.detail || "Lỗi không xác định");
+// ========== STATUS ==========
+async function refreshStatus() {
+    try {
+        const d = await api('/api/system/status');
+        updateInd('indNeo4j', d.neo4j?.status);
+        updateInd('indPathway', d.pathway?.status);
+        updateInd('indAzure', d.ai_claim?.dependencies?.azure_proxy);
+        const badge = document.getElementById('healthBadge');
+        const ok = d.ai_claim?.status === 'ok';
+        badge.textContent = ok ? 'San sang' : 'Sut giam';
+        badge.className = 'text-[10px] font-bold px-3 py-1 rounded-lg border ' + (ok ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : 'border-amber-200 bg-amber-50 text-amber-700');
+        document.getElementById('footerSync').innerHTML = `<i class="fa-solid fa-clock mr-1"></i> Last Sync: ${new Date().toLocaleTimeString()}`;
+        // Service status table in overview
+        if (currentView === 'overview') {
+            document.getElementById('svcStatus').innerHTML = [
+                ['ai_claim', d.ai_claim?.status],
+                ['Pathway API', d.pathway?.status],
+                ['Neo4j', d.neo4j?.status],
+                ['Azure Proxy', d.azure_proxy?.status],
+                ['9Router', d.router?.status],
+            ].map(([n,s]) => `<div class="flex justify-between items-center text-xs"><span class="text-slate-600 font-medium">${n}</span>${statusBadge(s)}</div>`).join('');
         }
-        return response.json();
-      });
-    });
+    } catch (e) { console.error('Status refresh', e); }
+}
 
-    document.getElementById("loadBenchmark").addEventListener("click", () => {
-      handleAction("loadBenchmark", "mainDebugOutput", () => 
-        loadJson("/api/benchmark/summary?run_dir=" + encodeURIComponent(document.getElementById("runDir").value))
-      );
-    });
+// ========== OVERVIEW ==========
+async function loadOverview() {
+    const [layout, policy, neo, readiness, bench] = await Promise.all([
+        api('/api/knowledge-layout'),
+        api('/api/domain-policy'),
+        api('/api/neo4j/health').catch(() => ({})),
+        api('/api/production-readiness').catch(() => ({ checklist: {} })),
+        api('/api/neo4j/benchmark-coverage').catch(() => ({ diseases: [], summary: {} })),
+    ]);
+    // KPIs
+    document.getElementById('kpiRoots').textContent = layout.roots?.length || 0;
+    const nodes = neo.summary || {};
+    document.getElementById('kpiNodes').textContent = ((nodes.claims_disease_count||0) + (nodes.insurance_contract_count||0) + (nodes.ontology_disease_count||0)).toLocaleString() + '+';
+    const toolTotal = (policy.allowed_builtin_tools?.length||0) + (policy.allowed_mcp_tools?.length||0);
+    document.getElementById('kpiTools').textContent = toolTotal;
+    const cl = readiness.checklist || {};
+    const ready = Object.values(cl).filter(v=>v===true).length;
+    const total = Object.keys(cl).length || 1;
+    const pct = Math.round(ready/total*100);
+    document.getElementById('kpiReady').textContent = pct + '%';
+    document.getElementById('kpiReadyBar').style.width = pct + '%';
+    // Root summary
+    const rootSummary = readiness.root_summary?.roots || [];
+    document.getElementById('rootSummaryTable').innerHTML = rootSummary.map(r =>
+        `<div class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
+            <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[10px] font-bold">${r.root_key}</span>
+                <span class="text-[10px] text-slate-400 font-mono">${r.graph_target}</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-[10px] font-bold text-slate-600">${r.asset_count} files</span>
+                ${r.duplicate_content_assets > 0 ? `<span class="text-[10px] text-amber-600 font-bold">${r.duplicate_content_assets} dup</span>` : ''}
+            </div>
+        </div>`
+    ).join('');
+    // Benchmark coverage
+    document.getElementById('benchmarkCoverage').innerHTML = (bench.diseases || []).map(d =>
+        `<div class="p-3 rounded-xl border ${d.ready ? 'border-emerald-200 bg-emerald-50' : 'border-red-200 bg-red-50'} animate-entry">
+            <p class="text-[10px] font-bold ${d.ready ? 'text-emerald-700' : 'text-red-600'}">${d.icd_code}</p>
+            <p class="text-[10px] text-slate-500 truncate">${d.disease_name}</p>
+            <p class="text-xs font-bold mt-1 ${d.ready ? 'text-emerald-600' : 'text-red-500'}">${d.service_count} svc</p>
+        </div>`
+    ).join('');
+    // Populate upload root selects
+    populateRoots(layout.roots || []);
+}
 
-    document.getElementById("scanKnowledge").addEventListener("click", () => {
-      handleAction("scanKnowledge", "knowledgeOutput", () => 
-        fetch("/api/knowledge/scan", { method: "POST" }).then(r => r.json())
-      );
-    });
+function populateRoots(roots) {
+    const sel = document.getElementById('uploadRoot');
+    if (!sel) return;
+    sel.innerHTML = roots.map(r => `<option value="${r.key}">${r.key.toUpperCase()} → ${r.graph_target}</option>`).join('');
+}
 
-    document.getElementById("uploadKnowledge").addEventListener("click", () => {
-      handleAction("uploadKnowledge", "knowledgeOutput", async () => {
-        const file = document.getElementById("uploadFile").files[0];
-        if (!file) throw new Error("Vui lòng chọn file");
+// ========== DOCUMENTS ==========
+async function loadAssets() {
+    try {
+        const q = (document.getElementById('docSearch')?.value || '').trim().toLowerCase();
+        const d = await api('/api/knowledge/assets?limit=200');
+        assetCache = d.assets || [];
+        let filtered = assetCache;
+        if (q) filtered = filtered.filter(a => (a.filename||'').toLowerCase().includes(q) || (a.root_key||'').toLowerCase().includes(q));
+        const tbody = document.getElementById('assetTable');
+        if (!filtered.length) { tbody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-xs text-slate-400">Khong co tai lieu</td></tr>'; return; }
+        tbody.innerHTML = filtered.map((a, i) =>
+            `<tr class="border-b border-slate-50 row-hover animate-entry" style="animation-delay:${i*0.03}s">
+                <td class="py-3 px-3 text-xs font-semibold text-slate-700">${a.filename}</td>
+                <td class="py-3 px-3"><span class="px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[10px] font-bold">${(a.root_key||'').toUpperCase()}</span></td>
+                <td class="py-3 px-3 text-[10px] text-slate-400 font-mono">${a.graph_target || '-'}</td>
+                <td class="py-3 px-3 text-[10px] font-bold text-slate-500">v${a.version||1}</td>
+                <td class="py-3 px-3 text-[10px] text-slate-400">${fmtBytes(a.size_bytes)}</td>
+                <td class="py-3 px-3 text-right">
+                    <button onclick="viewAsset('${a.asset_id}')" class="p-1.5 text-slate-400 hover:text-blue-600" title="Xem"><i class="fa-solid fa-eye"></i></button>
+                </td>
+            </tr>`
+        ).join('');
+        document.getElementById('assetPaging').textContent = `${filtered.length} / ${d.total} tai lieu`;
+    } catch (e) { toast('Loi load assets: ' + e.message, 'error'); }
+}
+
+async function viewAsset(id) {
+    try {
+        const d = await api('/api/knowledge/assets/' + id);
+        document.getElementById('docOutput').textContent = JSON.stringify(d, null, 2);
+    } catch (e) { document.getElementById('docOutput').textContent = 'LỖI: ' + e.message; }
+}
+
+async function scanRegistry() {
+    try {
+        const d = await fetch('/api/knowledge/scan', { method: 'POST' }).then(r => r.json());
+        toast('Scan xong: ' + (d.assets?.length || 0) + ' assets', 'ok');
+        if (currentView === 'documents') loadAssets();
+        if (currentView === 'overview') loadOverview();
+    } catch (e) { toast('Scan fail: ' + e.message, 'error'); }
+}
+
+// Upload handlers
+document.addEventListener('DOMContentLoaded', () => {
+    const dz = document.getElementById('dropZone');
+    const fi = document.getElementById('fileInput');
+    if (dz && fi) {
+        dz.addEventListener('click', () => fi.click());
+        dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('dragover'); });
+        dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
+        dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('dragover'); fi.files = e.dataTransfer.files; toast('File: ' + e.dataTransfer.files[0]?.name, 'ok'); });
+    }
+    document.getElementById('btnUploadLocal')?.addEventListener('click', async () => {
+        const file = document.getElementById('fileInput').files[0];
+        if (!file) { toast('Chon file truoc', 'error'); return; }
         const form = new FormData();
-        form.append("root_key", document.getElementById("rootKey").value);
-        form.append("file", file);
-        return fetch("/api/knowledge/upload", { method: "POST", body: form }).then(r => r.json());
-      });
+        form.append('root_key', document.getElementById('uploadRoot').value);
+        form.append('file', file);
+        try {
+            const d = await fetch('/api/knowledge/upload', { method: 'POST', body: form }).then(r=>r.json());
+            document.getElementById('docOutput').textContent = JSON.stringify(d, null, 2);
+            toast('Upload thanh cong', 'ok');
+            loadAssets();
+        } catch (e) { toast('Upload loi: ' + e.message, 'error'); }
     });
-
-    document.getElementById("bridgeUpload").addEventListener("click", () => {
-      handleAction("bridgeUpload", "knowledgeOutput", async () => {
-        const file = document.getElementById("uploadFile").files[0]; // Reuse file input for simplicity
-        if (!file) throw new Error("Vui lòng chọn file cho Bridge");
+    document.getElementById('btnBridgeUpload')?.addEventListener('click', async () => {
+        const file = document.getElementById('fileInput').files[0];
+        if (!file) { toast('Chon file truoc', 'error'); return; }
         const form = new FormData();
-        form.append("root_key", document.getElementById("rootKey").value);
-        form.append("namespace", document.getElementById("bridgeNamespace").value);
-        form.append("auto_ingest", document.getElementById("bridgeAutoIngest").checked);
-        form.append("wait_for_completion", document.getElementById("bridgeWait").checked);
-        form.append("file", file);
-        return fetch("/api/knowledge/bridge-upload", { method: "POST", body: form }).then(r => r.json());
-      });
+        form.append('root_key', document.getElementById('uploadRoot').value);
+        form.append('file', file);
+        form.append('namespace', document.getElementById('bridgeNs').value);
+        form.append('auto_ingest', document.getElementById('autoIngestToggle').checked);
+        try {
+            const d = await fetch('/api/knowledge/bridge-upload', { method: 'POST', body: form }).then(r=>r.json());
+            document.getElementById('docOutput').textContent = JSON.stringify(d, null, 2);
+            toast('Bridge upload thanh cong', 'ok');
+            loadAssets();
+        } catch (e) { toast('Bridge loi: ' + e.message, 'error'); }
     });
+    document.getElementById('docSearch')?.addEventListener('input', () => { if (assetCache.length) loadAssets(); });
+    document.getElementById('btnRunReasoning')?.addEventListener('click', runReasoning);
+});
 
-    document.getElementById("searchSurface").addEventListener("click", () => {
-      handleAction("searchSurface", "surfaceOutput", () =>
-        loadJson("/api/knowledge/surface/search?query=" + encodeURIComponent(document.getElementById("surfaceQuery").value) +
-                 "&disease_key=" + encodeURIComponent(document.getElementById("surfaceDiseaseKey").value))
-      );
-    });
+// ========== GRAPH ==========
+async function loadGraphHealth() {
+    try {
+        const d = await api('/api/neo4j/health');
+        const s = d.summary || {};
+        document.getElementById('graphHealth').innerHTML = Object.entries(s).map(([k,v]) =>
+            `<div class="flex justify-between items-center text-xs"><span class="text-slate-500">${k.replace(/_/g,' ')}</span><span class="font-bold text-slate-700">${typeof v === 'number' ? v.toLocaleString() : v}</span></div>`
+        ).join('');
+    } catch (e) { document.getElementById('graphHealth').innerHTML = '<p class="text-xs text-red-500">Neo4j unavailable</p>'; }
+}
 
-    document.getElementById("loadSystemStatus").addEventListener("click", () => {
-      handleAction("loadSystemStatus", "mainDebugOutput", () => loadJson("/api/system/status"));
-    });
+async function loadKeyAudit() {
+    try {
+        const d = await api('/api/neo4j/mapping-key-audit');
+        document.getElementById('keyAuditGrid').innerHTML = (d.checks || []).map(c =>
+            `<div class="p-3 rounded-xl border ${c.status==='ok' ? 'border-slate-200 bg-white' : 'border-red-200 bg-red-50'}">
+                <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">${c.name.replace(/_/g,' ')}</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs font-bold text-slate-700">${c.label}</span>
+                    ${statusBadge(c.status)}
+                </div>
+                ${c.duplicate_count > 0 ? `<p class="mt-1 text-[10px] text-red-600 font-bold">${c.duplicate_count} duplicates</p>` : ''}
+            </div>`
+        ).join('');
+        if (currentView === 'audit') document.getElementById('auditOutput').textContent = JSON.stringify(d, null, 2);
+    } catch (e) { console.error('Key audit', e); }
+}
 
-    document.getElementById("loadReadiness").addEventListener("click", () => {
-      handleAction("loadReadiness", "mainDebugOutput", () => loadJson("/api/production-readiness"));
-    });
+async function loadIngestMatrix() {
+    try {
+        const d = await api('/api/ingest/support-matrix');
+        document.getElementById('ingestMatrix').innerHTML = `<table class="w-full text-xs">
+            <thead><tr class="text-[10px] font-bold text-slate-400 uppercase border-b border-slate-100">
+                <th class="pb-2 text-left">Root</th><th class="pb-2">Graph Target</th><th class="pb-2">Types</th><th class="pb-2">Registry</th><th class="pb-2">Direct Ingest</th><th class="pb-2">Engine</th>
+            </tr></thead>
+            <tbody>${(d.rows||[]).map(r => `<tr class="border-b border-slate-50">
+                <td class="py-2 font-bold text-slate-700">${r.root_key}</td>
+                <td class="py-2 text-slate-400 font-mono text-[10px]">${r.graph_target}</td>
+                <td class="py-2 text-[10px] text-slate-500">${(r.accepted_types||[]).join(', ')}</td>
+                <td class="py-2 text-center">${r.local_registry ? '<i class="fa-solid fa-check text-emerald-500"></i>' : '-'}</td>
+                <td class="py-2 text-center">${r.pathway_direct_ingest ? '<i class="fa-solid fa-check text-emerald-500"></i>' : '<i class="fa-solid fa-minus text-slate-300"></i>'}</td>
+                <td class="py-2"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${r.pathway_direct_ingest ? 'bg-emerald-50 text-emerald-600' : 'bg-slate-100 text-slate-500'}">${r.recommended_engine?.replace(/_/g,' ')}</span></td>
+            </tr>`).join('')}</tbody></table>`;
+    } catch (e) { console.error('Ingest matrix', e); }
+}
 
-    document.getElementById("loadMappingAudit").addEventListener("click", () => {
-      handleAction("loadMappingAudit", "mainDebugOutput", () => loadJson("/api/neo4j/mapping-key-audit"));
-    });
+async function lookupDiseaseSvc() {
+    const icd = document.getElementById('graphIcd').value.trim();
+    const name = document.getElementById('graphDisease').value.trim();
+    try {
+        const d = await api(`/api/neo4j/disease-service-coverage?icd_code=${encodeURIComponent(icd)}&disease_name=${encodeURIComponent(name)}`);
+        document.getElementById('graphOutput').textContent = JSON.stringify(d, null, 2);
+    } catch (e) { document.getElementById('graphOutput').textContent = 'Error: ' + e.message; }
+}
 
-    document.getElementById("loadPathwayTrace").addEventListener("click", () => {
-      const id = document.getElementById("pathwayAssetId").value;
-      if (!id) throw new Error("Yêu cầu Asset ID");
-      handleAction("loadPathwayTrace", "mainDebugOutput", () => 
-        loadJson(`/api/pathway/knowledge/assets/${encodeURIComponent(id)}/graph-trace`)
-      );
-    });
+// ========== REASONING ==========
+async function loadPolicy() {
+    try {
+        const p = await api('/api/domain-policy');
+        const b = p.allowed_builtin_tools?.length || 0;
+        const m = p.allowed_mcp_tools?.length || 0;
+        document.getElementById('agentTools').textContent = b + m;
+        document.getElementById('agentBuiltin').textContent = b + ' (' + (p.allowed_builtin_tools||[]).join(', ') + ')';
+        document.getElementById('agentMcp').textContent = m + ' MCP tools';
+        document.getElementById('policyInfo').innerHTML = (p.decision_requirements || []).map(r => `<p>• ${r}</p>`).join('');
+    } catch (e) { console.error('Policy', e); }
+}
 
-    // Final Init
-    boot();
-  </script>
+async function runReasoning() {
+    const btn = document.getElementById('btnRunReasoning');
+    const orig = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Dang xu ly...';
+    try {
+        const mode = document.getElementById('reasonMode').value;
+        const caseVal = document.getElementById('caseInput').value.trim();
+        let result;
+        if (mode === 'duel') {
+            result = await api('/api/duel/run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ case_file: caseVal }) });
+        } else {
+            const caseData = caseVal.endsWith('.json') ? { case_file: caseVal } : JSON.parse(caseVal);
+            result = await api('/api/reasoning/run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(caseData) });
+        }
+        document.getElementById('reasonOutput').textContent = JSON.stringify(result, null, 2);
+        toast('Suy luan hoan tat' + (result.tool_call_count ? ` (${result.llm_call_count} LLM, ${result.tool_call_count} tools, ${result.duration_ms}ms)` : ''), 'ok');
+    } catch (e) {
+        document.getElementById('reasonOutput').textContent = 'LỖI: ' + e.message;
+        toast('Reasoning fail', 'error');
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = orig;
+    }
+}
+
+async function searchSurface() {
+    const q = document.getElementById('surfQ').value.trim();
+    const dk = document.getElementById('surfDisease').value.trim();
+    try {
+        const d = await api(`/api/knowledge/surface/search?query=${encodeURIComponent(q)}&disease_key=${encodeURIComponent(dk)}`);
+        document.getElementById('surfOutput').textContent = JSON.stringify(d, null, 2);
+    } catch (e) { document.getElementById('surfOutput').textContent = 'Error: ' + e.message; }
+}
+
+// ========== AUDIT ==========
+async function loadReadiness() {
+    try {
+        const d = await api('/api/production-readiness');
+        const cl = d.checklist || {};
+        const ready = Object.values(cl).filter(v=>v===true).length;
+        const total = Object.keys(cl).length || 1;
+        const pct = Math.round(ready/total*100);
+        document.getElementById('auditPct').textContent = pct + '%';
+        document.getElementById('auditBar').style.width = pct + '%';
+        document.getElementById('auditChecklist').innerHTML = Object.entries(cl).map(([k,v]) =>
+            `<div class="flex items-center gap-2 text-[10px]">
+                <i class="fa-solid ${v ? 'fa-circle-check text-emerald-500' : 'fa-circle-xmark text-red-400'}"></i>
+                <span class="${v ? 'text-slate-600' : 'text-red-500 font-bold'}">${k.replace(/_/g,' ')}</span>
+            </div>`
+        ).join('');
+        document.getElementById('auditOutput').textContent = JSON.stringify(d, null, 2);
+    } catch (e) { toast('Readiness fail', 'error'); }
+}
+
+async function loadBenchmark() {
+    try {
+        const d = await api('/api/benchmark/summary?run_dir=' + encodeURIComponent(document.getElementById('auditRunDir').value));
+        document.getElementById('auditOutput').textContent = JSON.stringify(d, null, 2);
+        toast('Benchmark loaded', 'ok');
+    } catch (e) { document.getElementById('auditOutput').textContent = 'Error: ' + e.message; toast('Benchmark fail', 'error'); }
+}
+
+async function loadTrace() {
+    const id = document.getElementById('traceAssetId').value.trim();
+    if (!id) { toast('Nhap Asset ID', 'error'); return; }
+    try {
+        const d = await api(`/api/pathway/knowledge/assets/${encodeURIComponent(id)}/graph-trace`);
+        document.getElementById('auditOutput').textContent = JSON.stringify(d, null, 2);
+    } catch (e) { document.getElementById('auditOutput').textContent = 'Error: ' + e.message; }
+}
+
+async function loadSystemFull() {
+    try {
+        const d = await api('/api/system/status');
+        document.getElementById('auditOutput').textContent = JSON.stringify(d, null, 2);
+    } catch (e) { document.getElementById('auditOutput').textContent = 'Error: ' + e.message; }
+}
+
+// ========== SETTINGS ==========
+async function loadSettings() {
+    try {
+        const d = await api('/health');
+        document.getElementById('settingsInfo').innerHTML = Object.entries(d).filter(([k]) => k !== 'dependencies').map(([k,v]) =>
+            `<div class="flex justify-between items-center"><span class="text-slate-500">${k}</span><span class="font-mono font-bold text-slate-700 text-[11px]">${v}</span></div>`
+        ).join('');
+        const arch = await api('/api/architecture');
+        document.getElementById('archOutput').textContent = JSON.stringify(arch, null, 2);
+    } catch (e) { console.error('Settings', e); }
+}
+
+// ========== MAPPER STATUS (for Documents view) ==========
+async function loadMapperMini() {
+    try {
+        const d = await api('/api/neo4j/mapping-key-audit');
+        document.getElementById('mapperStatus').innerHTML = (d.checks || []).slice(0, 4).map(c =>
+            `<div class="flex justify-between items-center p-2 rounded-lg ${c.status==='ok' ? 'bg-slate-50' : 'bg-red-50'}">
+                <span class="text-[10px] font-bold text-slate-500">${c.label}</span>
+                ${statusBadge(c.status)}
+            </div>`
+        ).join('');
+    } catch (e) {}
+}
+
+// Load mapper when documents view opens
+const origShowView = showView;
+showView = function(name) {
+    origShowView(name);
+    if (name === 'documents') loadMapperMini();
+};
+
+// ========== INIT ==========
+boot();
+</script>
 </body>
 </html>
