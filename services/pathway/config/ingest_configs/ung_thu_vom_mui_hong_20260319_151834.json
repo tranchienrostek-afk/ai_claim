@@ -1,0 +1,264 @@
+{
+  "disease_name": "Ung thư vòm mũi họng",
+  "icd_code": "C11.9",
+  "protocol_name": "HD Chẩn đoán Điều trị TMH - Ung thư vòm mũi họng",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": false,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Disease",
+      "examples": [
+        "Viêm tai giữa",
+        "Viêm mũi dị ứng",
+        "Viêm họng cấp"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "Đau tai",
+        "Chảy mũi",
+        "Khó thở"
+      ]
+    },
+    {
+      "label": "Drug",
+      "examples": [
+        "Paracetamol",
+        "Ibuprofen",
+        "Amoxicillin"
+      ]
+    },
+    {
+      "label": "ICD_Block",
+      "examples": [
+        "H60-H95"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "Xét nghiệm dịch mũi",
+        "Xét nghiệm tai",
+        "Chụp X-quang"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "Nội soi tai",
+        "Rửa mũi",
+        "Phẫu thuật cắt amidan"
+      ]
+    },
+    {
+      "label": "Treatment",
+      "examples": [
+        "Kháng sinh",
+        "Thuốc giảm đau",
+        "Điều trị triệu chứng"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are an NER model specialized in extracting medical entities from Vietnamese text related to diseases of the ear, nose, and throat. Your task is to identify and classify entities into the following categories: Disease, Symptom, Drug, ICD_Block, LabTest, Procedure, and Treatment. Return the results in valid JSON format with an 'entities' array containing objects with 'name' and 'type' fields.",
+  "extraction_user_prompt_template": "Analyze the following text: {chunk_content} from section: {section_path}. Identify and extract the following entities: \n- Disease (e.g., Viêm tai giữa, Viêm mũi dị ứng, Viêm họng cấp) \n- Symptom (e.g., Đau tai, Chảy mũi, Khó thở) \n- Drug (e.g., Paracetamol, Ibuprofen, Amoxicillin) \n- ICD_Block (e.g., H60-H95) \n- LabTest (e.g., Xét nghiệm dịch mũi, Xét nghiệm tai, Chụp X-quang) \n- Procedure (e.g., Nội soi tai, Rửa mũi, Phẫu thuật cắt amidan) \n- Treatment (e.g., Kháng sinh, Thuốc giảm đau, Điều trị triệu chứng) \nReturn JSON: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]} \nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the Ear, Nose, and Throat",
+      "properties": {
+        "code": "H60-H95"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Diseases of the Ear",
+      "properties": {
+        "code": "H60-H62"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Diseases of the Nose",
+      "properties": {
+        "code": "H65-H67"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Diseases of the Throat",
+      "properties": {
+        "code": "J00-J99"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Bệnh về tai mũi họng",
+      "properties": {
+        "aliases": "Ear, Nose, and Throat Diseases"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Amoxicillin",
+      "properties": {
+        "code": "J01CA04"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Ciprofloxacin",
+      "properties": {
+        "code": "J01MA02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Phenylephrine",
+      "properties": {
+        "code": "R01AA02"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Nasal Swab",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Throat Culture",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Audiometry",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "CT Scan of Sinuses",
+      "properties": {}
+    },
+    {
+      "label": "Procedure",
+      "name": "Tympanostomy",
+      "properties": {}
+    },
+    {
+      "label": "Procedure",
+      "name": "Nasal Endoscopy",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the Ear, Nose, and Throat",
+      "to_label": "ICD_Category",
+      "to_name": "Diseases of the Ear",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the Ear, Nose, and Throat",
+      "to_label": "ICD_Category",
+      "to_name": "Diseases of the Nose",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the Ear, Nose, and Throat",
+      "to_label": "ICD_Category",
+      "to_name": "Diseases of the Throat",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Diseases of the Ear",
+      "to_label": "Disease",
+      "to_name": "Bệnh về tai mũi họng",
+      "rel_type": "CLASSIFIED_AS"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Diseases of the Nose",
+      "to_label": "Disease",
+      "to_name": "Bệnh về tai mũi họng",
+      "rel_type": "CLASSIFIED_AS"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Diseases of the Throat",
+      "to_label": "Disease",
+      "to_name": "Bệnh về tai mũi họng",
+      "rel_type": "CLASSIFIED_AS"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh về tai mũi họng",
+      "to_label": "Drug",
+      "to_name": "Amoxicillin",
+      "rel_type": "TREATED_BY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh về tai mũi họng",
+      "to_label": "Drug",
+      "to_name": "Ciprofloxacin",
+      "rel_type": "TREATED_BY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh về tai mũi họng",
+      "to_label": "Drug",
+      "to_name": "Phenylephrine",
+      "rel_type": "TREATED_BY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh về tai mũi họng",
+      "to_label": "LabTest",
+      "to_name": "Nasal Swab",
+      "rel_type": "DIAGNOSED_BY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh về tai mũi họng",
+      "to_label": "LabTest",
+      "to_name": "Throat Culture",
+      "rel_type": "DIAGNOSED_BY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh về tai mũi họng",
+      "to_label": "LabTest",
+      "to_name": "Audiometry",
+      "rel_type": "DIAGNOSED_BY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh về tai mũi họng",
+      "to_label": "LabTest",
+      "to_name": "CT Scan of Sinuses",
+      "rel_type": "DIAGNOSED_BY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh về tai mũi họng",
+      "to_label": "Procedure",
+      "to_name": "Tympanostomy",
+      "rel_type": "TREATED_BY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh về tai mũi họng",
+      "to_label": "Procedure",
+      "to_name": "Nasal Endoscopy",
+      "rel_type": "TREATED_BY"
+    }
+  ],
+  "needs_ocr_cleanup": true
+}

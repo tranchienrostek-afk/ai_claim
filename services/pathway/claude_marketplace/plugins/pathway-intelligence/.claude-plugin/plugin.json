@@ -1,0 +1,8 @@
+{
+  "name": "pathway-intelligence",
+  "version": "0.1.0",
+  "description": "Repo-local skills and commands for Pathway architecture, duet orchestration, and decision-gate reasoning.",
+  "author": {
+    "name": "Pathway Workspace"
+  }
+}

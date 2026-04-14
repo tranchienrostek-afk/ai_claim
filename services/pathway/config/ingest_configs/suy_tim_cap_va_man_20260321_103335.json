@@ -1,0 +1,186 @@
+{
+  "disease_name": "Suy tim cấp và mạn",
+  "icd_code": "I50",
+  "protocol_name": "Phác đồ Suy tim cấp và mạn - Bộ Y tế Việt Nam 2022",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": true,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "thuốc ức chế men chuyển",
+        "chẹn beta giao cảm",
+        "thuốc lợi tiểu kháng aldosterone",
+        "ARNI",
+        "thuốc ức chế SGLT2"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "suy tim cấp",
+        "suy tim mạn",
+        "suy tim"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "khó thở",
+        "phù",
+        "mệt mỏi"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "chẩn đoán suy tim",
+        "điều trị suy tim",
+        "phác đồ điều trị"
+      ]
+    },
+    {
+      "label": "Protocol",
+      "examples": [
+        "phác đồ điều trị thuốc",
+        "hướng dẫn chẩn đoán và điều trị suy tim"
+      ]
+    },
+    {
+      "label": "ICD_Category",
+      "examples": [
+        "I50 - Suy tim"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese internal medicine texts about acute and chronic heart failure (Suy tim cấp và mạn). Extract all entities explicitly mentioned in the input text and return a valid JSON object with an \"entities\" array. Each entity should have a \"name\" (the exact text span) and a \"type\" (one of: Drug, Disease, Symptom, Procedure, Protocol, ICD_Category). Do not infer or add entities not explicitly present in the text. The output format must be: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}, ...]}.",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text from the section: {section_path}\n\nText:\n{chunk_content}\n\nExtract all entities explicitly mentioned in the text. The entity types and examples are:\n- Drug: thuốc ức chế men chuyển, chẹn beta giao cảm, thuốc lợi tiểu kháng aldosterone, ARNI, thuốc ức chế SGLT2\n- Disease: suy tim cấp, suy tim mạn, suy tim\n- Symptom: khó thở, phù, mệt mỏi\n- Procedure: chẩn đoán suy tim, điều trị suy tim, phác đồ điều trị\n- Protocol: phác đồ điều trị thuốc, hướng dẫn chẩn đoán và điều trị suy tim\n- ICD_Category: I50 - Suy tim\n\nReturn a JSON object in the format:\n{\"entities\": [{\"name\": \"...\", \"type\": \"...\"}, ...]}\n\nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the circulatory system",
+      "properties": {
+        "code": "I00-I99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Heart failure",
+      "properties": {
+        "code": "I50"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Suy tim cấp và mạn",
+      "properties": {
+        "icd_code": "I50",
+        "aliases": "Heart failure; Acute and chronic heart failure; Suy tim"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Furosemide",
+      "properties": {
+        "atc_code": "C03CA01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Lisinopril",
+      "properties": {
+        "atc_code": "C09AA03"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Metoprolol",
+      "properties": {
+        "atc_code": "C07AB02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Spironolactone",
+      "properties": {
+        "atc_code": "C03DA01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Digoxin",
+      "properties": {
+        "atc_code": "C01AA05"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Enalapril",
+      "properties": {
+        "atc_code": "C09AA02"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "B-type natriuretic peptide (BNP)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "N-terminal pro b-type natriuretic peptide (NT-proBNP)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Serum creatinine",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Serum sodium",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Liver function tests",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete blood count",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "New York Heart Association (NYHA) Functional Classification",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "American College of Cardiology/American Heart Association (ACC/AHA) Stages of Heart Failure",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the circulatory system",
+      "to_label": "ICD_Category",
+      "to_name": "Heart failure",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Suy tim cấp và mạn",
+      "to_label": "ICD_Category",
+      "to_name": "Heart failure",
+      "rel_type": "CLASSIFIED_AS"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

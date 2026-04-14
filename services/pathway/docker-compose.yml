@@ -1,0 +1,57 @@
+# This file is kept for convenience when running from notebooklm/ directly.
+# The canonical docker-compose.yml is at the repository root.
+# Usage: cd .. && docker compose up --build
+
+services:
+  neo4j:
+    image: neo4j:5.26.0
+    ports:
+      - "7475:7474"
+      - "7688:7687"
+    environment:
+      NEO4J_AUTH: neo4j/password123
+      NEO4J_PLUGINS: '["apoc"]'
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:7474 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+
+  api:
+    build: .
+    ports:
+      - "9600:9600"
+    env_file:
+      - .env
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    environment:
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_USER: neo4j
+      NEO4J_PASSWORD: password123
+    volumes:
+      # Source code (hot-reload friendly)
+      - ./api_server.py:/app/api_server.py
+      - ./medical_agent.py:/app/medical_agent.py
+      - ./academic_agent.py:/app/academic_agent.py
+      - ./runtime_env.py:/app/runtime_env.py
+      - ./server_support:/app/server_support
+      - ./templates:/app/templates
+      - ./static:/app/static
+      # Data directories (persistent)
+      - ./data:/app/data
+      - ./config:/app/config
+      - ./logs:/app/logs
+      # Pipeline & workspaces
+      - ./workspaces:/app/workspaces
+      - ./scripts:/app/scripts
+    restart: unless-stopped
+
+volumes:
+  neo4j_data:
+  neo4j_logs:

@@ -1,0 +1,17 @@
+{
+  "name": "pathway-local",
+  "owner": {
+    "name": "Pathway Workspace"
+  },
+  "plugins": [
+    {
+      "name": "pathway-intelligence",
+      "description": "Repo-local Pathway skills, commands, and hooks for architecture, orchestration, and decision-gate reasoning.",
+      "source": "./plugins/pathway-intelligence"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "description": "Local marketplace used by the Pathway workspace container."
+  }
+}

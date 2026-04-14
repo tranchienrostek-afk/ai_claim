@@ -1,0 +1,165 @@
+{
+  "disease_name": "Viêm thanh quản và khí quản cấp",
+  "icd_code": "J04",
+  "protocol_name": "Phác đồ Viêm thanh quản và khí quản cấp (BYT)",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": false,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "Influenzae",
+        "APC",
+        "S.pneumoniae",
+        "Hemophilus"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "Viêm thanh quản cấp tính",
+        "VTQ cấp",
+        "Viêm thanh quản",
+        "Viêm khí quản cấp"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "viêm niêm mạc",
+        "biểu hiện lâm sàng",
+        "tình trạng viêm"
+      ]
+    },
+    {
+      "label": "ICD_Category",
+      "examples": [
+        "J04"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "chẩn đoán",
+        "điều trị"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese internal medicine texts. Extract all entities related to the given categories from the input text. Return a valid JSON object with an \"entities\" array, where each entity is represented as {\"name\": \"...\", \"type\": \"...\"}. Only include entities explicitly mentioned in the text.",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text from the section: {section_path}. Extract all entities of the following types with examples:\n- Drug: Influenzae, APC, S.pneumoniae, Hemophilus\n- Disease: Viêm thanh quản cấp tính, VTQ cấp, Viêm thanh quản, Viêm khí quản cấp\n- Symptom: viêm niêm mạc, biểu hiện lâm sàng, tình trạng viêm\n- ICD_Category: J04\n- Procedure: chẩn đoán, điều trị\n\nText to analyze:\n\"\"\"\n{chunk_content}\n\"\"\"\n\nReturn a JSON object in the format: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}. Only include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the respiratory system",
+      "properties": {
+        "code": "J00-J99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Acute upper respiratory infections",
+      "properties": {
+        "code": "J00-J06"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Acute laryngitis and tracheitis",
+      "properties": {
+        "code": "J04"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Viêm thanh quản và khí quản cấp",
+      "properties": {
+        "code": "J04",
+        "aliases": "Acute laryngitis and tracheitis"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Dexamethasone",
+      "properties": {
+        "ATC_code": "H02AB02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Amoxicillin",
+      "properties": {
+        "ATC_code": "J01CA04"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Prednisolone",
+      "properties": {
+        "ATC_code": "H02AB06"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Paracetamol",
+      "properties": {
+        "ATC_code": "N02BE01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Ibuprofen",
+      "properties": {
+        "ATC_code": "M01AE01"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete blood count",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "C-reactive protein",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Throat swab culture",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Chest X-ray",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the respiratory system",
+      "to_label": "ICD_Category",
+      "to_name": "Acute upper respiratory infections",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Acute upper respiratory infections",
+      "to_label": "ICD_Category",
+      "to_name": "Acute laryngitis and tracheitis",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm thanh quản và khí quản cấp",
+      "to_label": "ICD_Category",
+      "to_name": "Acute laryngitis and tracheitis",
+      "rel_type": "CLASSIFIED_AS"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

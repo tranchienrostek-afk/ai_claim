@@ -1,0 +1,135 @@
+[
+  {
+    "num": 2,
+    "title": "Sự thật bất ngờ đằng sau cơn đau đầu dữ dội",
+    "disease": "Nhọt ống tai ngoài (Bệnh tai ngoài)",
+    "services": [
+      "Nội soi tai mũi họng",
+      "CT Scan xương thái dương không cản quang",
+      "Đo thính lực đơn âm",
+      "Tổng phân tích tế bào máu (CBC)"
+    ],
+    "context": "BN Nữ 28 tuoi.\nĐau tai phải dữ dội, đập theo nhịp mạch và lan rộng ra khắp nửa đầu bên phải [1].\nKhông thể nhai hay há miệng ngáp do đau [1].\nTai phải ù, nghe kém tiếng trầm, bưng bít hoàn toàn [1].\nVùng da phía sau vành tai sưng tấy đỏ [1].\nMệt mỏi do mất ngủ [1].\nTien su: Thói quen dùng dụng cụ ngoáy tai bằng sắt cứng cạo ráy tai gây xước da ống tai [1]."
+  },
+  {
+    "num": 3,
+    "title": "Cơn chóng mặt kịch phát và hành trình tìm dấu vết căn bệnh ẩn nấp",
+    "disease": "Bệnh Ménière",
+    "services": [
+      "Đo thính lực đồ đơn âm",
+      "Điện động nhãn đồ (ENG)",
+      "Điện thính giác thân não (ABR)",
+      "Chụp MRI sọ não - xương đá có tiêm thuốc"
+    ],
+    "context": "BN Nữ 45 tuoi.\nChóng mặt kịch phát quay cuồng, kéo dài hơn 2 giờ đồng hồ.\nNhắm nghiền hai mắt, buồn nôn dữ dội và không thể tự đi lại.\nTai phải ù đặc như có tiếng ve kêu (ù tai tiếng trầm).\nSức nghe giảm hẳn và có cảm giác bưng bít đầy trong tai.\nTien su: Thỉnh thoảng có cơn chóng mặt nhẹ từ vài tháng trước."
+  },
+  {
+    "num": 4,
+    "title": "Cơn sốt cao đột ngột và những chấm mủ trắng đáng ngờ",
+    "disease": "Viêm mũi họng cấp tính",
+    "services": [
+      "Nội soi tai mũi họng",
+      "Tổng phân tích tế bào máu (CBC)",
+      "Phết dịch họng nuôi cấy vi khuẩn làm kháng sinh đồ",
+      "Phản ứng ASLO"
+    ],
+    "context": "BN Nam 12 tuoi.\nSốt cao đột ngột 39.5 độ C, kèm theo ớn lạnh và mệt mỏi.\nĐau rát họng dữ dội, đặc biệt nuốt đau nhói lan lên tai.\nHo khan, ngạt mũi và chảy nước mũi nhầy đục.\nChán ăn, mệt mỏi rã rời.\nTien su: Đi dã ngoại gặp thời tiết lạnh đột ngột 2 ngày trước."
+  },
+  {
+    "num": 5,
+    "title": "Lời cảnh báo từ những vết loét họng bí ẩn",
+    "disease": "Viêm mũi họng cấp tính (Viêm họng do bệnh máu)",
+    "services": [
+      "Nội soi tai mũi họng",
+      "Phết dịch họng nuôi cấy vi khuẩn",
+      "Tổng phân tích tế bào máu ngoại vi (CBC)",
+      "Huyết tủy đồ (Chọc hút tủy xương)"
+    ],
+    "context": "BN Nữ 18 tuoi.\nSốt cao 39.5 độ C, rét run, mệt mỏi suy kiệt nhanh chóng.\nĐau họng dữ dội, nuốt đau nhói lên tai, hoàn toàn không ăn uống được.\nHơi thở rất hôi, thỉnh thoảng khạc ra chút máu đen.\nTien su: Khỏe mạnh, mới thi đợt thi đại học căng thẳng, tự mua thuốc cảm cúm uống 3 ngày không đỡ."
+  },
+  {
+    "num": 6,
+    "title": "Bí ẩn đằng sau lớp giả mạc họng và sự mệt mỏi cùng cực",
+    "disease": "Viêm họng cấp tính (Viêm họng do bệnh tăng bạch cầu đơn nhân)",
+    "services": [
+      "Nội soi tai mũi họng",
+      "Phết dịch họng soi tươi và nuôi cấy",
+      "Phản ứng ASLO",
+      "Tổng phân tích tế bào máu ngoại vi (CBC)",
+      "Xét nghiệm Monospot (Huyết thanh học EBV)"
+    ],
+    "context": "BN Nữ 22 tuoi.\nSốt cao 39.5 độ C kéo dài, kèm theo rét run và mệt mỏi rã rời, suy nhược rõ rệt.\nĐau họng dữ dội, đau nhói lên tai khi nuốt, hầu như không thể ăn uống.\nCổ sưng to, có nhiều hạch nổi hai bên góc hàm và dọc cơ ức đòn chũm.\nTien su: Sinh viên đại học, sống ở ký túc xá, tự uống kháng sinh Amoxicillin 4 ngày ở nhà nhưng không hạ sốt mà còn nổi thêm ban đỏ rải rác toàn thân."
+  },
+  {
+    "num": 7,
+    "title": "Cơn đau đầu 'lai vãng' và bí ẩn từ chiếc răng hàm",
+    "disease": "Viêm mũi xoang cấp tính",
+    "services": [
+      "Nội soi tai mũi họng",
+      "Chụp cắt lớp vi tính (CT Scanner) sọ mặt",
+      "Nuôi cấy vi khuẩn và kháng sinh đồ dịch tỵ hầu"
+    ],
+    "context": "BN Nữ 35 tuoi.\nĐau nhức dữ dội vùng mặt bên trái, cơn đau nhói từng cơn lan lên trán và lan xuống hàm trên bên trái.\nCó cảm giác căng nặng vùng trán và mỏi mắt trái, mi mắt trái hơi nề nhẹ.\nNgạt mũi bên trái nhưng không thấy chảy nước mũi rõ rệt đợt này.\nTien su: Cách đây 2 tuần bị 'cảm cúm' với triệu chứng sổ mũi, ho, hắt hơi. Đã tự mua thuốc uống thấy đỡ, nhưng 3 ngày nay đột nhiên đau nhức mặt và răng dữ dội. Đã đi khám Nha khoa không phát hiện sâu răng, khám Nội thần kinh được chẩn đoán nghi ngờ đau nửa đầu Migraine và cho thuốc nhưng không giảm."
+  },
+  {
+    "num": 8,
+    "title": "Cơn đau đầu 'lai vãng' và bí ẩn từ chiếc răng hàm",
+    "disease": "Viêm mũi xoang cấp tính",
+    "services": [
+      "Nội soi tai mũi họng",
+      "Chụp cắt lớp vi tính (CT Scanner) sọ mặt",
+      "Nuôi cấy vi khuẩn và kháng sinh đồ dịch tỵ hầu"
+    ],
+    "context": "BN Nữ 35 tuoi.\nĐau nhức dữ dội vùng mặt bên trái, cơn đau nhói từng cơn lan lên trán và lan xuống hàm trên bên trái.\nCó cảm giác căng nặng vùng trán và mỏi mắt trái, mi mắt trái hơi nề nhẹ.\nNgạt mũi bên trái nhưng không thấy chảy nước mũi rõ rệt đợt này.\nTien su: Cách đây 2 tuần bị 'cảm cúm' với triệu chứng sổ mũi, ho, hắt hơi. Đã tự mua thuốc uống thấy đỡ, nhưng 3 ngày nay đột nhiên đau nhức mặt và răng dữ dội. Đã đi khám Nha khoa không phát hiện sâu răng, khám Nội thần kinh được chẩn đoán nghi ngờ đau nửa đầu Migraine và cho thuốc nhưng không giảm."
+  },
+  {
+    "num": 9,
+    "title": "Cuộc rượt đuổi căn bệnh ẩn sau mác 'cảm cúm thông thường'",
+    "disease": "Viêm mũi họng cấp tính",
+    "services": [
+      "Nội soi tai mũi họng",
+      "Tổng phân tích tế bào máu ngoại vi (CBC)",
+      "Phết dịch họng nuôi cấy vi khuẩn và làm kháng sinh đồ",
+      "Phản ứng ASLO"
+    ],
+    "context": "BN Nam 26 tuoi.\nKhởi phát cách đây 5 ngày với triệu chứng hắt hơi, ngạt mũi, chảy nước mũi trong và sốt nhẹ (giống hệt cảm cúm).\nĐột ngột hôm nay sốt cao 39.5 độ C, ớn lạnh, người mệt mỏi rã rời, chán ăn.\nĐau rát họng dữ dội, nuốt đau nhói lan lên tận tai (kể cả khi nuốt chất lỏng), ho có đờm nhầy đục.\nTien su: Là nhân viên văn phòng, thời tiết đang chuyển lạnh. Đã tự mua thuốc cảm cúm (Paracetamol + Antihistamin) uống 4 ngày nhưng bệnh đột ngột nặng lên."
+  },
+  {
+    "num": 10,
+    "title": "Cú 'Hat-trick' tử thần và bức màn sương mù của hệ miễn dịch",
+    "disease": "Hội chứng đa bệnh lý Tai Mũi Họng nguy kịch",
+    "services": [
+      "Chụp MRI và CT Scan sọ mặt - cổ có cản quang",
+      "Nội soi thanh quản trực tiếp + Sinh thiết mô bệnh học",
+      "Phẫu thuật nội soi xoang sinh thiết + Nuôi cấy định danh vi nấm",
+      "Khám tai dưới kính hiển vi + Nghiệm pháp rò mê nhĩ",
+      "Mở khí quản cấp cứu"
+    ],
+    "context": "BN Nam 58 tuoi.\nHỌNG-THANH QUẢN: Khàn tiếng đặc, nuốt đau dữ dội chói lên tai, ho từng cơn rũ rượi khạc ra đờm lẫn máu. Mới xuất hiện tình trạng thở rít và rút lõm lồng ngực.\nMŨI-XOANG: Đau nhức vùng đỉnh chẩm và hốc mắt phải dữ dội, lồi mắt phải nhẹ, sụp mi, chảy mũi lờ lờ máu cá.\nTAI: Tai trái chảy mủ đặc thối khẳn lổn nhổn trắng. Đột ngột chóng mặt quay cuồng, đi loạng choạng, kèm theo méo mặt (liệt nửa mặt bên trái).\nTOÀN THÂN: Sốt vã mồ hôi về chiều, gầy sút 8kg trong 1 tháng, suy kiệt nặng.\nTien su: Nghiện thuốc lá nặng (40 bao/năm), đái tháo đường type 2 bỏ trị nhiều năm."
+  },
+  {
+    "num": 11,
+    "title": "Kẻ mạo danh hoàn hảo và cạm bẫy từ vùng đất ướt",
+    "disease": "Viêm phổi do Burkholderia pseudomallei (Melioidosis)",
+    "services": [
+      "AFB đờm và PCR (Gen Xpert) lao",
+      "Chụp cắt lớp vi tính (CT Scan) lồng ngực",
+      "Nuôi cấy đờm tìm vi khuẩn và kháng sinh đồ",
+      "Truyền tĩnh mạch Ceftazidim 2g mỗi 6 giờ"
+    ],
+    "context": "BN Nam 58 tuoi.\nHo khạc đờm mủ lẫn máu, kèm theo sút cân (5kg/2 tháng) và hay ra mồ hôi ban đêm.\nSốt nhẹ về chiều, đau tức ngực âm ỉ.\nBệnh nhân làm nghề nông, thường xuyên tiếp xúc với đất bùn."
+  },
+  {
+    "num": 12,
+    "title": "Test 9: Bức màn sương mù của bộ ba tử thần trên nền suy giảm miễn dịch",
+    "disease": "Hội chứng đa bệnh lý nhiễm trùng trên cơ địa đái tháo đường",
+    "services": [
+      "AFB đờm và PCR (Gen Xpert) lao",
+      "Chụp cắt lớp vi tính (CT Scan) sọ mặt - cổ có tiêm thuốc cản quang",
+      "Phẫu thuật nội soi xoang sinh thiết và cấy nấm",
+      "Nuôi cấy đờm tìm vi khuẩn và kháng sinh đồ",
+      "Định lượng Procalcitonin (PCT)"
+    ],
+    "context": "BN Nam 62 tuoi.\nHo khạc đờm mủ lẫn máu, sốt về chiều, gầy sút 6kg trong 1 tháng rưỡi nay, hay vã mồ hôi trộm.\nĐau nhức dữ dội vùng mặt phải, chảy mũi lờ lờ máu cá.\nCổ bên phải tự nhiên sưng to một cục, sờ vào nóng rát, nuốt rất đau và nghẹn.\nLàm nghề nông (tiếp xúc bùn đất thường xuyên), có tiền sử đái tháo đường và bệnh phổi tắc nghẽn mạn tính (COPD)."
+  }
+]

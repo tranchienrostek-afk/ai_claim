@@ -1,0 +1,167 @@
+{
+  "disease_name": "Viêm phế quản cấp",
+  "icd_code": "J20",
+  "protocol_name": "Phác đồ Viêm phế quản cấp (BYT)",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": false,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "Paracetamol",
+        "Amoxicillin",
+        "Azithromycin",
+        "Ibuprofen"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "Viêm phế quản cấp",
+        "Viêm mũi họng",
+        "Viêm xoang",
+        "Viêm amidan"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "Sốt nhẹ",
+        "Hắt hơi",
+        "Sổ mũi",
+        "Đau rát họng"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "Xét nghiệm máu",
+        "Cấy dịch mũi họng",
+        "Chụp X-quang phổi"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "Khám lâm sàng",
+        "Chụp X-quang",
+        "Nội soi phế quản"
+      ]
+    },
+    {
+      "label": "Stage",
+      "examples": [
+        "Giai đoạn cấp tính",
+        "Giai đoạn mãn tính"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese internal medicine texts. Extract all entities explicitly mentioned in the input text and return a valid JSON object with an array named \"entities\". Each entity should have a \"name\" field with the exact text span and a \"type\" field indicating the entity category. Only include entities explicitly mentioned in the text. The JSON format must be: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text from the section: {section_path}\n\nText to analyze:\n{chunk_content}\n\nExtract all explicitly mentioned entities of the following types with examples:\n- Drug: Paracetamol, Amoxicillin, Azithromycin, Ibuprofen\n- Disease: Viêm phế quản cấp, Viêm mũi họng, Viêm xoang, Viêm amidan\n- Symptom: Sốt nhẹ, Hắt hơi, Sổ mũi, Đau rát họng\n- LabTest: Xét nghiệm máu, Cấy dịch mũi họng, Chụp X-quang phổi\n- Procedure: Khám lâm sàng, Chụp X-quang, Nội soi phế quản\n- Stage: Giai đoạn cấp tính, Giai đoạn mãn tính\n\nReturn a JSON object in the format: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the respiratory system",
+      "properties": {
+        "code": "J00-J99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Acute bronchitis",
+      "properties": {
+        "code": "J20"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Viêm phế quản cấp",
+      "properties": {
+        "code": "J20",
+        "aliases": "Acute bronchitis"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Amoxicillin",
+      "properties": {
+        "ATC_code": "J01CA04"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Azithromycin",
+      "properties": {
+        "ATC_code": "J01FA10"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Dextromethorphan",
+      "properties": {
+        "ATC_code": "R05DA09"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Salbutamol",
+      "properties": {
+        "ATC_code": "R03AC02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Paracetamol",
+      "properties": {
+        "ATC_code": "N02BE01"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete blood count",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "C-reactive protein",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Chest X-ray",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Sputum culture",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Pulse oximetry",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the respiratory system",
+      "to_label": "ICD_Category",
+      "to_name": "Acute bronchitis",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Acute bronchitis",
+      "to_label": "Disease",
+      "to_name": "Viêm phế quản cấp",
+      "rel_type": "INSTANCE_OF"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

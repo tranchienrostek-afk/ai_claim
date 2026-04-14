@@ -1,0 +1,9 @@
+{
+  "name": "medical-pipeline-agent",
+  "version": "1.0.0",
+  "description": "Self-orchestrating AI agent that autonomously ingests medical PDF protocols into Neo4j knowledge graph. Analyzes PDF structure, designs pipeline, ingests data, runs tests, and self-improves accuracy.",
+  "author": {
+    "name": "Antigravity Bio-Medical",
+    "email": "admin@antigravity.bio"
+  }
+}

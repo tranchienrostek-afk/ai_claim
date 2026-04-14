@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ontology V2 PDF Inspector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #efe7db;
+      --panel: rgba(255, 251, 244, 0.92);
+      --panel-2: rgba(246, 239, 228, 0.95);
+      --line: #dccdb6;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --accent: #0f766e;
+      --accent-2: #c0662a;
+      --good: #0f9d58;
+      --warn: #d97706;
+      --bad: #c2410c;
+      --shadow: 0 18px 40px rgba(78, 55, 24, 0.12);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Manrope", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(15,118,110,0.12), transparent 18%),
+        radial-gradient(circle at bottom left, rgba(192,102,42,0.14), transparent 24%),
+        linear-gradient(180deg, #f8f3eb 0%, #efe7db 100%);
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 340px 1fr 340px;
+      min-height: 100vh;
+    }
+
+    .sidebar, .detailbar {
+      background: rgba(255, 250, 242, 0.78);
+      backdrop-filter: blur(12px);
+      padding: 20px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .detailbar {
+      border-right: none;
+      border-left: 1px solid var(--line);
+    }
+
+    .main {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), #0d9488);
+      color: white;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    .sub { color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .mono { font-family: "IBM Plex Mono", monospace; font-size: 12px; }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .panel-body { padding: 16px; }
+    .stack { display: grid; gap: 12px; }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    input[type="text"], select, input[type="file"] {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      color: var(--ink);
+      padding: 12px 14px;
+      font: inherit;
+      outline: none;
+    }
+
+    .row { display: flex; gap: 10px; align-items: center; }
+    .checkbox {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    button {
+      border-radius: 14px;
+      padding: 12px 14px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary { background: linear-gradient(135deg, var(--accent), #0f766e); color: white; }
+    .btn-secondary { background: var(--panel-2); color: var(--ink); border-color: var(--line); }
+
+    .run-status, .log-box, .empty, .detail-card, .kpi {
+      border-radius: 16px;
+      border: 1px solid var(--line);
+    }
+
+    .run-status, .detail-card, .kpi {
+      background: rgba(255,251,244,0.8);
+      padding: 14px;
+    }
+
+    .log-box {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 12px;
+      min-height: 120px;
+      max-height: 220px;
+      overflow: auto;
+      white-space: pre-wrap;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .kpi .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .kpi .value {
+      margin-top: 8px;
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    .tabs, .chips, .legend {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tab, .chip {
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(246,239,228,0.9);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tab.active, .chip.active {
+      background: rgba(15,118,110,0.12);
+      border-color: rgba(15,118,110,0.4);
+      color: var(--accent);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .graph-shell {
+      height: 560px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at center, rgba(15,118,110,0.08), transparent 18%),
+        linear-gradient(180deg, rgba(255,251,244,0.72), rgba(244,236,225,0.92));
+    }
+
+    svg { width: 100%; height: 100%; display: block; }
+
+    .table-wrap {
+      max-height: 520px;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,251,244,0.7);
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: #f7efe3;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .clickable-row:hover { background: rgba(15,118,110,0.06); cursor: pointer; }
+
+    .status {
+      display: inline-flex;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      border: 1px solid transparent;
+    }
+    .status.exact, .status.confirmed, .status.probable, .status.active { background: rgba(15,157,88,0.12); color: var(--good); border-color: rgba(15,157,88,0.22); }
+    .status.unknown, .status.pending { background: rgba(217,119,6,0.12); color: var(--warn); border-color: rgba(217,119,6,0.22); }
+    .status.ambiguous, .status.review { background: rgba(194,65,12,0.12); color: var(--bad); border-color: rgba(194,65,12,0.22); }
+
+    .disease-list, .detail-scroll {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: auto;
+    }
+
+    .disease-list { max-height: calc(100vh - 520px); }
+    .detail-scroll { max-height: calc(100vh - 80px); }
+
+    .disease-item {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,251,244,0.72);
+      cursor: pointer;
+    }
+
+    .disease-item:hover, .disease-item.active {
+      border-color: rgba(15,118,110,0.45);
+      background: rgba(15,118,110,0.08);
+    }
+
+    .empty { padding: 18px; text-align: center; color: var(--muted); background: rgba(255,255,255,0.38); }
+    .detail-row { display: grid; gap: 4px; padding-bottom: 8px; border-bottom: 1px dashed var(--line); }
+    .detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .detail-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 800; }
+    .detail-value { font-size: 13px; line-height: 1.55; word-break: break-word; }
+    .swatch { width: 10px; height: 10px; border-radius: 999px; display: inline-block; }
+
+    @media (max-width: 1400px) {
+      .app { grid-template-columns: 1fr; }
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">KG</div>
+        <div>
+          <h3>Ontology V2 PDF Inspector</h3>
+          <p class="sub">Chạy ingest cho 1 disease rồi nhìn thẳng raw mention, map status, canonical node, assertion và graph preview.</p>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="panel-header"><h3>Run Ingest</h3></div>
+        <div class="panel-body stack">
+          <div><label for="namespaceSelect">Namespace</label><select id="namespaceSelect"></select></div>
+          <div><label for="diseaseInput">Disease Name</label><input id="diseaseInput" type="text" placeholder="Ví dụ: Viêm mũi họng cấp tính" /></div>
+          <div><label for="pdfSelect">Existing PDF</label><select id="pdfSelect"></select></div>
+          <div><label for="pdfUpload">Upload PDF mới</label><input id="pdfUpload" type="file" accept=".pdf" /></div>
+          <div class="row">
+            <label class="checkbox"><input id="skipFirstPage" type="checkbox" /> Skip first page</label>
+            <button id="refreshBootstrapBtn" class="btn-secondary" type="button">Refresh</button>
+          </div>
+          <button id="runIngestBtn" class="btn-primary" type="button">Run Ontology V2 Ingest</button>
+          <div id="runStatus" class="run-status"><div class="mono">Chưa có run mới.</div></div>
+          <div id="logBox" class="log-box">Waiting for pipeline logs...</div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header"><h3>Disease Index</h3></div>
+        <div class="panel-body stack">
+          <input id="diseaseSearch" type="text" placeholder="Lọc disease id hoặc tên..." />
+          <div id="diseaseList" class="disease-list"></div>
+        </div>
+      </section>
+    </aside>
+
+    <main class="main">
+      <section class="kpis">
+        <div class="kpi"><div class="label">Diseases</div><div id="kpiDiseases" class="value">0</div></div>
+        <div class="kpi"><div class="label">Chunks</div><div id="kpiChunks" class="value">0</div></div>
+        <div class="kpi"><div class="label">Mentions</div><div id="kpiMentions" class="value">0</div></div>
+        <div class="kpi"><div class="label">Assertions</div><div id="kpiAssertions" class="value">0</div></div>
+        <div class="kpi"><div class="label">Graph</div><div id="kpiGraph" class="value">0</div></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 id="graphTitle">Chưa chọn disease</h2>
+            <p id="graphSubtitle" class="sub">Chọn disease bên trái hoặc chạy ingest mới.</p>
+          </div>
+          <div>
+            <div id="legend" class="legend"></div>
+            <div id="typeFilters" class="chips" style="margin-top:8px"></div>
+          </div>
+        </div>
+        <div class="panel-body stack">
+          <div class="tabs">
+            <div class="tab active" data-tab="graph">Graph</div>
+            <div class="tab" data-tab="mentions">Mappings</div>
+            <div class="tab" data-tab="assertions">Assertions</div>
+            <div class="tab" data-tab="chunks">Chunks</div>
+            <div class="tab" data-tab="summary">Summary</div>
+          </div>
+          <div id="tab-graph" class="tab-panel active"><div class="graph-shell panel"><svg id="graphSvg" viewBox="0 0 1200 560"></svg></div></div>
+          <div id="tab-mentions" class="tab-panel">
+            <div class="stack">
+              <div class="panel"><div class="panel-header"><h3>Sign Mentions</h3></div><div class="panel-body"><div class="table-wrap"><table id="signTable"></table></div></div></div>
+              <div class="panel"><div class="panel-header"><h3>Service Mentions</h3></div><div class="panel-body"><div class="table-wrap"><table id="serviceTable"></table></div></div></div>
+              <div class="panel"><div class="panel-header"><h3>Observation Mentions</h3></div><div class="panel-body"><div class="table-wrap"><table id="observationTable"></table></div></div></div>
+            </div>
+          </div>
+          <div id="tab-assertions" class="tab-panel"><div class="panel"><div class="panel-header"><h3>Protocol Assertions</h3></div><div class="panel-body"><div class="table-wrap"><table id="assertionTable"></table></div></div></div></div>
+          <div id="tab-chunks" class="tab-panel"><div class="panel"><div class="panel-header"><h3>Raw Chunks</h3></div><div class="panel-body"><div class="table-wrap"><table id="chunkTable"></table></div></div></div></div>
+          <div id="tab-summary" class="tab-panel"><div class="panel"><div class="panel-header"><h3>Disease Summary</h3></div><div class="panel-body"><div id="summaryPanel" class="stack"></div></div></div></div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="detailbar">
+      <div class="detail-scroll">
+        <section class="detail-card">
+          <h3>Inspector Context</h3>
+          <p id="contextText" class="sub">Namespace, Neo4j URI và stats mapping sẽ hiện ở đây.</p>
+          <div id="mappingStats" class="stack"></div>
+        </section>
+        <section class="detail-card">
+          <h3>Selected Node</h3>
+          <p class="sub">Click node trên graph hoặc row trong bảng.</p>
+          <div id="nodeDetail" class="stack"><div class="empty">Chưa có node nào được chọn.</div></div>
+        </section>
+        <section class="detail-card">
+          <h3>Summary Signals</h3>
+          <p class="sub">Key signs, services, drugs và differential.</p>
+          <div id="summarySignals" class="stack"><div class="empty">Chưa có summary.</div></div>
+        </section>
+        <section class="detail-card">
+          <h3>Experience Advisory</h3>
+          <p class="sub">Bài học ingest và mapping từ các run trước được kéo vào cho run hiện tại.</p>
+          <div id="experienceAdvisory" class="stack"><div class="empty">Chưa có experience advisory.</div></div>
+        </section>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    const state = {
+      bootstrap: null,
+      selectedNamespace: null,
+      selectedDiseaseId: null,
+      diseaseData: null,
+      graphFilters: new Set(),
+      activeRunId: null,
+      ws: null,
+      recentRunDiseaseName: null,
+      runPoller: null,
+      seenLogKeys: new Set(),
+      latestPhase: null,
+      latestExperienceAdvisory: null,
+    };
+
+    const els = {
+      namespaceSelect: document.getElementById("namespaceSelect"),
+      diseaseInput: document.getElementById("diseaseInput"),
+      pdfSelect: document.getElementById("pdfSelect"),
+      pdfUpload: document.getElementById("pdfUpload"),
+      skipFirstPage: document.getElementById("skipFirstPage"),
+      refreshBootstrapBtn: document.getElementById("refreshBootstrapBtn"),
+      runIngestBtn: document.getElementById("runIngestBtn"),
+      runStatus: document.getElementById("runStatus"),
+      logBox: document.getElementById("logBox"),
+      diseaseSearch: document.getElementById("diseaseSearch"),
+      diseaseList: document.getElementById("diseaseList"),
+      graphTitle: document.getElementById("graphTitle"),
+      graphSubtitle: document.getElementById("graphSubtitle"),
+      legend: document.getElementById("legend"),
+      typeFilters: document.getElementById("typeFilters"),
+      graphSvg: document.getElementById("graphSvg"),
+      kpiDiseases: document.getElementById("kpiDiseases"),
+      kpiChunks: document.getElementById("kpiChunks"),
+      kpiMentions: document.getElementById("kpiMentions"),
+      kpiAssertions: document.getElementById("kpiAssertions"),
+      kpiGraph: document.getElementById("kpiGraph"),
+      mappingStats: document.getElementById("mappingStats"),
+      contextText: document.getElementById("contextText"),
+      nodeDetail: document.getElementById("nodeDetail"),
+      summarySignals: document.getElementById("summarySignals"),
+      experienceAdvisory: document.getElementById("experienceAdvisory"),
+      signTable: document.getElementById("signTable"),
+      serviceTable: document.getElementById("serviceTable"),
+      observationTable: document.getElementById("observationTable"),
+      assertionTable: document.getElementById("assertionTable"),
+      chunkTable: document.getElementById("chunkTable"),
+      summaryPanel: document.getElementById("summaryPanel"),
+      tabs: Array.from(document.querySelectorAll(".tab")),
+      panels: Array.from(document.querySelectorAll(".tab-panel")),
+    };
+
+    const typeColors = {
+      disease: "#0f766e",
+      summary: "#c0662a",
+      chunk: "#7c6d5d",
+      sign_mention: "#0f9d58",
+      service_mention: "#2563eb",
+      observation_mention: "#8b5cf6",
+      assertion: "#b45309",
+      sign_concept: "#166534",
+      service: "#1d4ed8",
+      service_family: "#9a3412",
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;");
+    }
+
+    function statusBadge(status) {
+      const normalized = String(status || "unknown").toLowerCase();
+      return `<span class="status ${normalized}">${escapeHtml(status || "unknown")}</span>`;
+    }
+
+    function formatList(values) {
+      if (!values || !values.length) return '<span class="sub">Không có</span>';
+      return values.map((item) => `<span class="chip">${escapeHtml(item)}</span>`).join("");
+    }
+
+    function appendLog(text) {
+      const line = document.createElement("div");
+      line.textContent = text;
+      els.logBox.appendChild(line);
+      els.logBox.scrollTop = els.logBox.scrollHeight;
+    }
+
+    function resetRunTracking() {
+      state.seenLogKeys = new Set();
+      state.latestPhase = null;
+      state.latestExperienceAdvisory = null;
+      els.experienceAdvisory.innerHTML = '<div class="empty">Chưa có experience advisory.</div>';
+      if (state.runPoller) {
+        clearInterval(state.runPoller);
+        state.runPoller = null;
+      }
+      if (state.ws) {
+        try { state.ws.close(); } catch (_) {}
+        state.ws = null;
+      }
+    }
+
+    function buildLogKey(entry, index) {
+      return `${entry.timestamp || "na"}|${entry.type || "log"}|${entry.message || ""}|${index}`;
+    }
+
+    function updateRunStatusFromSnapshot(run) {
+      const status = run.status || "unknown";
+      const phaseHtml = state.latestPhase
+        ? `<div class="sub" style="margin-top:6px">Phase hiện tại: ${escapeHtml(state.latestPhase)}</div>`
+        : "";
+
+      if (status === "completed" && run.result) {
+        els.runStatus.innerHTML = `
+          <div><strong>Run hoàn tất</strong></div>
+          <div class="sub">chunks=${run.result.chunks || 0} | signs=${run.result.signs || 0} | services=${run.result.services || 0} | assertions=${run.result.assertions || 0}</div>
+          ${phaseHtml}
+        `;
+        return;
+      }
+
+      if (status === "error") {
+        els.runStatus.innerHTML = `
+          <div><strong>Run lỗi</strong></div>
+          <div class="sub mono" style="margin-top:6px">${escapeHtml(run.error || "Unknown error")}</div>
+          ${phaseHtml}
+        `;
+        return;
+      }
+
+      els.runStatus.innerHTML = `
+        <div><strong>Run ${escapeHtml(run.id || state.activeRunId || "-")}</strong></div>
+        <div class="sub">Status ${escapeHtml(status)} | logs ${(run.logs || []).length}</div>
+        ${phaseHtml}
+      `;
+    }
+
+    async function handleRunCompletion(runId) {
+      const run = await fetchJson(`/api/ingest/${encodeURIComponent(runId)}`);
+      absorbRunSnapshot(run);
+      await loadBootstrap();
+      const match = (state.bootstrap.diseases || []).find((item) => item.disease_name === state.recentRunDiseaseName);
+      if (match) await loadDisease(match.disease_id);
+      if (state.runPoller) {
+        clearInterval(state.runPoller);
+        state.runPoller = null;
+      }
+    }
+
+    function absorbRunSnapshot(run) {
+      const logs = run.logs || [];
+      logs.forEach((entry, index) => {
+        const key = buildLogKey(entry, index);
+        if (state.seenLogKeys.has(key)) return;
+        state.seenLogKeys.add(key);
+        const message = entry.message || JSON.stringify(entry);
+        appendLog(`${entry.type || "log"} | ${message}`);
+        const phaseMatch = String(message).match(/^\[Phase\s+\d+\]\s+(.+)$/);
+        if (phaseMatch) state.latestPhase = phaseMatch[1].trim();
+      });
+      if (run.result && run.result.experience_advisory) {
+        state.latestExperienceAdvisory = run.result.experience_advisory;
+        renderExperienceAdvisory(run.result.experience_advisory);
+      }
+      updateRunStatusFromSnapshot(run);
+    }
+
+    function startRunPolling(runId) {
+      if (state.runPoller) clearInterval(state.runPoller);
+      const tick = async () => {
+        try {
+          const run = await fetchJson(`/api/ingest/${encodeURIComponent(runId)}`);
+          absorbRunSnapshot(run);
+          if (run.status === "completed" || run.status === "error") {
+            if (state.runPoller) {
+              clearInterval(state.runPoller);
+              state.runPoller = null;
+            }
+            if (run.status === "completed") {
+              await loadBootstrap();
+              const match = (state.bootstrap.diseases || []).find((item) => item.disease_name === state.recentRunDiseaseName);
+              if (match) await loadDisease(match.disease_id);
+            }
+          }
+        } catch (error) {
+          appendLog(`[ERROR] Poll failed: ${error.message}`);
+        }
+      };
+      tick();
+      state.runPoller = setInterval(tick, 2000);
+    }
+
+    async function fetchJson(url, options) {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        const detail = await response.text();
+        throw new Error(detail || `HTTP ${response.status}`);
+      }
+      return response.json();
+    }
+
+    function renderNamespaceSummary(summary) {
+      els.kpiDiseases.textContent = summary.diseases || 0;
+      els.kpiChunks.textContent = summary.chunks || 0;
+      const mentions = (summary.sign_mentions || 0) + (summary.service_mentions || 0) + (summary.observation_mentions || 0);
+      els.kpiMentions.textContent = mentions;
+      els.kpiAssertions.textContent = summary.assertions || 0;
+      els.contextText.textContent = `Namespace ${state.selectedNamespace || "-"} | Neo4j ${state.bootstrap?.neo4j_uri || "-"}`;
+    }
+
+    function renderNamespaceOptions(items) {
+      const selected = state.selectedNamespace;
+      els.namespaceSelect.innerHTML = items.map((item) => {
+        const isSelected = item.namespace === selected ? "selected" : "";
+        return `<option value="${escapeHtml(item.namespace)}" ${isSelected}>${escapeHtml(item.namespace)} (${item.disease_count})</option>`;
+      }).join("");
+      if (!els.namespaceSelect.innerHTML) {
+        els.namespaceSelect.innerHTML = '<option value="ontology_v2">ontology_v2</option>';
+      }
+    }
+
+    function renderPdfOptions(items) {
+      const options = ['<option value="">-- Chọn PDF có sẵn --</option>'];
+      for (const item of items) {
+        options.push(`<option value="${escapeHtml(item.path)}">${escapeHtml(item.filename)} (${item.size_mb} MB)</option>`);
+      }
+      els.pdfSelect.innerHTML = options.join("");
+    }
+
+    function renderDiseaseList(items) {
+      const keyword = els.diseaseSearch.value.trim().toLowerCase();
+      const filtered = items.filter((item) => {
+        const hay = `${item.disease_id} ${item.disease_name}`.toLowerCase();
+        return !keyword || hay.includes(keyword);
+      });
+      if (!filtered.length) {
+        els.diseaseList.innerHTML = '<div class="empty">Không có disease nào trong namespace này.</div>';
+        return;
+      }
+      els.diseaseList.innerHTML = filtered.map((item) => `
+        <div class="disease-item ${item.disease_id === state.selectedDiseaseId ? "active" : ""}" data-disease-id="${escapeHtml(item.disease_id)}">
+          <div style="font-weight:800">${escapeHtml(item.disease_name || item.disease_id)}</div>
+          <div class="sub mono">${escapeHtml(item.disease_id)}</div>
+          <div class="row" style="justify-content:space-between; margin-top:10px">
+            <span class="chip">chunks ${item.chunk_count}</span>
+            <span class="chip">assertions ${item.assertion_count}</span>
+            <span class="chip">summary ${item.summary_count}</span>
+          </div>
+        </div>
+      `).join("");
+      document.querySelectorAll(".disease-item").forEach((node) => {
+        node.addEventListener("click", () => loadDisease(node.dataset.diseaseId));
+      });
+    }
+
+    function renderBootstrap(payload) {
+      state.bootstrap = payload;
+      state.selectedNamespace = payload.active_namespace || state.selectedNamespace || payload.default_namespace || "ontology_v2";
+      renderNamespaceOptions(payload.namespaces || []);
+      renderPdfOptions(payload.pdfs || []);
+      renderDiseaseList(payload.diseases || []);
+      renderNamespaceSummary(payload.summary || {});
+      if (payload.error) {
+        els.runStatus.innerHTML = `
+          <div><strong>Neo4j chưa sẵn sàng.</strong></div>
+          <div class="sub mono" style="margin-top:8px">${escapeHtml(payload.error)}</div>
+        `;
+      }
+    }
+
+    async function loadBootstrap() {
+      const ns = state.selectedNamespace ? `?namespace=${encodeURIComponent(state.selectedNamespace)}` : "";
+      const payload = await fetchJson(`/api/ontology-v2/inspector/bootstrap${ns}`);
+      renderBootstrap(payload);
+    }
+
+    function renderDetailRows(target, rows) {
+      if (!rows.length) {
+        target.innerHTML = '<div class="empty">Không có dữ liệu.</div>';
+        return;
+      }
+      target.innerHTML = rows.map((row) => `
+        <div class="detail-row">
+          <div class="detail-label">${escapeHtml(row.label)}</div>
+          <div class="detail-value">${row.html}</div>
+        </div>
+      `).join("");
+    }
+
+    function selectNode(detail) {
+      const rows = Object.entries(detail || {}).map(([key, value]) => ({
+        label: key,
+        html: Array.isArray(value)
+          ? formatList(value)
+          : `<span>${escapeHtml(value)}</span>`,
+      }));
+      renderDetailRows(els.nodeDetail, rows);
+    }
+
+    function renderMappingStats(stats) {
+      const blocks = [];
+      for (const [group, payload] of Object.entries(stats || {})) {
+        const summary = Object.entries(payload.by_status || {}).map(([status, count]) => `${status}: ${count}`).join(" | ");
+        blocks.push({
+          label: `${group} (${payload.total || 0})`,
+          html: `<span>${escapeHtml(summary || "No status")}</span>`,
+        });
+      }
+      renderDetailRows(els.mappingStats, blocks);
+    }
+
+    function renderSummary(summary) {
+      if (!summary) {
+        els.summaryPanel.innerHTML = '<div class="empty">Chưa có summary node cho disease này.</div>';
+        els.summarySignals.innerHTML = '<div class="empty">Chưa có summary signals.</div>';
+        return;
+      }
+      els.summaryPanel.innerHTML = `
+        <div class="detail-card">
+          <div class="detail-row"><div class="detail-label">Summary Text</div><div class="detail-value">${escapeHtml(summary.summary_text || "")}</div></div>
+          <div class="detail-row"><div class="detail-label">Key Signs</div><div class="detail-value">${formatList(summary.key_signs || [])}</div></div>
+          <div class="detail-row"><div class="detail-label">Key Services</div><div class="detail-value">${formatList(summary.key_services || [])}</div></div>
+          <div class="detail-row"><div class="detail-label">Key Drugs</div><div class="detail-value">${formatList(summary.key_drugs || [])}</div></div>
+          <div class="detail-row"><div class="detail-label">Differential</div><div class="detail-value">${formatList(summary.differential_diseases || [])}</div></div>
+        </div>
+      `;
+      els.summarySignals.innerHTML = `
+        <div class="detail-row"><div class="detail-label">Key Signs</div><div class="detail-value">${formatList(summary.key_signs || [])}</div></div>
+        <div class="detail-row"><div class="detail-label">Key Services</div><div class="detail-value">${formatList(summary.key_services || [])}</div></div>
+        <div class="detail-row"><div class="detail-label">Key Drugs</div><div class="detail-value">${formatList(summary.key_drugs || [])}</div></div>
+      `;
+    }
+
+    function renderExperienceAdvisory(advisory) {
+      if (!advisory) {
+        els.experienceAdvisory.innerHTML = '<div class="empty">Chưa có experience advisory.</div>';
+        return;
+      }
+
+      const recommendationSet = new Set();
+      const recommendations = [];
+      for (const item of [...(advisory.pre_run_recommendations || []), ...(advisory.contextual_recommendations || [])]) {
+        const text = String(item || "").trim();
+        if (!text || recommendationSet.has(text)) continue;
+        recommendationSet.add(text);
+        recommendations.push(text);
+      }
+
+      const preCategoryHtml = Object.entries(advisory.pre_run_by_category || {})
+        .map(([key, value]) => `<span class="chip">${escapeHtml(key)} ${escapeHtml(String(value))}</span>`)
+        .join("");
+      const contextualCategoryHtml = Object.entries(advisory.contextual_by_category || {})
+        .map(([key, value]) => `<span class="chip">${escapeHtml(key)} ${escapeHtml(String(value))}</span>`)
+        .join("");
+      const preSeverityHtml = Object.entries(advisory.pre_run_by_severity || {})
+        .map(([key, value]) => `<span class="chip">${escapeHtml(key)} ${escapeHtml(String(value))}</span>`)
+        .join("");
+      const contextualSeverityHtml = Object.entries(advisory.contextual_by_severity || {})
+        .map(([key, value]) => `<span class="chip">${escapeHtml(key)} ${escapeHtml(String(value))}</span>`)
+        .join("");
+      const preKindHtml = Object.entries(advisory.pre_run_by_kind || {})
+        .map(([key, value]) => `<span class="chip">${escapeHtml(key)} ${escapeHtml(String(value))}</span>`)
+        .join("");
+      const contextualKindHtml = Object.entries(advisory.contextual_by_kind || {})
+        .map(([key, value]) => `<span class="chip">${escapeHtml(key)} ${escapeHtml(String(value))}</span>`)
+        .join("");
+
+      els.experienceAdvisory.innerHTML = `
+        <div class="detail-row">
+          <div class="detail-label">Pre-run</div>
+          <div class="detail-value">Matches ${(advisory.pre_run_match_count || 0)}</div>
+          <div class="detail-value">${preKindHtml || '<span class="sub">Không có memory layer nổi bật.</span>'}</div>
+          <div class="detail-value">${preCategoryHtml || '<span class="sub">Không có category nổi bật.</span>'}</div>
+          <div class="detail-value">${preSeverityHtml || '<span class="sub">Không có severity nổi bật.</span>'}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Contextual</div>
+          <div class="detail-value">Matches ${(advisory.contextual_match_count || 0)}</div>
+          <div class="detail-value">${contextualKindHtml || '<span class="sub">Không có memory layer nổi bật.</span>'}</div>
+          <div class="detail-value">${contextualCategoryHtml || '<span class="sub">Không có category nổi bật.</span>'}</div>
+          <div class="detail-value">${contextualSeverityHtml || '<span class="sub">Không có severity nổi bật.</span>'}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Recommendations</div>
+          <div class="detail-value">
+            ${recommendations.length
+              ? recommendations.map((item) => `<div style="margin-bottom:8px">${escapeHtml(item)}</div>`).join("")
+              : '<span class="sub">Không có recommendation nào.</span>'}
+          </div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Artifacts</div>
+          <div class="detail-value mono">
+            JSON: ${escapeHtml((advisory.artifact_paths || {}).json || "-")}<br>
+            MD: ${escapeHtml((advisory.artifact_paths || {}).md || "-")}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTable(tableEl, columns, rows, onClick) {
+      if (!rows.length) {
+        tableEl.innerHTML = '<tbody><tr><td class="empty">Không có dữ liệu.</td></tr></tbody>';
+        return;
+      }
+      const thead = `<thead><tr>${columns.map((col) => `<th>${escapeHtml(col.label)}</th>`).join("")}</tr></thead>`;
+      const tbody = rows.map((row, index) => {
+        const cells = columns.map((col) => `<td>${col.render ? col.render(row) : escapeHtml(row[col.key] ?? "")}</td>`).join("");
+        return `<tr class="clickable-row" data-index="${index}">${cells}</tr>`;
+      }).join("");
+      tableEl.innerHTML = `${thead}<tbody>${tbody}</tbody>`;
+      tableEl.querySelectorAll(".clickable-row").forEach((tr) => {
+        tr.addEventListener("click", () => {
+          const row = rows[Number(tr.dataset.index)];
+          if (onClick) onClick(row);
+        });
+      });
+    }
+
+    function graphPreviewNodes(nodes) {
+      const limits = {
+        chunk: 14,
+        sign_mention: 16,
+        service_mention: 16,
+        observation_mention: 12,
+        assertion: 14,
+        sign_concept: 12,
+        service: 12,
+        service_family: 8,
+      };
+      const counters = {};
+      const result = [];
+      for (const node of nodes) {
+        if (!state.graphFilters.has(node.type)) continue;
+        const limit = limits[node.type] || 3;
+        counters[node.type] = counters[node.type] || 0;
+        if (["disease", "summary"].includes(node.type) || counters[node.type] < limit) {
+          result.push(node);
+          counters[node.type] += 1;
+        }
+      }
+      return result;
+    }
+
+    function renderLegend(nodes) {
+      const types = Array.from(new Set(nodes.map((node) => node.type)));
+      els.legend.innerHTML = types.map((type) => `
+        <div class="chip"><span class="swatch" style="background:${typeColors[type] || "#6b7280"}"></span> ${escapeHtml(type)}</div>
+      `).join("");
+      els.typeFilters.innerHTML = types.map((type) => `
+        <div class="chip ${state.graphFilters.has(type) ? "active" : ""}" data-type="${escapeHtml(type)}">${escapeHtml(type)}</div>
+      `).join("");
+      els.typeFilters.querySelectorAll(".chip").forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const type = chip.dataset.type;
+          if (state.graphFilters.has(type)) state.graphFilters.delete(type);
+          else state.graphFilters.add(type);
+          renderLegend(state.diseaseData?.graph?.nodes || []);
+          renderGraph(state.diseaseData?.graph || null);
+        });
+      });
+    }
+
+    function renderGraph(graph) {
+      if (!graph || !graph.nodes?.length) {
+        els.graphSvg.innerHTML = "";
+        els.kpiGraph.textContent = 0;
+        return;
+      }
+      const visibleNodes = graphPreviewNodes(graph.nodes);
+      const visibleIds = new Set(visibleNodes.map((node) => node.id));
+      const visibleEdges = (graph.edges || []).filter((edge) => visibleIds.has(edge.source) && visibleIds.has(edge.target));
+      els.kpiGraph.textContent = `${visibleNodes.length}/${graph.nodes.length}`;
+
+      const groups = {
+        summary: { x: 600, yStart: 70 },
+        chunk: { x: 170, yStart: 110 },
+        sign_mention: { x: 350, yStart: 120 },
+        service_mention: { x: 350, yStart: 320 },
+        observation_mention: { x: 350, yStart: 470 },
+        disease: { x: 600, yStart: 280 },
+        assertion: { x: 830, yStart: 130 },
+        sign_concept: { x: 1020, yStart: 120 },
+        service: { x: 1020, yStart: 320 },
+        service_family: { x: 1120, yStart: 470 },
+      };
+
+      const byType = {};
+      for (const node of visibleNodes) {
+        byType[node.type] = byType[node.type] || [];
+        byType[node.type].push(node);
+      }
+
+      const positions = {};
+      for (const [type, nodes] of Object.entries(byType)) {
+        const group = groups[type] || { x: 980, yStart: 120 };
+        const step = nodes.length > 1 ? Math.min(58, 340 / Math.max(nodes.length - 1, 1)) : 0;
+        nodes.forEach((node, index) => {
+          positions[node.id] = { x: group.x, y: group.yStart + index * step };
+        });
+      }
+
+      const edgeMarkup = visibleEdges.map((edge) => {
+        const source = positions[edge.source];
+        const target = positions[edge.target];
+        if (!source || !target) return "";
+        const midX = (source.x + target.x) / 2;
+        const path = `M ${source.x} ${source.y} C ${midX} ${source.y}, ${midX} ${target.y}, ${target.x} ${target.y}`;
+        return `<path d="${path}" fill="none" stroke="rgba(107,114,128,0.44)" stroke-width="1.6"></path>`;
+      }).join("");
+
+      const nodeMarkup = visibleNodes.map((node) => {
+        const pos = positions[node.id];
+        const color = typeColors[node.type] || "#6b7280";
+        const width = Math.max(110, Math.min(220, String(node.label || "").length * 7 + 34));
+        const x = pos.x - width / 2;
+        const y = pos.y - 21;
+        const subtitle = node.subtitle
+          ? `<text x="${pos.x}" y="${pos.y + 8}" text-anchor="middle" font-size="10" fill="#6b7280">${escapeHtml(String(node.subtitle).slice(0, 28))}</text>`
+          : "";
+        return `
+          <g class="graph-node" data-node-id="${escapeHtml(node.id)}" style="cursor:pointer">
+            <rect x="${x}" y="${y}" rx="13" ry="13" width="${width}" height="42" fill="rgba(255,251,244,0.95)" stroke="${color}" stroke-width="2"></rect>
+            <circle cx="${x + 15}" cy="${pos.y}" r="5" fill="${color}"></circle>
+            <text x="${x + 28}" y="${pos.y - 2}" font-size="12" font-weight="800" fill="#1f2937">${escapeHtml(String(node.label).slice(0, 28))}</text>
+            ${subtitle}
+          </g>
+        `;
+      }).join("");
+
+      els.graphSvg.innerHTML = `<g>${edgeMarkup}${nodeMarkup}</g>`;
+      els.graphSvg.querySelectorAll(".graph-node").forEach((nodeEl) => {
+        nodeEl.addEventListener("click", () => {
+          const selected = visibleNodes.find((item) => item.id === nodeEl.dataset.nodeId);
+          if (selected) selectNode(selected);
+        });
+      });
+    }
+
+    function renderDisease(data) {
+      state.diseaseData = data;
+      state.selectedDiseaseId = data.disease.disease_id;
+      if (!state.graphFilters.size) {
+        for (const node of data.graph.nodes || []) state.graphFilters.add(node.type);
+      }
+      els.graphTitle.textContent = data.disease.disease_name || data.disease.disease_id;
+      els.graphSubtitle.textContent = `${data.disease.disease_id} | namespace ${data.namespace} | nodes ${data.graph.stats.node_count} | edges ${data.graph.stats.edge_count}`;
+      renderLegend(data.graph.nodes || []);
+      renderGraph(data.graph);
+      renderMappingStats(data.mapping_stats || {});
+      renderSummary(data.summary);
+
+      const mentionCount = (data.sign_mentions?.length || 0) + (data.service_mentions?.length || 0) + (data.observation_mentions?.length || 0);
+      els.kpiChunks.textContent = data.chunks?.length || 0;
+      els.kpiMentions.textContent = mentionCount;
+      els.kpiAssertions.textContent = data.assertions?.length || 0;
+
+      renderTable(
+        els.signTable,
+        [
+          { label: "Mention", key: "mention_text" },
+          { label: "Mapped Concept", render: (row) => escapeHtml(row.concept_label || "-") },
+          { label: "Status", render: (row) => statusBadge(row.map_status || row.mapping_status) },
+          { label: "Chunk", render: (row) => `<span class="mono">${escapeHtml(row.source_chunk_id || "-")}</span>` },
+        ],
+        data.sign_mentions || [],
+        selectNode,
+      );
+
+      renderTable(
+        els.serviceTable,
+        [
+          { label: "Mention", key: "mention_text" },
+          { label: "Canonical", render: (row) => escapeHtml(row.service_name || "-") },
+          { label: "Family", render: (row) => escapeHtml(row.family_name || "-") },
+          { label: "Status", render: (row) => statusBadge(row.map_status || row.mapping_status) },
+        ],
+        data.service_mentions || [],
+        selectNode,
+      );
+
+      renderTable(
+        els.observationTable,
+        [
+          { label: "Observation", key: "mention_text" },
+          { label: "Semantics", render: (row) => escapeHtml(row.result_semantics || "-") },
+          { label: "Status", render: (row) => statusBadge(row.mapping_status || "pending") },
+          { label: "Chunk", render: (row) => `<span class="mono">${escapeHtml(row.source_chunk_id || "-")}</span>` },
+        ],
+        data.observation_mentions || [],
+        selectNode,
+      );
+
+      renderTable(
+        els.assertionTable,
+        [
+          { label: "Type", render: (row) => statusBadge(row.assertion_type || "-") },
+          { label: "Condition", render: (row) => escapeHtml(row.condition_text || "-") },
+          { label: "Action", render: (row) => escapeHtml(row.action_text || "-") },
+          { label: "Chunk", render: (row) => `<span class="mono">${escapeHtml(row.source_chunk_id || "-")}</span>` },
+        ],
+        data.assertions || [],
+        selectNode,
+      );
+
+      renderTable(
+        els.chunkTable,
+        [
+          { label: "Section", render: (row) => escapeHtml(row.section_title || "-") },
+          { label: "Type", render: (row) => `<span class="chip">${escapeHtml(row.section_type || "-")}</span>` },
+          { label: "Pages", render: (row) => escapeHtml((row.page_numbers || []).join(", ") || "-") },
+          { label: "Preview", render: (row) => escapeHtml(row.body_preview || "-") },
+        ],
+        data.chunks || [],
+        selectNode,
+      );
+
+      renderDiseaseList(state.bootstrap.diseases || []);
+      selectNode(data.disease);
+    }
+
+    async function loadDisease(diseaseId) {
+      const namespace = state.selectedNamespace || els.namespaceSelect.value || "ontology_v2";
+      const payload = await fetchJson(`/api/ontology-v2/inspector/disease/${encodeURIComponent(diseaseId)}?namespace=${encodeURIComponent(namespace)}`);
+      renderDisease(payload);
+    }
+
+    async function submitIngest() {
+      const diseaseName = els.diseaseInput.value.trim();
+      if (!diseaseName) {
+        alert("Cần nhập disease name.");
+        return;
+      }
+      if (!els.pdfUpload.files.length && !els.pdfSelect.value) {
+        alert("Chọn PDF có sẵn hoặc upload PDF mới.");
+        return;
+      }
+
+      const form = new FormData();
+      form.append("disease_name", diseaseName);
+      form.append("namespace", els.namespaceSelect.value || "ontology_v2");
+      form.append("skip_first_page", els.skipFirstPage.checked ? "true" : "false");
+      if (els.pdfUpload.files.length) {
+        form.append("file", els.pdfUpload.files[0]);
+      } else if (els.pdfSelect.value) {
+        form.append("existing_pdf_path", els.pdfSelect.value);
+      }
+
+      resetRunTracking();
+      els.runStatus.innerHTML = "<div><strong>Submitting run...</strong></div>";
+      els.logBox.innerHTML = "";
+      const payload = await fetchJson("/api/ontology-v2/ingest", { method: "POST", body: form });
+      state.activeRunId = payload.run_id;
+      state.recentRunDiseaseName = diseaseName;
+      els.runStatus.innerHTML = `
+        <div><strong>Run ${escapeHtml(payload.run_id)}</strong></div>
+        <div class="sub">Namespace ${escapeHtml(payload.namespace)} | Disease ${escapeHtml(payload.disease_name)}</div>
+      `;
+      appendLog(`[START] ${payload.run_id}`);
+      startRunPolling(payload.run_id);
+      connectRunLogs(payload.run_id);
+    }
+
+    function connectRunLogs(runId) {
+      if (state.ws) state.ws.close();
+      const proto = window.location.protocol === "https:" ? "wss" : "ws";
+      const ws = new WebSocket(`${proto}://${window.location.host}/ws/pipeline/${runId}`);
+      state.ws = ws;
+      ws.onopen = () => appendLog(`[WS] Connected to ${runId}`);
+      ws.onmessage = async (event) => {
+        const data = JSON.parse(event.data);
+        if (data.type === "complete") {
+          appendLog(`[COMPLETE] status=${data.status}`);
+          await handleRunCompletion(runId);
+          return;
+        }
+        if (data.message) {
+          appendLog(`${data.type || "log"} | ${data.message}`);
+          const phaseMatch = String(data.message).match(/^\[Phase\s+\d+\]\s+(.+)$/);
+          if (phaseMatch) state.latestPhase = phaseMatch[1].trim();
+        } else {
+          appendLog(JSON.stringify(data));
+        }
+      };
+      ws.onerror = () => appendLog("[WARN] WebSocket issue, UI sẽ fallback sang polling.");
+      ws.onclose = () => appendLog("[WS] Closed.");
+    }
+
+    function bindEvents() {
+      els.refreshBootstrapBtn.addEventListener("click", loadBootstrap);
+      els.runIngestBtn.addEventListener("click", submitIngest);
+      els.diseaseSearch.addEventListener("input", () => renderDiseaseList(state.bootstrap?.diseases || []));
+      els.namespaceSelect.addEventListener("change", async () => {
+        state.selectedNamespace = els.namespaceSelect.value;
+        await loadBootstrap();
+      });
+      els.tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const nextTab = tab.dataset.tab;
+          els.tabs.forEach((item) => item.classList.toggle("active", item.dataset.tab === nextTab));
+          els.panels.forEach((panel) => panel.classList.toggle("active", panel.id === `tab-${nextTab}`));
+        });
+      });
+    }
+
+    async function init() {
+      bindEvents();
+      await loadBootstrap();
+    }
+
+    init().catch((error) => {
+      els.runStatus.innerHTML = `<div class="mono">Init error: ${escapeHtml(error.message)}</div>`;
+    });
+  </script>
+</body>
+</html>

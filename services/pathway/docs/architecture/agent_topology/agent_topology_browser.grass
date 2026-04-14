@@ -1,0 +1,90 @@
+node.TopologyMap {
+  diameter: 42px;
+  color: #0f172a;
+  border-color: #334155;
+  text-color-internal: #ffffff;
+  caption: '{caption}';
+  font-size: 12px;
+}
+
+node.Agent {
+  diameter: 92px;
+  color: #f97316;
+  border-color: #9a3412;
+  text-color-internal: #ffffff;
+  caption: '{caption}';
+  font-size: 16px;
+}
+
+node.API {
+  diameter: 54px;
+  color: #3b82f6;
+  border-color: #1d4ed8;
+  text-color-internal: #ffffff;
+  caption: '{caption}';
+}
+
+node.Function {
+  diameter: 48px;
+  color: #22c55e;
+  border-color: #15803d;
+  text-color-internal: #ffffff;
+  caption: '{caption}';
+}
+
+node.Program {
+  diameter: 52px;
+  color: #a855f7;
+  border-color: #6b21a8;
+  text-color-internal: #ffffff;
+  caption: '{caption}';
+}
+
+node.Tool {
+  diameter: 50px;
+  color: #f59e0b;
+  border-color: #b45309;
+  text-color-internal: #ffffff;
+  caption: '{caption}';
+}
+
+node.Memory {
+  diameter: 50px;
+  color: #78716c;
+  border-color: #44403c;
+  text-color-internal: #ffffff;
+  caption: '{caption}';
+}
+
+node.MCP {
+  diameter: 50px;
+  color: #06b6d4;
+  border-color: #0e7490;
+  text-color-internal: #ffffff;
+  caption: '{caption}';
+}
+
+relationship.USES {
+  color: #94a3b8;
+  shaft-width: 2px;
+}
+
+relationship.OWNS {
+  color: #ef4444;
+  shaft-width: 2px;
+}
+
+relationship.CALLS {
+  color: #22c55e;
+  shaft-width: 2px;
+}
+
+relationship.READS {
+  color: #f59e0b;
+  shaft-width: 2px;
+}
+
+relationship.WRITES {
+  color: #e11d48;
+  shaft-width: 2px;
+}

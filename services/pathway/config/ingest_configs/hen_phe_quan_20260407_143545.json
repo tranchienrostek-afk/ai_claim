@@ -1,0 +1,190 @@
+{
+  "disease_name": "Hen phế quản",
+  "icd_code": "J45",
+  "protocol_name": "Phác đồ Hen phế quản (BYT)",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": false,
+  "extra_heading_patterns": [
+    "^Bảng\\s+\\d+"
+  ],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "Salbutamol",
+        "Budesonide",
+        "Montelukast",
+        "Theophylline"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "Hen phế quản",
+        "Asthma",
+        "Viêm mạn tính phế quản"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "ho",
+        "khó thở",
+        "thở khò khè",
+        "co thắt phế quản"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "Spirometry",
+        "Peak Expiratory Flow",
+        "Allergy test"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "Hồi sức cấp cứu",
+        "Khám lâm sàng",
+        "Đo chức năng hô hấp"
+      ]
+    },
+    {
+      "label": "Stage",
+      "examples": [
+        "Hen phế quản nhẹ",
+        "Hen phế quản trung bình",
+        "Hen phế quản nặng"
+      ]
+    },
+    {
+      "label": "Protocol",
+      "examples": [
+        "Hướng dẫn chẩn đoán và điều trị hen phế quản",
+        "Quyết định số 1851/QĐ-BYT"
+      ]
+    },
+    {
+      "label": "RiskFactor",
+      "examples": [
+        "dị ứng",
+        "hút thuốc lá",
+        "ô nhiễm môi trường"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese internal medicine texts about Hen phế quản (bronchial asthma). Extract all relevant medical entities from the given text chunk and return a valid JSON object with an array named \"entities\". Each entity must have a \"name\" (the exact text span) and a \"type\" (entity category). Only include entities explicitly mentioned in the text. Do not add any information not present in the text. The JSON format must be: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text from the section: {section_path}\n\nText to analyze:\n{chunk_content}\n\nExtract all explicitly mentioned entities of the following types with examples:\n- Drug: Salbutamol, Budesonide, Montelukast, Theophylline\n- Disease: Hen phế quản, Asthma, Viêm mạn tính phế quản\n- Symptom: ho, khó thở, thở khò khè, co thắt phế quản\n- LabTest: Spirometry, Peak Expiratory Flow, Allergy test\n- Procedure: Hồi sức cấp cứu, Khám lâm sàng, Đo chức năng hô hấp\n- Stage: Hen phế quản nhẹ, Hen phế quản trung bình, Hen phế quản nặng\n- Protocol: Hướng dẫn chẩn đoán và điều trị hen phế quản, Quyết định số 1851/QĐ-BYT\n- RiskFactor: dị ứng, hút thuốc lá, ô nhiễm môi trường\n\nReturn the result ONLY as a JSON object in this format:\n{\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\n\nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the respiratory system",
+      "properties": {
+        "code": "J00-J99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Asthma",
+      "properties": {
+        "code": "J45"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Hen phế quản",
+      "properties": {
+        "aliases": "Asthma, Bronchial asthma"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Salbutamol",
+      "properties": {
+        "ATC_code": "R03AC02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Budesonide",
+      "properties": {
+        "ATC_code": "R03BA02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Fluticasone",
+      "properties": {
+        "ATC_code": "R03BA05"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Montelukast",
+      "properties": {
+        "ATC_code": "R03DC03"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Theophylline",
+      "properties": {
+        "ATC_code": "R03DA04"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Spirometry",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Peak Expiratory Flow Rate",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Fractional exhaled Nitric Oxide (FeNO)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Allergen-specific IgE",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete Blood Count",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "GINA Asthma Control Classification",
+      "properties": {
+        "description": "Classification of asthma control: Controlled, Partly Controlled, Uncontrolled"
+      }
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the respiratory system",
+      "to_label": "ICD_Category",
+      "to_name": "Asthma",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Asthma",
+      "to_label": "Disease",
+      "to_name": "Hen phế quản",
+      "rel_type": "INSTANCE_OF"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

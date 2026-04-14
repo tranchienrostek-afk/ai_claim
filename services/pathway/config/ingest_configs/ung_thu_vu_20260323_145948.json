@@ -1,0 +1,199 @@
+{
+  "disease_name": "ung thư vú",
+  "icd_code": "C50",
+  "protocol_name": "Phác đồ ung thư vú - Bộ Y tế Việt Nam 2020",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": true,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "Tamoxifen",
+        "Trastuzumab",
+        "Doxorubicin",
+        "Paclitaxel"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "Ung thư vú",
+        "Carcinoma vú",
+        "Ung thư biểu mô tuyến vú"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "Khối u vú",
+        "Đau vú",
+        "Tiết dịch núm vú"
+      ]
+    },
+    {
+      "label": "Stage",
+      "examples": [
+        "Giai đoạn I",
+        "Giai đoạn II",
+        "Giai đoạn III",
+        "Giai đoạn IV"
+      ]
+    },
+    {
+      "label": "Biomarker",
+      "examples": [
+        "HER2",
+        "ER",
+        "PR",
+        "Ki-67"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "Phẫu thuật cắt bỏ khối u",
+        "Sinh thiết vú",
+        "Xạ trị",
+        "Hóa trị"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "Xét nghiệm mô bệnh học",
+        "Xét nghiệm huyết thanh",
+        "Chụp nhũ ảnh"
+      ]
+    },
+    {
+      "label": "Protocol",
+      "examples": [
+        "Phác đồ điều trị bổ trợ hệ thống",
+        "Phác đồ hóa trị chuẩn",
+        "Phác đồ xạ trị"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical named entity recognition (NER) model specialized in Vietnamese oncology texts about breast cancer (ung thư vú). Extract all entities explicitly mentioned in the input text and return a valid JSON object with an \"entities\" array. Each entity should have a \"name\" (the exact text span) and a \"type\" (entity category). Only include entities explicitly present in the text. The JSON format must be: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}",
+  "extraction_user_prompt_template": "Extract all named entities from the following Vietnamese medical text about breast cancer (ung thư vú). The text is from the section: {section_path}\n\nText to analyze:\n{chunk_content}\n\nEntity types and examples:\n- Drug: Tamoxifen, Trastuzumab, Doxorubicin, Paclitaxel\n- Disease: Ung thư vú, Carcinoma vú, Ung thư biểu mô tuyến vú\n- Symptom: Khối u vú, Đau vú, Tiết dịch núm vú\n- Stage: Giai đoạn I, Giai đoạn II, Giai đoạn III, Giai đoạn IV\n- Biomarker: HER2, ER, PR, Ki-67\n- Procedure: Phẫu thuật cắt bỏ khối u, Sinh thiết vú, Xạ trị, Hóa trị\n- LabTest: Xét nghiệm mô bệnh học, Xét nghiệm huyết thanh, Chụp nhũ ảnh\n- Protocol: Phác đồ điều trị bổ trợ hệ thống, Phác đồ hóa trị chuẩn, Phác đồ xạ trị\n\nReturn a JSON object in the format:\n{\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\n\nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Neoplasms",
+      "properties": {
+        "code": "C00-D49"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Malignant neoplasm of breast",
+      "properties": {
+        "code": "C50"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Breast cancer",
+      "properties": {
+        "aliases": "Ung thư vú, Malignant neoplasm of breast, Breast carcinoma"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Tamoxifen",
+      "properties": {
+        "code": "L02BA01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Trastuzumab",
+      "properties": {
+        "code": "L01XC03"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Doxorubicin",
+      "properties": {
+        "code": "L01DB01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Paclitaxel",
+      "properties": {
+        "code": "L01CD01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Anastrozole",
+      "properties": {
+        "code": "L02BG03"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Mammography",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Breast ultrasound",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Estrogen receptor (ER) status",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Progesterone receptor (PR) status",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "HER2/neu status",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Ki-67 proliferation index",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "TNM staging system",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "AJCC breast cancer staging",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Neoplasms",
+      "to_label": "ICD_Category",
+      "to_name": "Malignant neoplasm of breast",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Malignant neoplasm of breast",
+      "to_label": "Disease",
+      "to_name": "Breast cancer",
+      "rel_type": "INSTANCE_OF"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

@@ -1,0 +1,287 @@
+{
+  "disease_name": "Ung thư vú",
+  "icd_code": "C50",
+  "protocol_name": "Phác đồ Ung thư vú - BV Trung tâm Ung bướu - Bệnh viện Đa khoa Quốc tế Vinmec Central Park 2022",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": true,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "hóa trị",
+        "thuốc nhắm trúng đích",
+        "thuốc giảm đau"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "ung thư vú",
+        "ung thư biểu mô",
+        "ung thư tuyến vú"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "đau ngực",
+        "khối u",
+        "sưng tấy"
+      ]
+    },
+    {
+      "label": "Stage",
+      "examples": [
+        "giai đoạn I",
+        "giai đoạn II",
+        "giai đoạn III"
+      ]
+    },
+    {
+      "label": "Biomarker",
+      "examples": [
+        "HER2",
+        "ER",
+        "PR"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "phẫu thuật cắt bỏ khối u",
+        "xạ trị",
+        "sinh thiết"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "xét nghiệm mô bệnh học",
+        "xét nghiệm máu",
+        "chụp MRI"
+      ]
+    },
+    {
+      "label": "Protocol",
+      "examples": [
+        "phác đồ điều trị ung thư vú",
+        "phác đồ hóa trị",
+        "phác đồ xạ trị"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese oncology texts about breast cancer (Ung thư vú). Extract all entities explicitly mentioned in the input text and return a valid JSON object with an \"entities\" array. Each entity should have a \"name\" (the exact text span) and a \"type\" (entity category). Only include entities explicitly mentioned in the text. The JSON format must be: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text about breast cancer (Ung thư vú) from the section: {section_path}. Extract all entities explicitly mentioned in the text. Entity types and examples are:\n- Drug: hóa trị, thuốc nhắm trúng đích, thuốc giảm đau\n- Disease: ung thư vú, ung thư biểu mô, ung thư tuyến vú\n- Symptom: đau ngực, khối u, sưng tấy\n- Stage: giai đoạn I, giai đoạn II, giai đoạn III\n- Biomarker: HER2, ER, PR\n- Procedure: phẫu thuật cắt bỏ khối u, xạ trị, sinh thiết\n- LabTest: xét nghiệm mô bệnh học, xét nghiệm máu, chụp MRI\n- Protocol: phác đồ điều trị ung thư vú, phác đồ hóa trị, phác đồ xạ trị\n\nText to analyze:\n\"\"\"\n{chunk_content}\n\"\"\"\n\nReturn a JSON object in the format: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}. Only include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Neoplasms",
+      "properties": {
+        "code": "C00-D49"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Malignant neoplasms of breast",
+      "properties": {
+        "code": "C50"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Ung thư vú",
+      "properties": {
+        "code": "C50",
+        "aliases": "Breast cancer, Malignant neoplasm of breast"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Tamoxifen",
+      "properties": {
+        "code": "L02BA01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Trastuzumab",
+      "properties": {
+        "code": "L01XC03"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Doxorubicin",
+      "properties": {
+        "code": "L01DB01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Paclitaxel",
+      "properties": {
+        "code": "L01CD01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Anastrozole",
+      "properties": {
+        "code": "L02BG03"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Mammography",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Breast ultrasound",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Estrogen receptor (ER) status",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Progesterone receptor (PR) status",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "HER2/neu status",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete blood count",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "TNM staging system",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "AJCC Breast Cancer Staging",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Neoplasms",
+      "to_label": "ICD_Category",
+      "to_name": "Malignant neoplasms of breast",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Malignant neoplasms of breast",
+      "to_label": "Disease",
+      "to_name": "Ung thư vú",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ung thư vú",
+      "to_label": "Drug",
+      "to_name": "Tamoxifen",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ung thư vú",
+      "to_label": "Drug",
+      "to_name": "Trastuzumab",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ung thư vú",
+      "to_label": "Drug",
+      "to_name": "Doxorubicin",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ung thư vú",
+      "to_label": "Drug",
+      "to_name": "Paclitaxel",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ung thư vú",
+      "to_label": "Drug",
+      "to_name": "Anastrozole",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ung thư vú",
+      "to_label": "LabTest",
+      "to_name": "Mammography",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ung thư vú",
+      "to_label": "LabTest",
+      "to_name": "Breast ultrasound",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ung thư vú",
+      "to_label": "LabTest",
+      "to_name": "Estrogen receptor (ER) status",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ung thư vú",
+      "to_label": "LabTest",
+      "to_name": "Progesterone receptor (PR) status",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ung thư vú",
+      "to_label": "LabTest",
+      "to_name": "HER2/neu status",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ung thư vú",
+      "to_label": "LabTest",
+      "to_name": "Complete blood count",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ung thư vú",
+      "to_label": "Stage",
+      "to_name": "TNM staging system",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ung thư vú",
+      "to_label": "Stage",
+      "to_name": "AJCC Breast Cancer Staging",
+      "rel_type": "INSTANCE_OF"
+    }
+  ],
+  "source_type": "hospital",
+  "hospital_name": "Trung tâm Ung bướu - Bệnh viện Đa khoa Quốc tế Vinmec Central Park",
+  "needs_ocr_cleanup": true
+}

@@ -1,0 +1,198 @@
+{
+  "disease_name": "Viêm amidan cấp",
+  "icd_code": "J03",
+  "protocol_name": "Phác đồ Viêm amidan cấp (BYT)",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": false,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "Penicillin",
+        "Amoxicillin",
+        "Paracetamol",
+        "Ibuprofen"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "Viêm amidan cấp",
+        "Viêm amidan mạn tính",
+        "Viêm khớp cấp",
+        "Bại liệt",
+        "Viêm màng não",
+        "Viêm não"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "Viêm sung huyết",
+        "Xuất tiết",
+        "Sưng amidan",
+        "Đau họng"
+      ]
+    },
+    {
+      "label": "ICD_Category",
+      "examples": [
+        "J03",
+        "J00-J06",
+        "J30-J39"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "Xét nghiệm máu",
+        "Cấy dịch họng",
+        "Test nhanh vi khuẩn"
+      ]
+    },
+    {
+      "label": "Stage",
+      "examples": [
+        "Cấp tính",
+        "Mạn tính"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "Nội soi họng",
+        "Cắt amidan",
+        "Khám lâm sàng"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese internal medicine texts about acute tonsillitis (Viêm amidan cấp). Extract all entities explicitly mentioned in the input text. Return a valid JSON object with an \"entities\" array, where each entity has a \"name\" (the exact text span) and a \"type\" (entity category). Only include entities explicitly mentioned in the text. Do not infer or add any entities not present in the text.",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text from section: {section_path}\n\nText:\n{chunk_content}\n\nExtract all explicitly mentioned entities in the text. The entity types and examples are:\n- Drug: Penicillin, Amoxicillin, Paracetamol, Ibuprofen\n- Disease: Viêm amidan cấp, Viêm amidan mạn tính, Viêm khớp cấp, Bại liệt, Viêm màng não, Viêm não\n- Symptom: Viêm sung huyết, Xuất tiết, Sưng amidan, Đau họng\n- ICD_Category: J03, J00-J06, J30-J39\n- LabTest: Xét nghiệm máu, Cấy dịch họng, Test nhanh vi khuẩn\n- Stage: Cấp tính, Mạn tính\n- Procedure: Nội soi họng, Cắt amidan, Khám lâm sàng\n\nReturn a JSON object in the format:\n{\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\n\nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the respiratory system",
+      "properties": {
+        "code": "J00-J99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Acute upper respiratory infections",
+      "properties": {
+        "code": "J00-J06"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Viêm amidan cấp",
+      "properties": {
+        "code": "J03"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Viêm amidan cấp",
+      "properties": {
+        "code": "J03",
+        "aliases": "Acute tonsillitis; Acute tonsillar infection"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Amoxicillin",
+      "properties": {
+        "ATC_code": "J01CA04"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Penicillin V",
+      "properties": {
+        "ATC_code": "J01CE02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Azithromycin",
+      "properties": {
+        "ATC_code": "J01FA10"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Cefuroxime",
+      "properties": {
+        "ATC_code": "J01DC02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Paracetamol",
+      "properties": {
+        "ATC_code": "N02BE01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Ibuprofen",
+      "properties": {
+        "ATC_code": "M01AE01"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete blood count",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Throat swab culture",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Rapid antigen detection test (RADT)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "C-reactive protein (CRP)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Erythrocyte sedimentation rate (ESR)",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the respiratory system",
+      "to_label": "ICD_Category",
+      "to_name": "Acute upper respiratory infections",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Acute upper respiratory infections",
+      "to_label": "ICD_Category",
+      "to_name": "Viêm amidan cấp",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm amidan cấp",
+      "to_label": "ICD_Category",
+      "to_name": "Viêm amidan cấp",
+      "rel_type": "CLASSIFIED_AS"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

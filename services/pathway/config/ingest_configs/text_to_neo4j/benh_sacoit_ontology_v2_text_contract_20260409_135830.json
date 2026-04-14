@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-04-09T13:58:30.511021+07:00",
+  "engine": "ontology_v2",
+  "namespace": "ontology_v2",
+  "source": {
+    "relative_path": "Phác đồ hô hấp/Bệnh sacoít (chẩn đoán và điều trị).txt",
+    "absolute_path": "D:\\desktop_folder\\01_claudecodeleak\\roadmap_master_data\\Extracted_Protocols\\Phác đồ hô hấp\\Bệnh sacoít (chẩn đoán và điều trị).txt",
+    "document_kind": "protocol_text",
+    "seeded_default": false,
+    "domain_hint": "Internal_Medicine"
+  },
+  "profile": {
+    "disease_name": "Bệnh sacoit",
+    "disease_aliases": [
+      "Sarcoidosis",
+      "Sacoít"
+    ],
+    "icd_code": "D86",
+    "medical_domain": "Internal_Medicine",
+    "document_type": "treatment_guideline",
+    "pdf_quality": "digital",
+    "has_tables": false,
+    "has_flowcharts": false,
+    "has_appendices": false,
+    "heading_style": "arabic_numeral",
+    "estimated_pages": 4,
+    "publisher": "Bo Y te",
+    "year": null,
+    "summary": "Tài liệu hướng dẫn chẩn đoán và điều trị bệnh sacoit, một bệnh tổ chức liên kết đặc trưng bởi sự tăng sinh lympho bào T và hình thành u hạt không bã đậu, chủ yếu tổn thương phổi và các cơ quan khác. Nội dung bao gồm các triệu chứng lâm sàng, cận lâm sàng, phân giai đoạn bệnh theo X-quang phổi và chỉ định điều trị, đặc biệt là sử dụng corticoid cho các trường hợp suy giảm chức năng nghiêm trọng.",
+    "source_type": "BYT",
+    "hospital_name": null
+  },
+  "text_surface": {
+    "char_count": 9238,
+    "line_count": 183,
+    "paragraph_count": 72,
+    "word_count": 1862,
+    "sha1": "52e43ab713ecae01c7aeda9db105dc5c823e73b1"
+  },
+  "graph_contract": {
+    "namespace": "ontology_v2",
+    "logical_layers": [
+      "L1_raw_evidence",
+      "L2_canonical_models",
+      "L3_assertions_and_rules"
+    ],
+    "core_nodes": [
+      "RawDocument",
+      "RawChunk",
+      "DiseaseEntity",
+      "ProtocolBook",
+      "ProtocolSection",
+      "ProtocolAssertion",
+      "ProtocolDiseaseSummary",
+      "RawSignMention",
+      "RawServiceMention",
+      "RawObservationMention"
+    ],
+    "reasoning_edges": [
+      "CHUNK_ABOUT_DISEASE",
+      "BOOK_HAS_SECTION",
+      "SECTION_HAS_CHUNK",
+      "SECTION_COVERS_DISEASE",
+      "ASSERTION_REQUIRES_SIGN",
+      "ASSERTION_INDICATES_SERVICE",
+      "ASSERTION_CONTRAINDICATES"
+    ]
+  }
+}

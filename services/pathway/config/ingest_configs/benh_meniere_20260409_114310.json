@@ -1,0 +1,238 @@
+{
+  "disease_name": "Bệnh Ménière",
+  "icd_code": "H81.0",
+  "protocol_name": "Bệnh Ménière (text protocol)",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": false,
+  "extra_heading_patterns": [
+    "^Bảng\\s+\\d+"
+  ],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "Betahistine",
+        "Diuretics",
+        "Corticosteroids"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "Bệnh Ménière",
+        "Hội chứng tai trong",
+        "Viêm tai giữa"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "Chóng mặt",
+        "Điếc",
+        "Ù tai"
+      ]
+    },
+    {
+      "label": "DiagnosticCriteria",
+      "examples": [
+        "Tiêu chuẩn chẩn đoán bệnh Ménière",
+        "Chẩn đoán phân biệt",
+        "Tiêu chuẩn lâm sàng"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "Phác đồ điều trị nội khoa",
+        "Phẫu thuật cắt dây thần kinh tiền đình",
+        "Điều trị ngoại khoa"
+      ]
+    },
+    {
+      "label": "Protocol",
+      "examples": [
+        "Phác đồ điều trị",
+        "Hướng dẫn chẩn đoán và điều trị",
+        "Quy trình điều trị bệnh Ménière"
+      ]
+    },
+    {
+      "label": "RiskFactor",
+      "examples": [
+        "Yếu tố nguy cơ",
+        "Nguyên nhân bệnh Ménière",
+        "Tiền sử gia đình"
+      ]
+    },
+    {
+      "label": "ICD_Category",
+      "examples": [
+        "H81.0",
+        "Rối loạn tiền đình",
+        "Bệnh tai trong"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese internal medicine texts about Bệnh Ménière. Extract all entities explicitly mentioned in the input text and return a valid JSON object with an \"entities\" array. Each entity should have a \"name\" (the exact text span) and a \"type\" (entity category). Only include entities explicitly present in the text. Do not add any information or inference beyond the text.",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text about Bệnh Ménière from the section: {section_path}. Extract all entities explicitly mentioned in the text. The entity types and examples are:\n- Drug: Betahistine, Diuretics, Corticosteroids\n- Disease: Bệnh Ménière, Hội chứng tai trong, Viêm tai giữa\n- Symptom: Chóng mặt, Điếc, Ù tai\n- DiagnosticCriteria: Tiêu chuẩn chẩn đoán bệnh Ménière, Chẩn đoán phân biệt, Tiêu chuẩn lâm sàng\n- Procedure: Phác đồ điều trị nội khoa, Phẫu thuật cắt dây thần kinh tiền đình, Điều trị ngoại khoa\n- Protocol: Phác đồ điều trị, Hướng dẫn chẩn đoán và điều trị, Quy trình điều trị bệnh Ménière\n- RiskFactor: Yếu tố nguy cơ, Nguyên nhân bệnh Ménière, Tiền sử gia đình\n- ICD_Category: H81.0, Rối loạn tiền đình, Bệnh tai trong\n\nText to analyze:\n\"\"\"\n{chunk_content}\n\"\"\"\n\nReturn the result as a JSON object with the format:\n{\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the ear and mastoid process",
+      "properties": {
+        "code": "H80-H83"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Bệnh Ménière",
+      "properties": {
+        "code": "H81.0"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Bệnh Ménière",
+      "properties": {
+        "aliases": "Ménière disease; Endolymphatic hydrops"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Betahistine",
+      "properties": {
+        "ATC_code": "N07CA01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Diuretics",
+      "properties": {
+        "ATC_code": "C03"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Dimenhydrinate",
+      "properties": {
+        "ATC_code": "R06AA11"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Prochlorperazine",
+      "properties": {
+        "ATC_code": "N05AB04"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Audiometry",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Electrocochleography",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Vestibular evoked myogenic potentials (VEMP)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "MRI of inner ear",
+      "properties": {}
+    },
+    {
+      "label": "DiagnosticCriteria",
+      "name": "AAO-HNS 1995 Criteria for Ménière's Disease",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the ear and mastoid process",
+      "to_label": "ICD_Category",
+      "to_name": "Bệnh Ménière",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh Ménière",
+      "to_label": "ICD_Category",
+      "to_name": "Bệnh Ménière",
+      "rel_type": "CLASSIFIED_AS"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh Ménière",
+      "to_label": "Drug",
+      "to_name": "Betahistine",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh Ménière",
+      "to_label": "Drug",
+      "to_name": "Diuretics",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh Ménière",
+      "to_label": "Drug",
+      "to_name": "Dimenhydrinate",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh Ménière",
+      "to_label": "Drug",
+      "to_name": "Prochlorperazine",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh Ménière",
+      "to_label": "LabTest",
+      "to_name": "Audiometry",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh Ménière",
+      "to_label": "LabTest",
+      "to_name": "Electrocochleography",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh Ménière",
+      "to_label": "LabTest",
+      "to_name": "Vestibular evoked myogenic potentials (VEMP)",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh Ménière",
+      "to_label": "LabTest",
+      "to_name": "MRI of inner ear",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh Ménière",
+      "to_label": "DiagnosticCriteria",
+      "to_name": "AAO-HNS 1995 Criteria for Ménière's Disease",
+      "rel_type": "INSTANCE_OF"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

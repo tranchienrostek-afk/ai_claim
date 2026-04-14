@@ -1,0 +1,5010 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ontology V2 Graph Forge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root, [data-theme="knowledge-forge"] {
+      --bg-void: #f8fafc;
+      --bg-panel: #ffffff;
+      --border-panel: #e2e8f0;
+      --line: rgba(148, 163, 184, 0.1);
+      --line-strong: rgba(148, 163, 184, 0.2);
+      --ink: #0f172a;
+      --muted: #4b5563;
+      --cyan: #3b82f6;
+      --emerald: #10b981;
+      --cyan-2: #2563eb;
+      --gold: #f59e0b;
+      --amber: #f59e0b;
+      --pink: #db2777;
+      --good: #10b981;
+      --warn: #f59e0b;
+      --bad: #ef4444;
+      --glow: 0 0 20px rgba(59, 130, 246, 0.12);
+      --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      --radius: 16px;
+      
+      /* Knowledge Forge Graph Theme - Unified Blue */
+      --node-core: #2563eb; --node-core-halo: rgba(37,99,235,0.2);
+      --node-assert: #7c3aed; --node-assert-halo: rgba(124,58,237,0.2);
+      --node-chunk: #0284c7; --node-chunk-halo: rgba(2,132,199,0.2);
+      --node-sign: #64748b; --node-sign-halo: rgba(100,116,139,0.15);
+      --node-service: #059669; --node-service-halo: rgba(5,150,105,0.2);
+      --node-obs: #d97706; --node-obs-halo: rgba(217,119,6,0.2);
+      --node-default: #94a3b8; --node-default-halo: rgba(148,163,184,0.15);
+    }
+
+    [data-theme="deep-space"] {
+      --bg-void: #0a1128;
+      --bg-panel: rgba(16, 28, 58, 0.85);
+      --border-panel: rgba(0, 242, 255, 0.2);
+      --line: rgba(226, 232, 240, 0.1);
+      --line-strong: rgba(226, 232, 240, 0.25);
+      --ink: #e2e8f0;
+      --muted: #94a3b8;
+      --cyan: #00f2ff;
+      --cyan-2: #00c3ff;
+      --gold: #ffd700;
+      --amber: #ffb700;
+      --pink: #ff007f;
+      --good: #00ffaa;
+      --warn: #ffae00;
+      --bad: #ff3366;
+      --glow: 0 0 25px rgba(0, 242, 255, 0.4);
+      --shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      
+      /* Neon Graph Theme */
+      --node-core: #00f2ff; --node-core-halo: rgba(0,242,255,0.3);
+      --node-assert: #d946ef; --node-assert-halo: rgba(217,70,239,0.3);
+      --node-chunk: #38bdf8; --node-chunk-halo: rgba(56,189,248,0.3);
+      --node-sign: #cbd5e1; --node-sign-halo: rgba(203,213,225,0.2);
+      --node-service: #4ade80; --node-service-halo: rgba(74,222,128,0.3);
+      --node-obs: #fbbf24; --node-obs-halo: rgba(251,191,36,0.3);
+      --node-default: #94a3b8; --node-default-halo: rgba(148,163,184,0.2);
+    }
+
+    [data-theme="terra-cotta"] {
+      --bg-void: #faf6f0;
+      --bg-panel: rgba(245, 238, 228, 0.9);
+      --border-panel: rgba(67, 48, 43, 0.1);
+      --line: rgba(67, 48, 43, 0.08);
+      --line-strong: rgba(67, 48, 43, 0.18);
+      --ink: #43302b;
+      --muted: #8a736c;
+      --cyan: #4d7c0f;      
+      --cyan-2: #c2410c;    
+      --good: #65a30d;
+      --warn: #d97706;
+      --bad: #b91c1c;
+      --glow: 0 0 15px rgba(194, 65, 12, 0.15);
+      --shadow: 0 10px 40px rgba(67, 48, 43, 0.08);
+
+      /* Natural Graph Theme */
+      --node-core: #4d7c0f; --node-core-halo: rgba(77,124,15,0.2);
+      --node-assert: #c2410c; --node-assert-halo: rgba(194,65,12,0.2);
+      --node-chunk: #0f766e; --node-chunk-halo: rgba(15,118,110,0.2);
+      --node-sign: #78716c; --node-sign-halo: rgba(120,113,108,0.15);
+      --node-service: #854d0e; --node-service-halo: rgba(133,77,14,0.2);
+      --node-obs: #b45309; --node-obs-halo: rgba(180,83,9,0.2);
+      --node-default: #a8a29e; --node-default-halo: rgba(168,162,158,0.15);
+    }
+
+    [data-theme="vibrant"] {
+      --bg-void: #ffffff;
+      --bg-panel: rgba(255, 255, 255, 0.85);
+      --border-panel: rgba(168, 85, 247, 0.15);
+      --line: rgba(51, 65, 85, 0.05);
+      --line-strong: rgba(51, 65, 85, 0.15);
+      --ink: #334155;
+      --muted: #94a3b8;
+      --cyan: #a855f7;      
+      --cyan-2: #f43f5e;    
+      --good: #10b981;
+      --warn: #f59e0b;
+      --bad: #ef4444;
+      --glow: 0 0 20px rgba(244, 63, 94, 0.15);
+      --shadow: 0 10px 40px rgba(168, 85, 247, 0.1);
+
+      /* Pastel Vibrant Graph Theme */
+      --node-core: #a855f7; --node-core-halo: rgba(168,85,247,0.2);
+      --node-assert: #f43f5e; --node-assert-halo: rgba(244,63,94,0.2);
+      --node-chunk: #3b82f6; --node-chunk-halo: rgba(59,130,246,0.2);
+      --node-sign: #64748b; --node-sign-halo: rgba(100,116,139,0.15);
+      --node-service: #10b981; --node-service-halo: rgba(16,185,129,0.2);
+      --node-obs: #f59e0b; --node-obs-halo: rgba(245,158,11,0.2);
+      --node-default: #cbd5e1; --node-default-halo: rgba(203,213,225,0.2);
+    }
+
+    [data-theme="monochrome"] {
+      --bg-void: #ffffff;
+      --bg-panel: #ffffff;
+      --border-panel: #000000;
+      --line: rgba(0, 0, 0, 0.15);
+      --line-strong: rgba(0, 0, 0, 0.4);
+      --ink: #000000;
+      --muted: #555555;
+      --cyan: #000000;      
+      --cyan-2: #ef4444;    
+      --pink: #ef4444;      
+      --good: #000000;
+      --warn: #000000;
+      --bad: #ef4444;
+      --glow: none;
+      --shadow: 4px 4px 0px rgba(0, 0, 0, 1);
+
+      /* Monochrome Graph Theme */
+      --node-core: #000000; --node-core-halo: rgba(0,0,0,0.1);
+      --node-assert: #ef4444; --node-assert-halo: rgba(239,68,68,0.15);
+      --node-chunk: #000000; --node-chunk-halo: rgba(0,0,0,0.05);
+      --node-sign: #777777; --node-sign-halo: rgba(0,0,0,0.05);
+      --node-service: #000000; --node-service-halo: rgba(0,0,0,0.05);
+      --node-obs: #000000; --node-obs-halo: rgba(0,0,0,0.05);
+      --node-default: #999999; --node-default-halo: rgba(0,0,0,0.05);
+    }
+
+    [data-theme="neon-grid"] {
+      --bg-void: #0b0f19;
+      --bg-panel: rgba(18, 25, 43, 0.85);
+      --border-panel: rgba(16, 185, 129, 0.25);
+      --line: rgba(16, 185, 129, 0.15);
+      --line-strong: rgba(16, 185, 129, 0.4);
+      --ink: #f1f5f9;
+      --muted: #94a3b8;
+      --cyan: #10b981;      
+      --cyan-2: #059669;
+      --good: #10b981;
+      --warn: #fbbf24;
+      --bad: #ef4444;
+      --glow: 0 0 25px rgba(16, 185, 129, 0.4);
+      --shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+
+      /* Cyberpunk Graph Theme */
+      --node-core: #10b981; --node-core-halo: rgba(16,185,129,0.3);
+      --node-assert: #fbbf24; --node-assert-halo: rgba(251,191,36,0.3);
+      --node-chunk: #38bdf8; --node-chunk-halo: rgba(56,189,248,0.3);
+      --node-sign: #94a3b8; --node-sign-halo: rgba(148,163,184,0.2);
+      --node-service: #a855f7; --node-service-halo: rgba(168,85,247,0.3);
+      --node-obs: #f43f5e; --node-obs-halo: rgba(244,63,94,0.3);
+      --node-default: #64748b; --node-default-halo: rgba(100,116,139,0.2);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; overflow: hidden; }
+    body {
+      font-family: "Rajdhani", sans-serif;
+      font-size: 15px;
+      color: var(--ink);
+      background: var(--bg-void);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0 1px, transparent 1px 4px);
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .shell {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      width: 100vw;
+      margin: 0;
+      overflow: hidden;
+      gap: 24px;
+      padding: 24px;
+    }
+
+    .panel {
+      position: relative;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), transparent 40%);
+      opacity: 0.5;
+    }
+
+    .left-rail, .right-rail {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      height: 100%;
+      overflow-y: auto;
+      padding-bottom: 40px;
+      overflow-x: hidden;
+    }
+
+    .left-rail {
+      width: 380px;
+      flex-shrink: 0;
+      padding-right: 8px;
+    }
+
+    .right-rail {
+      width: 380px;
+      flex-shrink: 0;
+      padding-left: 8px;
+    }
+
+    .left-rail > .panel,
+    .right-rail > .panel {
+      min-height: 0;
+      flex-shrink: 0;
+    }
+
+    .main-stage {
+      flex-grow: 1;
+      min-width: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .theatre-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      border: none;
+      background: transparent;
+      padding: 0;
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--border-panel);
+      background: #fcfdfe;
+    }
+
+    .panel-body { padding: 16px 18px 18px; }
+    .collapsible-panel.collapsed .panel-body { display: none; }
+    .collapsible-panel.collapsed .panel-head { border-bottom: none; }
+    h1, h2, h3, h4 { margin: 0; color: var(--ink); font-weight: 700; }
+    p { margin: 0; color: var(--muted); line-height: 1.6; }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 18px 6px;
+    }
+
+    .logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      background: var(--cyan);
+      box-shadow: 
+        0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .stack { display: grid; gap: 12px; }
+    .controls { display: grid; gap: 12px; }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #64748b;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 600;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    input[type="text"], select, input[type="file"] {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--border-panel);
+      background: rgba(0, 0, 0, 0.03);
+      color: var(--ink);
+      padding: 12px 14px;
+      font: inherit;
+      outline: none;
+      transition: all 0.2s ease;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+      font-weight: 500;
+    }
+
+    input[type="text"]:focus, select:focus {
+      border-color: var(--cyan);
+      background: #ffffff;
+      box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.01),
+        0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    input::file-selector-button {
+      border: none;
+      border-radius: 10px;
+      padding: 8px 10px;
+      margin-right: 10px;
+      background: rgba(76,204,255,0.14);
+      color: var(--ink);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button, a.btn {
+      border: none;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font: inherit;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      color: #ffffff;
+      background: var(--cyan);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 0 35px rgba(0, 242, 255, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(76, 204, 255, 0.2);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--cyan);
+    }
+
+    .btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .panel-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-ghost {
+      color: var(--ink);
+      background: rgba(76,204,255,0.10);
+      border: 1px solid rgba(76,204,255,0.16);
+      padding: 10px 12px;
+    }
+
+    .btn-ghost.active {
+      color: #ffffff;
+      background: var(--cyan);
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+
+    .status-card, .metric-card, .phase-card, .intel-card, .timeline-card, .disease-item, .detail-block {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .status-card:hover, .metric-card:hover, .intel-card:hover, .timeline-card:hover, .disease-item:hover {
+      background: #fbfcfe;
+      border-color: var(--cyan);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+
+    .disease-item {
+      padding: 18px;
+    }
+
+    .minimap-container {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      width: 180px;
+      height: 120px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-panel);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      z-index: 20;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+    
+    .minimap-container canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    .panel-head.toggleable {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .panel-toggle {
+      border: 1px solid rgba(76,204,255,0.18);
+      background: rgba(76,204,255,0.08);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 8px 12px;
+      min-width: 76px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border: 1px solid rgba(0, 242, 255, 0.2);
+      background: rgba(0, 242, 255, 0.06);
+      color: var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
+    }
+
+    .status-running { color: var(--cyan); }
+    .status-completed { color: var(--good); }
+    .status-error { color: var(--bad); }
+    .status-stale { color: var(--warn); }
+    .status-idle { color: var(--muted); }
+    .status-watch { color: var(--cyan); }
+    .status-elevated { color: var(--warn); }
+    .status-critical { color: var(--bad); }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric-card .label, .phase-card .label, .overlay-stat .label {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .metric-card .value {
+      margin-top: 8px;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 380px;
+      gap: 16px;
+    }
+
+    .hero-banner {
+      min-height: 150px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .ticker {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(76,204,255,0.14);
+      background: rgba(5, 14, 24, 0.75);
+      color: var(--cyan);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 18px;
+    }
+
+    /* Chat Dock System */
+    .chat-dock {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      pointer-events: none;
+    }
+
+    .chat-trigger {
+      width: 68px;
+      height: 68px;
+      border-radius: 34px;
+      background: #2563eb;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(37, 99, 235, 0.5);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      pointer-events: all;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-top: 12px;
+    }
+    .chat-trigger:hover {
+      transform: scale(1.1) rotate(8deg);
+      background: #1d4ed8;
+      box-shadow: 0 12px 40px rgba(37, 99, 235, 0.7);
+    }
+    .chat-trigger svg {
+      width: 32px;
+      height: 32px;
+      stroke-width: 2.5;
+    }
+
+    .chat-window {
+      width: 420px;
+      height: 520px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-panel);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      pointer-events: all;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: bottom right;
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .chat-window.collapsed {
+      opacity: 0;
+      transform: scale(0.5) translateY(40px);
+      pointer-events: none;
+    }
+
+    .chat-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border-panel);
+      background: var(--bg);
+    }
+    .chat-tab {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .chat-tab.active {
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+    }
+    .claim-input-area {
+      padding: 12px;
+      background: var(--bg);
+      border-top: 1px solid var(--border-panel);
+    }
+    .claim-input-area textarea {
+      width: 100%;
+      height: 80px;
+      background: var(--surface);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      resize: none;
+      font-size: 13px;
+    }
+    .claim-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .claim-actions button {
+      flex: 1;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .chat-window.collapsed {
+      height: 64px;
+      flex: none;
+    }
+
+    .chat-header {
+      padding: 18px 20px;
+      background: #fcfdfe;
+      border-bottom: 1px solid var(--border-panel);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .chat-header-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .chat-header .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--good);
+      box-shadow: 0 0 8px var(--good);
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: rgba(248, 250, 252, 0.5);
+    }
+
+    .message {
+      max-width: 85%;
+      padding: 12px 16px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      position: relative;
+      animation: message-in 0.3s ease-out;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .message pre.claim-json {
+      background: rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin: 8px 0 4px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      white-space: pre;
+      overflow-x: auto;
+      color: var(--ink);
+    }
+
+    .message-doctor pre.claim-json {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.95);
+    }
+
+    .message .claim-disease-tag {
+      display: inline-block;
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: #059669;
+      border-radius: 8px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .message-doctor .claim-disease-tag {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .message .adjudicate-item {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .message .adjudicate-item:last-child { border-bottom: none; }
+    .message .adjudicate-item .svc-name {
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .message .adjudicate-item .svc-reason {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+      white-space: pre-wrap;
+    }
+    .message .adjudicate-summary {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(37,99,235,0.06);
+      border: 1px solid rgba(37,99,235,0.12);
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    @keyframes message-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message-doctor {
+      align-self: flex-end;
+      background: var(--cyan);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message-ai {
+      align-self: flex-start;
+      background: white;
+      color: var(--ink);
+      border: 1px solid var(--border-panel);
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .chat-input-area {
+      padding: 16px;
+      background: white;
+      border-top: 1px solid var(--border-panel);
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-input-area input {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-panel);
+      background: #f8fafc;
+      font: inherit;
+      outline: none;
+    }
+
+    .chat-input-area input:focus {
+      border-color: var(--cyan);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    /* Reasoning Overlay System */
+    .reasoning-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      z-index: 2000;
+      display: flex;
+      align-items: stretch;
+      justify-content: flex-end;
+      color: white;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reasoning-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .reasoning-panel {
+      width: 420px;
+      max-width: 45vw;
+      background: rgba(15, 23, 42, 0.95);
+      border-left: 1px solid var(--border-panel);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .reasoning-panel-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .reasoning-panel-header h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cyan);
+      letter-spacing: 0.5px;
+      margin: 0;
+    }
+
+    .reasoning-panel-header .reasoning-status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      animation: pulse-dot 1.4s infinite ease-in-out both;
+    }
+
+    .reasoning-panel-header .reasoning-status-dot.done {
+      animation: none;
+      background: #22c55e;
+    }
+
+    .reasoning-steps {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .reasoning-step {
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border-left: 3px solid transparent;
+      opacity: 0;
+      transform: translateX(20px);
+      animation: step-appear 0.35s ease forwards;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .reasoning-step .step-phase {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .reasoning-step .step-action {
+      color: #e2e8f0;
+    }
+
+    .reasoning-step .step-details {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 4px;
+      word-break: break-word;
+    }
+
+    .reasoning-step .step-timing {
+      font-size: 10px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .reasoning-step .step-nodes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .reasoning-step .step-node-tag {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .reasoning-step .step-node-tag:hover {
+      background: rgba(56, 189, 248, 0.25);
+    }
+
+    /* Phase colors */
+    .reasoning-step[data-phase="disease_resolve"] { border-left-color: #a78bfa; }
+    .reasoning-step[data-phase="disease_resolve"] .step-phase { color: #a78bfa; }
+    .reasoning-step[data-phase="chunk_traverse"] { border-left-color: #38bdf8; }
+    .reasoning-step[data-phase="chunk_traverse"] .step-phase { color: #38bdf8; }
+    .reasoning-step[data-phase="assertion_traverse"] { border-left-color: #fb923c; }
+    .reasoning-step[data-phase="assertion_traverse"] .step-phase { color: #fb923c; }
+    .reasoning-step[data-phase="service_traverse"] { border-left-color: #34d399; }
+    .reasoning-step[data-phase="service_traverse"] .step-phase { color: #34d399; }
+    .reasoning-step[data-phase="sign_traverse"] { border-left-color: #f472b6; }
+    .reasoning-step[data-phase="sign_traverse"] .step-phase { color: #f472b6; }
+    .reasoning-step[data-phase="vector_search"],
+    .reasoning-step[data-phase="graph_search"] { border-left-color: #38bdf8; }
+    .reasoning-step[data-phase="vector_search"] .step-phase,
+    .reasoning-step[data-phase="graph_search"] .step-phase { color: #38bdf8; }
+    .reasoning-step[data-phase="context_select"] { border-left-color: #facc15; }
+    .reasoning-step[data-phase="context_select"] .step-phase { color: #facc15; }
+    .reasoning-step[data-phase="llm_adjudicate"],
+    .reasoning-step[data-phase="llm_generate"] { border-left-color: #c084fc; }
+    .reasoning-step[data-phase="llm_adjudicate"] .step-phase,
+    .reasoning-step[data-phase="llm_generate"] .step-phase { color: #c084fc; }
+    .reasoning-step[data-phase="error"] { border-left-color: #f87171; }
+    .reasoning-step[data-phase="error"] .step-phase { color: #f87171; }
+
+    @keyframes step-appear {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .reasoning-panel-footer {
+      padding: 12px 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .reasoning-panel-footer button {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #94a3b8;
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .reasoning-panel-footer button:hover {
+      background: rgba(255,255,255,0.15);
+      color: white;
+    }
+
+    .pulse-loader {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: pulse-dot 1.4s infinite ease-in-out both;
+    }
+
+    .pulse-dot:nth-child(1) { animation-delay: -0.32s; }
+    .pulse-dot:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes pulse-dot {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1.0); }
+    }
+
+    .progress-ring {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto;
+    }
+
+    .progress-ring svg {
+      width: 120px;
+      height: 120px;
+      transform: rotate(-90deg);
+    }
+
+    .progress-ring .center {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+
+    .progress-ring .percent {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .progress-ring .caption {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .phase-matrix {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .phase-card {
+      min-height: 110px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phase-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -30% -40% -30%;
+      height: 70px;
+      background: radial-gradient(circle at center, rgba(76,204,255,0.14), transparent 70%);
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+
+    .phase-card.active::after,
+    .phase-card.done::after { opacity: 1; }
+
+    .phase-card.active {
+      border-color: rgba(76,204,255,0.44);
+      box-shadow: inset 0 0 22px rgba(76,204,255,0.14), 0 0 22px rgba(76,204,255,0.16);
+    }
+
+    .phase-card.done {
+      border-color: rgba(67,243,178,0.28);
+    }
+
+    .phase-card .phase-title {
+      margin-top: 8px;
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.05;
+    }
+
+    .phase-card .phase-meta {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .theatre-panel { min-height: 0; }
+
+    .theatre {
+      flex: 1;
+      position: relative;
+      height: 100%;
+      min-height: 800px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.02);
+      border-radius: 16px;
+      border: 1px solid var(--border-panel);
+    }
+
+    body.focus-mode .shell {
+      grid-template-columns: 1fr;
+    }
+
+    body.focus-mode .left-rail,
+    body.focus-mode .right-rail,
+    body.focus-mode .hero-grid,
+    body.focus-mode .activity-grid,
+    body.focus-mode .main-stage > section:not(.theatre-panel) {
+      display: none;
+    }
+
+    body.focus-mode .main-stage {
+      grid-template-rows: 1fr;
+    }
+
+    body.focus-mode .theatre {
+      height: calc(100vh - 120px);
+      min-height: calc(100vh - 120px);
+    }
+
+    .theatre::before,
+    .theatre::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .theatre::before {
+      background:
+        repeating-linear-gradient(90deg, rgba(0,0,0,0.03) 0 1px, transparent 1px 64px),
+        repeating-linear-gradient(180deg, rgba(0,0,0,0.02) 0 1px, transparent 1px 64px);
+      opacity: 0.8;
+    }
+
+    .theatre::after {
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.05), transparent);
+      transform: translateX(-100%);
+      animation: sweep 8s linear infinite;
+      mix-blend-mode: multiply;
+    }
+
+    @keyframes sweep { to { transform: translateX(100%); } }
+
+    #gridCanvas, #graphSvg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #graphSvg {
+      touch-action: none;
+      cursor: grab;
+    }
+
+    #graphSvg.panning {
+      cursor: grabbing;
+    }
+
+    .minimap-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border: 1px solid rgba(37, 99, 235, 0.4);
+      background: rgba(37, 99, 235, 0.1);
+      transition: all 0.1s ease;
+    }
+
+    .overlay {
+      position: absolute;
+      width: 100%;
+      padding: 16px;
+      border-radius: 20px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-panel);
+      backdrop-filter: blur(28px);
+      box-shadow: var(--shadow);
+      z-index: 100;
+      pointer-events: all;
+    }
+
+    .overlay.top-left { top: 16px; left: 16px; max-width: 320px; }
+    .overlay.top-right { top: 16px; right: 16px; width: 260px; }
+    .overlay.bottom-center {
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      min-width: 420px;
+      max-width: min(80%, 760px);
+    }
+
+    .flash-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      overflow: hidden;
+    }
+
+    .flash-ring {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 120px;
+      height: 120px;
+      margin-left: -60px;
+      margin-top: -60px;
+      border-radius: 50%;
+      border: 1px solid rgba(76,204,255,0.45);
+      opacity: 0;
+      transform: scale(.5);
+    }
+
+    .flash-layer.active .flash-ring {
+      animation: flashRing 1.1s ease-out forwards;
+    }
+
+    .flash-banner {
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(.92);
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(76,204,255,0.22);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 0 40px rgba(76,204,255,0.16);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      opacity: 0;
+      white-space: nowrap;
+    }
+
+    .flash-layer.active .flash-banner {
+      animation: flashBanner 1.2s ease-out forwards;
+    }
+
+    .overlay-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .overlay-stat {
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(76, 204, 255, 0.1);
+    }
+
+    .overlay-stat .value {
+      margin-top: 6px;
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .activity-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 16px;
+    }
+
+    .lane-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 56px;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .lane-label {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .lane-bar {
+      position: relative;
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(76,204,255,0.08);
+      border: 1px solid rgba(76,204,255,0.10);
+    }
+
+    .lane-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, rgba(76,204,255,0.28), rgba(10,233,215,0.85));
+      box-shadow: 0 0 18px rgba(76,204,255,0.25);
+      transition: width .35s ease;
+    }
+
+    .lane-value {
+      text-align: right;
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--ink);
+      font-size: 12px;
+    }
+
+    .list-shell {
+      display: grid;
+      gap: 10px;
+      max-height: 100%;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .list-shell::-webkit-scrollbar,
+    .log-box::-webkit-scrollbar,
+    .disease-list::-webkit-scrollbar { width: 8px; }
+
+    .list-shell::-webkit-scrollbar-thumb,
+    .log-box::-webkit-scrollbar-thumb,
+    .disease-list::-webkit-scrollbar-thumb {
+      background: rgba(76,204,255,0.22);
+      border-radius: 999px;
+    }
+
+    .timeline-card,
+    .intel-card {
+      display: grid;
+      gap: 8px;
+    }
+
+    .timeline-card .meta,
+    .intel-card .meta {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .timeline-card.info,
+    .intel-card.info { border-color: rgba(76,204,255,0.16); }
+    .timeline-card.good,
+    .intel-card.good { border-color: rgba(67,243,178,0.18); }
+    .timeline-card.warn,
+    .intel-card.warn { border-color: rgba(255,179,87,0.20); }
+    .timeline-card.bad,
+    .intel-card.bad { border-color: rgba(255,107,125,0.20); }
+
+    .disease-list {
+      display: grid;
+      gap: 10px;
+      max-height: 360px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .disease-item {
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .disease-item:hover,
+    .disease-item.active {
+      transform: translateY(-1px);
+      border-color: rgba(76,204,255,0.28);
+      box-shadow: 0 0 24px rgba(76,204,255,0.12);
+    }
+
+    .disease-item .name {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .disease-item .meta {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(76,204,255,0.08);
+      border: 1px solid rgba(76,204,255,0.12);
+      font-size: 11px;
+      color: var(--cyan);
+      font-family: "IBM Plex Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+    }
+
+    .detail-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .detail-block h4 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .json-pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0;
+      color: #c4d7e8;
+      font-size: 12px;
+      line-height: 1.5;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .log-box {
+      min-height: 220px;
+      max-height: calc(100vh - 430px);
+      overflow: auto;
+      padding-right: 4px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .log-line {
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #f8fafc;
+      font-size: 12px;
+      line-height: 1.6;
+      font-family: "IBM Plex Mono", monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .log-line.warn { border-color: rgba(255,179,87,0.16); color: #ffd29b; }
+    .log-line.error { border-color: rgba(255,107,125,0.18); color: #ffb0ba; }
+    .log-line.complete { border-color: rgba(67,243,178,0.18); color: #b4fbd9; }
+
+    .muted {
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+    }
+
+    .tiny {
+      font-size: 11px;
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--muted);
+    }
+
+    .switch-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .switch-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--cyan);
+    }
+
+    .top-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .node-link {
+      stroke: var(--muted);
+      stroke-width: 1.2;
+      opacity: 0.25;
+      transition: all 0.3s ease;
+    }
+
+    .node-link.strong {
+      stroke: var(--ink);
+      stroke-width: 2.0;
+      opacity: 0.35;
+    }
+
+    .node-link.locked {
+      stroke-dasharray: 8 6;
+      animation: edgeLock 1.5s linear infinite;
+    }
+
+    .node-link.focused {
+      stroke: var(--warn);
+      stroke-width: 2.1;
+      opacity: 0.8;
+    }
+
+    .node-link.dimmed {
+      opacity: 0.04;
+    }
+
+    .graph-node {
+      cursor: pointer;
+      transition: opacity .22s ease, filter .22s ease;
+    }
+
+    .graph-node rect.core, .graph-node circle.core {
+      stroke-width: 0;
+    }
+
+    .graph-node rect.halo, .graph-node circle.halo {
+      fill: none;
+      stroke-width: 1;
+      opacity: 0.0;
+    }
+
+    .graph-node .label {
+      font-size: 13px;
+      fill: #ffffff;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      font-weight: 700;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .18s ease;
+    }
+
+    .graph-node .subtext {
+      font-size: 10px;
+      fill: rgba(255,255,255,0.7);
+      text-anchor: middle;
+      dominant-baseline: middle;
+      font-family: "IBM Plex Mono", monospace;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .18s ease;
+    }
+
+    .graph-node.key-label .label,
+    .graph-node.selected .label,
+    .graph-node.neighbor .label,
+    .graph-node:hover .label {
+      opacity: 1;
+    }
+
+    .graph-node.selected .subtext,
+    .graph-node.neighbor .subtext,
+    .graph-node:hover .subtext {
+      opacity: 0.92;
+    }
+
+    .graph-node.selected rect.halo, .graph-node.selected circle.halo {
+      fill: var(--cyan);
+      opacity: 0.3;
+      stroke: none;
+    }
+
+    .graph-node.neighbor rect.halo, .graph-node.neighbor circle.halo {
+      fill: var(--warn);
+      opacity: 0.2;
+      stroke: none;
+    }
+
+    .graph-node.dimmed {
+      opacity: 0.2;
+    }
+
+    .highlighted-node rect.core, .highlighted-node circle.core {
+      stroke: var(--cyan) !important;
+      stroke-width: 3px !important;
+      filter: drop-shadow(0 0 12px var(--cyan));
+      animation: node-glow 1.5s infinite alternate;
+    }
+
+    @keyframes node-glow {
+      from { filter: drop-shadow(0 0 8px var(--cyan)); }
+      to { filter: drop-shadow(0 0 20px var(--cyan)); }
+    }
+
+    .highlighted-edge {
+      stroke: var(--cyan) !important;
+      stroke-width: 3px !important;
+      opacity: 1 !important;
+      filter: drop-shadow(0 0 8px var(--cyan));
+      stroke-dasharray: 10;
+      animation: edge-flow 3s linear infinite;
+    }
+
+    @keyframes edge-flow {
+      from { stroke-dashoffset: 40; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    .storyboard {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      bottom: 16px;
+      width: min(320px, 28vw);
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .24s ease;
+    }
+
+    .storyboard.visible {
+      opacity: 1;
+    }
+
+    .story-panel {
+      border-radius: 20px;
+      border: 1px solid var(--border-panel);
+      background: var(--bg-panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(24px);
+      overflow: hidden;
+    }
+
+    .story-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px 14px;
+      border-bottom: 1px solid rgba(76, 204, 255, 0.1);
+      background: rgba(0, 242, 255, 0.03);
+    }
+
+    .story-panel-body {
+      padding: 14px 16px 16px;
+      overflow: auto;
+    }
+
+    .doc-stage {
+      display: grid;
+      gap: 12px;
+    }
+
+    .doc-frame {
+      min-height: 210px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(76,204,255,0.10);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.40)),
+        rgba(225, 245, 255, 0.88);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .doc-frame::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(76,204,255,0.08);
+      pointer-events: none;
+    }
+
+    .doc-blocks {
+      display: grid;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .doc-block {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(76,204,255,0.08);
+      background: rgba(255,255,255,0.82);
+      color: var(--ink);
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+
+    .doc-block.active {
+      border-color: rgba(76,204,255,0.34);
+      box-shadow: 0 0 20px rgba(76,204,255,0.12);
+      transform: translateX(4px);
+    }
+
+    .doc-block.dimmed {
+      opacity: 0.45;
+    }
+
+    .story-summary {
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px dashed rgba(76,204,255,0.12);
+      background: rgba(255,255,255,0.72);
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .flow-stage-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .flow-stage {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(76, 204, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+      display: grid;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .flow-stage.active {
+      border-color: var(--cyan);
+      background: rgba(0, 242, 255, 0.05);
+      box-shadow: 
+        inset 0 0 20px rgba(0, 242, 255, 0.1),
+        0 0 25px rgba(0, 242, 255, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .flow-stage.done {
+      border-color: rgba(67,243,178,0.22);
+    }
+
+    .flow-stage.dimmed {
+      opacity: 0.46;
+    }
+
+    .flow-stage.compact {
+      padding: 10px 12px;
+      gap: 6px;
+    }
+
+    .flow-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .storyboard.visible ~ .overlay.top-left {
+      left: calc(min(320px, 28vw) + 34px);
+      max-width: 280px;
+    }
+
+    .storyboard.visible ~ .overlay.bottom-center {
+      left: calc(50% + 88px);
+      min-width: 360px;
+      max-width: min(52%, 700px);
+    }
+
+    .mission-alert,
+    .focus-lens {
+      position: absolute;
+      z-index: 5;
+      border-radius: 20px;
+      border: 1px solid var(--border-panel);
+      background: var(--bg-panel);
+      backdrop-filter: blur(28px);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mission-alert.visible,
+    .focus-lens.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mission-alert {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border-panel);
+      background: var(--bg-panel);
+      backdrop-filter: blur(24px);
+      box-shadow: var(--shadow);
+      display: none;
+    }
+
+    .mission-alert.visible {
+      display: block;
+    }
+
+    .mission-alert.warn { border-color: rgba(245, 158, 11, 0.5); background: rgba(255, 255, 255, 0.95); }
+    .mission-alert.bad { border-color: rgba(239, 68, 68, 0.5); background: rgba(255, 255, 255, 0.95); }
+    .mission-alert.good { border-color: rgba(16, 185, 129, 0.5); background: rgba(255, 255, 255, 0.95); }
+
+    .focus-lens {
+      width: 320px;
+      max-width: calc(100% - 32px);
+      padding: 14px 16px;
+      transform: translateY(10px);
+    }
+
+    .focus-lens.visible {
+      transform: translateY(0);
+    }
+
+    .focus-lens-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .focus-lens-close {
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
+      border-radius: 12px;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-panel);
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .focus-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+      max-height: 180px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .focus-list-item {
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border-panel);
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    @keyframes nodePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.018); }
+    }
+
+    @keyframes haloBreath {
+      0%, 100% { transform: scale(1); opacity: 0.35; }
+      50% { transform: scale(1.18); opacity: 0.8; }
+    }
+
+    @keyframes nodeBirth {
+      0% { transform: scale(.2); opacity: 0; filter: drop-shadow(0 0 0 rgba(76,204,255,0)); }
+      35% { transform: scale(1.28); opacity: 1; filter: drop-shadow(0 0 16px rgba(76,204,255,0.9)); }
+      100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 0 rgba(76,204,255,0)); }
+    }
+
+    @keyframes haloBirth {
+      0% { transform: scale(.2); opacity: 0; }
+      40% { transform: scale(1.5); opacity: 1; }
+      100% { transform: scale(1); opacity: .55; }
+    }
+
+    @keyframes edgeLock {
+      0% { stroke-dashoffset: 48; opacity: 0; }
+      35% { opacity: 1; }
+      100% { stroke-dashoffset: 0; opacity: 1; }
+    }
+
+    @keyframes flashRing {
+      0% { transform: scale(.4); opacity: 0; }
+      30% { opacity: .95; }
+      100% { transform: scale(9); opacity: 0; }
+    }
+
+    @keyframes flashBanner {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(.82); }
+      20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      70% { opacity: 1; }
+      100% { opacity: 0; transform: translate(-50%, -58%) scale(1.06); }
+    }
+
+    .tone-info { color: var(--cyan); }
+    .tone-good { color: var(--good); }
+    .tone-warn { color: var(--warn); }
+    .tone-bad { color: var(--bad); }
+
+    .empty-state {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(7, 20, 34, 0.56);
+      border: 1px dashed rgba(76,204,255,0.16);
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1560px) {
+      .shell {
+        grid-template-columns: 290px 1fr 320px;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr 340px;
+      }
+    }
+
+    @media (max-width: 1320px) {
+      body { overflow: auto; }
+      .shell {
+        grid-template-columns: 1fr;
+      }
+      .main-stage {
+        order: 1;
+      }
+      .left-rail {
+        order: 2;
+      }
+      .right-rail {
+        order: 3;
+      }
+      .hero-grid,
+      .activity-grid,
+      .phase-matrix,
+      .btn-row {
+        grid-template-columns: 1fr;
+      }
+      .theatre {
+        height: 560px;
+      }
+      .disease-list,
+      .log-box {
+        max-height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="left-rail">
+      <section class="panel hero-banner">
+        <div>
+          <div class="eyebrow" style="color:var(--cyan);font-weight:700;letter-spacing:0.1em;font-size:12px;text-transform:uppercase;">Live Mission Narrative</div>
+          <h1 id="heroTitle" style="font-size:26px;font-weight:700;line-height:1.1;margin-top:8px;">Text-to-Graph Command</h1>
+          <p class="sub" id="heroSub" style="margin-top:8px;">Trình diễn quá trình bóc tách và khóa graph vào Neo4j bằng dữ liệu thật.</p>
+        </div>
+        <div class="ticker" id="ticker" style="margin-top:16px;padding:14px;border-radius:12px;background:#f1f5f9;border:1px solid #e2e8f0;color:var(--muted);font-size:13px;line-height:1.5;">Đang chờ nhiệm vụ mới. Hãy chọn disease và PDF để khai hỏa run.</div>
+        <div class="top-links" style="margin-top:16px;display:flex;gap:8px;">
+          <a class="btn btn-secondary" href="/dashboard" style="flex:1;text-align:center;">Dashboard</a>
+          <a class="btn btn-secondary" href="/ontology-v2/inspector" style="flex:1;text-align:center;">Inspector</a>
+        </div>
+        <div class="theme-switcher-wrapper" style="margin-top:16px;display:flex;flex-direction:column;gap:4px;">
+          <label for="themeSwitcher" style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;">Aesthetic Theme</label>
+          <select id="themeSwitcher" style="padding:10px 14px;border-radius:12px;border:1px solid var(--border-panel);background:var(--bg-panel);color:var(--ink);font-family:inherit;font-size:14px;font-weight:600;outline:none;cursor:pointer;width:100%;">
+            <option value="knowledge-forge">Knowledge Forge (Default)</option>
+            <option value="deep-space">Deep Space (Dark Mode)</option>
+            <option value="terra-cotta">Terra Cotta (Earth Tones)</option>
+            <option value="vibrant">Pastel Vibrant (Energy)</option>
+            <option value="monochrome">Precision Monochrome</option>
+            <option value="neon-grid">Neon Night Grid</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="panel hero-stats" style="display:grid;grid-template-columns:90px 1fr;gap:16px;align-items:center;padding:18px;">
+        <div class="progress-ring" style="position:relative;width:90px;height:90px;margin:0 auto;">
+          <svg viewBox="0 0 120 120" style="width:90px;height:90px;transform:rotate(-90deg);">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(76,204,255,0.10)" stroke-width="8"></circle>
+            <circle id="progressCircle" cx="60" cy="60" r="50" fill="none" stroke="url(#ringGradient)" stroke-width="8" stroke-linecap="round" stroke-dasharray="314.159" stroke-dashoffset="314.159"></circle>
+            <defs>
+              <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--cyan)"></stop>
+                <stop offset="100%" stop-color="var(--cyan-2)"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="center" style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;">
+            <div>
+              <div class="percent" id="progressPercent" style="font-size:22px;font-weight:700;">0%</div>
+            </div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="detail-block">
+            <div class="label" style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;">Current Phase</div>
+            <div style="font-size:22px;font-weight:700;margin-top:4px;" id="currentPhaseTitle">Mission Prep</div>
+            <div class="sub" style="margin-top:4px;" id="currentPhaseMeta">Chưa có run.</div>
+          </div>
+        </div>
+        <div class="chip-row" id="heroChipRow" style="grid-column:1 / -1;margin-top:4px;"></div>
+      </section>
+
+      <div class="mission-alert" id="missionAlert">
+        <div class="eyebrow" style="color:inherit;opacity:0.8;">Mission Alert</div>
+        <div style="font-size:16px;font-weight:700;margin-top:4px;" id="missionAlertTitle">No active alert</div>
+        <div class="sub" style="margin-top:4px;color:inherit;" id="missionAlertBody">Cảnh báo runtime quan trọng.</div>
+      </div>
+
+      <section class="panel collapsible-panel collapsed">
+        <div class="panel-head toggleable">
+          <div>
+            <h3>Theatre Overlays</h3>
+            <div class="sub">Quản lý góc nhìn và các telemetry HUD.</div>
+          </div>
+        </div>
+        <div class="panel-body stack">
+          <div class="panel-actions" style="display:flex;flex-wrap:wrap;gap:6px;">
+            <button class="btn-ghost" id="focusModeBtn" type="button">Focus</button>
+            <button class="btn-ghost" id="fullscreenBtn" type="button">FS</button>
+            <button class="btn-ghost" id="cameraPresetFull" type="button">Full</button>
+            <button class="btn-ghost" id="cameraPresetCore" type="button">Core</button>
+            <button class="btn-ghost" id="cameraPresetChunks" type="button">Chunks</button>
+            <button class="btn-ghost" id="cameraPresetAssertions" type="button">Asserts</button>
+            <button class="btn-ghost" id="cameraPresetServices" type="button">Svcs</button>
+            <button class="btn-ghost" id="autoTourBtn" type="button">Tour</button>
+            <span class="status-chip" id="theatreModeChip" style="margin-left:auto;">SYNTHETIC</span>
+          </div>
+
+          <div class="overlay">
+            <div class="eyebrow">Mission Focus</div>
+            <div style="font-size:18px;font-weight:700;margin-top:4px;" id="overlayDiseaseName">Chưa nạp disease</div>
+            <div class="sub" style="margin-top:4px;" id="overlayNamespace">Namespace chưa xác định.</div>
+            <div class="overlay-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
+              <div class="overlay-stat"><div class="label" style="font-size:11px;color:var(--muted);text-transform:uppercase;">Nodes</div><div class="value" id="overlayNodeCount" style="font-size:20px;font-weight:700;color:var(--ink);">0</div></div>
+              <div class="overlay-stat"><div class="label" style="font-size:11px;color:var(--muted);text-transform:uppercase;">Edges</div><div class="value" id="overlayEdgeCount" style="font-size:20px;font-weight:700;color:var(--ink);">0</div></div>
+              <div class="overlay-stat"><div class="label" style="font-size:11px;color:var(--muted);text-transform:uppercase;">Signs</div><div class="value" id="overlaySignCount" style="font-size:20px;font-weight:700;color:var(--ink);">0</div></div>
+              <div class="overlay-stat"><div class="label" style="font-size:11px;color:var(--muted);text-transform:uppercase;">Services</div><div class="value" id="overlayServiceCount" style="font-size:20px;font-weight:700;color:var(--ink);">0</div></div>
+            </div>
+          </div>
+
+          <div class="overlay">
+            <div class="eyebrow">Theatre State</div>
+            <div style="font-size:16px;font-weight:700;margin-top:4px;" id="overlayModeTitle">Synthetic telemetry</div>
+            <div class="sub" style="margin-top:4px;" id="overlayModeSub">Scene đẩy bằng phase, log.</div>
+            <div class="chip-row" style="margin-top:8px;">
+              <span class="status-chip status-idle" id="alarmStateChip">IDLE</span>
+              <span class="chip" id="cameraStateChip">CAM FULL</span>
+              <span class="chip" id="tourStateChip">TOUR OFF</span>
+            </div>
+            <div class="sub" style="margin-top:8px;" id="alarmStateSub">Hệ đang ổn định.</div>
+          </div>
+
+          <div class="overlay">
+            <div class="eyebrow">Latest Signal</div>
+            <div style="font-size:16px;font-weight:700;margin-top:4px;" id="latestSignalTitle">Awaiting ignition</div>
+            <div class="sub" style="margin-top:4px;" id="latestSignalBody">Đang chờ tín hiệu.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel collapsible-panel collapsed" id="storyboardPanel">
+        <div class="panel-head toggleable">
+          <div>
+            <h3>Radar & Pipelines</h3>
+            <div class="sub">Tài liệu gốc và tiến trình Flow.</div>
+          </div>
+        </div>
+        <div class="panel-body stack">
+          <div class="storyboard" id="storyboard" style="display:flex;flex-direction:column;gap:16px;">
+            <section class="story-panel" style="background:rgba(7,20,34,0.65);border:1px solid rgba(76,204,255,0.1);border-radius:16px;padding:16px;">
+              <div class="story-panel-head" style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+                <div>
+                  <div class="eyebrow">Document Radar</div>
+                  <div style="font-size:16px;font-weight:700;margin-top:4px;" id="storyDocTitle">PDF source lane</div>
+                </div>
+                <span class="chip" id="storyDocMeta">SCAN</span>
+              </div>
+              <div class="story-panel-body">
+                <div class="doc-stage">
+                  <div class="doc-frame" style="background:rgba(255,255,255,0.02);border:1px dashed rgba(76,204,255,0.15);border-radius:12px;padding:12px;margin-bottom:12px;">
+                    <div class="doc-blocks" id="storyDocBlocks"></div>
+                  </div>
+                  <div class="sub" id="storyDocNarrative">Khung trái giữ vai trò tài liệu gốc.</div>
+                </div>
+              </div>
+            </section>
+
+            <section class="story-panel" style="background:rgba(7,20,34,0.65);border:1px solid rgba(76,204,255,0.1);border-radius:16px;padding:16px;">
+              <div class="story-panel-head" style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+                <div>
+                  <div class="eyebrow">Transformation Rail</div>
+                  <div style="font-size:16px;font-weight:700;margin-top:4px;" id="storyFlowTitle">Data flow transformation</div>
+                </div>
+                <span class="chip" id="storyFlowMeta">PHASED</span>
+              </div>
+              <div class="story-panel-body">
+                <div class="flow-stage-list" id="storyFlowStages" style="display:flex;flex-direction:column;gap:8px;"></div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h3>Mission Input</h3>
+            <div class="sub">Chọn namespace, PDF, disease và khai hỏa ingest.</div>
+          </div>
+          <span class="status-chip" id="leftHealthChip">BOOTSTRAP</span>
+        </div>
+        <div class="panel-body controls">
+          <div>
+            <label for="namespaceSelect">Namespace</label>
+            <select id="namespaceSelect"></select>
+          </div>
+          <div>
+            <label for="diseaseInput">Disease Name</label>
+            <input id="diseaseInput" type="text" placeholder="Ví dụ: Viêm phổi cộng đồng" />
+          </div>
+          <div>
+            <label for="pdfSelect">Existing PDF</label>
+            <select id="pdfSelect"></select>
+          </div>
+          <div>
+            <label for="pdfUpload">Upload PDF mới</label>
+            <input id="pdfUpload" type="file" accept=".pdf" />
+          </div>
+          <div class="switch-row">
+            <input id="skipFirstPage" type="checkbox" />
+            <label for="skipFirstPage" style="margin:0;">Skip first page</label>
+          </div>
+          <div class="btn-row" style="margin-top: 16px;">
+            <button class="btn-secondary" id="refreshBootstrapBtn" type="button">Refresh</button>
+            <button class="btn-secondary" id="loadLatestMatchBtn" type="button">Latest Match</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h3>Run Status</h3>
+            <div class="sub">Theo dõi mission hiện tại, phase và namespace đang vận hành.</div>
+          </div>
+        </div>
+        <div class="panel-body stack">
+          <div class="status-card">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+              <div>
+                <div class="eyebrow">Current Mission</div>
+                <h3 id="statusTitle">Idle</h3>
+              </div>
+              <span class="status-chip" id="runStatusChip">READY</span>
+            </div>
+            <div class="sub" style="margin-top:10px;" id="statusSub">Chưa có run nào đang hoạt động.</div>
+          </div>
+          <div class="mini-grid" id="namespaceMetricGrid"></div>
+        </div>
+      </section>
+
+      <button class="btn-primary" id="runIngestBtn" style="margin-top: 24px; padding: 20px 24px; font-size: 18px; z-index: 10; box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4); border-radius: 18px; width: 100%; flex-shrink: 0;">
+        <svg fill="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px;"><path d="M8 5v14l11-7z"/></svg>
+        Ignite Run Core
+      </button>
+    </aside>
+
+    <main class="main-stage">
+
+      <section class="panel collapsible-panel collapsed" id="phaseLatticePanel">
+        <div class="panel-head toggleable">
+          <div>
+            <h3>Phase Lattice</h3>
+            <div class="sub">Sáu pha đang được chiếu liên tục: từ advisory đến graph core.</div>
+          </div>
+        </div>
+        <div class="panel-body" id="intelPanelBody">
+          <div class="phase-matrix" id="phaseMatrix"></div>
+        </div>
+      </section>
+
+      <section class="theatre-panel">
+        <div class="theatre" id="theatre">
+          <div class="minimap-container">
+            <canvas id="minimapCanvas"></canvas>
+            <div id="minimapView" class="minimap-overlay"></div>
+          </div>
+          <div class="flash-layer" id="flashLayer">
+            <div class="flash-ring"></div>
+            <div class="flash-banner" id="flashBanner">SYSTEM EVENT</div>
+          </div>
+          <svg class="graph-svg" id="graphSvg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet"></svg>
+
+          <div class="focus-lens" id="focusLens">
+            <div class="focus-lens-head">
+              <div>
+                <div class="eyebrow">Local Expansion</div>
+                <div style="font-size:18px;font-weight:700;margin-top:6px;" id="focusLensTitle">Cluster focus</div>
+              </div>
+              <button class="focus-lens-close" id="focusLensClose" type="button">×</button>
+            </div>
+            <div class="sub" style="margin-top:8px;" id="focusLensMeta">Bấm vào một node để bung cụm liên quan ngay tại chỗ.</div>
+            <div class="chip-row" id="focusLensChips"></div>
+            <div class="focus-list" id="focusLensList"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="right-rail">
+      <section class="panel" style="min-height:0;">
+        <div class="panel-head">
+          <div>
+            <h3>Disease Registry</h3>
+            <div class="sub">Các disease hiện có trong namespace để nạp graph thật vào theatre.</div>
+          </div>
+        </div>
+        <div class="panel-body stack" style="min-height:0;">
+          <div>
+            <label for="diseaseSearch">Filter disease</label>
+            <input id="diseaseSearch" type="text" placeholder="Tìm theo tên disease...">
+          </div>
+          <div class="disease-list" id="diseaseList"></div>
+        </div>
+      </section>
+
+      <section class="panel collapsible-panel collapsed" id="lanePanel">
+        <div class="panel-head toggleable">
+          <div>
+            <h3>Extraction Lanes</h3>
+            <div class="sub">Mỗi lane là một dòng tín hiệu của quá trình bóc text thành ontology graph.</div>
+          </div>
+        </div>
+        <div class="panel-body" id="laneContainer"></div>
+      </section>
+
+      <section class="panel collapsible-panel collapsed" id="timelinePanel">
+        <div class="panel-head toggleable">
+          <div>
+            <h3>Mission Timeline</h3>
+            <div class="sub">Tóm tắt những nhịp ngoặt chính của run dưới dạng log chiến thuật.</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="list-shell" id="timelineList"></div>
+        </div>
+      </section>
+      <section class="panel collapsible-panel collapsed" id="intelPanel">
+        <div class="panel-head toggleable">
+          <div>
+            <h3>Operational Interpretation</h3>
+            <div class="sub">Diễn giải những gì hệ đang làm, dựa trên log và graph thật chứ không phải shell khô.</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="list-shell" id="intelList"></div>
+        </div>
+      </section>
+
+      <section class="panel collapsible-panel collapsed" id="nodeInspectorPanel">
+        <div class="panel-head toggleable">
+          <div>
+            <h3>Selected Node</h3>
+            <div class="sub">Bấm vào node trên theatre để soi ngay thuộc tính và provenance.</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="detail-grid" id="nodeDetail"></div>
+        </div>
+      </section>
+
+      <section class="panel collapsible-panel collapsed" id="experienceAdvicePanel">
+        <div class="panel-head toggleable">
+          <div>
+            <h3>Experience Advisory</h3>
+            <div class="sub">Lesson cũ nào được truy hồi và áp lên run hiện tại.</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="experiencePanel" class="empty-state">Chưa có advisory. Chạy ingest mới để xem episodic, semantic và procedural memory được kéo lên như thế nào.</div>
+        </div>
+      </section>
+
+      <section class="panel collapsible-panel collapsed" style="min-height:0;" id="logFeedPanel">
+        <div class="panel-head toggleable">
+          <div>
+            <h3>Live Signal Feed</h3>
+            <div class="sub">Log runtime, phase shifts, complete/error notifications và các mảnh tín hiệu đang chảy qua pipeline.</div>
+          </div>
+        </div>
+        <div class="panel-body" style="min-height:0;">
+          <div class="log-box" id="logBox"></div>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <script>
+    const PHASES = [
+      { num: 0, title: "Mission Prep", meta: "Input, namespace, experience advisory" },
+      { num: 1, title: "Document Analysis", meta: "Text extraction, section framing" },
+      { num: 2, title: "Ontology Extraction", meta: "Signs, services, observations" },
+      { num: 3, title: "Canonical Resolution", meta: "Raw mention -> concept/service" },
+      { num: 4, title: "Assertion & Summary", meta: "Clinical rules, summary, disease memory" },
+      { num: 5, title: "Neo4j Forge", meta: "Index, ingest, graph sealing" },
+    ];
+
+    const TYPE_STYLE = {
+      disease: { color: "var(--node-core)", halo: "var(--node-core-halo)" },
+      synthetic_core: { color: "var(--node-core)", halo: "var(--node-core-halo)" },
+      assertion: { color: "var(--node-assert)", halo: "var(--node-assert-halo)" },
+      summary: { color: "var(--node-assert)", halo: "var(--node-assert-halo)" },
+      chunk: { color: "var(--node-chunk)", halo: "var(--node-chunk-halo)" },
+      synthetic_doc: { color: "var(--node-chunk)", halo: "var(--node-chunk-halo)" },
+      sign_mention: { color: "var(--node-sign)", halo: "var(--node-sign-halo)" },
+      sign_concept: { color: "var(--node-sign)", halo: "var(--node-sign-halo)" },
+      service_mention: { color: "var(--node-service)", halo: "var(--node-service-halo)" },
+      service: { color: "var(--node-service)", halo: "var(--node-service-halo)" },
+      service_family: { color: "var(--node-service)", halo: "var(--node-service-halo)" },
+      observation_mention: { color: "var(--node-obs)", halo: "var(--node-obs-halo)" },
+      synthetic_output: { color: "var(--node-core)", halo: "var(--node-core-halo)" },
+      default: { color: "var(--node-default)", halo: "var(--node-default-halo)" },
+    };
+
+    const PHASE_MINIMUMS = {
+      0: { chunks: 0, signs: 0, services: 0, observations: 0, assertions: 0, summaries: 0 },
+      1: { chunks: 3, signs: 0, services: 0, observations: 0, assertions: 0, summaries: 0 },
+      2: { chunks: 4, signs: 2, services: 2, observations: 1, assertions: 0, summaries: 0 },
+      3: { chunks: 5, signs: 4, services: 4, observations: 2, assertions: 0, summaries: 0 },
+      4: { chunks: 5, signs: 5, services: 5, observations: 3, assertions: 2, summaries: 1 },
+      5: { chunks: 5, signs: 5, services: 5, observations: 3, assertions: 3, summaries: 1 },
+    };
+
+    const SCENE_VIEWBOX = [0, 0, 1000, 620];
+
+    const CAMERA_PRESETS = {
+      full: { label: "FULL", flash: "CAM FULL", tone: "info", types: null },
+      core: { label: "CORE", flash: "CAM CORE", tone: "good", types: ["disease", "summary", "synthetic_core", "synthetic_output"] },
+      chunks: { label: "CHUNKS", flash: "CAM CHUNKS", tone: "info", types: ["chunk", "sign_mention", "sign_concept", "observation_mention", "synthetic_doc"] },
+      assertions: { label: "ASSERT", flash: "CAM ASSERT", tone: "warn", types: ["assertion", "summary", "disease"] },
+      services: { label: "SERVICE", flash: "CAM SERVICE", tone: "good", types: ["service_mention", "service", "service_family", "synthetic_output"] },
+    };
+
+    const AUTO_TOUR_SEQUENCE = ["core", "chunks", "assertions", "services", "full"];
+
+    const CLINICAL_SCENARIOS = {
+      "2": {
+        "title": "Sự thật bất ngờ đằng sau cơn đau đầu dữ dội",
+        "disease": "Nhọt ống tai ngoài (Bệnh tai ngoài)",
+        "services": [
+          { "service": "Nội soi tai mũi họng" },
+          { "service": "CT Scan xương thái dương không cản quang" },
+          { "service": "Đo thính lực đơn âm" },
+          { "service": "Tổng phân tích tế bào máu (CBC)" }
+        ],
+        "context": "BN Nữ 28 tuổi.\nĐau tai phải dữ dội, đập theo nhịp mạch và lan rộng ra khắp nửa đầu bên phải [1].\nKhông thể nhai hay há miệng ngáp do đau [1].\nTai phải ù, nghe kém tiếng trầm, bưng bít hoàn toàn [1].\nVùng da phía sau vành tai sưng tấy đỏ [1].\nMệt mỏi do mất ngủ [1].\nTiền sử: Thói quen dùng dụng cụ ngoáy tai bằng sắt cứng cạo ráy tai gây xước da ống tai [1]."
+      },
+      "3": {
+        "title": "Cơn chóng mặt kịch phát và hành trình tìm dấu vết căn bệnh ẩn nấp",
+        "disease": "Bệnh Ménière",
+        "services": [
+          { "service": "Đo thính lực đồ đơn âm" },
+          { "service": "Điện động nhãn đồ (ENG)" },
+          { "service": "Điện thính giác thân não (ABR)" },
+          { "service": "Chụp MRI sọ não - xương đá có tiêm thuốc" }
+        ],
+        "context": "BN Nữ 45 tuổi.\nChóng mặt kịch phát quay cuồng, kéo dài hơn 2 giờ đồng hồ.\nNhắm nghiền hai mắt, buồn nôn dữ dội và không thể tự đi lại.\nTai phải ù đặc như có tiếng ve kêu (ù tai tiếng trầm).\nSức nghe giảm hẳn và có cảm giác bưng bít đầy trong tai.\nTiền sử: Thỉnh thoảng có cơn chóng mặt nhẹ từ vài tháng trước."
+      },
+      "4": {
+        "title": "Cơn sốt cao đột ngột và những chấm mủ trắng đáng ngờ",
+        "disease": "Viêm mũi họng cấp tính",
+        "services": [
+          { "service": "Nội soi tai mũi họng" },
+          { "service": "Tổng phân tích tế bào máu (CBC)" },
+          { "service": "Phết dịch họng nuôi cấy vi khuẩn làm kháng sinh đồ" },
+          { "service": "Phản ứng ASLO" }
+        ],
+        "context": "BN Nam 12 tuổi.\nSốt cao đột ngột 39.5 độ C, kèm theo ớn lạnh và mệt mỏi.\nĐau rát họng dữ dội, đặc biệt nuốt đau nhói lan lên tai.\nHo khan, ngạt mũi và chảy nước mũi nhầy đục.\nChán ăn, mệt mỏi rã rời.\nTiền sử: Đi dã ngoại gặp thời tiết lạnh đột ngột 2 ngày trước."
+      },
+      "5": {
+        "title": "Lời cảnh báo từ những vết loét họng bí ẩn",
+        "disease": "Viêm mũi họng cấp tính (Viêm họng do bệnh máu)",
+        "services": [
+          { "service": "Nội soi tai mũi họng" },
+          { "service": "Phết dịch họng nuôi cấy vi khuẩn" },
+          { "service": "Tổng phân tích tế bào máu ngoại vi (CBC)" },
+          { "service": "Huyết tủy đồ (Chọc hút tủy xương)" }
+        ],
+        "context": "BN Nữ 18 tuổi.\nSốt cao 39.5 độ C, rét run, mệt mỏi suy kiệt nhanh chóng.\nĐau họng dữ dội, nuốt đau nhói lên tai, hoàn toàn không ăn uống được.\nHơi thở rất hôi, thỉnh thoảng khạc ra chút máu đen.\nTiền sử: Khỏe mạnh, mới thi đợt thi đại học căng thẳng, tự mua thuốc cảm cúm uống 3 ngày không đỡ."
+      },
+      "6": {
+        "title": "Bí ẩn đằng sau lớp giả mạc họng và sự mệt mỏi cùng cực",
+        "disease": "Viêm họng cấp tính (Viêm họng do bệnh tăng bạch cầu đơn nhân)",
+        "services": [
+          { "service": "Nội soi tai mũi họng" },
+          { "service": "Phết dịch họng soi tươi và nuôi cấy" },
+          { "service": "Phản ứng ASLO" },
+          { "service": "Tổng phân tích tế bào máu ngoại vi (CBC)" },
+          { "service": "Xét nghiệm Monospot (Huyết thanh học EBV)" }
+        ],
+        "context": "BN Nữ 22 tuổi.\nSốt cao 39.5 độ C kéo dài, kèm theo rét run và mệt mỏi rã rời, suy nhược rõ rệt.\nĐau họng dữ dội, đau nhói lên tai khi nuốt, hầu như không thể ăn uống.\nCổ sưng to, có nhiều hạch nổi hai bên góc hàm và dọc cơ ức đòn chũm.\nTiền sử: Sinh viên đại học, sống ở ký túc xá, tự uống kháng sinh Amoxicillin 4 ngày ở nhà nhưng không hạ sốt mà còn nổi thêm ban đỏ rải rác toàn thân."
+      },
+      "7": {
+        "title": "Cơn đau đầu 'lai vãng' và bí ẩn từ chiếc răng hàm",
+        "disease": "Viêm mũi xoang cấp tính",
+        "services": [
+          { "service": "Nội soi tai mũi họng" },
+          { "service": "Chụp cắt lớp vi tính (CT Scanner) sọ mặt" },
+          { "service": "Nuôi cấy vi khuẩn và kháng sinh đồ dịch tỵ hầu" }
+        ],
+        "context": "BN Nữ 35 tuổi.\nĐau nhức dữ dội vùng mặt bên trái, cơn đau nhói từng cơn lan lên trán và lan xuống hàm trên bên trái.\nCó cảm giác căng nặng vùng trán và mỏi mắt trái, mi mắt trái hơi nề nhẹ.\nNgạt mũi bên trái nhưng không thấy chảy nước mũi rõ rệt đợt này.\nTiền sử: Cách đây 2 tuần bị 'cảm cúm' với triệu chứng sổ mũi, ho, hắt hơi. Đã tự mua thuốc uống thấy đỡ, nhưng 3 ngày nay đột nhiên đau nhức mặt và răng dữ dội. Đã đi khám Nha khoa không phát hiện sâu răng."
+      },
+      "9": {
+        "title": "Cuộc rượt đuổi căn bệnh ẩn sau mác 'cảm cúm thông thường'",
+        "disease": "Viêm mũi họng cấp tính",
+        "services": [
+          { "service": "Nội soi tai mũi họng" },
+          { "service": "Tổng phân tích tế bào máu ngoại vi (CBC)" },
+          { "service": "Phết dịch họng nuôi cấy vi khuẩn và làm kháng sinh đồ" },
+          { "service": "Phản ứng ASLO" }
+        ],
+        "context": "BN Nam 26 tuổi.\nKhởi phát cách đây 5 ngày với triệu chứng hắt hơi, ngạt mũi, chảy nước mũi trong và sốt nhẹ (giống hệt cảm cúm).\nĐột ngột hôm nay sốt cao 39.5 độ C, ớn lạnh, người mệt mỏi rã rời, chán ăn.\nĐau rát họng dữ dội, nuốt đau nhói lan lên tận tai (kể cả khi nuốt chất lỏng), ho có đờm nhầy đục.\nTiền sử: Là nhân viên văn phòng, thời tiết đang chuyển lạnh."
+      },
+      "10": {
+        "title": "Cú 'Hat-trick' tử thần và bức màn sương mù của hệ miễn dịch",
+        "disease": "Hội chứng đa bệnh lý Tai Mũi Họng nguy kịch",
+        "services": [
+          { "service": "Chụp MRI và CT Scan sọ mặt - cổ có cản quang" },
+          { "service": "Nội soi thanh quản trực tiếp + Sinh thiết mô bệnh học" },
+          { "service": "Phẫu thuật nội soi xoang sinh thiết + Nuôi cấy định danh vi nấm" },
+          { "service": "Khám tai dưới kính hiển vi + Nghiệm pháp rò mê nhĩ" },
+          { "service": "Mở khí quản cấp cứu" }
+        ],
+        "context": "BN Nam 58 tuổi.\nHỌNG-THANH QUẢN: Khàn tiếng đặc, nuốt đau dữ dội chói lên tai, ho từng cơn rũ rượi khạc ra đờm lẫn máu. Mới xuất hiện tình trạng thở rít và rút lõm lồng ngực.\nMŨI-XOANG: Đau nhức vùng đỉnh chẩm và hốc mắt phải dữ dội, lồi mắt phải nhẹ, sụp mi, chảy mũi lờ lờ máu cá.\nTAI: Tai trái chảy mủ đặc thối khẳn lổn nhổn trắng. Đột ngột chóng mặt quay cuồng, đi loạng choạng, kèm theo méo mặt (liệt nửa mặt bên trái).\nTOÀN THÂN: Sốt vã mồ hôi về chiều, gầy sút 8kg trong 1 tháng, suy kiệt nặng.\nTiền sử: Nghiện thuốc lá nặng (40 bao/năm), đái tháo đường type 2 bỏ trị nhiều năm."
+      },
+      "11": {
+        "title": "Kẻ mạo danh hoàn hảo và cạm bẫy từ vùng đất ướt",
+        "disease": "Viêm phổi do Burkholderia pseudomallei (Melioidosis)",
+        "services": [
+          { "service": "AFB đờm và PCR (Gen Xpert) lao" },
+          { "service": "Chụp cắt lớp vi tính (CT Scan) lồng ngực" },
+          { "service": "Nuôi cấy đờm tìm vi khuẩn và kháng sinh đồ" },
+          { "service": "Truyền tĩnh mạch Ceftazidim 2g mỗi 6 giờ" }
+        ],
+        "context": "BN Nam 58 tuổi.\nHo khạc đờm mủ lẫn máu, kèm theo sút cân (5kg/2 tháng) và hay ra mồ hôi ban đêm.\nSốt nhẹ về chiều, đau tức ngực âm ỉ.\nBệnh nhân làm nghề nông, thường xuyên tiếp xúc with đất bùn."
+      },
+      "12": {
+        "title": "Test 12: Bộ ba tử thần (Nấm + Whitmore + Áp xe cổ)",
+        "disease": "Hội chứng đa bệnh lý nhiễm trùng trên cơ địa đái tháo đường",
+        "services": [
+          { "service": "AFB đờm và PCR (Gen Xpert) lao" },
+          { "service": "Chụp cắt lớp vi tính (CT Scan) sọ mặt - cổ có tiêm thuốc cản quang" },
+          { "service": "Phẫu thuật nội soi xoang sinh thiết và cấy nấm" },
+          { "service": "Nuôi cấy đờm tìm vi khuẩn và kháng sinh đồ" },
+          { "service": "Định lượng Procalcitonin (PCT)" }
+        ],
+        "context": "BN Nam 62 tuổi.\nHo khạc đờm mủ lẫn máu, sốt về chiều, gầy sút 6kg trong 1 tháng rưỡi nay, hay vã mồ hôi trộm.\nĐau nhức dữ dội vùng mặt phải, chảy mũi lờ lờ máu cá.\nCổ bên phải tự nhiên sưng to một cục, sờ vào nóng rát, nuốt rất đau và nghẹn.\nLàm nghề nông (tiếp xúc bùn đất thường xuyên), có tiền sử đái tháo đường và bệnh phổi tắc nghẽn mạn tính (COPD)."
+      }
+    };
+
+    const els = {
+      namespaceSelect: document.getElementById("namespaceSelect"),
+      diseaseInput: document.getElementById("diseaseInput"),
+      pdfSelect: document.getElementById("pdfSelect"),
+      pdfUpload: document.getElementById("pdfUpload"),
+      skipFirstPage: document.getElementById("skipFirstPage"),
+      refreshBootstrapBtn: document.getElementById("refreshBootstrapBtn"),
+      loadLatestMatchBtn: document.getElementById("loadLatestMatchBtn"),
+      runIngestBtn: document.getElementById("runIngestBtn"),
+      diseaseSearch: document.getElementById("diseaseSearch"),
+      diseaseList: document.getElementById("diseaseList"),
+      namespaceMetricGrid: document.getElementById("namespaceMetricGrid"),
+      statusTitle: document.getElementById("statusTitle"),
+      statusSub: document.getElementById("statusSub"),
+      runStatusChip: document.getElementById("runStatusChip"),
+      leftHealthChip: document.getElementById("leftHealthChip"),
+      heroTitle: document.getElementById("heroTitle"),
+      heroSub: document.getElementById("heroSub"),
+      ticker: document.getElementById("ticker"),
+      progressCircle: document.getElementById("progressCircle"),
+      progressPercent: document.getElementById("progressPercent"),
+      currentPhaseTitle: document.getElementById("currentPhaseTitle"),
+      currentPhaseMeta: document.getElementById("currentPhaseMeta"),
+      heroChipRow: document.getElementById("heroChipRow"),
+      phaseMatrix: document.getElementById("phaseMatrix"),
+      focusModeBtn: document.getElementById("focusModeBtn"),
+      fullscreenBtn: document.getElementById("fullscreenBtn"),
+      cameraPresetFull: document.getElementById("cameraPresetFull"),
+      cameraPresetCore: document.getElementById("cameraPresetCore"),
+      cameraPresetChunks: document.getElementById("cameraPresetChunks"),
+      cameraPresetAssertions: document.getElementById("cameraPresetAssertions"),
+      cameraPresetServices: document.getElementById("cameraPresetServices"),
+      autoTourBtn: document.getElementById("autoTourBtn"),
+      theatreModeChip: document.getElementById("theatreModeChip"),
+      flashLayer: document.getElementById("flashLayer"),
+      flashBanner: document.getElementById("flashBanner"),
+      storyboard: document.getElementById("storyboard"),
+      storyDocTitle: document.getElementById("storyDocTitle"),
+      storyDocMeta: document.getElementById("storyDocMeta"),
+      storyDocBlocks: document.getElementById("storyDocBlocks"),
+      storyDocNarrative: document.getElementById("storyDocNarrative"),
+      storyFlowTitle: document.getElementById("storyFlowTitle"),
+      storyFlowMeta: document.getElementById("storyFlowMeta"),
+      storyFlowStages: document.getElementById("storyFlowStages"),
+      missionAlert: document.getElementById("missionAlert"),
+      missionAlertTitle: document.getElementById("missionAlertTitle"),
+      missionAlertBody: document.getElementById("missionAlertBody"),
+      overlayDiseaseName: document.getElementById("overlayDiseaseName"),
+      overlayNamespace: document.getElementById("overlayNamespace"),
+      overlayNodeCount: document.getElementById("overlayNodeCount"),
+      overlayEdgeCount: document.getElementById("overlayEdgeCount"),
+      overlaySignCount: document.getElementById("overlaySignCount"),
+      overlayServiceCount: document.getElementById("overlayServiceCount"),
+      overlayModeTitle: document.getElementById("overlayModeTitle"),
+      overlayModeSub: document.getElementById("overlayModeSub"),
+      alarmStateChip: document.getElementById("alarmStateChip"),
+      cameraStateChip: document.getElementById("cameraStateChip"),
+      tourStateChip: document.getElementById("tourStateChip"),
+      alarmStateSub: document.getElementById("alarmStateSub"),
+      latestSignalTitle: document.getElementById("latestSignalTitle"),
+      latestSignalBody: document.getElementById("latestSignalBody"),
+      focusLens: document.getElementById("focusLens"),
+      focusLensTitle: document.getElementById("focusLensTitle"),
+      focusLensMeta: document.getElementById("focusLensMeta"),
+      focusLensChips: document.getElementById("focusLensChips"),
+      focusLensList: document.getElementById("focusLensList"),
+      focusLensClose: document.getElementById("focusLensClose"),
+      laneContainer: document.getElementById("laneContainer"),
+      timelineList: document.getElementById("timelineList"),
+      intelList: document.getElementById("intelList"),
+      nodeDetail: document.getElementById("nodeDetail"),
+      experiencePanel: document.getElementById("experiencePanel"),
+      logBox: document.getElementById("logBox"),
+      theatre: document.getElementById("theatre"),
+      graphSvg: document.getElementById("graphSvg"),
+    };
+
+    const state = {
+      bootstrap: null,
+      selectedNamespace: "ontology_v2",
+      selectedDiseaseId: null,
+      diseaseData: null,
+      activeRunId: null,
+      latestRunDiseaseName: "",
+      activeStatus: "ready",
+      latestPhaseIndex: -1,
+      latestPhaseText: "",
+      theatreMode: "synthetic",
+      ws: null,
+      pollTimer: null,
+      logs: [],
+      timeline: [],
+      intel: [],
+      advisory: null,
+      selectedNode: null,
+      chatSessionId: null,
+      currentDiseaseId: null,
+      scene: { nodes: [], edges: [] },
+      telemetry: {
+        chunks: 0,
+        signs: 0,
+        services: 0,
+        observations: 0,
+        assertions: 0,
+        summaries: 0,
+        drugs: 0,
+        summaryChars: 0,
+        graphReady: false,
+        keySigns: [],
+        keyDrugs: [],
+      },
+      canvas: {
+        ctx: null,
+        particles: [],
+        animationId: null,
+      },
+      visual: {
+        bornNodes: new Set(),
+        lockedEdges: new Set(),
+        flashTimer: null,
+        focusMode: false,
+        cameraPreset: "full",
+        cameraBox: SCENE_VIEWBOX.slice(),
+        cameraAnimId: null,
+        cameraManual: false,
+        autoTour: false,
+        autoTourIndex: 0,
+        autoTourTimer: null,
+        alarmLevel: "idle",
+        alarmText: "Hệ đang ở trạng thái ổn định, chưa có cảnh báo chiến thuật.",
+        focusNodeIds: new Set(),
+        focusEdgeKeys: new Set(),
+        focusLensAnchor: { x: 24, y: 24 },
+        alert: null,
+        panActive: false,
+        panMoved: false,
+        panPointerId: null,
+        panStart: null,
+        panBoxStart: null,
+      },
+      replay: {
+        isPaused: false,
+        speed: 1.0,
+      },
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function normalizeText(value) {
+      return String(value || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, " ")
+        .trim();
+    }
+
+    function hashString(value) {
+      let hash = 0;
+      const text = String(value || "");
+      for (let i = 0; i < text.length; i += 1) {
+        hash = ((hash << 5) - hash) + text.charCodeAt(i);
+        hash |= 0;
+      }
+      return Math.abs(hash);
+    }
+
+    function parseListLiteral(raw) {
+      const match = String(raw || "").match(/\[(.*)\]/);
+      if (!match) return [];
+      return match[1]
+        .split(/,(?=(?:[^'"]*['"][^'"]*['"])*[^'"]*$)/)
+        .map((item) => item.trim().replace(/^['"]|['"]$/g, ""))
+        .filter(Boolean);
+    }
+
+    async function fetchJson(url, options = {}) {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        let detail = response.statusText;
+        try {
+          const payload = await response.json();
+          detail = payload.detail || JSON.stringify(payload);
+        } catch (_) {}
+        throw new Error(detail);
+      }
+      return response.json();
+    }
+
+    function formatTime(isoText) {
+      if (!isoText) return "no-time";
+      const date = new Date(isoText);
+      if (Number.isNaN(date.getTime())) return String(isoText);
+      return `${date.toLocaleDateString("vi-VN")} ${date.toLocaleTimeString("vi-VN")}`;
+    }
+
+    function setTicker(message) {
+      els.ticker.textContent = message;
+    }
+
+    function setLatestSignal(title, body) {
+      els.latestSignalTitle.textContent = title;
+      els.latestSignalBody.textContent = body;
+    }
+
+    function edgeKey(edge) {
+      return `${edge.source}->${edge.target}:${edge.type || edge.label || ""}`;
+    }
+
+    function updateModeButtons() {
+      els.focusModeBtn.textContent = state.visual.focusMode ? "Exit Focus" : "Focus";
+      els.fullscreenBtn.textContent = document.fullscreenElement ? "Exit Fullscreen" : "Fullscreen";
+      const buttonMap = {
+        full: els.cameraPresetFull,
+        core: els.cameraPresetCore,
+        chunks: els.cameraPresetChunks,
+        assertions: els.cameraPresetAssertions,
+        services: els.cameraPresetServices,
+      };
+      Object.entries(buttonMap).forEach(([preset, element]) => {
+        if (!element) return;
+        element.classList.toggle("active", !state.visual.cameraManual && state.visual.cameraPreset === preset);
+      });
+      els.autoTourBtn.classList.toggle("active", Boolean(state.visual.autoTour));
+      els.autoTourBtn.textContent = state.visual.autoTour ? "Stop Tour" : "Auto Tour";
+    }
+
+    function currentViewBox() {
+      const raw = els.graphSvg.getAttribute("viewBox");
+      if (!raw) return SCENE_VIEWBOX.slice();
+      const parts = raw.split(/\s+/).map(Number).filter((value) => Number.isFinite(value));
+      return parts.length === 4 ? parts : SCENE_VIEWBOX.slice();
+    }
+
+    function cancelCameraAnimation() {
+      if (state.visual.cameraAnimId) {
+        cancelAnimationFrame(state.visual.cameraAnimId);
+        state.visual.cameraAnimId = null;
+      }
+    }
+
+    function normalizeViewBox(box) {
+      const [x0, y0, w0, h0] = box;
+      let x = Number.isFinite(x0) ? x0 : 0;
+      let y = Number.isFinite(y0) ? y0 : 0;
+      let w = Math.max(Number.isFinite(w0) ? w0 : SCENE_VIEWBOX[2], 220);
+      let h = Math.max(Number.isFinite(h0) ? h0 : SCENE_VIEWBOX[3], 180);
+
+      const centerX = x + (w / 2);
+      const centerY = y + (h / 2);
+      const ratio = SCENE_VIEWBOX[2] / SCENE_VIEWBOX[3];
+      if ((w / h) > ratio) h = w / ratio;
+      else w = h * ratio;
+
+      x = Math.min(Math.max(centerX - (w / 2), 0), SCENE_VIEWBOX[2] - w);
+      y = Math.min(Math.max(centerY - (h / 2), 0), SCENE_VIEWBOX[3] - h);
+
+      if (w >= SCENE_VIEWBOX[2] || h >= SCENE_VIEWBOX[3]) {
+        return SCENE_VIEWBOX.slice();
+      }
+      return [x, y, w, h];
+    }
+
+    function setViewBox(box) {
+      const next = normalizeViewBox(box);
+      els.graphSvg.setAttribute("viewBox", next.map((value) => value.toFixed(2)).join(" "));
+      state.visual.cameraBox = next;
+      return next;
+    }
+
+    function enterFreeCamera(options = {}) {
+      const { stopTour = true } = options;
+      if (stopTour && state.visual.autoTour) stopAutoTour({ silent: true });
+      cancelCameraAnimation();
+      state.visual.cameraManual = true;
+      refreshCameraChip();
+      updateModeButtons();
+    }
+
+    function theatrePointToScene(clientX, clientY) {
+      const rect = els.graphSvg.getBoundingClientRect();
+      const [x, y, width, height] = currentViewBox();
+      const px = Math.min(Math.max(clientX - rect.left, 0), rect.width);
+      const py = Math.min(Math.max(clientY - rect.top, 0), rect.height);
+      return {
+        x: x + ((px / Math.max(rect.width, 1)) * width),
+        y: y + ((py / Math.max(rect.height, 1)) * height),
+      };
+    }
+
+    function sceneNodesForPreset(preset) {
+      if (!state.scene?.nodes?.length) return [];
+      if (preset === "full") return state.scene.nodes;
+      const types = new Set(CAMERA_PRESETS[preset]?.types || []);
+      const filtered = state.scene.nodes.filter((node) => types.has(node.type));
+      return filtered.length ? filtered : state.scene.nodes;
+    }
+
+    function viewBoxForPreset(preset) {
+      const nodes = sceneNodesForPreset(preset);
+      if (!nodes.length) return SCENE_VIEWBOX.slice();
+      const paddingX = preset === "full" ? 120 : 90;
+      const paddingY = preset === "full" ? 90 : 72;
+      const minX = Math.min(...nodes.map((node) => node.x)) - paddingX;
+      const maxX = Math.max(...nodes.map((node) => node.x)) + paddingX;
+      const minY = Math.min(...nodes.map((node) => node.y)) - paddingY;
+      const maxY = Math.max(...nodes.map((node) => node.y)) + paddingY;
+      return normalizeViewBox([minX, minY, maxX - minX, maxY - minY]);
+    }
+
+    function animateViewBox(targetBox) {
+      const startBox = currentViewBox();
+      const finalBox = normalizeViewBox(targetBox);
+      cancelCameraAnimation();
+      const startAt = performance.now();
+      const duration = 650;
+
+      const frame = (now) => {
+        const progress = Math.min(1, (now - startAt) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const next = startBox.map((value, index) => value + ((finalBox[index] - value) * eased));
+        els.graphSvg.setAttribute("viewBox", next.map((value) => value.toFixed(2)).join(" "));
+        state.visual.cameraBox = next;
+        if (progress < 1) state.visual.cameraAnimId = requestAnimationFrame(frame);
+        else state.visual.cameraAnimId = null;
+      };
+
+      state.visual.cameraAnimId = requestAnimationFrame(frame);
+    }
+
+    function refreshCameraChip() {
+      els.cameraStateChip.textContent = state.visual.cameraManual
+        ? "CAM FREE"
+        : `CAM ${CAMERA_PRESETS[state.visual.cameraPreset]?.label || state.visual.cameraPreset.toUpperCase()}`;
+      els.tourStateChip.textContent = state.visual.autoTour ? "TOUR ON" : "TOUR OFF";
+    }
+
+    function deriveAlarmState() {
+      if (state.activeStatus === "error") {
+        return { level: "critical", text: "Run đang lỗi hoặc bị đứt mạch. Cần kiểm tra ngay telemetry và graph ingest." };
+      }
+      if (state.activeStatus === "running" && state.latestPhaseIndex >= 4) {
+        return { level: "elevated", text: "Mission đang vào vùng nóng: assertion forge, summary core và graph seal đang hoạt động." };
+      }
+      if (state.activeStatus === "running") {
+        return { level: "watch", text: "Pipeline đang vận hành. Màn hình đang theo dõi các node birth, edge lock và drift tín hiệu." };
+      }
+      if (state.activeStatus === "completed") {
+        return { level: "completed", text: "Mission đã hoàn tất. Graph thật đã sẵn sàng cho inspection và trace." };
+      }
+      return { level: "idle", text: "Deck synchronized. Chưa có cảnh báo chiến thuật; hệ đang chờ mission tiếp theo." };
+    }
+
+    function renderTheatreSignals() {
+      const alarm = deriveAlarmState();
+      state.visual.alarmLevel = alarm.level;
+      state.visual.alarmText = alarm.text;
+      els.alarmStateChip.textContent = alarm.level.toUpperCase();
+      els.alarmStateChip.className = `status-chip status-${alarm.level}`;
+      els.alarmStateSub.textContent = alarm.text;
+      refreshCameraChip();
+      updateModeButtons();
+    }
+
+    function renderMissionAlert() {
+      const alert = state.visual.alert;
+      if (!alert) {
+        els.missionAlert.className = "mission-alert";
+        return;
+      }
+      els.missionAlert.className = `mission-alert visible ${alert.tone || "warn"}`;
+      els.missionAlertTitle.textContent = alert.title;
+      els.missionAlertBody.textContent = alert.body;
+    }
+
+    function setMissionAlert(title, body, tone = "warn") {
+      state.visual.alert = {
+        title: title || "Runtime alert",
+        body: body || "Có cảnh báo mới trong pipeline.",
+        tone,
+        time: new Date().toISOString(),
+      };
+      if (tone === "bad") setPanelCollapsed("logFeedPanel", false);
+      renderMissionAlert();
+    }
+
+    function clearMissionAlert() {
+      state.visual.alert = null;
+      renderMissionAlert();
+    }
+
+    function setPanelCollapsed(panelId, collapsed) {
+      const panel = document.getElementById(panelId);
+      if (!panel) return;
+      panel.classList.toggle("collapsed", collapsed);
+      const button = panel.querySelector(".panel-toggle");
+      if (button) {
+        button.textContent = collapsed ? "Show" : "Hide";
+        button.setAttribute("aria-expanded", collapsed ? "false" : "true");
+      }
+    }
+
+    function togglePanel(panelId) {
+      const panel = document.getElementById(panelId);
+      if (!panel) return;
+      setPanelCollapsed(panelId, !panel.classList.contains("collapsed"));
+    }
+
+    function bindCollapsiblePanels() {
+      Array.from(document.querySelectorAll(".collapsible-panel")).forEach((panel) => {
+        const head = panel.querySelector(".panel-head");
+        if (!head) return;
+        let button = panel.querySelector(".panel-toggle");
+        if (!button) {
+          button = document.createElement("button");
+          button.type = "button";
+          button.className = "panel-toggle";
+          head.appendChild(button);
+        }
+        const toggle = () => togglePanel(panel.id);
+        head.addEventListener("click", (event) => {
+          if (event.target.closest("button") && !event.target.classList.contains("panel-toggle")) return;
+          toggle();
+        });
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          toggle();
+        });
+        setPanelCollapsed(panel.id, panel.classList.contains("collapsed"));
+      });
+    }
+
+    function beginGraphPan(event) {
+      if (event.button !== 0) return;
+      if (event.target.closest(".graph-node")) return;
+      enterFreeCamera();
+      state.visual.panActive = true;
+      state.visual.panMoved = false;
+      state.visual.panPointerId = event.pointerId;
+      state.visual.panStart = { x: event.clientX, y: event.clientY };
+      state.visual.panBoxStart = currentViewBox();
+      els.graphSvg.classList.add("panning");
+      try { els.graphSvg.setPointerCapture(event.pointerId); } catch (_) {}
+    }
+
+    function updateGraphPan(event) {
+      if (!state.visual.panActive || state.visual.panPointerId !== event.pointerId) return;
+      const rect = els.graphSvg.getBoundingClientRect();
+      const start = state.visual.panStart || { x: event.clientX, y: event.clientY };
+      const box = state.visual.panBoxStart || currentViewBox();
+      const dx = event.clientX - start.x;
+      const dy = event.clientY - start.y;
+      if (Math.abs(dx) > 2 || Math.abs(dy) > 2) state.visual.panMoved = true;
+      setViewBox([
+        box[0] - ((dx / Math.max(rect.width, 1)) * box[2]),
+        box[1] - ((dy / Math.max(rect.height, 1)) * box[3]),
+        box[2],
+        box[3],
+      ]);
+    }
+
+    function endGraphPan(event) {
+      if (!state.visual.panActive) return;
+      if (event && state.visual.panPointerId != null && event.pointerId != null && event.pointerId !== state.visual.panPointerId) return;
+      state.visual.panActive = false;
+      state.visual.panPointerId = null;
+      state.visual.panStart = null;
+      state.visual.panBoxStart = null;
+      els.graphSvg.classList.remove("panning");
+    }
+
+    function zoomGraphAt(clientX, clientY, scale) {
+      enterFreeCamera();
+      const box = currentViewBox();
+      const anchor = theatrePointToScene(clientX, clientY);
+      const nextWidth = Math.max(220, Math.min(SCENE_VIEWBOX[2], box[2] * scale));
+      const nextHeight = Math.max(180, Math.min(SCENE_VIEWBOX[3], box[3] * scale));
+      const ratioX = (anchor.x - box[0]) / Math.max(box[2], 1);
+      const ratioY = (anchor.y - box[1]) / Math.max(box[3], 1);
+      setViewBox([
+        anchor.x - (ratioX * nextWidth),
+        anchor.y - (ratioY * nextHeight),
+        nextWidth,
+        nextHeight,
+      ]);
+    }
+
+    function getLocalCluster(nodeId) {
+      const nodeIds = new Set([nodeId]);
+      const edgeKeys = new Set();
+      for (const edge of state.scene.edges || []) {
+        if (edge.source === nodeId || edge.target === nodeId) {
+          nodeIds.add(edge.source);
+          nodeIds.add(edge.target);
+          edgeKeys.add(edgeKey(edge));
+        }
+      }
+      const nodes = (state.scene.nodes || []).filter((node) => nodeIds.has(node.id));
+      const edges = (state.scene.edges || []).filter((edge) => nodeIds.has(edge.source) && nodeIds.has(edge.target));
+      edges.forEach((edge) => edgeKeys.add(edgeKey(edge)));
+      return { nodeIds, edgeKeys, nodes, edges };
+    }
+
+    function focusViewBox(nodeId) {
+      const cluster = getLocalCluster(nodeId);
+      if (!cluster.nodes.length) return viewBoxForPreset(state.visual.cameraPreset || "full");
+      const minX = Math.min(...cluster.nodes.map((node) => node.x)) - 80;
+      const maxX = Math.max(...cluster.nodes.map((node) => node.x)) + 80;
+      const minY = Math.min(...cluster.nodes.map((node) => node.y)) - 70;
+      const maxY = Math.max(...cluster.nodes.map((node) => node.y)) + 70;
+      return normalizeViewBox([minX, minY, maxX - minX, maxY - minY]);
+    }
+
+    function positionFocusLens() {
+      const rect = els.theatre.getBoundingClientRect();
+      const width = Math.min(320, Math.max(260, rect.width - 32));
+      const maxLeft = Math.max(16, rect.width - width - 16);
+      const maxTop = Math.max(16, rect.height - 260);
+      const left = Math.min(Math.max(state.visual.focusLensAnchor.x, 16), maxLeft);
+      const top = Math.min(Math.max(state.visual.focusLensAnchor.y, 16), maxTop);
+      els.focusLens.style.left = `${left}px`;
+      els.focusLens.style.top = `${top}px`;
+    }
+
+    function renderFocusLens() {
+      if (!state.selectedNode) {
+        els.focusLens.className = "focus-lens";
+        return;
+      }
+      const cluster = getLocalCluster(state.selectedNode.id);
+      const neighbors = cluster.nodes.filter((node) => node.id !== state.selectedNode.id);
+      els.focusLensTitle.textContent = state.selectedNode.label || state.selectedNode.id;
+      els.focusLensMeta.textContent = `${state.selectedNode.type || "node"} | ${neighbors.length} node liên quan một-hop | click nền để thoát focus`;
+      els.focusLensChips.innerHTML = `
+        <span class="chip">${escapeHtml(state.selectedNode.subtitle || state.selectedNode.type || "node")}</span>
+        <span class="chip">cluster ${escapeHtml(cluster.nodes.length)}</span>
+        <span class="chip">edges ${escapeHtml(cluster.edges.length)}</span>
+      `;
+      els.focusLensList.innerHTML = neighbors.length
+        ? neighbors.map((node) => `
+            <div class="focus-list-item">
+              <div style="font-size:15px;font-weight:700;">${escapeHtml(node.label || node.id)}</div>
+              <div class="meta">${escapeHtml(node.type || "node")} ${node.subtitle ? `| ${escapeHtml(node.subtitle)}` : ""}</div>
+            </div>
+          `).join("")
+        : `<div class="focus-list-item">Node này hiện chưa có láng giềng trực tiếp trong scene đang mở.</div>`;
+      positionFocusLens();
+      els.focusLens.className = "focus-lens visible";
+    }
+
+    function clearNodeFocus(options = {}) {
+      const { restorePreset = true } = options;
+      state.selectedNode = null;
+      state.visual.focusNodeIds = new Set();
+      state.visual.focusEdgeKeys = new Set();
+      renderNodeDetail(null);
+      renderFocusLens();
+      renderScene();
+      if (restorePreset) {
+        state.visual.cameraManual = false;
+        animateViewBox(viewBoxForPreset(state.visual.cameraPreset || "full"));
+      }
+    }
+
+    function focusNodeAt(node, event) {
+      if (!node) return;
+      const rect = els.theatre.getBoundingClientRect();
+      state.selectedNode = node;
+      state.visual.cameraManual = false;
+      const cluster = getLocalCluster(node.id);
+      state.visual.focusNodeIds = cluster.nodeIds;
+      state.visual.focusEdgeKeys = cluster.edgeKeys;
+      state.visual.focusLensAnchor = {
+        x: Math.max(16, (event?.clientX || rect.left + 24) - rect.left + 22),
+        y: Math.max(16, (event?.clientY || rect.top + 24) - rect.top - 12),
+      };
+      renderNodeDetail(state.selectedNode);
+      renderFocusLens();
+      renderScene();
+      animateViewBox(focusViewBox(node.id));
+      setPanelCollapsed("nodeInspectorPanel", false);
+      setLatestSignal("Cluster focus", `${node.label || node.id} đã bung cụm cục bộ với ${cluster.nodes.length - 1} node liên quan.`);
+      pushIntel("Cluster expanded", `Theatre bung cục bộ quanh ${node.label || node.id} để không cần zoom nhỏ toàn cảnh.`, "good");
+    }
+
+    function applyCameraPreset(preset, options = {}) {
+      const { announce = true, manual = false } = options;
+      if (!CAMERA_PRESETS[preset]) preset = "full";
+      if (manual && state.visual.autoTour) stopAutoTour({ silent: true });
+      if (manual && state.selectedNode) clearNodeFocus({ restorePreset: false });
+      state.visual.cameraPreset = preset;
+      state.visual.cameraManual = false;
+      animateViewBox(viewBoxForPreset(preset));
+      renderTheatreSignals();
+      if (announce) {
+        const meta = CAMERA_PRESETS[preset];
+        triggerTheatreFlash(meta.flash, meta.tone);
+        pushIntel("Camera preset", `Theatre đang khoá góc nhìn vào ${meta.label.toLowerCase()} cluster.`, meta.tone === "warn" ? "warn" : "info");
+      }
+    }
+
+    function stopAutoTour(options = {}) {
+      const { silent = false } = options;
+      state.visual.autoTour = false;
+      if (state.visual.autoTourTimer) {
+        clearTimeout(state.visual.autoTourTimer);
+        state.visual.autoTourTimer = null;
+      }
+      renderTheatreSignals();
+      if (!silent) {
+        pushIntel("Auto-tour halted", "Theatre quay về điều khiển tay; camera giữ nguyên preset hiện tại.", "warn");
+      }
+    }
+
+    function scheduleAutoTourTick() {
+      if (!state.visual.autoTour) return;
+      if (state.visual.autoTourTimer) clearTimeout(state.visual.autoTourTimer);
+      state.visual.autoTourTimer = setTimeout(() => {
+        state.visual.autoTourIndex = (state.visual.autoTourIndex + 1) % AUTO_TOUR_SEQUENCE.length;
+        applyCameraPreset(AUTO_TOUR_SEQUENCE[state.visual.autoTourIndex], { announce: true, manual: false });
+        scheduleAutoTourTick();
+      }, 3600);
+    }
+
+    function startAutoTour() {
+      state.visual.autoTour = true;
+      state.visual.autoTourIndex = AUTO_TOUR_SEQUENCE.indexOf(state.visual.cameraPreset);
+      if (state.visual.autoTourIndex < 0) state.visual.autoTourIndex = 0;
+      renderTheatreSignals();
+      triggerTheatreFlash("AUTO TOUR", "info");
+      pushIntel("Auto-tour engaged", "Theatre bắt đầu quét lần lượt core, chunks, assertions, services và full graph.", "good");
+      scheduleAutoTourTick();
+    }
+
+    function syncCameraToScene() {
+      state.visual.cameraManual = false;
+      animateViewBox(viewBoxForPreset(state.visual.cameraPreset || "full"));
+      renderTheatreSignals();
+    }
+
+    function triggerTheatreFlash(label, tone = "info") {
+      els.flashBanner.textContent = label;
+      els.flashBanner.style.color =
+        tone === "good" ? "var(--good)" :
+        tone === "warn" ? "var(--warn)" :
+        tone === "bad" ? "var(--bad)" :
+        "var(--cyan)";
+      els.flashLayer.classList.remove("active");
+      void els.flashLayer.offsetWidth;
+      els.flashLayer.classList.add("active");
+      if (state.visual.flashTimer) clearTimeout(state.visual.flashTimer);
+      state.visual.flashTimer = setTimeout(() => {
+        els.flashLayer.classList.remove("active");
+      }, 1200);
+    }
+
+    function applySceneTransitions(nextScene) {
+      const previousNodeIds = new Set((state.scene?.nodes || []).map((node) => node.id));
+      const previousEdgeKeys = new Set((state.scene?.edges || []).map(edgeKey));
+      state.visual.bornNodes = new Set((nextScene.nodes || []).filter((node) => !previousNodeIds.has(node.id)).map((node) => node.id));
+      state.visual.lockedEdges = new Set((nextScene.edges || []).filter((edge) => !previousEdgeKeys.has(edgeKey(edge))).map(edgeKey));
+
+      const assertionBirths = (nextScene.nodes || []).filter((node) => node.type === "assertion" && state.visual.bornNodes.has(node.id)).length;
+      if (assertionBirths > 0) {
+        triggerTheatreFlash("ASSERTION FLARE", "warn");
+      } else if (state.visual.bornNodes.size > 0) {
+        triggerTheatreFlash("NODE BIRTH", "info");
+      } else if (state.visual.lockedEdges.size > 0) {
+        triggerTheatreFlash("EDGE LOCK", "good");
+      }
+
+      if (state.visual.bornNodes.size || state.visual.lockedEdges.size) {
+        setTimeout(() => {
+          if (state.visual.bornNodes.size || state.visual.lockedEdges.size) {
+            state.visual.bornNodes = new Set();
+            state.visual.lockedEdges = new Set();
+            renderScene();
+          }
+        }, 1400);
+      }
+    }
+
+    function updateStatus(status, title, sub) {
+      state.activeStatus = status;
+      els.statusTitle.textContent = title;
+      els.statusSub.textContent = sub;
+      els.runStatusChip.textContent = status.toUpperCase();
+      els.runStatusChip.className = `status-chip status-${status}`;
+      els.leftHealthChip.textContent = (state.bootstrap?.source || "boot").toUpperCase();
+      renderTheatreSignals();
+    }
+
+    function pushTimeline(title, detail, tone = "info") {
+      const key = `${title}::${detail}`;
+      if (state.timeline[0] && state.timeline[0].key === key) return;
+      state.timeline.unshift({ key, title, detail, tone, time: new Date().toISOString() });
+      state.timeline = state.timeline.slice(0, 12);
+      renderTimeline();
+    }
+
+    function pushIntel(title, body, tone = "info") {
+      const key = `${title}::${body}`;
+      if (state.intel.some((item) => item.key === key)) return;
+      state.intel.unshift({ key, title, body, tone, time: new Date().toISOString() });
+      state.intel = state.intel.slice(0, 10);
+      renderIntel();
+    }
+
+    function appendLog(line, kind = "log") {
+      const entry = { line: String(line), kind, time: new Date().toISOString() };
+      state.logs.push(entry);
+      state.logs = state.logs.slice(-180);
+      parseLogEvent(entry.line);
+      renderLogs();
+    }
+
+    function applyPhaseMinimums(phaseIndex) {
+      const minimum = PHASE_MINIMUMS[phaseIndex];
+      if (!minimum) return;
+      Object.entries(minimum).forEach(([key, value]) => {
+        state.telemetry[key] = Math.max(state.telemetry[key] || 0, value);
+      });
+    }
+
+    function renderPhaseMatrix() {
+      const current = state.latestPhaseIndex;
+      const completed = state.activeStatus === "completed" ? PHASES.length - 1 : current;
+      els.phaseMatrix.innerHTML = PHASES.map((phase) => {
+        const statusClass = phase.num < completed ? "done" : phase.num === current ? "active" : "";
+        return `
+          <div class="phase-card ${statusClass}">
+            <div class="label">Phase ${phase.num}</div>
+            <div class="phase-title">${escapeHtml(phase.title)}</div>
+            <div class="phase-meta">${escapeHtml(phase.meta)}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderHeroStats() {
+      const phaseCount = PHASES.length - 1;
+      const activeIndex = Math.max(state.latestPhaseIndex, 0);
+      const rawPercent = state.activeStatus === "completed"
+        ? 100
+        : state.activeStatus === "ready"
+          ? 0
+          : Math.round((activeIndex / phaseCount) * 100);
+      const percent = Math.max(0, Math.min(rawPercent, 100));
+      const circumference = 2 * Math.PI * 50;
+      const offset = circumference - (circumference * percent / 100);
+      els.progressCircle.style.strokeDashoffset = `${offset}`;
+      els.progressPercent.textContent = `${percent}%`;
+      els.currentPhaseTitle.textContent = state.latestPhaseIndex >= 0 ? PHASES[state.latestPhaseIndex]?.title || "Unknown" : "Mission Prep";
+      els.currentPhaseMeta.textContent = state.latestPhaseText || (state.activeStatus === "completed"
+        ? "Run đã hoàn tất. Chờ nạp graph hoặc mission tiếp theo."
+        : "Chưa có phase runtime. Bạn có thể load graph sẵn hoặc chạy ingest mới.");
+
+      const chips = [];
+      chips.push(`<span class="chip">mode ${escapeHtml(state.theatreMode)}</span>`);
+      chips.push(`<span class="chip">namespace ${escapeHtml(state.selectedNamespace || "ontology_v2")}</span>`);
+      if (state.activeRunId) chips.push(`<span class="chip">run ${escapeHtml(state.activeRunId.slice(-8))}</span>`);
+      if (state.telemetry.summaryChars) chips.push(`<span class="chip">summary ${escapeHtml(state.telemetry.summaryChars)} chars</span>`);
+      if (state.telemetry.keySigns.length) chips.push(`<span class="chip">key signs ${escapeHtml(state.telemetry.keySigns.length)}</span>`);
+      els.heroChipRow.innerHTML = chips.join("");
+    }
+
+    function renderTimeline() {
+      if (!state.timeline.length) {
+        els.timelineList.innerHTML = `<div class="empty-state">Timeline sẽ hiện khi run bắt đầu sinh phase, advisory và graph events.</div>`;
+        return;
+      }
+      els.timelineList.innerHTML = state.timeline.map((item) => `
+        <div class="timeline-card ${escapeHtml(item.tone)}">
+          <div style="font-size:17px;font-weight:700;">${escapeHtml(item.title)}</div>
+          <div>${escapeHtml(item.detail)}</div>
+          <div class="meta">${escapeHtml(formatTime(item.time))}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderIntel() {
+      if (!state.intel.length) {
+        els.intelList.innerHTML = `<div class="empty-state">Operational interpretation sẽ sinh dần từ phase, counters và graph payload.</div>`;
+        return;
+      }
+      els.intelList.innerHTML = state.intel.map((item) => `
+        <div class="intel-card ${escapeHtml(item.tone)}">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+            <strong>${escapeHtml(item.title)}</strong>
+            <span class="tiny tone-${escapeHtml(item.tone)}">${escapeHtml(item.tone.toUpperCase())}</span>
+          </div>
+          <div>${escapeHtml(item.body)}</div>
+          <div class="meta">${escapeHtml(formatTime(item.time))}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderLogs() {
+      if (!state.logs.length) {
+        els.logBox.innerHTML = `<div class="empty-state">Live signal feed đang chờ kết nối tới một run hoặc load graph có sẵn.</div>`;
+        return;
+      }
+      els.logBox.innerHTML = state.logs.slice().reverse().map((entry) => {
+        const klass = /warn/i.test(entry.kind) || /^\[WARN\]/i.test(entry.line)
+          ? "warn"
+          : /error/i.test(entry.kind) || /error/i.test(entry.line)
+            ? "error"
+            : /complete/i.test(entry.kind) || /\[COMPLETE\]/i.test(entry.line)
+              ? "complete"
+              : "";
+        return `<div class="log-line ${klass}">${escapeHtml(entry.line)}</div>`;
+      }).join("");
+    }
+
+    function renderExperience(advisory) {
+      if (!advisory) {
+        els.experiencePanel.className = "empty-state";
+        els.experiencePanel.innerHTML = "Chưa có advisory. Khi ingest mới chạy, nơi này sẽ cho thấy episodic, semantic và procedural memory nào được kéo lên.";
+        return;
+      }
+
+      const pre = advisory.pre_run || {};
+      const contextual = advisory.contextual || {};
+      const renderRows = (items) => {
+        if (!items?.length) return `<div class="empty-state" style="padding:10px;">Không có recommendation cụ thể.</div>`;
+        return items.slice(0, 8).map((item) => `
+          <div class="intel-card ${escapeHtml(item.severity || "info")}">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <strong>${escapeHtml(item.category || "memory")}</strong>
+              <span class="tiny">${escapeHtml(item.memory_kind || "memory")} / ${escapeHtml(item.scope || "shared")}</span>
+            </div>
+            <div>${escapeHtml(item.recommendation || item.summary || "Không có mô tả")}</div>
+          </div>
+        `).join("");
+      };
+
+      els.experiencePanel.className = "";
+      els.experiencePanel.innerHTML = `
+        <div class="stack">
+          <div class="detail-block">
+            <h4>Pre-run advisory</h4>
+            <div class="chip-row">
+              <span class="chip">matches ${escapeHtml(pre.match_count || 0)}</span>
+              <span class="chip">artifact ${escapeHtml(advisory.artifact_paths?.json ? "yes" : "no")}</span>
+            </div>
+          </div>
+          ${renderRows(pre.matches)}
+          <div class="detail-block">
+            <h4>Contextual advisory</h4>
+            <div class="chip-row">
+              <span class="chip">matches ${escapeHtml(contextual.match_count || 0)}</span>
+            </div>
+          </div>
+          ${renderRows(contextual.matches)}
+        </div>
+      `;
+      setPanelCollapsed("experienceAdvicePanel", false);
+    }
+
+    function renderNodeDetail(node) {
+      if (!node) {
+        els.nodeDetail.innerHTML = `<div class="empty-state">Bấm vào node trong theatre để xem properties và provenance ở đây.</div>`;
+        return;
+      }
+      const detail = {
+        id: node.id,
+        type: node.type,
+        label: node.label,
+        subtitle: node.subtitle,
+        ...node.raw,
+      };
+      els.nodeDetail.innerHTML = `
+        <div class="detail-block">
+          <div class="eyebrow">Node signature</div>
+          <h4>${escapeHtml(node.label || node.id || "Unknown node")}</h4>
+          <div class="chip-row">
+            <span class="chip">${escapeHtml(node.type || "unknown")}</span>
+            ${node.subtitle ? `<span class="chip">${escapeHtml(node.subtitle)}</span>` : ""}
+          </div>
+        </div>
+        <div class="detail-block">
+          <div class="eyebrow">Payload</div>
+          <pre class="json-pre">${escapeHtml(JSON.stringify(detail, null, 2))}</pre>
+        </div>
+      `;
+    }
+
+    function renderSyntheticStoryboard() {
+      const visible = state.theatreMode === "synthetic";
+      els.storyboard.classList.toggle("visible", visible);
+      if (!visible) return;
+
+      const phaseIndex = Math.max(state.latestPhaseIndex, 0);
+      const diseaseName = state.latestRunDiseaseName || "Mission Core";
+      els.storyDocTitle.textContent = diseaseName;
+      els.storyDocMeta.textContent = `PHASE ${phaseIndex}`;
+      els.storyDocNarrative.textContent =
+        phaseIndex <= 1
+          ? "Khung trái đang bóc semantic unit từ tài liệu gốc: header, body, bảng và vùng tín hiệu lâm sàng."
+          : phaseIndex <= 3
+            ? "Tài liệu đã tách xong các vùng giàu thông tin. Runtime đang kéo từng mention sang canonical concept và ontology type."
+            : "Các semantic unit quan trọng đã đủ để sinh assertion, summary và đóng graph vào Neo4j.";
+
+      const docBlocks = [
+        { title: "Header / Context", body: diseaseName, activeAt: 1 },
+        { title: "Clinical Body", body: `${state.telemetry.signs || 0} signs | ${state.telemetry.observations || 0} observations`, activeAt: 2 },
+        { title: "Services / Tests", body: `${state.telemetry.services || 0} service mentions`, activeAt: 3 },
+        { title: "Assertions / Summary", body: `${state.telemetry.assertions || 0} assertions | ${state.telemetry.summaryChars || 0} chars`, activeAt: 4 },
+      ];
+      const visibleBlocks = docBlocks.filter((block) => Math.abs(block.activeAt - phaseIndex) <= 1 || (phaseIndex <= 1 && block.activeAt === 1));
+      const hiddenBlocks = Math.max(0, docBlocks.length - visibleBlocks.length);
+      els.storyDocBlocks.innerHTML = visibleBlocks.map((block) => {
+        const active = phaseIndex === block.activeAt ? "active" : "";
+        const dimmed = phaseIndex < block.activeAt - 1 ? "dimmed" : "";
+        return `
+          <div class="doc-block ${active} ${dimmed}">
+            <div style="font-size:15px;font-weight:700;">${escapeHtml(block.title)}</div>
+            <div class="sub" style="margin-top:6px;">${escapeHtml(block.body)}</div>
+          </div>
+        `;
+      }).join("") + (hiddenBlocks ? `<div class="story-summary">+${hiddenBlocks} block ẩn để giữ nhịp nhìn rõ</div>` : "");
+
+      els.storyFlowTitle.textContent = `Transformation rail for ${diseaseName}`;
+      els.storyFlowMeta.textContent = state.telemetry.graphReady ? "GRAPH READY" : "STREAMING";
+      const visiblePhases = PHASES.filter((phase) => Math.abs(phase.num - phaseIndex) <= 1 || (phaseIndex <= 1 && phase.num <= 1) || (phaseIndex >= PHASES.length - 2 && phase.num >= PHASES.length - 2));
+      const hiddenPhases = Math.max(0, PHASES.length - visiblePhases.length);
+      els.storyFlowStages.innerHTML = visiblePhases.map((phase) => {
+        const active = phase.num === phaseIndex ? "active" : "";
+        const done = phase.num < phaseIndex ? "done" : "";
+        const dimmed = phase.num > phaseIndex + 1 ? "dimmed" : "";
+        const tags = [];
+        if (phase.num === 1) tags.push(`${state.telemetry.chunks || 0} chunks`);
+        if (phase.num === 2) tags.push(`${state.telemetry.signs || 0} signs`, `${state.telemetry.services || 0} services`);
+        if (phase.num === 3) tags.push(`${state.telemetry.observations || 0} observations`);
+        if (phase.num === 4) tags.push(`${state.telemetry.assertions || 0} assertions`);
+        if (phase.num === 5) tags.push(`${state.telemetry.summaryChars || 0} chars`, state.telemetry.graphReady ? "sealed" : "pending");
+        return `
+          <div class="flow-stage ${active} ${done} ${dimmed} ${phase.num === phaseIndex ? "" : "compact"}">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+              <div>
+                <div class="eyebrow">Phase ${escapeHtml(phase.num)}</div>
+                <div style="font-size:18px;font-weight:700;margin-top:6px;">${escapeHtml(phase.title)}</div>
+              </div>
+              <span class="chip">${phase.num < phaseIndex ? "done" : phase.num === phaseIndex ? "live" : "queued"}</span>
+            </div>
+            <div class="sub">${escapeHtml(phase.meta || "")}</div>
+            <div class="flow-tags">${tags.map((tag) => `<span class="chip">${escapeHtml(tag)}</span>`).join("")}</div>
+          </div>
+        `;
+      }).join("") + (hiddenPhases ? `<div class="story-summary">+${hiddenPhases} phase khác đang được giữ nền để tránh nghẽn màn hình</div>` : "");
+    }
+
+    function syntheticVisibilityConfig() {
+      const phase = Math.max(state.latestPhaseIndex, 0);
+      const allowCore = new Set(["synthetic:disease"]);
+      const burstBudget = { chunks: 0, signs: 0, services: 0, assertions: 0 };
+      if (phase >= 0) allowCore.add("synthetic:doc");
+      if (phase >= 1) {
+        allowCore.add("synthetic:chunks");
+        burstBudget.chunks = 3;
+      }
+      if (phase >= 2) {
+        allowCore.add("synthetic:signs");
+        allowCore.add("synthetic:services");
+        burstBudget.chunks = 4;
+        burstBudget.signs = 2;
+        burstBudget.services = 2;
+      }
+      if (phase >= 3) {
+        allowCore.add("synthetic:observations");
+        burstBudget.chunks = 5;
+        burstBudget.signs = 3;
+        burstBudget.services = 3;
+      }
+      if (phase >= 4) {
+        allowCore.add("synthetic:assertions");
+        allowCore.add("synthetic:summary");
+        burstBudget.assertions = 2;
+      }
+      if (phase >= 5 || state.telemetry.graphReady) {
+        allowCore.add("synthetic:neo4j");
+        burstBudget.assertions = 3;
+      }
+      return { allowCore, burstBudget };
+    }
+
+    function visibleSyntheticNodeIds(scene) {
+      const { allowCore, burstBudget } = syntheticVisibilityConfig();
+      const visible = new Set();
+      for (const node of scene.nodes || []) {
+        if (allowCore.has(node.id)) {
+          visible.add(node.id);
+          continue;
+        }
+        const burstMatch = node.id.match(/^(chunks|signs|services|assertions):(\d+)$/);
+        if (!burstMatch) continue;
+        const family = burstMatch[1];
+        const index = Number(burstMatch[2]);
+        if (index < (burstBudget[family] || 0)) visible.add(node.id);
+      }
+      return visible;
+    }
+
+    function laneData() {
+      const graphStats = state.diseaseData?.graph?.stats || {};
+      return [
+        { label: "Chunks", count: graphStats.node_types?.chunk || state.telemetry.chunks, max: Math.max(graphStats.node_types?.chunk || 0, state.telemetry.chunks, 6) },
+        { label: "Signs", count: (state.diseaseData?.mapping_stats?.signs?.total) || state.telemetry.signs, max: Math.max((state.diseaseData?.mapping_stats?.signs?.total) || 0, state.telemetry.signs, 6) },
+        { label: "Services", count: (state.diseaseData?.mapping_stats?.services?.total) || state.telemetry.services, max: Math.max((state.diseaseData?.mapping_stats?.services?.total) || 0, state.telemetry.services, 6) },
+        { label: "Observations", count: (state.diseaseData?.mapping_stats?.observations?.total) || state.telemetry.observations, max: Math.max((state.diseaseData?.mapping_stats?.observations?.total) || 0, state.telemetry.observations, 4) },
+        { label: "Assertions", count: (state.diseaseData?.assertions?.length) || state.telemetry.assertions, max: Math.max((state.diseaseData?.assertions?.length) || 0, state.telemetry.assertions, 4) },
+        { label: "Graph Core", count: state.diseaseData?.graph?.stats?.node_count || (state.telemetry.graphReady ? 1 : 0), max: Math.max(state.diseaseData?.graph?.stats?.node_count || 0, state.telemetry.graphReady ? 1 : 0, 1) },
+      ];
+    }
+
+    function renderLanes() {
+      els.laneContainer.innerHTML = laneData().map((lane) => {
+        const ratio = lane.max > 0 ? Math.min(100, Math.round((lane.count / lane.max) * 100)) : 0;
+        return `
+          <div class="lane-row">
+            <div class="lane-label">${escapeHtml(lane.label)}</div>
+            <div class="lane-bar"><div class="lane-fill" style="width:${ratio}%"></div></div>
+            <div class="lane-value">${escapeHtml(lane.count)}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function parseLogEvent(line) {
+      const phaseMatch = String(line).match(/\[Phase\s+(\d+)\]\s+(.+)/i);
+      if (phaseMatch) {
+        const phaseIndex = Number(phaseMatch[1]);
+        state.latestPhaseIndex = phaseIndex;
+        state.latestPhaseText = phaseMatch[2].trim();
+        applyPhaseMinimums(phaseIndex);
+        triggerTheatreFlash(`PHASE ${phaseIndex}`, phaseIndex >= 4 ? "warn" : "info");
+        pushTimeline(`Phase ${phaseIndex}`, phaseMatch[2].trim(), "info");
+        pushIntel("LLM tactical shift", `Pipeline chuyển sang ${phaseMatch[2].trim().toLowerCase()}.`, "info");
+        setTicker(`Phase ${phaseIndex} -> ${phaseMatch[2].trim()}`);
+        setLatestSignal(`Phase ${phaseIndex}`, phaseMatch[2].trim());
+      }
+
+      const summaryMatch = String(line).match(/Summary:\s*(\d+)\s*chars/i);
+      if (summaryMatch) {
+        state.telemetry.summaryChars = Number(summaryMatch[1]);
+        state.telemetry.summaries = Math.max(state.telemetry.summaries, 1);
+        pushIntel("Summary lattice formed", `Đã sinh summary ${summaryMatch[1]} ký tự cho disease hiện tại.`, "good");
+      }
+
+      const signMatch = String(line).match(/Key signs:\s*(\[.*\])/i);
+      if (signMatch) {
+        const items = parseListLiteral(signMatch[1]);
+        state.telemetry.keySigns = items;
+        state.telemetry.signs = Math.max(state.telemetry.signs, items.length);
+        pushIntel("Clinical signals captured", `Nhận diện ${items.length} tín hiệu lâm sàng chủ đạo: ${items.slice(0, 4).join(", ") || "n/a"}.`, "good");
+      }
+
+      const drugMatch = String(line).match(/Key drugs:\s*(\[.*\])/i);
+      if (drugMatch) {
+        const items = parseListLiteral(drugMatch[1]);
+        state.telemetry.keyDrugs = items;
+        state.telemetry.drugs = Math.max(state.telemetry.drugs, items.length);
+        pushIntel("Therapy vector extracted", `Nhận diện ${items.length} drug clue trong protocol hiện tại.`, "info");
+      }
+
+      const chunkMatch = String(line).match(/(\d+)\s+chunks?/i);
+      if (chunkMatch) state.telemetry.chunks = Math.max(state.telemetry.chunks, Number(chunkMatch[1]));
+      const signCountMatch = String(line).match(/(\d+)\s+sign(?:s| mentions?)?/i);
+      if (signCountMatch) state.telemetry.signs = Math.max(state.telemetry.signs, Number(signCountMatch[1]));
+      const serviceCountMatch = String(line).match(/(\d+)\s+service(?:s| mentions?)?/i);
+      if (serviceCountMatch) state.telemetry.services = Math.max(state.telemetry.services, Number(serviceCountMatch[1]));
+      const obsCountMatch = String(line).match(/(\d+)\s+observation(?:s| mentions?)?/i);
+      if (obsCountMatch) state.telemetry.observations = Math.max(state.telemetry.observations, Number(obsCountMatch[1]));
+      const assertionCountMatch = String(line).match(/(\d+)\s+assertion(?:s)?/i);
+      if (assertionCountMatch) state.telemetry.assertions = Math.max(state.telemetry.assertions, Number(assertionCountMatch[1]));
+
+      if (/neo4j ingest/i.test(line)) {
+        triggerTheatreFlash("GRAPH SEAL", "warn");
+        pushTimeline("Neo4j Forge", "Bắt đầu khoá graph vào runtime store.", "warn");
+        pushIntel("Graph seal pending", "Hệ đang mở pha Neo4j ingest và dựng index/edge cuối cùng.", "warn");
+        setLatestSignal("Neo4j Forge", "Chuẩn bị khoá các node, edge và index vào graph runtime.");
+      }
+      if (/indexes created/i.test(line)) {
+        state.telemetry.graphReady = true;
+        triggerTheatreFlash("INDEX ARMED", "good");
+        pushIntel("Index lattice armed", "Neo4j indexes đã sẵn, graph có thể được truy xuất ngay.", "good");
+        setMissionAlert("Indexes armed", "Neo4j indexes đã sẵn sàng. Runtime graph có thể được query ngay.", "good");
+      }
+      if (/\[COMPLETE\]/i.test(line)) {
+        state.telemetry.graphReady = true;
+        triggerTheatreFlash("MISSION COMPLETE", "good");
+        pushTimeline("Mission complete", "Pipeline đã hoàn tất, chờ nạp graph thật.", "good");
+        setMissionAlert("Mission complete", "Pipeline đã khép run thành công và đang chờ bootstrap/load graph.", "good");
+      }
+      if (/\[WARN\]/i.test(line)) {
+        const warnBody = line.replace(/^log\s*\|\s*/i, "").replace(/^\[WARN\]\s*/i, "");
+        pushIntel("Runtime warning", warnBody, "warn");
+        setMissionAlert("Runtime warning", warnBody, /connection error|failed/i.test(warnBody) ? "bad" : "warn");
+        if (/Extraction failed/i.test(warnBody)) {
+          setLatestSignal("Extraction failure", warnBody);
+        }
+      }
+      if (/error/i.test(line) || /\[ONTOLOGY_V2\]\s+Error/i.test(line)) {
+        pushIntel("Runtime failure", line, "bad");
+        setMissionAlert("Runtime failure", line.replace(/^log\s*\|\s*/i, ""), "bad");
+        setLatestSignal("Runtime failure", line.replace(/^log\s*\|\s*/i, ""));
+      }
+
+      renderPhaseMatrix();
+      renderHeroStats();
+      renderLanes();
+      if (state.theatreMode === "synthetic") {
+        buildSyntheticScene();
+        renderScene();
+      }
+    }
+
+    function resetTelemetry() {
+      state.latestPhaseIndex = -1;
+      state.latestPhaseText = "";
+      state.telemetry = {
+        chunks: 0, signs: 0, services: 0, observations: 0, assertions: 0,
+        summaries: 0, drugs: 0, summaryChars: 0, graphReady: false, keySigns: [], keyDrugs: [],
+      };
+      state.logs = [];
+      state.timeline = [];
+      state.intel = [];
+      state.advisory = null;
+      state.selectedNode = null;
+      state.diseaseData = null;
+      state.selectedDiseaseId = null;
+      state.visual.focusNodeIds = new Set();
+      state.visual.focusEdgeKeys = new Set();
+      clearMissionAlert();
+    }
+
+    function renderNamespaceMetrics(summary) {
+      const cards = [
+        { label: "Diseases", value: summary?.diseases ?? 0 },
+        { label: "Chunks", value: summary?.chunks ?? 0 },
+        { label: "Assertions", value: summary?.assertions ?? 0 },
+        { label: "Summaries", value: summary?.summaries ?? 0 },
+      ];
+      els.namespaceMetricGrid.innerHTML = cards.map((card) => `
+        <div class="metric-card">
+          <div class="label">${escapeHtml(card.label)}</div>
+          <div class="value">${escapeHtml(card.value)}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderPdfOptions(pdfs) {
+      const options = ['<option value="">-- Chọn PDF --</option>'];
+      for (const item of pdfs || []) {
+        options.push(`<option value="${escapeHtml(item.path)}">${escapeHtml(item.filename)} (${escapeHtml(item.size_mb)} MB)</option>`);
+      }
+      els.pdfSelect.innerHTML = options.join("");
+    }
+
+    function renderDiseaseList(diseases) {
+      const query = normalizeText(els.diseaseSearch.value);
+      const activeId = state.selectedDiseaseId;
+      const filtered = (diseases || []).filter((item) => !query || normalizeText(item.disease_name).includes(query) || normalizeText(item.disease_id).includes(query));
+      if (!filtered.length) {
+        els.diseaseList.innerHTML = `<div class="empty-state">Không có disease nào khớp bộ lọc hiện tại.</div>`;
+        return;
+      }
+      els.diseaseList.innerHTML = filtered.map((item) => `
+        <div class="disease-item ${item.disease_id === activeId ? "active" : ""}" data-disease-id="${escapeHtml(item.disease_id)}">
+          <div class="name">${escapeHtml(item.disease_name)}</div>
+          <div class="meta">${escapeHtml(item.disease_id)} | chunks ${escapeHtml(item.chunk_count)} | assertions ${escapeHtml(item.assertion_count)}</div>
+          <div class="chip-row">
+            <span class="chip">summary ${escapeHtml(item.summary_count)}</span>
+            <span class="chip">namespace ${escapeHtml(state.selectedNamespace || "ontology_v2")}</span>
+          </div>
+        </div>
+      `).join("");
+      Array.from(els.diseaseList.querySelectorAll(".disease-item")).forEach((node) => {
+        node.addEventListener("click", () => loadDisease(node.dataset.diseaseId));
+      });
+    }
+
+    function clusterCenter(type) {
+      const centers = {
+        disease: [510, 305],
+        summary: [510, 92],
+        chunk: [150, 168],
+        sign_mention: [170, 422],
+        sign_concept: [360, 540],
+        service_mention: [845, 368],
+        service: [660, 520],
+        service_family: [890, 548],
+        observation_mention: [94, 548],
+        assertion: [858, 118],
+        synthetic_doc: [470, 170],
+        synthetic_output: [930, 320],
+        synthetic_core: [700, 330],
+      };
+      return centers[type] || [500, 310];
+    }
+
+    function layoutClusterNodes(nodes, cx, cy, type) {
+      const style = TYPE_STYLE[type] || TYPE_STYLE.default;
+      return nodes.map((node, index) => {
+        if (nodes.length === 1) {
+          return {
+            ...node,
+            x: cx,
+            y: cy,
+            homeX: cx,
+            homeY: cy,
+            radius: style.r + 4,
+          };
+        }
+        const angle = index * 2.399963229728653;
+        const radius = 28 + (Math.sqrt(index + 1) * (style.ring + 18) * 1.62);
+        const x = cx + Math.cos(angle) * radius;
+        const y = cy + Math.sin(angle) * radius * 0.82;
+        return {
+          ...node,
+          x,
+          y,
+          homeX: x,
+          homeY: y,
+          radius: style.r + 4,
+        };
+      });
+    }
+
+    function relaxSceneNodes(nodes) {
+      for (let iteration = 0; iteration < 44; iteration += 1) {
+        for (let i = 0; i < nodes.length; i += 1) {
+          const a = nodes[i];
+          for (let j = i + 1; j < nodes.length; j += 1) {
+            const b = nodes[j];
+            const dx = b.x - a.x;
+            const dy = b.y - a.y;
+            const distance = Math.sqrt((dx * dx) + (dy * dy)) || 0.001;
+            const minDistance = (a.radius || 16) + (b.radius || 16) + 16;
+            if (distance < minDistance) {
+              const push = ((minDistance - distance) / 2) * 0.92;
+              const ux = dx / distance;
+              const uy = dy / distance;
+              a.x -= ux * push;
+              a.y -= uy * push;
+              b.x += ux * push;
+              b.y += uy * push;
+            }
+          }
+          a.x += (a.homeX - a.x) * 0.035;
+          a.y += (a.homeY - a.y) * 0.035;
+          a.x = Math.min(Math.max(a.x, 50), 950);
+          a.y = Math.min(Math.max(a.y, 56), 580);
+        }
+      }
+      return nodes;
+    }
+
+    function edgeEndpoints(source, target) {
+      const dx = target.x - source.x;
+      const dy = target.y - source.y;
+      const distance = Math.sqrt((dx * dx) + (dy * dy)) || 1;
+      const ux = dx / distance;
+      const uy = dy / distance;
+      const sourceStyle = TYPE_STYLE[source.type] || TYPE_STYLE.default;
+      const targetStyle = TYPE_STYLE[target.type] || TYPE_STYLE.default;
+      const sourceRadius = (sourceStyle.r || 12) + 3;
+      const targetRadius = (targetStyle.r || 12) + 3;
+      return {
+        x1: source.x + (ux * sourceRadius),
+        y1: source.y + (uy * sourceRadius),
+        x2: target.x - (ux * targetRadius),
+        y2: target.y - (uy * targetRadius),
+      };
+    }
+
+    function buildRealScene(graph) {
+      const buckets = {};
+      for (const node of graph.nodes || []) {
+        buckets[node.type] = buckets[node.type] || [];
+        buckets[node.type].push(node);
+      }
+      const sceneNodes = [];
+      Object.entries(buckets).forEach(([type, nodes]) => {
+        const [cx, cy] = clusterCenter(type);
+        const laidOut = layoutClusterNodes(nodes.map((node) => ({
+          id: node.id,
+          type: node.type,
+          label: node.label,
+          subtitle: node.subtitle || "",
+          raw: node,
+        })), cx, cy, type);
+        sceneNodes.push(...laidOut);
+      });
+      relaxSceneNodes(sceneNodes);
+      const nodeMap = Object.fromEntries(sceneNodes.map((node) => [node.id, node]));
+      const sceneEdges = (graph.edges || [])
+        .filter((edge) => nodeMap[edge.source] && nodeMap[edge.target])
+        .map((edge) => ({ ...edge, strong: /maps_to|assertion_about|summarizes/i.test(edge.type || edge.label || "") }));
+      applySceneTransitions({ nodes: sceneNodes, edges: sceneEdges });
+      state.scene = { nodes: sceneNodes, edges: sceneEdges };
+      state.selectedNode = state.selectedNode ? sceneNodes.find((node) => node.id === state.selectedNode.id) || null : null;
+      if (state.selectedNode) {
+        const cluster = getLocalCluster(state.selectedNode.id);
+        state.visual.focusNodeIds = cluster.nodeIds;
+        state.visual.focusEdgeKeys = cluster.edgeKeys;
+      } else {
+        state.visual.focusNodeIds = new Set();
+        state.visual.focusEdgeKeys = new Set();
+      }
+      state.theatreMode = "graph";
+      els.theatreModeChip.textContent = "GRAPH";
+      els.theatreModeChip.className = "status-chip status-completed";
+      els.overlayModeTitle.textContent = "Runtime graph loaded";
+      els.overlayModeSub.textContent = "Theatre đang hiển thị graph thật từ Neo4j inspector payload.";
+      syncCameraToScene();
+    }
+
+    function buildSyntheticScene() {
+      const nodes = [];
+      const edges = [];
+      const addNode = (id, type, label, x, y, subtitle = "", raw = {}) => nodes.push({ id, type, label, subtitle, x, y, raw });
+      const addEdge = (source, target, type = "flow", strong = false) => edges.push({ source, target, type, strong });
+
+      addNode("synthetic:disease", "synthetic_core", state.latestRunDiseaseName || "Mission Core", 700, 320, state.selectedNamespace);
+      addNode("synthetic:doc", "synthetic_doc", "PDF Input", 470, 170, "Document envelope");
+      addNode("synthetic:chunks", "chunk", "Chunk lattice", 560, 220, `${state.telemetry.chunks} chunks`);
+      addNode("synthetic:signs", "sign_mention", "Sign burst", 560, 450, `${state.telemetry.signs} signals`);
+      addNode("synthetic:services", "service_mention", "Service burst", 850, 450, `${state.telemetry.services} services`);
+      addNode("synthetic:observations", "observation_mention", "Observation line", 455, 548, `${state.telemetry.observations} obs`);
+      addNode("synthetic:assertions", "assertion", "Assertion forge", 870, 150, `${state.telemetry.assertions} rules`);
+      addNode("synthetic:summary", "summary", "Summary core", 700, 98, `${state.telemetry.summaryChars || 0} chars`);
+      addNode("synthetic:neo4j", "synthetic_output", "Neo4j core", 930, 320, state.telemetry.graphReady ? "Index armed" : "Awaiting seal");
+
+      addEdge("synthetic:doc", "synthetic:chunks", "extract", true);
+      addEdge("synthetic:chunks", "synthetic:disease", "chunk_about");
+      addEdge("synthetic:chunks", "synthetic:signs", "mentions_sign");
+      addEdge("synthetic:chunks", "synthetic:services", "mentions_service");
+      addEdge("synthetic:chunks", "synthetic:observations", "mentions_observation");
+      addEdge("synthetic:chunks", "synthetic:assertions", "contains_assertion");
+      addEdge("synthetic:summary", "synthetic:disease", "summarizes", true);
+      addEdge("synthetic:assertions", "synthetic:disease", "assertion_about", true);
+      addEdge("synthetic:disease", "synthetic:neo4j", "sealed_into", true);
+
+      const orbit = (prefix, type, count, cx, cy, radius, maxCount) => {
+        const total = Math.min(Math.max(count, 0), maxCount);
+        for (let index = 0; index < total; index += 1) {
+          const angle = (Math.PI * 2 * index) / Math.max(total, 1);
+          const x = cx + Math.cos(angle) * radius;
+          const y = cy + Math.sin(angle) * radius;
+          addNode(`${prefix}:${index}`, type, `${prefix} ${index + 1}`, x, y, "burst");
+          addEdge(`synthetic:${prefix}`, `${prefix}:${index}`, "emits");
+        }
+      };
+      orbit("chunks", "chunk", state.telemetry.chunks || 0, 560, 220, 54, 8);
+      orbit("signs", "sign_mention", state.telemetry.signs || 0, 560, 450, 62, 8);
+      orbit("services", "service_mention", state.telemetry.services || 0, 850, 450, 62, 8);
+      orbit("assertions", "assertion", state.telemetry.assertions || 0, 870, 150, 50, 6);
+
+      applySceneTransitions({ nodes, edges });
+      state.scene = { nodes, edges };
+      state.selectedNode = state.selectedNode ? nodes.find((node) => node.id === state.selectedNode.id) || null : null;
+      if (state.selectedNode) {
+        const cluster = getLocalCluster(state.selectedNode.id);
+        state.visual.focusNodeIds = cluster.nodeIds;
+        state.visual.focusEdgeKeys = cluster.edgeKeys;
+      } else {
+        state.visual.focusNodeIds = new Set();
+        state.visual.focusEdgeKeys = new Set();
+      }
+      state.theatreMode = "synthetic";
+      els.theatreModeChip.textContent = "SYNTHETIC";
+      els.theatreModeChip.className = "status-chip status-running";
+      els.overlayModeTitle.textContent = "Synthetic telemetry";
+      els.overlayModeSub.textContent = "Scene đang được đẩy bằng phase, log và các counter đang lớn dần trong runtime.";
+      syncCameraToScene();
+    }
+
+    function renderScene() {
+      const svg = els.graphSvg;
+      const baseScene = state.scene;
+      const scene = state.theatreMode === "synthetic"
+        ? (() => {
+            const visibleIds = visibleSyntheticNodeIds(baseScene);
+            const nodes = (baseScene.nodes || []).filter((node) => visibleIds.has(node.id));
+            const edges = (baseScene.edges || []).filter((edge) => visibleIds.has(edge.source) && visibleIds.has(edge.target));
+            return { nodes, edges };
+          })()
+        : baseScene;
+      if (!scene?.nodes?.length) {
+        svg.innerHTML = "";
+        return;
+      }
+      const nodeMap = Object.fromEntries(scene.nodes.map((node) => [node.id, node]));
+      const degreeMap = {};
+      (scene.edges || []).forEach((edge) => {
+        degreeMap[edge.source] = (degreeMap[edge.source] || 0) + 1;
+        degreeMap[edge.target] = (degreeMap[edge.target] || 0) + 1;
+      });
+      const keyTypes = new Set(["disease", "summary", "assertion", "synthetic_core", "synthetic_output"]);
+      const hasLocalFocus = Boolean(state.selectedNode && state.visual.focusNodeIds.size);
+      const isReasoning = scene.nodes.some(n => n.highlighted);
+
+      const edgeMarkup = (scene.edges || []).map((edge) => {
+        const source = nodeMap[edge.source];
+        const target = nodeMap[edge.target];
+        if (!source || !target) return "";
+        const locked = state.visual.lockedEdges.has(edgeKey(edge)) ? "locked" : "";
+        const focused = hasLocalFocus && state.visual.focusEdgeKeys.has(edgeKey(edge)) ? "focused" : "";
+        
+        let dimmed = "";
+        if (isReasoning) {
+          dimmed = edge.faded ? "dimmed" : "";
+        } else if (hasLocalFocus) {
+          dimmed = !focused ? "dimmed" : "";
+        }
+
+        const highlighted = edge.highlighted ? "highlighted-edge" : "";
+        const points = edgeEndpoints(source, target);
+        return `<line class="node-link ${edge.strong ? "strong" : ""} ${locked} ${focused} ${dimmed} ${highlighted}" x1="${points.x1}" y1="${points.y1}" x2="${points.x2}" y2="${points.y2}"></line>`;
+      }).join("");
+
+      const nodeMarkup = scene.nodes.map((node) => {
+        const style = TYPE_STYLE[node.type] || TYPE_STYLE.default;
+        const selected = state.selectedNode?.id === node.id ? "selected" : "";
+        const born = state.visual.bornNodes.has(node.id) ? "birth" : "";
+        const neighbor = hasLocalFocus && state.visual.focusNodeIds.has(node.id) && !selected ? "neighbor" : "";
+        
+        let dimmed = "";
+        if (isReasoning) {
+          dimmed = node.faded ? "dimmed" : "";
+        } else if (hasLocalFocus) {
+          dimmed = !state.visual.focusNodeIds.has(node.id) ? "dimmed" : "";
+        }
+
+        const highlighted = node.highlighted ? "highlighted-node" : "";
+        const keyLabel = keyTypes.has(node.type) || (degreeMap[node.id] || 0) >= 3 || scene.nodes.length <= 12 || node.highlighted;
+        
+        const labelText = escapeHtml(String(node.label || "").slice(0, 24));
+        const subText = node.subtitle ? escapeHtml(String(node.subtitle).slice(0, 26)) : "";
+        const charCount = Math.max(labelText.length, subText.length, 6);
+        const pillWidth = Math.max(100, charCount * 9 + 32);
+        const pillHeight = subText ? 52 : 36;
+        const rx = pillHeight / 2;
+        const rectX = -(pillWidth / 2);
+        const rectY = -(pillHeight / 2);
+
+        if (keyLabel) {
+          return `
+            <g class="graph-node ${selected} ${born} ${neighbor} ${dimmed} ${highlighted} key-label" data-node-id="${escapeHtml(node.id)}" transform="translate(${node.x} ${node.y})">
+              <rect class="halo" x="${rectX - 6}" y="${rectY - 6}" width="${pillWidth + 12}" height="${pillHeight + 12}" rx="${rx + 6}" fill="${style.halo}"></rect>
+              <rect class="core" x="${rectX}" y="${rectY}" width="${pillWidth}" height="${pillHeight}" rx="${rx}" fill="${style.color}"></rect>
+              <text class="label" x="0" y="${subText ? -6 : 1}" font-size="14px" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">${labelText}</text>
+              ${subText ? `<text class="subtext" x="0" y="12" font-size="12px" font-weight="500" font-family="'IBM Plex Mono', monospace" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">${subText}</text>` : ""}
+            </g>
+          `;
+        } else {
+          return `
+            <g class="graph-node ${selected} ${born} ${neighbor} ${dimmed} ${highlighted}" data-node-id="${escapeHtml(node.id)}" transform="translate(${node.x} ${node.y})">
+              <circle class="halo" r="16" fill="${style.halo}"></circle>
+              <circle class="core" r="10" fill="${style.color}"></circle>
+              <text class="label" x="0" y="24" font-size="13px" font-weight="600" text-anchor="middle" fill="var(--ink)">${labelText}</text>
+            </g>
+          `;
+        }
+      }).join("");
+      svg.innerHTML = `${edgeMarkup}${nodeMarkup}`;
+      svg.onclick = (event) => {
+        if (state.visual.panMoved) {
+          state.visual.panMoved = false;
+          return;
+        }
+        if (event.target === svg) clearNodeFocus();
+      };
+      Array.from(svg.querySelectorAll(".graph-node")).forEach((element) => {
+        element.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const node = scene.nodes.find((item) => item.id === element.dataset.nodeId);
+          focusNodeAt(node, event);
+        });
+      });
+    }
+
+    function updateOverlayStats() {
+      const stats = state.diseaseData?.graph?.stats || {};
+      els.overlayNodeCount.textContent = String(stats.node_count || state.scene.nodes.length || 0);
+      els.overlayEdgeCount.textContent = String(stats.edge_count || state.scene.edges.length || 0);
+      els.overlaySignCount.textContent = String(state.diseaseData?.mapping_stats?.signs?.total || state.telemetry.signs || 0);
+      els.overlayServiceCount.textContent = String(state.diseaseData?.mapping_stats?.services?.total || state.telemetry.services || 0);
+      if (state.diseaseData?.disease) {
+        els.overlayDiseaseName.textContent = state.diseaseData.disease.disease_name || state.diseaseData.disease.disease_id;
+        els.overlayNamespace.textContent = `Namespace ${state.diseaseData.namespace || state.selectedNamespace} | Disease ${state.diseaseData.disease.disease_id}`;
+      } else {
+        els.overlayDiseaseName.textContent = state.latestRunDiseaseName || "Chưa nạp disease";
+        els.overlayNamespace.textContent = `Namespace ${state.selectedNamespace || "ontology_v2"} | waiting graph`;
+      }
+    }
+
+    function renderAll() {
+      renderPhaseMatrix();
+      renderHeroStats();
+      renderTimeline();
+      renderIntel();
+      renderLogs();
+      renderLanes();
+      renderNodeDetail(state.selectedNode);
+      renderExperience(state.advisory);
+      renderTheatreSignals();
+      renderSyntheticStoryboard();
+      renderMissionAlert();
+      renderFocusLens();
+      updateOverlayStats();
+      renderScene();
+    }
+
+    async function loadBootstrap() {
+      const namespace = state.selectedNamespace || els.namespaceSelect.value || "ontology_v2";
+      const query = namespace ? `?namespace=${encodeURIComponent(namespace)}` : "";
+      const payload = await fetchJson(`/api/ontology-v2/inspector/bootstrap${query}`);
+      state.bootstrap = payload;
+      state.selectedNamespace = payload.active_namespace || payload.default_namespace || namespace || "ontology_v2";
+      const options = (payload.namespaces || []).map((item) => (
+        `<option value="${escapeHtml(item.namespace)}" ${item.namespace === state.selectedNamespace ? "selected" : ""}>${escapeHtml(item.namespace)} (${escapeHtml(item.disease_count)})</option>`
+      ));
+      if (!options.length) options.push(`<option value="${escapeHtml(state.selectedNamespace)}">${escapeHtml(state.selectedNamespace)}</option>`);
+      els.namespaceSelect.innerHTML = options.join("");
+      renderNamespaceMetrics(payload.summary || {});
+      renderPdfOptions(payload.pdfs || []);
+      renderDiseaseList(payload.diseases || []);
+      pushIntel("Bootstrap synchronized", `Namespace ${state.selectedNamespace} đã được đồng bộ với ${payload.summary?.diseases || 0} disease nodes.`, "good");
+      updateStatus(state.activeStatus === "running" ? "running" : "ready", state.activeStatus === "running" ? "Mission active" : "Deck synchronized", `Bootstrap nguồn ${payload.source || "unknown"} | Neo4j ${payload.neo4j_uri || "n/a"}`);
+      renderAll();
+    }
+
+    function findDiseaseMatchByName(name, diseases) {
+      const target = normalizeText(name);
+      if (!target) return null;
+      const exact = diseases.find((item) => normalizeText(item.disease_name) === target);
+      if (exact) return exact;
+      return diseases.find((item) => normalizeText(item.disease_name).includes(target) || target.includes(normalizeText(item.disease_name))) || null;
+    }
+
+    async function loadLatestMatch() {
+      const name = els.diseaseInput.value.trim() || state.latestRunDiseaseName;
+      const diseases = state.bootstrap?.diseases || [];
+      const match = findDiseaseMatchByName(name, diseases);
+      if (!match) {
+        pushIntel("No disease match", `Không tìm thấy disease trong namespace ${state.selectedNamespace} khớp với "${name}".`, "warn");
+        return;
+      }
+      await loadDisease(match.disease_id);
+    }
+
+    async function loadDisease(diseaseId) {
+      const namespace = state.selectedNamespace || els.namespaceSelect.value || "ontology_v2";
+      const payload = await fetchJson(`/api/ontology-v2/inspector/disease/${encodeURIComponent(diseaseId)}?namespace=${encodeURIComponent(namespace)}`);
+      state.diseaseData = payload;
+      state.selectedDiseaseId = diseaseId;
+      state.currentDiseaseId = payload.disease?.disease_name || diseaseId;
+      state.latestRunDiseaseName = payload.disease?.disease_name || state.latestRunDiseaseName;
+      state.selectedNode = { id: `disease:${payload.disease?.disease_id || diseaseId}`, type: "disease", label: payload.disease?.disease_name || diseaseId, subtitle: payload.disease?.disease_id, raw: payload.disease };
+      const graphStats = payload.graph?.stats || {};
+      state.telemetry.chunks = graphStats.node_types?.chunk || state.telemetry.chunks;
+      state.telemetry.signs = payload.mapping_stats?.signs?.total || state.telemetry.signs;
+      state.telemetry.services = payload.mapping_stats?.services?.total || state.telemetry.services;
+      state.telemetry.observations = payload.mapping_stats?.observations?.total || state.telemetry.observations;
+      state.telemetry.assertions = payload.assertions?.length || state.telemetry.assertions;
+      state.telemetry.summaries = payload.summary ? 1 : state.telemetry.summaries;
+      state.telemetry.graphReady = true;
+      buildRealScene(payload.graph || { nodes: [], edges: [], stats: {} });
+      triggerTheatreFlash("GRAPH ACQUIRED", "good");
+      renderDiseaseList(state.bootstrap?.diseases || []);
+      setTicker(`Graph loaded: ${payload.disease?.disease_name || diseaseId} | ${graphStats.node_count || 0} nodes / ${graphStats.edge_count || 0} edges`);
+      setLatestSignal("Graph acquired", `Đã nạp graph thật cho ${payload.disease?.disease_name || diseaseId}.`);
+      pushTimeline("Graph loaded", `${payload.disease?.disease_name || diseaseId} -> ${graphStats.node_count || 0} nodes / ${graphStats.edge_count || 0} edges.`, "good");
+      pushIntel("Graph theatre switched", "Theatre đã chuyển từ synthetic telemetry sang graph thật từ inspector payload.", "good");
+      updateStatus(state.activeStatus === "running" ? "running" : "completed", payload.disease?.disease_name || "Graph loaded", `Namespace ${namespace} | disease ${payload.disease?.disease_id || diseaseId}`);
+      renderAll();
+    }
+
+    function closeRunChannels() {
+      if (state.ws) { try { state.ws.close(); } catch (_) {} state.ws = null; }
+      if (state.pollTimer) { clearInterval(state.pollTimer); state.pollTimer = null; }
+    }
+
+    function updateAdvisoryFromSnapshot(snapshot) {
+      const advisory = snapshot?.result?.experience_advisory;
+      if (advisory) {
+        state.advisory = advisory;
+        renderExperience(state.advisory);
+      }
+    }
+
+    async function handleRunCompletion(runId, snapshot) {
+      updateAdvisoryFromSnapshot(snapshot);
+      const status = snapshot?.status || "completed";
+      if (status === "completed") {
+        updateStatus("completed", state.latestRunDiseaseName || "Mission complete", `Run ${runId} đã hoàn tất. Đang đồng bộ bootstrap và dò disease graph.`);
+        pushTimeline("Mission complete", `Run ${runId} hoàn tất và đang dò graph trong namespace hiện tại.`, "good");
+        await loadBootstrap();
+        const match = findDiseaseMatchByName(state.latestRunDiseaseName, state.bootstrap?.diseases || []);
+        if (match) await loadDisease(match.disease_id);
+        else { buildSyntheticScene(); renderAll(); }
+      } else if (status === "error") {
+        updateStatus("error", state.latestRunDiseaseName || "Mission failed", snapshot?.error || "Run kết thúc lỗi.");
+        pushTimeline("Mission failed", snapshot?.error || "Run kết thúc lỗi.", "bad");
+        pushIntel("Mission failed", snapshot?.error || "Run kết thúc lỗi.", "bad");
+        buildSyntheticScene();
+        renderAll();
+      }
+      closeRunChannels();
+      state.activeRunId = null;
+    }
+
+    function startRunPolling(runId) {
+      if (state.pollTimer) clearInterval(state.pollTimer);
+      state.pollTimer = setInterval(async () => {
+        try {
+          const snapshot = await fetchJson(`/api/ingest/${encodeURIComponent(runId)}`);
+          updateAdvisoryFromSnapshot(snapshot);
+          if (snapshot.status === "running") {
+            updateStatus("running", state.latestRunDiseaseName || "Mission active", `Run ${runId} đang hoạt động trên namespace ${snapshot.namespace || state.selectedNamespace}.`);
+          }
+          if (snapshot.status === "completed" || snapshot.status === "error") {
+            await handleRunCompletion(runId, snapshot);
+          }
+        } catch (error) {
+          appendLog(`[WARN] Polling issue: ${error.message}`, "warn");
+        }
+      }, 1500);
+    }
+
+    function connectRunLogs(runId) {
+      if (state.ws) { try { state.ws.close(); } catch (_) {} }
+      const proto = window.location.protocol === "https:" ? "wss" : "ws";
+      const ws = new WebSocket(`${proto}://${window.location.host}/ws/pipeline/${runId}`);
+      state.ws = ws;
+      ws.onopen = () => appendLog(`[WS] Connected to ${runId}`);
+      ws.onmessage = async (event) => {
+        const data = JSON.parse(event.data);
+        if (data.type === "complete") {
+          const snapshot = await fetchJson(`/api/ingest/${encodeURIComponent(runId)}`);
+          await handleRunCompletion(runId, snapshot);
+          return;
+        }
+        if (data.message) appendLog(`${data.type || "log"} | ${data.message}`, data.type || "log");
+        else appendLog(JSON.stringify(data), data.type || "log");
+      };
+      ws.onerror = () => appendLog("[WARN] WebSocket issue, UI se fallback sang polling.", "warn");
+      ws.onclose = () => appendLog("[WS] Closed.", "log");
+    }
+
+    async function submitIngest() {
+      const diseaseName = els.diseaseInput.value.trim();
+      if (!diseaseName) { alert("Cần nhập disease name."); return; }
+      if (!els.pdfUpload.files.length && !els.pdfSelect.value) {
+        alert("Chọn PDF có sẵn hoặc upload PDF mới.");
+        return;
+      }
+
+      closeRunChannels();
+      resetTelemetry();
+      state.latestRunDiseaseName = diseaseName;
+      buildSyntheticScene();
+      renderAll();
+
+      const form = new FormData();
+      form.append("disease_name", diseaseName);
+      form.append("namespace", els.namespaceSelect.value || "ontology_v2");
+      form.append("skip_first_page", els.skipFirstPage.checked ? "true" : "false");
+      if (els.pdfUpload.files.length) form.append("file", els.pdfUpload.files[0]);
+      else if (els.pdfSelect.value) form.append("existing_pdf_path", els.pdfSelect.value);
+
+      updateStatus("running", diseaseName, `Submitting ingest for ${diseaseName}...`);
+      setTicker(`Ignition requested for ${diseaseName}. Backend đang nhận mission.`);
+      setLatestSignal("Mission submitted", `Đã gửi nhiệm vụ ${diseaseName} vào ontology_v2 ingest pipeline.`);
+      pushTimeline("Mission submitted", `Disease ${diseaseName} đã được gửi vào pipeline.`, "info");
+
+      try {
+        const payload = await fetchJson("/api/ontology-v2/ingest", { method: "POST", body: form });
+        state.activeRunId = payload.run_id;
+        state.latestRunDiseaseName = payload.disease_name;
+        updateStatus("running", payload.disease_name, `Run ${payload.run_id} đang hình thành graph trong namespace ${payload.namespace}.`);
+        appendLog(`[START] ${payload.run_id}`);
+        connectRunLogs(payload.run_id);
+        startRunPolling(payload.run_id);
+      } catch (error) {
+        updateStatus("error", diseaseName, error.message);
+        appendLog(`[ERROR] ${error.message}`, "error");
+        pushTimeline("Submit failed", error.message, "bad");
+        pushIntel("Mission submission failed", error.message, "bad");
+      }
+    }
+
+    function resizeCanvas() {
+      // Canvas is now handled via CSS for SVG and Minimap rendering loop
+    }
+
+    function initCanvas() {
+      const mmCanvas = document.getElementById("minimapCanvas");
+      if (!mmCanvas) return;
+      const mmCtx = mmCanvas.getContext("2d");
+      
+      const frame = () => {
+        if (!state.scene || !state.scene.nodes || !state.scene.nodes.length) {
+          state.canvas.animationId = requestAnimationFrame(frame);
+          return;
+        }
+        
+        const w = els.theatre.getBoundingClientRect().width;
+        const h = els.theatre.getBoundingClientRect().height;
+        
+        mmCanvas.width = 180;
+        mmCanvas.height = 120;
+        mmCtx.clearRect(0,0,180,120);
+        
+        const bounds = { minX: 9999, maxX: -9999, minY: 9999, maxY: -9999 };
+        state.scene.nodes.forEach(n => {
+          bounds.minX = Math.min(bounds.minX, n.x);
+          bounds.maxX = Math.max(bounds.maxX, n.x);
+          bounds.minY = Math.min(bounds.minY, n.y);
+          bounds.maxY = Math.max(bounds.maxY, n.y);
+        });
+        
+        const mapW = Math.max(bounds.maxX - bounds.minX, 800) || 800;
+        const mapH = Math.max(bounds.maxY - bounds.minY, 600) || 600;
+        
+        const scale = Math.min(180 / mapW, 120 / mapH) * 0.8;
+        const offsetX = (180 - (bounds.maxX - bounds.minX) * scale) / 2 - bounds.minX * scale;
+        const offsetY = (120 - (bounds.maxY - bounds.minY) * scale) / 2 - bounds.minY * scale;
+        
+        mmCtx.fillStyle = "rgba(37, 99, 235, 0.6)";
+        state.scene.nodes.forEach(n => {
+          const mx = n.x * scale + offsetX;
+          const my = n.y * scale + offsetY;
+          mmCtx.beginPath();
+          mmCtx.arc(mx, my, 2, 0, Math.PI * 2);
+          mmCtx.fill();
+        });
+        
+        const viewportW = w / state.visual.zoom;
+        const viewportH = h / state.visual.zoom;
+        const vX = -state.visual.pan.x / state.visual.zoom;
+        const vY = -state.visual.pan.y / state.visual.zoom;
+        
+        const mmView = document.getElementById("minimapView");
+        if(mmView) {
+          mmView.style.width = Math.min(viewportW * scale, 180) + "px";
+          mmView.style.height = Math.min(viewportH * scale, 120) + "px";
+          mmView.style.left = (vX * scale + offsetX) + "px";
+          mmView.style.top = (vY * scale + offsetY) + "px";
+        }
+        
+        state.canvas.animationId = requestAnimationFrame(frame);
+      };
+      frame();
+    }
+
+    function bindEvents() {
+      bindCollapsiblePanels();
+      els.refreshBootstrapBtn.addEventListener("click", loadBootstrap);
+      els.runIngestBtn.addEventListener("click", submitIngest);
+      els.loadLatestMatchBtn.addEventListener("click", loadLatestMatch);
+      els.cameraPresetFull.addEventListener("click", () => applyCameraPreset("full", { announce: true, manual: true }));
+      els.cameraPresetCore.addEventListener("click", () => applyCameraPreset("core", { announce: true, manual: true }));
+      els.cameraPresetChunks.addEventListener("click", () => applyCameraPreset("chunks", { announce: true, manual: true }));
+      els.cameraPresetAssertions.addEventListener("click", () => applyCameraPreset("assertions", { announce: true, manual: true }));
+      els.cameraPresetServices.addEventListener("click", () => applyCameraPreset("services", { announce: true, manual: true }));
+      els.autoTourBtn.addEventListener("click", () => {
+        if (state.visual.autoTour) stopAutoTour();
+        else startAutoTour();
+      });
+      els.focusLensClose.addEventListener("click", () => clearNodeFocus());
+      els.focusModeBtn.addEventListener("click", () => {
+        state.visual.focusMode = !state.visual.focusMode;
+        document.body.classList.toggle("focus-mode", state.visual.focusMode);
+        updateModeButtons();
+        setTimeout(resizeCanvas, 120);
+      });
+      els.fullscreenBtn.addEventListener("click", async () => {
+        try {
+          if (document.fullscreenElement) {
+            await document.exitFullscreen();
+          } else {
+            await document.documentElement.requestFullscreen();
+          }
+        } catch (error) {
+          pushIntel("Fullscreen unavailable", error.message, "warn");
+        } finally {
+          updateModeButtons();
+        }
+      });
+      els.diseaseSearch.addEventListener("input", () => renderDiseaseList(state.bootstrap?.diseases || []));
+      
+      const themeSwitcher = document.getElementById("themeSwitcher");
+      if (themeSwitcher) {
+        themeSwitcher.addEventListener("change", (e) => {
+          document.documentElement.setAttribute('data-theme', e.target.value);
+        });
+      }
+
+      els.namespaceSelect.addEventListener("change", async () => {
+        state.selectedNamespace = els.namespaceSelect.value;
+        await loadBootstrap();
+      });
+      els.graphSvg.addEventListener("pointerdown", beginGraphPan);
+      els.graphSvg.addEventListener("wheel", (event) => {
+        event.preventDefault();
+        const scale = event.deltaY > 0 ? 1.12 : 0.88;
+        zoomGraphAt(event.clientX, event.clientY, scale);
+      }, { passive: false });
+      window.addEventListener("pointermove", updateGraphPan);
+      window.addEventListener("pointerup", endGraphPan);
+      window.addEventListener("pointercancel", endGraphPan);
+      window.addEventListener("resize", () => {
+        resizeCanvas();
+        renderFocusLens();
+      });
+      document.addEventListener("fullscreenchange", () => {
+        updateModeButtons();
+        setTimeout(resizeCanvas, 120);
+      });
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("chatInput");
+      const text = input.value.trim();
+      if (!text) return;
+
+      const diseaseName = state.currentDiseaseId;
+      if (!diseaseName) {
+        appendChatMessage("ai", "⚠️ Chưa chọn bệnh/phác đồ! Vui lòng chọn một disease trong Disease Registry (panel bên phải) trước khi hỏi.\n\nHệ thống cần biết phác đồ nào để trả lời chính xác.");
+        return;
+      }
+
+      input.value = "";
+      const doctorHtml = `<div class="claim-disease-tag">📋 ${escapeHtml(diseaseName)}</div>\n${escapeHtml(text)}`;
+      appendChatMessage("doctor", doctorHtml, { html: true });
+      openReasoningPanel();
+
+      try {
+        const response = await fetchJson("/api/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            question: text,
+            disease_name: diseaseName,
+            session_id: state.chatSessionId
+          })
+        });
+
+        state.chatSessionId = response.session_id;
+        appendChatMessage("ai", response.answer);
+
+        if (response.reasoning_trace && response.reasoning_trace.length > 0) {
+          await renderReasoningTrace(response.reasoning_trace);
+        } else if (response.reasoning_node_ids && response.reasoning_node_ids.length > 0) {
+          await highlightReasoningPath(response.reasoning_node_ids);
+        }
+        markReasoningDone();
+      } catch (error) {
+        appendChatMessage("ai", "Xin lỗi, có lỗi xảy ra khi truy xuất kiến thức: " + error.message);
+        markReasoningDone();
+      }
+    }
+
+    function appendChatMessage(role, text, { html = false } = {}) {
+      const container = document.getElementById("chatMessages");
+      const msg = document.createElement("div");
+      msg.className = `message message-${role}`;
+      if (html) {
+        msg.innerHTML = text;
+      } else {
+        msg.innerText = text;
+      }
+      container.appendChild(msg);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function toggleChat() {
+      const win = document.getElementById("chatWindow");
+      win.classList.toggle("collapsed");
+    }
+
+    function switchChatMode(mode) {
+      const isClaim = mode === "claim";
+      document.getElementById("tabChat").classList.toggle("active", !isClaim);
+      document.getElementById("tabClaim").classList.toggle("active", isClaim);
+      document.getElementById("chatInputArea").style.display = isClaim ? "none" : "flex";
+      document.getElementById("claimInputArea").style.display = isClaim ? "block" : "none";
+      if (isClaim) {
+        fetchTraceBootstrap();
+      }
+    }
+
+    async function fetchTraceBootstrap() {
+      try {
+        const data = await fetchJson("/api/claims-insights/testcase-trace/bootstrap");
+        const select = document.getElementById("traceRunSelect");
+        if (!select) return;
+        
+        // Keep the first placeholder option
+        const placeholder = select.options[0];
+        select.innerHTML = "";
+        select.appendChild(placeholder);
+        
+        (data.recent_runs || []).forEach(run => {
+          const opt = document.createElement("option");
+          opt.value = run.id;
+          opt.textContent = `${run.filename || run.id} (${run.status})`;
+          select.appendChild(opt);
+        });
+      } catch (e) {
+        console.error("Trace bootstrap failed", e);
+      }
+    }
+
+    async function loadTraceRun(runId) {
+      if (!runId) return;
+      try {
+        const run = await fetchJson(`/api/ingest/${encodeURIComponent(runId)}`);
+        state.currentTraceRun = run;
+        const select = document.getElementById("traceCaseSelect");
+        if (!select) return;
+        
+        const placeholder = select.options[0];
+        select.innerHTML = "";
+        select.appendChild(placeholder);
+        
+        const cases = run.result?.cases || [];
+        cases.forEach(c => {
+          const opt = document.createElement("option");
+          opt.value = c.case_id;
+          const label = c.summary?.testcase_title || c.story_title || c.case_id;
+          opt.textContent = label.length > 40 ? label.slice(0, 38) + "..." : label;
+          select.appendChild(opt);
+        });
+        appendChatMessage("ai", `📡 Connected to trace run: ${runId} (${cases.length} entries detected)`);
+      } catch (e) {
+        appendChatMessage("ai", `❌ Failed to acquire trace run: ${e.message}`);
+      }
+    }
+
+    function loadTraceCase(caseId) {
+      if (!caseId || !state.currentTraceRun) return;
+      const caseData = (state.currentTraceRun.result?.cases || []).find(c => c.case_id === caseId);
+      if (caseData) {
+        state.selectedTraceCase = caseData;
+        const symptoms = caseData.sign_sets?.symptom_story || "";
+        const scenarioTitle = caseData.summary?.testcase_title || caseData.story_title || caseId;
+        
+        document.getElementById("claimContext").value = symptoms;
+        document.getElementById("claimInput").value = JSON.stringify(caseData.service_lines || [], null, 2);
+        
+        appendChatMessage("ai", `📂 LOADED SCENARIO: ${scenarioTitle}\n\nClinical context and service lines have been populated. Click "PLAY CINEMATIC TRACE" to visualize the reasoning.`);
+      }
+    }
+
+    async function replayTrace() {
+      if (!state.selectedTraceCase) {
+        alert("Select a Trace Run and Case from the History Browser first.");
+        return;
+      }
+      
+      const caseData = state.selectedTraceCase;
+      const trace = caseData.planning_trace || [];
+      if (trace.length === 0) {
+        appendChatMessage("ai", "⚠️ This mission record has no planning artifacts to replay.");
+        return;
+      }
+
+      appendChatMessage("ai", `🎬 INITIATING CINEMATIC REPLAY: ${caseData.case_id}...`);
+      openReasoningPanel();
+
+      // Convert planning trace to ReasoningTraceEntry for UI rendering
+      const formattedTrace = trace.map(step => {
+        const phaseMap = {
+          "Planner": "context_select",
+          "Mapper": "service_traverse",
+          "Reasoner": "graph_search",
+          "Adjudicator": "llm_adjudicate",
+          "Verifier": "llm_generate"
+        };
+        
+        return {
+          phase: phaseMap[step.agent] || "context_select",
+          action: `${step.agent}: ${step.title || step.summary || ""}`,
+          details: {
+            summary: step.summary,
+            ...step.details
+          },
+          node_ids: _extractNodeIdsFromTraceStep(step),
+          duration_ms: Math.round(1200 / state.replay.speed)
+        };
+      });
+
+      await renderReasoningTrace(formattedTrace);
+      markReasoningDone();
+      
+      appendChatMessage("ai", `🏁 Replay complete. Focus points highlighted on graph.`);
+    }
+
+    function _extractNodeIdsFromTraceStep(step) {
+      const ids = [];
+      const details = step.details || {};
+      
+      // Extract from hypotheses
+      if (details.top_hypotheses) {
+        details.top_hypotheses.forEach(h => {
+          if (h.disease_id) ids.push(`disease:${h.disease_id}`);
+          else if (h.disease_name) ids.push(`disease:${h.disease_name}`);
+        });
+      }
+      
+      // Extract from sign matches
+      if (details.matched_signs) {
+        details.matched_signs.forEach(s => {
+          if (s.block_id) ids.push(`chunk:${s.block_id}`);
+          else if (s.name) ids.push(`sign:${s.name}`);
+        });
+      }
+
+      // Extract from service mapping
+      if (details.service_mapping && details.service_mapping.rows) {
+        details.service_mapping.rows.forEach(r => {
+          if (r.mapped_service_code) ids.push(`service:${r.mapped_service_code}`);
+        });
+      }
+
+      return ids;
+    }
+
+    function exportSampleClaim() {
+      loadScriptScenario("12");
+    }
+
+    async function loadScriptScenario(scriptNum) {
+      if (!scriptNum) return;
+      
+      const scenario = CLINICAL_SCENARIOS[scriptNum];
+      if (scenario) {
+        document.getElementById("claimInput").value = JSON.stringify(scenario.services, null, 2);
+        if (scenario.context) {
+          document.getElementById("claimContext").value = scenario.context;
+        }
+        appendChatMessage("ai", `📂 Đã nạp kịch bản standard #${scriptNum}: ${scenario.title}`);
+        return;
+      }
+
+      // Fallback for custom scenarios if any
+      try {
+        const data = await fetchJson(`/api/script-scenarios/${scriptNum}`);
+        if (data.services && data.services.length) {
+          document.getElementById("claimInput").value = JSON.stringify(data.services, null, 2);
+        }
+        if (data.context) {
+          document.getElementById("claimContext").value = data.context;
+        }
+        appendChatMessage("ai", `📂 Đã nạp kịch bản custom #${scriptNum}: ${data.title || 'N/A'}`);
+      } catch (e) {
+        appendChatMessage("ai", `⚠️ Không tìm thấy kịch bản #${scriptNum}`);
+      }
+    }
+
+    async function adjudicateClaim() {
+      const input = document.getElementById("claimInput").value.trim();
+      const contextInput = (document.getElementById("claimContext")?.value || "").trim();
+      if (!input) return;
+
+      // Validate: phải chọn disease trước
+      const diseaseName = state.currentDiseaseId;
+      if (!diseaseName) {
+        appendChatMessage("ai", "⚠️ Chưa chọn bệnh/phác đồ! Vui lòng chọn một disease trong Disease Registry (panel bên phải) trước khi thẩm định.\n\nHệ thống cần biết phác đồ nào để đối chiếu dịch vụ claim.");
+        return;
+      }
+
+      document.getElementById("claimInput").value = "";
+
+      // Format JSON đẹp trong message
+      let formattedInput = input;
+      try {
+        const parsed = JSON.parse(input);
+        formattedInput = JSON.stringify(parsed, null, 2);
+      } catch(_) {}
+
+      // Build claim_text gộp context + services cho API
+      let claimText = input;
+      if (contextInput) {
+        claimText = `BỐI CẢNH LÂM SÀNG:\n${contextInput}\n\nDANH SÁCH DỊCH VỤ YÊU CẦU:\n${input}`;
+      }
+
+      // Doctor message
+      let doctorHtml = `<div class="claim-disease-tag">📋 ${escapeHtml(diseaseName)}</div>\n`;
+      if (contextInput) {
+        doctorHtml += `<strong>Bối cảnh lâm sàng:</strong>\n${escapeHtml(contextInput)}\n\n`;
+      }
+      doctorHtml += `<strong>Dịch vụ yêu cầu thẩm định:</strong><pre class="claim-json">${escapeHtml(formattedInput)}</pre>`;
+      appendChatMessage("doctor", doctorHtml, { html: true });
+      openReasoningPanel();
+
+      try {
+        const response = await fetchJson("/api/adjudicate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            claim_text: claimText,
+            disease_name: diseaseName,
+            session_id: state.chatSessionId
+          })
+        });
+
+        state.chatSessionId = response.session_id || state.chatSessionId;
+
+        // Build structured HTML result
+        let html = `<div class="claim-disease-tag">🏥 ${escapeHtml(diseaseName)}</div>\n`;
+        html += `<strong>KẾT QUẢ THẨM ĐỊNH TỰ ĐỘNG</strong>\n\n`;
+
+        (response.items || []).forEach(item => {
+          const icon = item.status === "Approved" ? "✅" : (item.status === "Denied" ? "❌" : "⚠️");
+          html += `<div class="adjudicate-item">`;
+          html += `<div class="svc-name">${icon} ${escapeHtml(item.service_name)}</div>`;
+          html += `<div class="svc-reason">${escapeHtml(item.reason)}</div>`;
+          html += `</div>`;
+        });
+
+        if (response.summary) {
+          html += `<div class="adjudicate-summary"><strong>📊 TỔNG QUAN:</strong> ${escapeHtml(response.summary)}</div>`;
+        }
+
+        appendChatMessage("ai", html, { html: true });
+
+        if (response.reasoning_trace && response.reasoning_trace.length > 0) {
+          await renderReasoningTrace(response.reasoning_trace);
+        } else if (response.reasoning_node_ids && response.reasoning_node_ids.length > 0) {
+          await highlightReasoningPath(response.reasoning_node_ids);
+        }
+        markReasoningDone();
+      } catch (error) {
+        appendChatMessage("ai", "❌ Lỗi thẩm định: " + error.message);
+        markReasoningDone();
+      }
+    }
+
+    function openReasoningPanel() {
+      const overlay = document.getElementById("reasoningOverlay");
+      const steps = document.getElementById("reasoningSteps");
+      const dot = document.getElementById("reasoningDot");
+      steps.innerHTML = "";
+      dot.classList.remove("done");
+      overlay.classList.add("active");
+    }
+
+    function closeReasoningPanel() {
+      const overlay = document.getElementById("reasoningOverlay");
+      overlay.classList.remove("active");
+      // Clear graph highlighting
+      if (state.scene) {
+        (state.scene.nodes || []).forEach(n => { n.faded = false; n.highlighted = false; });
+        (state.scene.edges || []).forEach(l => { l.faded = false; l.highlighted = false; });
+        renderAll();
+      }
+    }
+
+    function markReasoningDone() {
+      const dot = document.getElementById("reasoningDot");
+      dot.classList.add("done");
+    }
+
+    function _panToNodes(nodeIds) {
+      if (!state.scene || !state.scene.nodes) return;
+      const idSet = new Set(nodeIds.map(String));
+      const targets = state.scene.nodes.filter(n => idSet.has(String(n.id)));
+      if (targets.length === 0) return;
+
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+      targets.forEach(n => {
+        minX = Math.min(minX, n.x); maxX = Math.max(maxX, n.x);
+        minY = Math.min(minY, n.y); maxY = Math.max(maxY, n.y);
+      });
+      const padding = 100;
+      const boxX = minX - padding;
+      const boxY = minY - padding;
+      const boxW = Math.max(maxX - minX + padding * 2, 300);
+      const boxH = Math.max(maxY - minY + padding * 2, 300);
+      animateViewBox([boxX, boxY, boxW, boxH]);
+    }
+
+    async function renderReasoningTrace(traceEntries) {
+      const container = document.getElementById("reasoningSteps");
+      const allNodeIds = [];
+      const allEdgeKeys = [];
+
+      // First dim everything
+      if (state.scene) {
+        state.scene.nodes.forEach(n => { n.faded = true; n.highlighted = false; });
+        (state.scene.edges || []).forEach(l => { l.faded = true; l.highlighted = false; });
+        renderAll();
+      }
+
+      for (let i = 0; i < traceEntries.length; i++) {
+        const entry = traceEntries[i];
+        
+        while (state.replay.isPaused) {
+          await new Promise(r => setTimeout(r, 100)); // wait while paused
+        }
+        
+        const baseDelay = 450;
+        const delay = Math.max(100, Math.round(baseDelay / state.replay.speed));
+        await new Promise(r => setTimeout(r, delay)); // stagger animation
+
+        const stepEl = document.createElement("div");
+        stepEl.className = "reasoning-step";
+        stepEl.setAttribute("data-phase", entry.phase || "unknown");
+
+        const phaseLabels = {
+          disease_resolve: "DISEASE RESOLVE",
+          chunk_traverse: "CHUNK TRAVERSE",
+          assertion_traverse: "ASSERTION TRAVERSE",
+          service_traverse: "SERVICE TRAVERSE",
+          sign_traverse: "SIGN TRAVERSE",
+          vector_search: "VECTOR SEARCH",
+          graph_search: "GRAPH SEARCH",
+          context_select: "CONTEXT SELECT",
+          llm_adjudicate: "LLM ADJUDICATE",
+          llm_generate: "LLM GENERATE",
+          error: "ERROR",
+        };
+
+        let html = `<div class="step-phase">${phaseLabels[entry.phase] || entry.phase}</div>`;
+        html += `<div class="step-action">${escapeHtml(entry.action)}</div>`;
+
+        if (entry.details) {
+          const d = entry.details;
+          let detailParts = [];
+          if (d.summary) detailParts.push(d.summary);
+          if (d.sections) detailParts.push("Sections: " + d.sections.slice(0, 5).join(", "));
+          if (d.types) detailParts.push("Types: " + d.types.slice(0, 5).join(", "));
+          if (d.services) detailParts.push("Services: " + d.services.slice(0, 5).join(", "));
+          if (d.signs) detailParts.push("Signs: " + d.signs.slice(0, 5).join(", "));
+          if (d.titles) detailParts.push("Titles: " + d.titles.slice(0, 4).join(", "));
+          if (d.results) detailParts.push(d.results.slice(0, 5).join(" | "));
+          if (d.by_type) detailParts.push(Object.entries(d.by_type).map(([k,v]) => `${k}: ${v}`).join(", "));
+          if (d.total !== undefined) detailParts.push(`Total: ${d.total}`);
+          if (d.mapped !== undefined) detailParts.push(`Mapped: ${d.mapped}`);
+          if (detailParts.length > 0) {
+            html += `<div class="step-details">${escapeHtml(detailParts.join(" | "))}</div>`;
+          }
+        }
+
+        if (entry.duration_ms) {
+          html += `<div class="step-timing">${entry.duration_ms}ms</div>`;
+        }
+
+        // Node tags (clickable)
+        if (entry.node_ids && entry.node_ids.length > 0) {
+          html += `<div class="step-nodes">`;
+          const showNodes = entry.node_ids.slice(0, 12);
+          showNodes.forEach(nid => {
+            const shortId = nid.length > 30 ? nid.slice(0, 28) + "..." : nid;
+            html += `<span class="step-node-tag" title="${escapeHtml(nid)}" onclick="_panToNodes(['${escapeHtml(nid)}'])">${escapeHtml(shortId)}</span>`;
+          });
+          if (entry.node_ids.length > 12) {
+            html += `<span class="step-node-tag">+${entry.node_ids.length - 12}</span>`;
+          }
+          html += `</div>`;
+
+          // Highlight these nodes and edges on graph
+          allNodeIds.push(...entry.node_ids);
+          if (entry.edge_keys) allEdgeKeys.push(...entry.edge_keys);
+          _highlightGraph(entry.node_ids, entry.edge_keys || []);
+        }
+
+        stepEl.innerHTML = html;
+        container.appendChild(stepEl);
+        container.scrollTop = container.scrollHeight;
+      }
+
+      // Pan to all highlighted nodes
+      if (allNodeIds.length > 0) {
+        _panToNodes(allNodeIds);
+      }
+    }
+
+    function _highlightGraph(nodeIds, edgeKeys = []) {
+      if (!state.scene || !state.scene.nodes) return;
+      const idSet = new Set((nodeIds || []).map(String));
+      const edgeSet = new Set((edgeKeys || []).map(String));
+
+      state.scene.nodes.forEach(n => {
+        if (idSet.has(String(n.id))) {
+          n.highlighted = true;
+          n.faded = false;
+        }
+      });
+      
+      (state.scene.edges || []).forEach(l => {
+        const key = `${l.source}→${l.target}`;
+        if (edgeSet.has(key) || (idSet.has(String(l.source)) && idSet.has(String(l.target)))) {
+          l.highlighted = true;
+          l.faded = false;
+        }
+      });
+      renderAll();
+    }
+
+    async function highlightReasoningPath(nodeIds) {
+      if (!state.scene || !state.scene.nodes) return;
+
+      // Dim everything first
+      state.scene.nodes.forEach(n => { n.faded = true; n.highlighted = false; });
+      (state.scene.edges || []).forEach(l => { l.faded = true; l.highlighted = false; });
+
+      _highlightGraph(nodeIds, []);
+      _panToNodes(nodeIds);
+
+      // Add a single step to the panel
+      const container = document.getElementById("reasoningSteps");
+      const stepEl = document.createElement("div");
+      stepEl.className = "reasoning-step";
+      stepEl.setAttribute("data-phase", "graph_search");
+      stepEl.innerHTML = `
+        <div class="step-phase">HIGHLIGHT</div>
+        <div class="step-action">Chiếu sáng ${nodeIds.length} nodes liên quan</div>
+        <div class="step-nodes">
+          ${nodeIds.slice(0, 8).map(nid => `<span class="step-node-tag" title="${escapeHtml(nid)}">${escapeHtml(nid.length > 30 ? nid.slice(0, 28) + "..." : nid)}</span>`).join("")}
+          ${nodeIds.length > 8 ? `<span class="step-node-tag">+${nodeIds.length - 8}</span>` : ""}
+        </div>
+      `;
+      container.appendChild(stepEl);
+    }
+
+    async function init() {
+      bindEvents();
+      updateModeButtons();
+      renderPhaseMatrix();
+      buildSyntheticScene();
+      renderAll();
+      initCanvas();
+      await loadBootstrap();
+      setTicker("Deck synchronized. Bạn có thể load graph sẵn hoặc chạy ingest để xem node bung ra theo từng pha.");
+    }
+
+    init().catch((error) => {
+      updateStatus("error", "Init error", error.message);
+      pushIntel("Init error", error.message, "bad");
+      renderAll();
+    });
+  </script>
+
+  <style>
+    /* New dynamic styles for trace playback */
+    .adjudicate-summary {
+      margin-top: 14px;
+      padding: 12px;
+      background: rgba(37, 99, 235, 0.08);
+      border-radius: 12px;
+      font-size: 13px;
+      border-left: 4px solid var(--cyan);
+      color: var(--ink);
+    }
+    .trace-selector-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding: 12px;
+      background: rgba(0, 242, 255, 0.04);
+      border-radius: 16px;
+      border: 1px solid var(--border-panel);
+    }
+    .btn-replay {
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      color: white !important;
+      box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+    }
+    .btn-replay:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+  </style>
+
+  <div class="chat-dock">
+    <div class="chat-window collapsed" id="chatWindow">
+      <div class="chat-header" onclick="toggleChat()">
+        <div class="chat-header-title">
+          <div class="status-dot"></div>
+          <span>KNOWLEDGE ADVISOR</span>
+        </div>
+        <div class="header-actions">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+        </div>
+      </div>
+      <div class="chat-tabs">
+        <div class="chat-tab active" id="tabChat" onclick="switchChatMode('chat')">Knowledge Consult</div>
+        <div class="chat-tab" id="tabClaim" onclick="switchChatMode('claim')">Adjudicator (Thẩm định)</div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="message message-ai">
+          Xin chào bác sĩ. Tôi có thể hỗ trợ tìm kiếm kiến thức từ các phác đồ đã trích xuất, hoặc thực hiện thẩm định tự động bộ hồ sơ claim. Bạn muốn thao tác gì?
+        </div>
+      </div>
+      <div class="chat-input-area" id="chatInputArea">
+        <input type="text" id="chatInput" placeholder="Hỏi về phác đồ, liều lượng, quy trình..." onkeydown="if(event.key==='Enter') sendMessage()" />
+        <button class="btn-primary" onclick="sendMessage()" style="padding: 10px 16px; border-radius: 12px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        </button>
+      </div>
+      <div class="claim-input-area" id="claimInputArea" style="display: none;">
+        <div class="trace-selector-grid">
+          <div>
+            <label style="font-size:10px; opacity: 0.8;">Trace History Run</label>
+            <select id="traceRunSelect" onchange="loadTraceRun(this.value)" style="font-size:12px; padding: 10px; border-radius: 12px; background: white;">
+              <option value="">-- Browse History --</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:10px; opacity: 0.8;">Scenario Case</label>
+            <select id="traceCaseSelect" onchange="loadTraceCase(this.value)" style="font-size:12px; padding: 10px; border-radius: 12px; background: white;">
+              <option value="">-- Pick Case --</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-bottom:8px;">
+          <label style="display:block;margin-bottom:4px;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;">Standard Scenarios (Shortcuts)</label>
+          <select id="scenarioSelect" onchange="loadScriptScenario(this.value)" style="width:100%;padding:8px 10px;border-radius:10px;border:1px solid var(--border-panel);background:var(--bg-panel);color:var(--ink);font:inherit;font-size:12px;">
+            <option value="">-- Chọn kịch bản mẫu --</option>
+            <option value="1">#01 - Cơ bản</option>
+            <option value="8">#08 - Phức tạp</option>
+            <option value="12">#12 - Master-class: Bộ ba tử thần</option>
+          </select>
+        </div>
+        <div style="margin-bottom:6px;">
+          <label style="display:block;margin-bottom:4px;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;">Bối cảnh lâm sàng (bệnh sử, triệu chứng)</label>
+          <textarea id="claimContext" placeholder="Ví dụ: Bệnh nhân nam 62 tuổi, tiền sử ĐTĐ, nhập viện vì ho máu kéo dài..." style="width:100%;height:60px;background:var(--bg-panel);color:var(--ink);border:1px solid var(--border-panel);border-radius:8px;padding:8px 10px;font-family:'IBM Plex Mono',monospace;resize:none;font-size:12px;"></textarea>
+        </div>
+        <div style="margin-bottom:6px;">
+          <label style="display:block;margin-bottom:4px;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;">Danh sách dịch vụ (JSON)</label>
+          <textarea id="claimInput" placeholder='[{"service": "Tên dịch vụ 1"}, {"service": "Tên dịch vụ 2"}]' style="width:100%;height:80px;background:var(--bg-panel);color:var(--ink);border:1px solid var(--border-panel);border-radius:8px;padding:8px 10px;font-family:'IBM Plex Mono',monospace;resize:none;font-size:12px;"></textarea>
+        </div>
+        <div class="claim-actions">
+            <button class="btn-secondary btn-replay" onclick="replayTrace()" style="flex: 1.2;">PLAY CINEMATIC TRACE</button>
+            <button class="btn-primary" onclick="adjudicateClaim()" style="flex: 1;">RUN LIVE ADJUDICATE</button>
+        </div>
+      </div>
+    </div>
+    <div class="chat-trigger" onclick="toggleChat()" title="Knowledge Advisor">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+    </div>
+  </div>
+
+  <div class="reasoning-overlay" id="reasoningOverlay">
+    <div style="flex:1" onclick="closeReasoningPanel()"></div>
+    <div class="reasoning-panel" id="reasoningPanel">
+      <div class="reasoning-panel-header">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div class="reasoning-status-dot" id="reasoningDot"></div>
+          <h3>GRAPH REASONING TRACE</h3>
+        </div>
+        <div class="replay-controls" style="display:flex; align-items:center; gap:8px;">
+           <button class="btn-control" id="pauseBtn" onclick="togglePause()" style="padding:4px 8px; font-size:10px; background:rgba(255,255,255,0.1); border:1px solid var(--border-panel); color:var(--ink); border-radius:4px; cursor:pointer;">PAUSE</button>
+           <select onchange="state.replay.speed = parseFloat(this.value)" style="padding:4px; font-size:10px; background:rgba(0,0,0,0.3); color:var(--ink); border:1px solid var(--border-panel); border-radius:4px;">
+             <option value="0.5">0.5x</option>
+             <option value="1.0" selected>1.0x</option>
+             <option value="1.5">1.5x</option>
+             <option value="2.0">2.0x</option>
+           </select>
+        </div>
+      </div>
+      <div class="reasoning-steps" id="reasoningSteps"></div>
+      <div class="reasoning-panel-footer">
+        <button onclick="closeReasoningPanel()">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePause() {
+      state.replay.isPaused = !state.replay.isPaused;
+      const btn = document.getElementById("pauseBtn");
+      if (btn) btn.textContent = state.replay.isPaused ? "RESUME" : "PAUSE";
+    }
+  </script>
+</body>
+</html>

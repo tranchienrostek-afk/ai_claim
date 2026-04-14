@@ -1,0 +1,174 @@
+{
+  "disease_name": "Viêm mũi xoang cấp tính",
+  "icd_code": "J01",
+  "protocol_name": "Phác đồ Viêm mũi xoang cấp tính (BYT)",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": false,
+  "extra_heading_patterns": [
+    "^Bảng\\s+\\d+"
+  ],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "Paracetamol",
+        "Amoxicillin",
+        "Ibuprofen"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "Viêm mũi xoang cấp tính",
+        "Viêm mũi xoang mạn tính",
+        "Viêm mũi xoang cấp tính tái phát"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "Đau đầu",
+        "Nghẹt mũi",
+        "Chảy mũi"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "Công thức máu",
+        "Xét nghiệm dịch mũi xoang",
+        "Chụp CT xoang"
+      ]
+    },
+    {
+      "label": "Stage",
+      "examples": [
+        "Cấp tính",
+        "Bán cấp tính",
+        "Mạn tính"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "Nội soi mũi xoang",
+        "Rửa xoang",
+        "Chọc hút dịch xoang"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese internal medicine texts about acute sinusitis (Viêm mũi xoang cấp tính). Extract all entities explicitly mentioned in the input text and return a valid JSON object with an \"entities\" array. Each entity should have a \"name\" (the exact text span) and a \"type\" (entity category). Do not infer or add entities not explicitly present. The JSON format must be: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text from the section: {section_path}\n\nText to analyze:\n{chunk_content}\n\nExtract all entities explicitly mentioned in the text. The entity types and examples are:\n- Drug: Paracetamol, Amoxicillin, Ibuprofen\n- Disease: Viêm mũi xoang cấp tính, Viêm mũi xoang mạn tính, Viêm mũi xoang cấp tính tái phát\n- Symptom: Đau đầu, Nghẹt mũi, Chảy mũi\n- LabTest: Công thức máu, Xét nghiệm dịch mũi xoang, Chụp CT xoang\n- Stage: Cấp tính, Bán cấp tính, Mạn tính\n- Procedure: Nội soi mũi xoang, Rửa xoang, Chọc hút dịch xoang\n\nReturn a JSON object in the format: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the respiratory system",
+      "properties": {
+        "code": "J00-J99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Acute sinusitis",
+      "properties": {
+        "code": "J01"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Viêm mũi xoang cấp tính",
+      "properties": {
+        "code": "J01",
+        "aliases": "Acute sinusitis; Viêm mũi xoang cấp tính"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Amoxicillin",
+      "properties": {
+        "ATC_code": "J01CA04"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Amoxicillin/Clavulanic acid",
+      "properties": {
+        "ATC_code": "J01CR02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Azithromycin",
+      "properties": {
+        "ATC_code": "J01FA10"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Cefuroxime",
+      "properties": {
+        "ATC_code": "J01DC02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Paracetamol",
+      "properties": {
+        "ATC_code": "N02BE01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Ibuprofen",
+      "properties": {
+        "ATC_code": "M01AE01"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete blood count",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "C-reactive protein",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Sinus X-ray",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Nasal endoscopy",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Bacterial culture of nasal discharge",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the respiratory system",
+      "to_label": "ICD_Category",
+      "to_name": "Acute sinusitis",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Acute sinusitis",
+      "to_label": "Disease",
+      "to_name": "Viêm mũi xoang cấp tính",
+      "rel_type": "INSTANCE_OF"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

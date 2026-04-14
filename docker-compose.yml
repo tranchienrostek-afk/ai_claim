@@ -1,12 +1,132 @@
+# AI Claim Monorepo — Full Stack
+# 5 services: Neo4j, Pathway API, Azure Proxy, 9Router, ai_claim
+#
+# Usage:
+#   docker compose up -d              # Start all
+#   docker compose up -d ai_claim     # Start only ai_claim + dependencies
+#   docker compose logs -f pathway    # Tail one service
+#   docker compose down               # Stop all
+
 services:
+  # ─── 1. Neo4j Graph Database ───────────────────────────────────────
+  neo4j:
+    image: neo4j:5.26.0
+    container_name: ai_claim_neo4j
+    restart: unless-stopped
+    ports:
+      - "7475:7474"
+      - "7688:7687"
+    environment:
+      NEO4J_AUTH: neo4j/password123
+      NEO4J_PLUGINS: '["apoc"]'
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:7474 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+
+  # ─── 2. Pathway API (FastAPI + RAG + Adjudication) ────────────────
+  pathway:
+    build:
+      context: ./services/pathway
+      dockerfile: Dockerfile
+    container_name: ai_claim_pathway
+    restart: unless-stopped
+    ports:
+      - "9600:9600"
+    env_file:
+      - .env
+    environment:
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_USER: neo4j
+      NEO4J_PASSWORD: password123
+      CLAUDE_CODE_DISABLE_AUTOUPDATER: "1"
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    volumes:
+      - pathway_data:/app/data
+      - pathway_logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9600/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 30s
+      retries: 3
+
+  # ─── 3. Azure Anthropic Proxy ──────────────────────────────────────
+  azure-proxy:
+    build:
+      context: ./services/azure-proxy
+      dockerfile: Dockerfile
+    container_name: ai_claim_azure_proxy
+    restart: unless-stopped
+    ports:
+      - "8009:8009"
+    env_file:
+      - .env
+    environment:
+      PROXY_PORT: "8009"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8009/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+
+  # ─── 4. 9Router (Model Router + UI) ───────────────────────────────
+  9router:
+    build:
+      context: ./services/9router
+      dockerfile: Dockerfile
+    container_name: ai_claim_9router
+    restart: unless-stopped
+    ports:
+      - "20128:20128"
+    environment:
+      PORT: "20128"
+      NODE_ENV: production
+      HOSTNAME: "0.0.0.0"
+      NEXT_TELEMETRY_DISABLED: "1"
+    depends_on:
+      azure-proxy:
+        condition: service_healthy
+    volumes:
+      - 9router_data:/app/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:20128 || exit 1"]
+      interval: 30s
+      timeout: 5s
+      start_period: 60s
+      retries: 3
+
+  # ─── 5. ai_claim (Reasoning Agent + Dashboard) ────────────────────
   ai_claim:
-    build: .
-    container_name: ai_claim
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai_claim_app
     restart: unless-stopped
     ports:
       - "9780:9780"
     env_file:
       - .env
+    environment:
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_USER: neo4j
+      NEO4J_PASSWORD: password123
+      PATHWAY_API_BASE_URL: http://pathway:9600
+      AZURE_PROXY_BASE_URL: http://azure-proxy:8009
+      ROUTER_BASE_URL: http://9router:20128
+    depends_on:
+      neo4j:
+        condition: service_healthy
+      pathway:
+        condition: service_healthy
     volumes:
       - ./data/knowledge:/app/data/knowledge
       - ./src:/app/src
@@ -14,5 +134,12 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:9780/health"]
       interval: 30s
       timeout: 5s
-      retries: 3
       start_period: 15s
+      retries: 3
+
+volumes:
+  neo4j_data:
+  neo4j_logs:
+  pathway_data:
+  pathway_logs:
+  9router_data:

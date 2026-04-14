@@ -1,0 +1,565 @@
+{
+  "schema_version": "2.1",
+  "description": "Ontology V2.1 — 5-Layer Claims Medical Reasoning Architecture. Top-down, ontology-driven.",
+  "updated": "2026-03-29",
+
+  "layers": {
+    "L1_raw_mention": "Raw text + extracted mentions — audit trail, no forced canonicalization",
+    "L2_canonical": "Canonical clinical concepts — stable dictionary across data sources",
+    "L3_protocol_rules": "Guideline knowledge with provenance — assertions, rules, sections",
+    "L4_inference": "Hypothesis generation + evidence scoring — multi-disease reasoning",
+    "L5_claims_ops": "Operational claims — separates medical truth from contract truth"
+  },
+
+  "node_types": {
+
+    "RawDocument": {
+      "layer": "L1_raw_mention",
+      "description": "Source document metadata (PDF, claim form, etc.)",
+      "properties": {
+        "doc_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "doc_type": {"type": "string", "enum": ["protocol_pdf", "claim_form", "lab_report", "prescription"]},
+        "title": {"type": "string"},
+        "source_type": {"type": "string", "enum": ["BYT", "hospital", "insurance"]},
+        "hospital_name": {"type": "string"},
+        "file_path": {"type": "string"},
+        "page_count": {"type": "integer"},
+        "ingested_at": {"type": "datetime"}
+      }
+    },
+
+    "RawChunk": {
+      "layer": "L1_raw_mention",
+      "description": "Text chunk from PDF — basic retrieval unit.",
+      "properties": {
+        "chunk_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "disease_id": {"type": "string", "required": true},
+        "section_type": {"type": "string", "required": true, "enum": ["trieu_chung", "chan_doan", "dieu_tri", "xet_nghiem", "dai_cuong", "tien_luong", "phong_benh", "other"]},
+        "section_title": {"type": "string", "required": true},
+        "body_text": {"type": "string", "required": true},
+        "body_preview": {"type": "string"},
+        "page_numbers": {"type": "array", "items": "integer"},
+        "parent_section_path": {"type": "string"},
+        "embedding": {"type": "vector", "dimensions": 1536}
+      }
+    },
+
+    "RawSignMention": {
+      "layer": "L1_raw_mention",
+      "description": "Sign/symptom mention extracted from text — exact wording preserved.",
+      "properties": {
+        "mention_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "mention_text": {"type": "string", "required": true},
+        "normalized_key": {"type": "string", "required": true},
+        "context_text": {"type": "string"},
+        "modifier_raw": {"type": "string"},
+        "extraction_confidence": {"type": "float", "min": 0, "max": 1},
+        "source_chunk_id": {"type": "string", "required": true},
+        "source_page": {"type": "integer"},
+        "mapping_status": {"type": "string", "enum": ["exact", "probable", "ambiguous", "unknown", "pending"], "default": "pending"}
+      }
+    },
+
+    "RawServiceMention": {
+      "layer": "L1_raw_mention",
+      "description": "Service/procedure/drug mention extracted from text.",
+      "properties": {
+        "mention_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "mention_text": {"type": "string", "required": true},
+        "normalized_key": {"type": "string", "required": true},
+        "context_text": {"type": "string"},
+        "medical_role": {"type": "string", "enum": ["diagnostic", "therapeutic", "monitoring", "preventive", "unknown"]},
+        "condition_to_apply": {"type": "string"},
+        "extraction_confidence": {"type": "float", "min": 0, "max": 1},
+        "source_chunk_id": {"type": "string", "required": true},
+        "source_page": {"type": "integer"},
+        "mapping_status": {"type": "string", "enum": ["exact", "probable", "ambiguous", "unknown", "pending"], "default": "pending"}
+      }
+    },
+
+    "RawObservationMention": {
+      "layer": "L1_raw_mention",
+      "description": "Lab result/observation mention extracted from text.",
+      "properties": {
+        "mention_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "mention_text": {"type": "string", "required": true},
+        "normalized_key": {"type": "string", "required": true},
+        "context_text": {"type": "string"},
+        "result_semantics": {"type": "string", "enum": ["positive", "negative", "abnormal", "normal", "narrative", "unknown"]},
+        "extraction_confidence": {"type": "float", "min": 0, "max": 1},
+        "source_chunk_id": {"type": "string", "required": true},
+        "source_page": {"type": "integer"},
+        "mapping_status": {"type": "string", "enum": ["exact", "probable", "ambiguous", "unknown", "pending"], "default": "pending"}
+      }
+    },
+
+    "DiseaseEntity": {
+      "layer": "L2_canonical",
+      "description": "Specific disease — e.g., Viêm tai giữa mạn tính có cholesteatoma.",
+      "properties": {
+        "disease_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "disease_name": {"type": "string", "required": true},
+        "icd10": {"type": "string"},
+        "specialty": {"type": "string"},
+        "aliases": {"type": "array", "items": "string"}
+      }
+    },
+
+    "DiseaseGroup": {
+      "layer": "L2_canonical",
+      "description": "Disease group — e.g., Bệnh nhiễm trùng đường hô hấp trên.",
+      "properties": {
+        "group_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "group_name": {"type": "string", "required": true},
+        "icd10_range": {"type": "string"},
+        "specialty": {"type": "string"}
+      }
+    },
+
+    "ClinicalTopic": {
+      "layer": "L2_canonical",
+      "description": "Clinical topic that groups related diseases — e.g., TMH, Nội tiết.",
+      "properties": {
+        "topic_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "topic_name": {"type": "string", "required": true}
+      }
+    },
+
+    "SignConcept": {
+      "layer": "L2_canonical",
+      "description": "Canonical sign/symptom — stable ID for reasoning.",
+      "properties": {
+        "sign_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "canonical_label": {"type": "string", "required": true},
+        "normalized_key": {"type": "string", "required": true},
+        "support_cases": {"type": "integer", "default": 0},
+        "linked_disease_count": {"type": "integer", "default": 0},
+        "aliases": {"type": "array", "items": "string"},
+        "summary_description": {"type": "string"},
+        "summary_embedding": {"type": "vector", "dimensions": 1536}
+      }
+    },
+
+    "Modifier": {
+      "layer": "L2_canonical",
+      "description": "Qualifier for signs: laterality, temporality, severity, course, location, quality.",
+      "properties": {
+        "modifier_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "modifier_type": {"type": "string", "required": true, "enum": ["laterality", "temporality", "severity", "course", "location", "quality"]},
+        "modifier_label": {"type": "string", "required": true},
+        "aliases": {"type": "array", "items": "string"}
+      }
+    },
+
+    "ServiceFamily": {
+      "layer": "L2_canonical",
+      "description": "Service category/family — e.g., LAB-HEM (Huyết học), IMG-USG (Siêu âm).",
+      "properties": {
+        "family_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "family_name": {"type": "string", "required": true},
+        "category_code": {"type": "string", "required": true},
+        "service_count": {"type": "integer"}
+      }
+    },
+
+    "ProtocolService": {
+      "layer": "L2_canonical",
+      "description": "Canonical service/procedure — with code and cost stats.",
+      "properties": {
+        "service_code": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "service_name": {"type": "string", "required": true},
+        "category_code": {"type": "string"},
+        "category_name": {"type": "string"},
+        "confidence": {"type": "string"},
+        "total_occurrences": {"type": "integer"},
+        "avg_cost_vnd": {"type": "float"},
+        "bhyt_code": {"type": "string"},
+        "bhyt_name": {"type": "string"},
+        "bhyt_price_vnd": {"type": "float"}
+      }
+    },
+
+    "ObservationFamily": {
+      "layer": "L2_canonical",
+      "description": "Observation category — e.g., Huyết học, Sinh hoá.",
+      "properties": {
+        "family_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "family_name": {"type": "string", "required": true},
+        "category_code": {"type": "string", "required": true}
+      }
+    },
+
+    "ObservationConcept": {
+      "layer": "L2_canonical",
+      "description": "Canonical lab analyte — e.g., WBC, HGB, ALT.",
+      "properties": {
+        "concept_code": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "concept_name": {"type": "string", "required": true},
+        "category_code": {"type": "string"},
+        "category_name": {"type": "string"},
+        "result_semantics": {"type": "string", "enum": ["quantitative", "positive_negative", "narrative"]},
+        "aliases": {"type": "array", "items": "string"}
+      }
+    },
+
+    "ICDConcept": {
+      "layer": "L2_canonical",
+      "description": "ICD-10 code node — links diseases to international standard.",
+      "properties": {
+        "icd_code": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "icd_name": {"type": "string", "required": true},
+        "icd_chapter": {"type": "string"}
+      }
+    },
+
+    "BodySite": {
+      "layer": "L2_canonical",
+      "description": "Anatomical location — e.g., Tai trái, Xoang bướm phải.",
+      "properties": {
+        "site_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "site_name": {"type": "string", "required": true},
+        "parent_site": {"type": "string"}
+      }
+    },
+
+    "ClaimSignAlias": {
+      "layer": "L2_canonical",
+      "description": "Synonym node for signs — synonyms are graph nodes, not just text.",
+      "properties": {
+        "alias_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "alias_label": {"type": "string", "required": true},
+        "normalized_alias": {"type": "string", "required": true},
+        "token_count": {"type": "integer"},
+        "label_support_cases": {"type": "integer"},
+        "label_frequency": {"type": "integer"}
+      }
+    },
+
+    "ServiceAlias": {
+      "layer": "L2_canonical",
+      "description": "Synonym node for services.",
+      "properties": {
+        "alias_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "alias_label": {"type": "string", "required": true},
+        "normalized_alias": {"type": "string", "required": true}
+      }
+    },
+
+    "ObservationAlias": {
+      "layer": "L2_canonical",
+      "description": "Synonym node for observations.",
+      "properties": {
+        "alias_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "alias_label": {"type": "string", "required": true},
+        "normalized_alias": {"type": "string", "required": true}
+      }
+    },
+
+    "ProtocolBook": {
+      "layer": "L3_protocol_rules",
+      "description": "Source guideline document — e.g., QĐ 5643/QĐ-BYT.",
+      "properties": {
+        "book_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "book_name": {"type": "string", "required": true},
+        "publisher": {"type": "string"},
+        "year": {"type": "integer"},
+        "source_type": {"type": "string", "enum": ["BYT", "hospital"]}
+      }
+    },
+
+    "ProtocolSection": {
+      "layer": "L3_protocol_rules",
+      "description": "Section within a protocol — links to chunks and assertions.",
+      "properties": {
+        "section_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "section_title": {"type": "string", "required": true},
+        "section_type": {"type": "string", "enum": ["trieu_chung", "chan_doan", "dieu_tri", "xet_nghiem", "dai_cuong", "tien_luong", "phong_benh", "other"]},
+        "disease_id": {"type": "string"},
+        "page_start": {"type": "integer"},
+        "page_end": {"type": "integer"}
+      }
+    },
+
+    "ProtocolAssertion": {
+      "layer": "L3_protocol_rules",
+      "description": "Clinical rule extracted from protocol: condition → action.",
+      "properties": {
+        "assertion_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "assertion_text": {"type": "string", "required": true},
+        "assertion_type": {"type": "string", "required": true, "enum": ["treatment_rule", "diagnostic_rule", "contraindication", "indication", "dosage_rule", "monitoring_rule", "referral_rule", "preventive"]},
+        "condition_text": {"type": "string", "required": true},
+        "action_text": {"type": "string", "required": true},
+        "status": {"type": "string", "enum": ["ACTIVE", "CONDITIONAL", "DEPRECATED"]},
+        "evidence_level": {"type": "string", "enum": ["strong", "moderate", "weak", "expert_opinion"]},
+        "source_chunk_id": {"type": "string"},
+        "source_page": {"type": "integer"},
+        "embedding": {"type": "vector", "dimensions": 1536}
+      }
+    },
+
+    "RuleCatalog": {
+      "layer": "L3_protocol_rules",
+      "description": "Collection of rules for a specific purpose — e.g., TMH diagnostic rules.",
+      "properties": {
+        "catalog_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "catalog_name": {"type": "string", "required": true},
+        "rule_count": {"type": "integer"}
+      }
+    },
+
+    "ExclusionRule": {
+      "layer": "L3_protocol_rules",
+      "description": "Insurance exclusion/rejection rule with regulatory source.",
+      "properties": {
+        "rule_code": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "reason": {"type": "string", "required": true},
+        "group": {"type": "string", "required": true},
+        "process_path": {"type": "string"},
+        "source_note": {"type": "string"}
+      }
+    },
+
+    "DiseaseHypothesis": {
+      "layer": "L4_inference",
+      "description": "Clinical hypothesis activated by signs — supports multi-disease reasoning.",
+      "properties": {
+        "hypothesis_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "disease_id": {"type": "string", "required": true},
+        "disease_name": {"type": "string", "required": true},
+        "icd10": {"type": "string"},
+        "specialty": {"type": "string"},
+        "prior_probability": {"type": "float", "description": "Base rate from epidemiology"}
+      }
+    },
+
+    "SignalProfile": {
+      "layer": "L4_inference",
+      "description": "Evidence interpretation template — how to read a lab result.",
+      "properties": {
+        "profile_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "label": {"type": "string", "required": true},
+        "trigger": {"type": "object"},
+        "support_direction": {"type": "string", "enum": ["support", "exclude"]},
+        "support_level": {"type": "string", "enum": ["strong", "moderate", "weak"]},
+        "weight": {"type": "float"}
+      }
+    },
+
+    "ResultSignal": {
+      "layer": "L4_inference",
+      "description": "Observable signal source — a lab analyte that can produce evidence.",
+      "properties": {
+        "source_key": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "concept_code": {"type": "string", "required": true},
+        "concept_name": {"type": "string"},
+        "category_code": {"type": "string"},
+        "result_semantics": {"type": "string"},
+        "observed_rows": {"type": "integer"},
+        "abnormal_count": {"type": "integer"},
+        "allowed_profile_ids": {"type": "array", "items": "string"}
+      }
+    },
+
+    "ProtocolDiseaseSummary": {
+      "layer": "L2_canonical",
+      "description": "Acceleration layer — LLM-generated summary. NOT source of truth.",
+      "properties": {
+        "summary_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "disease_id": {"type": "string", "required": true},
+        "summary_text": {"type": "string", "required": true},
+        "key_signs": {"type": "array", "items": "string"},
+        "key_services": {"type": "array", "items": "string"},
+        "key_drugs": {"type": "array", "items": "string"},
+        "differential_diseases": {"type": "array", "items": "string"},
+        "summary_embedding": {"type": "vector", "dimensions": 1536}
+      }
+    },
+
+    "ClaimCase": {
+      "layer": "L5_claims_ops",
+      "description": "Insurance claim case — the operational unit.",
+      "properties": {
+        "claim_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "patient_age": {"type": "integer"},
+        "patient_gender": {"type": "string"},
+        "admission_signs": {"type": "string"},
+        "primary_icd10": {"type": "string"},
+        "hospital_name": {"type": "string"},
+        "claim_date": {"type": "date"},
+        "total_cost_vnd": {"type": "float"}
+      }
+    },
+
+    "ServiceLine": {
+      "layer": "L5_claims_ops",
+      "description": "Individual service line within a claim.",
+      "properties": {
+        "line_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "service_text_raw": {"type": "string", "required": true},
+        "service_code": {"type": "string"},
+        "quantity": {"type": "integer"},
+        "unit_cost_vnd": {"type": "float"},
+        "total_cost_vnd": {"type": "float"},
+        "mapping_confidence": {"type": "float"}
+      }
+    },
+
+    "ReviewDecision": {
+      "layer": "L5_claims_ops",
+      "description": "Adjudication decision for a service line — PAYMENT or REJECT with reasoning chain.",
+      "properties": {
+        "decision_id": {"type": "string", "required": true},
+        "namespace": {"type": "string", "required": true},
+        "decision": {"type": "string", "enum": ["PAYMENT", "REJECT", "REVIEW"]},
+        "reason_code": {"type": "string"},
+        "reason_text": {"type": "string"},
+        "medical_justification": {"type": "string"},
+        "contract_justification": {"type": "string"},
+        "confidence": {"type": "float"}
+      }
+    }
+  },
+
+  "relationship_types": {
+
+    "L1_structural": {
+      "FROM_DOCUMENT": {"from": "RawChunk", "to": "RawDocument"},
+      "NEXT_CHUNK": {"from": "RawChunk", "to": "RawChunk"},
+      "CHUNK_ABOUT_DISEASE": {"from": "RawChunk", "to": "DiseaseEntity"},
+      "MENTIONS_SIGN": {"from": "RawChunk", "to": "RawSignMention"},
+      "MENTIONS_SERVICE": {"from": "RawChunk", "to": "RawServiceMention"},
+      "MENTIONS_OBSERVATION": {"from": "RawChunk", "to": "RawObservationMention"}
+    },
+
+    "L1_to_L2_mapping": {
+      "MAPS_TO_SIGN": {
+        "from": "RawSignMention", "to": "SignConcept",
+        "properties": {
+          "confidence": {"type": "float"},
+          "method": {"type": "string", "enum": ["exact", "alias_match", "fuzzy_match", "llm_resolve", "manual"]},
+          "status": {"type": "string", "enum": ["exact", "probable", "ambiguous", "unknown"]}
+        }
+      },
+      "MAPS_TO_SERVICE": {
+        "from": "RawServiceMention", "to": "ProtocolService",
+        "properties": {"confidence": {"type": "float"}, "method": {"type": "string"}, "status": {"type": "string"}}
+      },
+      "MAPS_TO_OBSERVATION": {
+        "from": "RawObservationMention", "to": "ObservationConcept",
+        "properties": {"confidence": {"type": "float"}, "method": {"type": "string"}, "status": {"type": "string"}}
+      }
+    },
+
+    "L2_canonical": {
+      "ALIAS_OF_SIGN": {"from": "ClaimSignAlias", "to": "SignConcept"},
+      "ALIAS_OF_SERVICE": {"from": "ServiceAlias", "to": "ProtocolService"},
+      "ALIAS_OF_OBSERVATION": {"from": "ObservationAlias", "to": "ObservationConcept"},
+      "BELONGS_TO_FAMILY": {"from": "ProtocolService", "to": "ServiceFamily"},
+      "OBSERVATION_IN_FAMILY": {"from": "ObservationConcept", "to": "ObservationFamily"},
+      "DISEASE_IN_GROUP": {"from": "DiseaseEntity", "to": "DiseaseGroup"},
+      "GROUP_IN_TOPIC": {"from": "DiseaseGroup", "to": "ClinicalTopic"},
+      "HAS_ICD": {"from": "DiseaseEntity", "to": "ICDConcept"},
+      "SIGN_AT_SITE": {"from": "SignConcept", "to": "BodySite"},
+      "HAS_MODIFIER": {"from": "RawSignMention", "to": "Modifier"},
+      "SIGN_INDICATES_DISEASE": {
+        "from": "SignConcept", "to": "DiseaseEntity",
+        "properties": {"weight": {"type": "float"}, "support_cases": {"type": "integer"}}
+      }
+    },
+
+    "L3_protocol": {
+      "BOOK_HAS_SECTION": {"from": "ProtocolBook", "to": "ProtocolSection"},
+      "SECTION_COVERS_DISEASE": {"from": "ProtocolSection", "to": "DiseaseEntity"},
+      "SECTION_HAS_CHUNK": {"from": "ProtocolSection", "to": "RawChunk"},
+      "CONTAINS_ASSERTION": {"from": "ProtocolSection", "to": "ProtocolAssertion"},
+      "ASSERTION_ABOUT_DISEASE": {"from": "ProtocolAssertion", "to": "DiseaseEntity"},
+      "ASSERTION_REQUIRES_SIGN": {
+        "from": "ProtocolAssertion", "to": "SignConcept",
+        "properties": {"role": {"type": "string", "enum": ["required", "supportive", "exclusion"]}}
+      },
+      "ASSERTION_INDICATES_SERVICE": {"from": "ProtocolAssertion", "to": "ProtocolService"},
+      "ASSERTION_CONTRAINDICATES": {"from": "ProtocolAssertion", "to": "ProtocolService"},
+      "CATALOG_HAS_RULE": {"from": "RuleCatalog", "to": "ExclusionRule"},
+      "RULE_APPLIES_TO_GROUP": {"from": "ExclusionRule", "to": "ServiceFamily"}
+    },
+
+    "L4_inference": {
+      "HYPOTHESIS_FOR_DISEASE": {"from": "DiseaseHypothesis", "to": "DiseaseEntity"},
+      "DISEASE_EXPECTS_SERVICE": {
+        "from": "DiseaseHypothesis", "to": "ProtocolService",
+        "properties": {"role": {"type": "string"}, "category_code": {"type": "string"}}
+      },
+      "SERVICE_PRODUCES_SIGNAL": {
+        "from": "ProtocolService", "to": "ResultSignal",
+        "properties": {"link_mode": {"type": "string"}, "link_confidence": {"type": "string"}}
+      },
+      "SIGNAL_HAS_PROFILE": {"from": "ResultSignal", "to": "SignalProfile"},
+      "DISEASE_EXPECTS_SIGNAL": {
+        "from": "DiseaseHypothesis", "to": "ResultSignal",
+        "properties": {"evidence_weight": {"type": "float"}, "link_mode": {"type": "string"}}
+      },
+      "SIGNAL_MAPS_OBSERVATION": {"from": "ResultSignal", "to": "ObservationConcept"}
+    },
+
+    "L5_claims_ops": {
+      "CLAIM_HAS_LINE": {"from": "ClaimCase", "to": "ServiceLine"},
+      "LINE_MAPS_SERVICE": {"from": "ServiceLine", "to": "ProtocolService"},
+      "LINE_HAS_DECISION": {"from": "ServiceLine", "to": "ReviewDecision"},
+      "DECISION_BASED_ON_ASSERTION": {"from": "ReviewDecision", "to": "ProtocolAssertion"},
+      "DECISION_BASED_ON_RULE": {"from": "ReviewDecision", "to": "ExclusionRule"},
+      "DECISION_BASED_ON_EVIDENCE": {"from": "ReviewDecision", "to": "ResultSignal"},
+      "CLAIM_HAS_HYPOTHESIS": {"from": "ClaimCase", "to": "DiseaseHypothesis"},
+      "CLAIM_ABOUT_DISEASE": {"from": "ClaimCase", "to": "DiseaseEntity"}
+    }
+  },
+
+  "validation_rules": {
+    "mention_must_have_source_chunk": true,
+    "assertion_must_have_condition_and_action": true,
+    "mapping_status_required_for_maps_to": true,
+    "summary_never_replaces_raw": true,
+    "canonical_never_replaces_mention": true,
+    "medical_truth_separate_from_contract_truth": true,
+    "provenance_chain": "ReviewDecision → ProtocolAssertion → ProtocolSection → RawChunk → text span"
+  },
+
+  "benchmark_queries": [
+    "Q1: Disease X → which canonical services are indicated, from which section?",
+    "Q2: Raw service text Y → which ServiceFamily, canonical candidates, confidence?",
+    "Q3: Raw sign text Z → which SignConcept, related diseases?",
+    "Q4: Claim case A → top DiseaseHypotheses after synthesizing signs + services + lab results?",
+    "Q5: Lab result B → support or exclude which diseases?",
+    "Q6: ServiceLine C → approval/rejection reasoning chain (protocol + sign + result + rule)?",
+    "Q7: Claim D → medical truth vs contract truth (separated clearly)?"
+  ]
+}

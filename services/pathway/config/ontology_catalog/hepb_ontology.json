@@ -1,0 +1,41 @@
+{
+  "disease_name": "Viêm gan vi rút B",
+  "icd_code": "B18",
+  "medical_domain": "Internal_Medicine",
+  "description": "Ontology seed data for Hepatitis B treatment protocol (BYT 2019)",
+
+  "icd_hierarchy": [
+    {"code": "I", "name": "Bệnh nhiễm trùng và ký sinh trùng", "level": "chapter"},
+    {"code": "B15-B19", "name": "Viêm gan virus", "level": "category", "parent": "I"},
+    {"code": "B18", "name": "Viêm gan virus mạn tính", "level": "subcategory", "parent": "B15-B19"},
+    {"code": "B16", "name": "Viêm gan virus B cấp tính", "level": "subcategory", "parent": "B15-B19"}
+  ],
+
+  "disease": {
+    "name": "Viêm gan vi rút B",
+    "icd_code": "B18",
+    "category": "Nhiễm trùng",
+    "aliases": ["Hepatitis B", "HBV", "Viêm gan B"]
+  },
+
+  "drugs": [
+    {"name": "Tenofovir TDF", "code": "J05AF07"},
+    {"name": "Entecavir", "code": "J05AF10"},
+    {"name": "Tenofovir TAF", "code": "J05AF13"},
+    {"name": "Peg-Interferon alfa", "code": "L03AB11"},
+    {"name": "Lamivudine", "code": "J05AF05"}
+  ],
+
+  "lab_tests": [
+    "HBsAg", "HBeAg", "anti-HBe", "HBV DNA", "ALT", "AST",
+    "Bilirubin", "INR", "AFP", "Fibroscan"
+  ],
+
+  "stages": [
+    {"code": "F0", "description": "Không xơ hóa", "system": "METAVIR"},
+    {"code": "F1", "description": "Xơ hóa nhẹ", "system": "METAVIR"},
+    {"code": "F2", "description": "Xơ hóa vừa", "system": "METAVIR"},
+    {"code": "F3", "description": "Xơ hóa nặng", "system": "METAVIR"},
+    {"code": "F4", "description": "Xơ gan", "system": "METAVIR"}
+  ]
+}

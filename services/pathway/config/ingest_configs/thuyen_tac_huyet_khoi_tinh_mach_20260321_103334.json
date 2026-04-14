@@ -1,0 +1,208 @@
+{
+  "disease_name": "Thuyên tắc huyết khối tĩnh mạch",
+  "icd_code": "I82",
+  "protocol_name": "Phác đồ Thuyên tắc huyết khối tĩnh mạch - Bộ Y tế 2023",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": true,
+  "extra_heading_patterns": [
+    "^Bảng\\s+\\d+"
+  ],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "Heparin",
+        "Warfarin",
+        "Rivaroxaban",
+        "Apixaban"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "Thuyên tắc huyết khối tĩnh mạch",
+        "Bệnh nhân nội khoa",
+        "Bệnh nhân ngoại khoa",
+        "Ung thư"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "Sưng tấy",
+        "Đau",
+        "Nóng đỏ vùng tĩnh mạch"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "Siêu âm Doppler",
+        "Chụp CT mạch máu",
+        "Đặt catheter tĩnh mạch"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "D-dimer",
+        "Xét nghiệm đông máu",
+        "Công thức máu"
+      ]
+    },
+    {
+      "label": "Stage",
+      "examples": [
+        "Giai đoạn nguy cơ thấp",
+        "Giai đoạn nguy cơ cao"
+      ]
+    },
+    {
+      "label": "RiskFactor",
+      "examples": [
+        "Bất động lâu ngày",
+        "Phẫu thuật gần đây",
+        "Ung thư hoạt động"
+      ]
+    },
+    {
+      "label": "Protocol",
+      "examples": [
+        "Hướng dẫn điều trị dự phòng",
+        "Chiến lược dự phòng chung",
+        "Chiến lược dự phòng chuyên biệt"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese internal medicine texts about Thuyên tắc huyết khối tĩnh mạch. Extract all entities explicitly mentioned in the input text and return a valid JSON object with an \"entities\" array. Each entity should have a \"name\" (the exact text span) and a \"type\" (entity category). Only include entities explicitly present in the text. The JSON format must be: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text from the section: {section_path}\n\nText:\n{chunk_content}\n\nExtract all explicitly mentioned entities in the text. The entity types and examples are:\n- Drug: Heparin, Warfarin, Rivaroxaban, Apixaban\n- Disease: Thuyên tắc huyết khối tĩnh mạch, Bệnh nhân nội khoa, Bệnh nhân ngoại khoa, Ung thư\n- Symptom: Sưng tấy, Đau, Nóng đỏ vùng tĩnh mạch\n- Procedure: Siêu âm Doppler, Chụp CT mạch máu, Đặt catheter tĩnh mạch\n- LabTest: D-dimer, Xét nghiệm đông máu, Công thức máu\n- Stage: Giai đoạn nguy cơ thấp, Giai đoạn nguy cơ cao\n- RiskFactor: Bất động lâu ngày, Phẫu thuật gần đây, Ung thư hoạt động\n- Protocol: Hướng dẫn điều trị dự phòng, Chiến lược dự phòng chung, Chiến lược dự phòng chuyên biệt\n\nReturn a JSON object in this exact format:\n{\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\n\nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the Circulatory System",
+      "properties": {
+        "code": "I00-I99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Phlebitis and thrombophlebitis",
+      "properties": {
+        "code": "I80-I89"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Other venous embolism and thrombosis",
+      "properties": {
+        "code": "I82"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Thuyên tắc huyết khối tĩnh mạch",
+      "properties": {
+        "code": "I82",
+        "aliases": "Venous thromboembolism, VTE, Deep vein thrombosis, Pulmonary embolism"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Heparin",
+      "properties": {
+        "ATC_code": "B01AB"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Warfarin",
+      "properties": {
+        "ATC_code": "B01AA03"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Rivaroxaban",
+      "properties": {
+        "ATC_code": "B01AF01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Apixaban",
+      "properties": {
+        "ATC_code": "B01AF02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Dabigatran",
+      "properties": {
+        "ATC_code": "B01AE07"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "D-dimer",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Prothrombin Time (PT)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Activated Partial Thromboplastin Time (aPTT)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete Blood Count (CBC)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Fibrinogen",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "Wells Score for Deep Vein Thrombosis",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "Wells Score for Pulmonary Embolism",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the Circulatory System",
+      "to_label": "ICD_Category",
+      "to_name": "Phlebitis and thrombophlebitis",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Phlebitis and thrombophlebitis",
+      "to_label": "ICD_Category",
+      "to_name": "Other venous embolism and thrombosis",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Other venous embolism and thrombosis",
+      "to_label": "Disease",
+      "to_name": "Thuyên tắc huyết khối tĩnh mạch",
+      "rel_type": "CLASSIFIED_AS"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

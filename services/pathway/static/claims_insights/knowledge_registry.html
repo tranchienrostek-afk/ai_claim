@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pathway Knowledge Registry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fbf7ef;
+      --panel: #fffdf7;
+      --panel-soft: #fff6de;
+      --line: #e8d9b3;
+      --ink: #2f2a1f;
+      --muted: #756b56;
+      --accent: #b45309;
+      --accent-2: #14532d;
+      --danger: #991b1b;
+      --shadow: 0 14px 36px rgba(92, 65, 20, 0.12);
+      --radius: 18px;
+      --font-ui: "Be Vietnam Pro", sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(180, 83, 9, 0.08), transparent 28%),
+        linear-gradient(180deg, #fefbf4 0%, #f7f1e4 100%);
+      color: var(--ink);
+      font-family: var(--font-ui);
+      min-height: 100vh;
+    }
+    .app {
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr) 380px;
+      gap: 20px;
+      padding: 22px;
+      min-height: 100vh;
+    }
+    .panel {
+      background: rgba(255, 253, 247, 0.94);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .sidebar, .detail, .main {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .panel-header {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(180, 83, 9, 0.08), rgba(180, 83, 9, 0.02));
+    }
+    .panel-body { padding: 18px; }
+    .brand {
+      display: grid;
+      gap: 10px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(180, 83, 9, 0.12), rgba(255,255,255,0.92));
+      box-shadow: var(--shadow);
+    }
+    .eyebrow, .mono, .chip {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .eyebrow, .mono { color: var(--muted); }
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { font-size: 30px; line-height: 1.15; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 15px; }
+    .muted { color: var(--muted); line-height: 1.5; }
+    .chips, .kpis, .actions, .grid-two {
+      display: grid;
+      gap: 12px;
+    }
+    .chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .chip, .kpi, .root-card, .stat, .detail-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+      padding: 14px;
+    }
+    .chip strong, .kpi strong {
+      display: block;
+      margin-top: 8px;
+      font-family: var(--font-ui);
+      font-size: 22px;
+      color: var(--accent);
+      letter-spacing: normal;
+      text-transform: none;
+    }
+    .kpi strong { font-size: 28px; }
+    .kpi { background: linear-gradient(180deg, rgba(180, 83, 9, 0.09), rgba(255,255,255,0.95)); }
+    .root-list, .stat-list, .detail-list, .trace-list { display: grid; gap: 10px; }
+    .root-card .path {
+      margin-top: 8px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--muted);
+      word-break: break-word;
+      font-family: var(--font-mono);
+    }
+    button, select, input {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fffef9;
+      color: var(--ink);
+      font: inherit;
+    }
+    button {
+      cursor: pointer;
+      padding: 12px 14px;
+      font-weight: 600;
+      transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+    }
+    button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 22px rgba(180, 83, 9, 0.12);
+    }
+    button:disabled { opacity: 0.55; cursor: not-allowed; }
+    .btn-primary { background: linear-gradient(135deg, #b45309, #d97706); color: #fffaf3; border-color: #b45309; }
+    .btn-secondary { background: var(--panel-soft); }
+    .btn-danger { background: #fee2e2; border-color: #fecaca; color: var(--danger); }
+    .btn-success { background: #dcfce7; border-color: #bbf7d0; color: var(--accent-2); }
+    input, select { padding: 11px 12px; }
+    label {
+      display: grid;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .table-wrap {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: auto;
+      max-height: 480px;
+      background: var(--panel);
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid rgba(232, 217, 179, 0.75);
+      vertical-align: top;
+      font-size: 13px;
+    }
+    th {
+      position: sticky;
+      top: 0;
+      background: #fff6de;
+      z-index: 1;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    tr.asset-row { cursor: pointer; }
+    tr.asset-row:hover { background: rgba(180, 83, 9, 0.05); }
+    tr.asset-row.active { background: rgba(180, 83, 9, 0.12); }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(180, 83, 9, 0.12);
+      color: var(--accent);
+    }
+    .badge.success { background: rgba(20, 83, 45, 0.12); color: var(--accent-2); }
+    .badge.error { background: rgba(153, 27, 27, 0.12); color: var(--danger); }
+    .log {
+      min-height: 220px;
+      max-height: 300px;
+      overflow: auto;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #2c2418;
+      color: #f8edd6;
+      padding: 14px;
+      font-size: 12px;
+      line-height: 1.6;
+      font-family: var(--font-mono);
+      white-space: pre-wrap;
+    }
+    .empty {
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px dashed var(--line);
+      background: rgba(255,255,255,0.7);
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .toolbar > * { flex: 1; min-width: 130px; }
+    .detail-card .value, .trace-card .value {
+      margin-top: 6px;
+      color: var(--ink);
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    .mono-block {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6;
+      word-break: break-word;
+    }
+    .text-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 14px;
+    }
+    .text-editor {
+      min-height: 360px;
+      width: 100%;
+      resize: vertical;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      padding: 14px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.6;
+      background: #fffef9;
+      color: var(--ink);
+    }
+    .text-preview {
+      min-height: 360px;
+      max-height: 560px;
+      overflow: auto;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fffef9;
+      padding: 14px;
+    }
+    .text-preview-plain {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    .entity-mark {
+      padding: 1px 3px;
+      border-radius: 6px;
+      cursor: help;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+    .entity-sign { background: rgba(180, 83, 9, 0.18); }
+    .entity-service { background: rgba(20, 83, 45, 0.18); }
+    .entity-observation { background: rgba(14, 116, 144, 0.18); }
+    .entity-manual { outline: 2px solid rgba(153, 27, 27, 0.35); }
+    .entity-list {
+      display: grid;
+      gap: 10px;
+      max-height: 220px;
+      overflow: auto;
+    }
+    .entity-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+      padding: 12px;
+    }
+    .manual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .manual-grid .full {
+      grid-column: 1 / -1;
+    }
+    .manual-list {
+      display: grid;
+      gap: 10px;
+      max-height: 220px;
+      overflow: auto;
+    }
+    .manual-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(153, 27, 27, 0.06), rgba(255,255,255,0.96));
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+    }
+    .manual-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .manual-actions > * {
+      flex: 1;
+      min-width: 120px;
+    }
+    @media (max-width: 1460px) {
+      .app { grid-template-columns: 320px 1fr; }
+      .detail { grid-column: 1 / -1; }
+    }
+    @media (max-width: 1080px) {
+      .app { grid-template-columns: 1fr; }
+      .kpis, .grid-two, .chips { grid-template-columns: 1fr; }
+      .text-grid { grid-template-columns: 1fr; }
+      .manual-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="eyebrow">Pathway Knowledge Operating Layer</div>
+        <h1>Kho tri thức điều phối</h1>
+        <p class="muted">
+          Quản trị file nguồn, cấu hình ingest, phiên bản tài liệu, và reverse trace từ Neo4j về lại nguồn gốc.
+        </p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><h2>Điều khiển nhanh</h2></div>
+        <div class="panel-body actions">
+          <button id="syncBtn" class="btn-secondary">Đồng bộ thư mục tri thức</button>
+          <button id="autoSyncBtn" class="btn-primary">Đồng bộ và tự nạp phác đồ mới</button>
+          <button id="openManagedDirBtn" class="btn-success">Copy thư mục phác đồ</button>
+          <div class="empty" style="text-align:left;">
+            Đặt PDF mới vào thư mục quản trị rồi bấm đồng bộ. Các file protocol được gắn `auto_ingest` sẽ tự chạy vào graph.
+          </div>
+          <div class="detail-card">
+            <div class="eyebrow">Excel Workbook Sync</div>
+            <div class="muted" style="margin-top:8px;">
+              Export graph hien tai ra workbook nhieu sheet, chinh sua theo dang bang, roi sync nguoc lai Neo4j.
+            </div>
+            <div class="actions" style="margin-top:12px;">
+              <button id="exportExcelBtn" class="btn-success" disabled>Export workbook</button>
+              <label>Workbook de sync ve graph
+                <input id="excelSyncFile" type="file" accept=".xlsx" />
+              </label>
+              <button id="syncExcelBtn" class="btn-secondary" disabled>Sync workbook vao graph</button>
+            </div>
+            <div id="excelSummary" class="mono-block" style="margin-top:12px;">Chua co workbook view.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><h2>Thư mục quản trị</h2></div>
+        <div class="panel-body">
+          <div id="rootList" class="root-list"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><h2>Tải tài liệu mới</h2></div>
+        <div class="panel-body">
+          <form id="uploadForm" class="actions">
+            <label>Tập tin
+              <input id="uploadFile" name="file" type="file" required />
+            </label>
+            <div class="grid-two">
+              <label>Domain
+                <select id="uploadDomain" name="domain">
+                  <option value="protocols">protocols</option>
+                  <option value="insurance">insurance</option>
+                  <option value="legal">legal</option>
+                  <option value="taxonomy">taxonomy</option>
+                  <option value="benchmark">benchmark</option>
+                  <option value="memory">memory</option>
+                  <option value="misc">misc</option>
+                </select>
+              </label>
+              <label>Kind
+                <select id="uploadKind" name="kind">
+                  <option value="protocol_pdf">protocol_pdf</option>
+                  <option value="protocol_text">protocol_text</option>
+                  <option value="insurance_rulebook">insurance_rulebook</option>
+                  <option value="benefit_table">benefit_table</option>
+                  <option value="legal_document">legal_document</option>
+                  <option value="service_table">service_table</option>
+                  <option value="symptom_table">symptom_table</option>
+                  <option value="benchmark_bundle">benchmark_bundle</option>
+                  <option value="experience_memory">experience_memory</option>
+                  <option value="knowledge_file">knowledge_file</option>
+                </select>
+              </label>
+            </div>
+            <label>Tiêu đề hiển thị
+              <input id="uploadTitle" name="title" type="text" placeholder="Để trống sẽ lấy tên file" />
+            </label>
+            <div class="grid-two">
+              <label>Source type
+                <select id="uploadSourceType" name="source_type">
+                  <option value="BYT">BYT</option>
+                  <option value="hospital">hospital</option>
+                </select>
+              </label>
+              <label>Tự ingest ngay
+                <select id="uploadAutoIngest" name="auto_ingest">
+                  <option value="false">Không</option>
+                  <option value="true">Có</option>
+                </select>
+              </label>
+            </div>
+            <button type="submit" class="btn-primary">Đưa vào kho tri thức</button>
+          </form>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Summary</div>
+            <h2>Bản đồ tài sản tri thức</h2>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="kpiGrid" class="kpis"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Catalog</div>
+            <h2>Danh sách tài sản</h2>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="toolbar">
+            <input id="queryInput" type="text" placeholder="Tìm theo tên file, domain, tag..." />
+            <select id="domainFilter">
+              <option value="">Tất cả domain</option>
+              <option value="protocols">protocols</option>
+              <option value="insurance">insurance</option>
+              <option value="legal">legal</option>
+              <option value="taxonomy">taxonomy</option>
+              <option value="benchmark">benchmark</option>
+              <option value="memory">memory</option>
+              <option value="misc">misc</option>
+            </select>
+            <select id="kindFilter">
+              <option value="">Tất cả kind</option>
+              <option value="protocol_pdf">protocol_pdf</option>
+              <option value="protocol_text">protocol_text</option>
+              <option value="protocol_markdown">protocol_markdown</option>
+              <option value="insurance_rulebook">insurance_rulebook</option>
+              <option value="benefit_table">benefit_table</option>
+              <option value="legal_document">legal_document</option>
+              <option value="service_table">service_table</option>
+              <option value="symptom_table">symptom_table</option>
+              <option value="benchmark_bundle">benchmark_bundle</option>
+              <option value="testcase_bundle">testcase_bundle</option>
+              <option value="experience_memory">experience_memory</option>
+              <option value="knowledge_file">knowledge_file</option>
+            </select>
+            <button id="filterBtn" class="btn-secondary">Lọc</button>
+          </div>
+          <div class="table-wrap" style="margin-top: 14px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tài sản</th>
+                  <th>Domain</th>
+                  <th>Kind</th>
+                  <th>Trạng thái</th>
+                  <th>Version</th>
+                </tr>
+              </thead>
+              <tbody id="assetTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Run Trace</div>
+            <h2>Nhật ký ingest</h2>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="runSummary" class="detail-list"></div>
+          <div id="runLog" class="log">Chưa có run nào được chọn.</div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="detail">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Selected Asset</div>
+            <h2>Chi tiết tài sản</h2>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="assetDetail" class="detail-list"><div class="empty">Chọn một tài sản để xem chi tiết.</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Config</div>
+            <h2>Cấu hình ingest</h2>
+          </div>
+        </div>
+        <div class="panel-body actions">
+          <label>Tên bệnh ưu tiên
+            <input id="configDisease" type="text" placeholder="Nếu muốn ép tên bệnh đầu vào" />
+          </label>
+          <div class="grid-two">
+            <label>Source type
+              <select id="configSourceType">
+                <option value="BYT">BYT</option>
+                <option value="hospital">hospital</option>
+              </select>
+            </label>
+            <label>Split strategy
+              <select id="configSplitStrategy">
+                <option value="auto">auto</option>
+                <option value="single">single</option>
+                <option value="multi">multi</option>
+              </select>
+            </label>
+          </div>
+          <label>Tự ingest khi sync
+            <select id="configAutoIngest">
+              <option value="true">Có</option>
+              <option value="false">Không</option>
+            </select>
+          </label>
+          <button id="saveConfigBtn" class="btn-secondary">Lưu cấu hình</button>
+          <button id="ingestBtn" class="btn-primary" disabled>Ingest tài sản này</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Reverse Trace</div>
+            <h2>Graph quay ngược về file</h2>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="traceSummary" class="trace-list"><div class="empty">Chưa có trace.</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Impact Review</div>
+            <h2>Những gì bị ảnh hưởng</h2>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="impactSummary" class="detail-list"><div class="empty">Chưa có impact report.</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">Text Workspace</div>
+            <h2>Soi text va hieu graph</h2>
+          </div>
+        </div>
+        <div class="panel-body actions">
+          <div id="textSummary" class="detail-list"><div class="empty">Chon protocol asset de xem text workspace.</div></div>
+          <div class="toolbar">
+            <button id="extractTextBtn" class="btn-secondary" disabled>Lay/refresh text tu source</button>
+            <button id="saveTextBtn" class="btn-secondary" disabled>Luu text da sua</button>
+            <button id="saveAndReingestBtn" class="btn-primary" disabled>Luu text va tai sinh graph</button>
+          </div>
+          <div class="text-grid">
+            <div>
+              <label>Text workspace
+                <textarea id="textEditor" class="text-editor" placeholder="Text da extract tu PDF/source se hien o day..." disabled></textarea>
+              </label>
+            </div>
+            <div>
+              <div class="eyebrow" style="margin-bottom:8px;">Graph Highlight Preview</div>
+              <div id="textPreview" class="text-preview"><div class="empty">Chua co preview.</div></div>
+            </div>
+          </div>
+          <div>
+            <div class="eyebrow" style="margin-bottom:8px;">Entities dang duoc graph hieu</div>
+            <div id="entityList" class="entity-list"><div class="empty">Chua co entity graph nao.</div></div>
+          </div>
+          <div>
+            <div class="eyebrow" style="margin-bottom:8px;">Labelling thu cong tren text</div>
+            <div class="manual-grid">
+              <label class="full">Doan text duoc gan nhan
+                <input id="manualLabelText" type="text" placeholder="Chon text trong o ben trai hoac tu nhap..." />
+              </label>
+              <label>Loai
+                <select id="manualLabelKind">
+                  <option value="sign">sign</option>
+                  <option value="service">service</option>
+                  <option value="observation">observation</option>
+                </select>
+              </label>
+              <label>Concept ref
+                <input id="manualConceptRef" type="text" placeholder="VD: H81.0 / HbA1c / sign_id" />
+              </label>
+              <label>Concept label
+                <input id="manualConceptLabel" type="text" placeholder="Ten chuan neu co" />
+              </label>
+              <label>Chunk id
+                <input id="manualSourceChunkId" type="text" placeholder="De trong neu cho phep auto doan chunk" />
+              </label>
+              <label class="full">Ghi chu
+                <input id="manualLabelNote" type="text" placeholder="Ly do gan nhan / chinh sua sai label..." />
+              </label>
+            </div>
+            <div class="manual-actions" style="margin-top:12px;">
+              <button id="captureSelectionBtn" class="btn-secondary" disabled>Lay doan text dang chon</button>
+              <button id="saveManualLabelBtn" class="btn-primary" disabled>Luu manual label vao graph</button>
+            </div>
+          </div>
+          <div>
+            <div class="eyebrow" style="margin-bottom:8px;">Manual labels dang hoat dong</div>
+            <div id="manualLabelList" class="manual-list"><div class="empty">Chua co manual label nao.</div></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    const state = {
+      bootstrap: null,
+      assets: [],
+      selectedAsset: null,
+      impactReport: null,
+      textWorkspace: null,
+      activeManualLabelId: "",
+      activeRunId: null,
+      pollTimer: null,
+      managedProtocolDir: "",
+    };
+
+    const els = {
+      rootList: document.getElementById("rootList"),
+      kpiGrid: document.getElementById("kpiGrid"),
+      assetTableBody: document.getElementById("assetTableBody"),
+      assetDetail: document.getElementById("assetDetail"),
+      traceSummary: document.getElementById("traceSummary"),
+      impactSummary: document.getElementById("impactSummary"),
+      textSummary: document.getElementById("textSummary"),
+      textEditor: document.getElementById("textEditor"),
+      textPreview: document.getElementById("textPreview"),
+      entityList: document.getElementById("entityList"),
+      manualLabelText: document.getElementById("manualLabelText"),
+      manualLabelKind: document.getElementById("manualLabelKind"),
+      manualConceptRef: document.getElementById("manualConceptRef"),
+      manualConceptLabel: document.getElementById("manualConceptLabel"),
+      manualSourceChunkId: document.getElementById("manualSourceChunkId"),
+      manualLabelNote: document.getElementById("manualLabelNote"),
+      manualLabelList: document.getElementById("manualLabelList"),
+      captureSelectionBtn: document.getElementById("captureSelectionBtn"),
+      saveManualLabelBtn: document.getElementById("saveManualLabelBtn"),
+      runSummary: document.getElementById("runSummary"),
+      runLog: document.getElementById("runLog"),
+      queryInput: document.getElementById("queryInput"),
+      domainFilter: document.getElementById("domainFilter"),
+      kindFilter: document.getElementById("kindFilter"),
+      uploadForm: document.getElementById("uploadForm"),
+      uploadAutoIngest: document.getElementById("uploadAutoIngest"),
+      uploadKind: document.getElementById("uploadKind"),
+      uploadDomain: document.getElementById("uploadDomain"),
+      uploadSourceType: document.getElementById("uploadSourceType"),
+      uploadTitle: document.getElementById("uploadTitle"),
+      configDisease: document.getElementById("configDisease"),
+      configSourceType: document.getElementById("configSourceType"),
+      configSplitStrategy: document.getElementById("configSplitStrategy"),
+      configAutoIngest: document.getElementById("configAutoIngest"),
+      saveConfigBtn: document.getElementById("saveConfigBtn"),
+      ingestBtn: document.getElementById("ingestBtn"),
+      extractTextBtn: document.getElementById("extractTextBtn"),
+      saveTextBtn: document.getElementById("saveTextBtn"),
+      saveAndReingestBtn: document.getElementById("saveAndReingestBtn"),
+      exportExcelBtn: document.getElementById("exportExcelBtn"),
+      excelSyncFile: document.getElementById("excelSyncFile"),
+      syncExcelBtn: document.getElementById("syncExcelBtn"),
+      excelSummary: document.getElementById("excelSummary"),
+      syncBtn: document.getElementById("syncBtn"),
+      autoSyncBtn: document.getElementById("autoSyncBtn"),
+      filterBtn: document.getElementById("filterBtn"),
+      openManagedDirBtn: document.getElementById("openManagedDirBtn"),
+    };
+
+    async function fetchJson(url, options = {}) {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(text || `Request failed: ${response.status}`);
+      }
+      return response.json();
+    }
+
+    function badge(status) {
+      const normalized = String(status || "unknown").toLowerCase();
+      const cls = normalized.includes("error") ? "error" : (normalized.includes("graph") || normalized.includes("completed") ? "success" : "");
+      return `<span class="badge ${cls}">${status || "unknown"}</span>`;
+    }
+
+    function renderBootstrap(payload) {
+      state.bootstrap = payload;
+      const summary = payload.summary || {};
+      const counts = payload.counts || {};
+      const kpis = [
+        ["Assets", summary.asset_count || 0],
+        ["Domains", summary.domain_count || 0],
+        ["Kinds", summary.kind_count || 0],
+        ["Graph Ready", summary.graph_ready_count || 0],
+        ["Needs Review", summary.needs_review_count || 0],
+      ];
+      els.kpiGrid.innerHTML = kpis.map(([label, value]) => `
+        <div class="kpi">
+          <div class="eyebrow">${label}</div>
+          <strong>${value}</strong>
+        </div>
+      `).join("");
+
+      const managedRoots = payload.managed_roots || [];
+      const managedProtocolRoot = managedRoots.find(item => item.key === "managed_protocol_pdfs") || {};
+      state.managedProtocolDir = managedProtocolRoot.relative_path || managedProtocolRoot.path || "";
+      els.rootList.innerHTML = managedRoots.map(item => `
+        <div class="root-card">
+          <div class="eyebrow">${item.domain}</div>
+          <h3>${item.label}</h3>
+          <div class="path">${item.relative_path || item.path}</div>
+        </div>
+      `).join("") || `<div class="empty">Chưa có thư mục quản trị nào.</div>`;
+    }
+
+    function renderAssets(items) {
+      state.assets = items || [];
+      if (!state.assets.length) {
+        els.assetTableBody.innerHTML = `<tr><td colspan="5"><div class="empty">Không có tài sản phù hợp.</div></td></tr>`;
+        return;
+      }
+      els.assetTableBody.innerHTML = state.assets.map(asset => `
+        <tr class="asset-row ${state.selectedAsset && state.selectedAsset.asset_id === asset.asset_id ? "active" : ""}" data-id="${asset.asset_id}">
+          <td>
+            <strong>${asset.title || asset.asset_id}</strong>
+            <div class="mono">${asset.source_relative_path || asset.source_path || ""}</div>
+          </td>
+          <td>${asset.domain || "-"}</td>
+          <td>${asset.kind || "-"}</td>
+          <td>${badge(asset.status)}</td>
+          <td>${asset.version_count || 0}</td>
+        </tr>
+      `).join("");
+      document.querySelectorAll(".asset-row").forEach(row => {
+        row.addEventListener("click", () => selectAsset(row.dataset.id));
+      });
+    }
+
+    function renderAssetDetail(asset, trace, impact) {
+      if (!asset) {
+        els.assetDetail.innerHTML = `<div class="empty">Chọn một tài sản để xem chi tiết.</div>`;
+        els.traceSummary.innerHTML = `<div class="empty">Chưa có trace.</div>`;
+        els.impactSummary.innerHTML = `<div class="empty">Chưa có impact report.</div>`;
+        els.ingestBtn.disabled = true;
+        els.exportExcelBtn.disabled = true;
+        els.syncExcelBtn.disabled = true;
+        els.excelSummary.textContent = "Chua co workbook view.";
+        return;
+      }
+      const ingest = asset.ingest || {};
+      const config = asset.config || {};
+      const review = asset.review || {};
+      const companion = asset.companion_paths || {};
+      const companionDomain = companion.domain_workspace_relative || companion.domain_workspace || "-";
+      const companionAsset = companion.asset_workspace_relative || companion.asset_workspace || "-";
+      const companionDisease = companion.disease_workspace_relative || companion.disease_workspace || "-";
+      const companionReview = companion.asset_review_dir_relative || companion.asset_review_dir || "-";
+      els.assetDetail.innerHTML = `
+        <div class="detail-card">
+          <div class="eyebrow">Title</div>
+          <div class="value">${asset.title || "-"}</div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Source</div>
+          <div class="mono-block">${asset.source_path || "-"}</div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Tags</div>
+          <div class="value">${(asset.tags || []).join(", ") || "-"}</div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Ingest</div>
+          <div class="value">${badge(ingest.latest_status || (ingest.supported ? "ready" : "catalog_only"))}</div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Review</div>
+          <div class="value">${badge(review.status || "clear")} ${review.pending_reason ? `<br>${review.pending_reason}` : ""}</div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Companion Workspaces</div>
+          <div class="mono-block">
+            domain: ${companionDomain}<br>
+            asset: ${companionAsset}<br>
+            disease: ${companionDisease}<br>
+            review: ${companionReview}
+          </div>
+        </div>
+      `;
+      els.configDisease.value = config.preferred_disease_name || "";
+      els.configSourceType.value = config.source_type || "BYT";
+      els.configSplitStrategy.value = config.split_strategy || "auto";
+      els.configAutoIngest.value = String(Boolean(config.auto_ingest));
+      els.ingestBtn.disabled = !(ingest.supported);
+      const hasOntologyTrace = Boolean(trace && ((trace.summary || {}).ontology_document_count || 0) > 0);
+      els.exportExcelBtn.disabled = !hasOntologyTrace;
+      els.syncExcelBtn.disabled = !hasOntologyTrace;
+      els.excelSummary.textContent = hasOntologyTrace
+        ? "Co the export workbook nhieu sheet tu graph hien tai va sync chinh sua nguoc lai Neo4j."
+        : "Tai san chua co document ontology trong graph. Hay ingest truoc khi dung workbook sync.";
+
+      if (!trace) {
+        els.traceSummary.innerHTML = `<div class="empty">Chưa có trace.</div>`;
+      } else {
+        const ontologyDocs = trace.ontology_documents || [];
+        const insuranceSources = trace.insurance_sources || [];
+        const taxonomyAssets = trace.taxonomy_assets || [];
+        els.traceSummary.innerHTML = `
+          <div class="detail-card">
+            <div class="eyebrow">Summary</div>
+            <div class="value">Ontology docs: ${(trace.summary || {}).ontology_document_count || 0} | Insurance sources: ${(trace.summary || {}).insurance_source_count || 0} | Taxonomy assets: ${(trace.summary || {}).taxonomy_asset_count || 0}</div>
+          </div>
+          <div class="detail-card">
+            <div class="eyebrow">Ontology documents</div>
+            <div class="value">${ontologyDocs.length ? ontologyDocs.map(row => `${row.doc_title || row.file_path} • chunks ${row.chunk_count || 0} • assertions ${row.assertion_count || 0}`).join("<br>") : "Chưa thấy document Neo4j nào nối ngược về file này."}</div>
+          </div>
+          <div class="detail-card">
+            <div class="eyebrow">Insurance sources</div>
+            <div class="value">${insuranceSources.length ? insuranceSources.map(row => `${(row.labels || []).join("/")} • ${row.node_count || 0} node • ${row.source_file || ""}`).join("<br>") : "Chưa thấy evidence bảo hiểm nối ngược về file này."}</div>
+          </div>
+        `;
+      }
+      renderImpactReport(impact);
+    }
+
+    function renderImpactReport(report) {
+      state.impactReport = report || null;
+      if (!report) {
+        els.impactSummary.innerHTML = `<div class="empty">Chưa có impact report.</div>`;
+        return;
+      }
+      const impacts = report.impacts || {};
+      const ontology = impacts.ontology || {};
+      const insurance = impacts.insurance || {};
+      const review = report.review || {};
+      const stored = report.stored_paths || {};
+      const impactPath = stored.impact_report_relative_path || stored.impact_report_path || "-";
+      const reviewQueuePath = stored.review_queue_relative_path || stored.review_queue_path || "-";
+      const joinLines = (items, formatter, emptyText) => items && items.length
+        ? items.map(formatter).join("<br>")
+        : emptyText;
+      els.impactSummary.innerHTML = `
+        <div class="detail-card">
+          <div class="eyebrow">Summary</div>
+          <div class="value">
+            needs_review=${review.needs_human_review ? "true" : "false"} |
+            severity=${review.severity || "low"} |
+            generated=${report.generated_at || "-"}
+          </div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Reasons</div>
+          <div class="value">${joinLines(review.reasons || [], item => item, "Chưa có lý do review.")}</div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Review Items</div>
+          <div class="value">${joinLines(review.review_items || [], item => item, "Chưa có review item.")}</div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Ontology Impacts</div>
+          <div class="value">
+            docs=${(ontology.documents || []).length} |
+            diseases=${(ontology.diseases || []).length} |
+            services=${(ontology.services || []).length} |
+            signs=${(ontology.signs || []).length}
+            <br><br>
+            ${joinLines(
+              (ontology.diseases || []).slice(0, 12),
+              item => `${item.disease_name || item.disease_id || "-"}`,
+              "Chưa thấy impact ontology theo bệnh."
+            )}
+          </div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Insurance Impacts</div>
+          <div class="value">
+            contracts=${(insurance.contracts || []).length} |
+            benefits=${(insurance.benefits || []).length} |
+            exclusions=${(insurance.exclusions || []).length} |
+            rulebooks=${(insurance.rulebooks || []).length} |
+            services=${(insurance.services || []).length}
+            <br><br>
+            ${joinLines(
+              (insurance.contracts || []).slice(0, 12),
+              item => `${item.contract_id || "-"}${item.contract_label ? ` • ${item.contract_label}` : ""}`,
+              "Chưa thấy impact insurance theo hợp đồng."
+            )}
+          </div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Stored Review Files</div>
+          <div class="mono-block">
+            impact_report: ${impactPath}<br>
+            review_queue: ${reviewQueuePath}
+          </div>
+        </div>
+      `;
+    }
+
+    function assetSupportsTextWorkspace(asset) {
+      return Boolean(asset && ["protocol_pdf", "protocol_text", "protocol_markdown"].includes(asset.kind || ""));
+    }
+
+    function renderTextWorkspace(view) {
+      state.textWorkspace = view || null;
+      if (!view) {
+        els.textSummary.innerHTML = `<div class="empty">Chon protocol asset de xem text workspace.</div>`;
+        els.textEditor.value = "";
+        els.textEditor.disabled = true;
+        els.textPreview.innerHTML = `<div class="empty">Chua co preview.</div>`;
+        els.entityList.innerHTML = `<div class="empty">Chua co entity graph nao.</div>`;
+        els.manualLabelList.innerHTML = `<div class="empty">Chua co manual label nao.</div>`;
+        els.extractTextBtn.disabled = true;
+        els.saveTextBtn.disabled = true;
+        els.saveAndReingestBtn.disabled = true;
+        els.captureSelectionBtn.disabled = true;
+        els.saveManualLabelBtn.disabled = true;
+        resetManualLabelForm();
+        return;
+      }
+
+      const metadata = view.metadata || {};
+      const summary = view.annotation_summary || {};
+      const manualSummary = view.manual_label_summary || {};
+      const canEdit = view.can_edit !== false;
+      els.textSummary.innerHTML = `
+        <div class="detail-card">
+          <div class="eyebrow">Workspace</div>
+          <div class="value">${view.workspace_relative_path || "-"}</div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Trang thai</div>
+          <div class="value">length=${view.content_length || 0} | dirty=${metadata.dirty ? "true" : "false"} | source=${metadata.source_mode || "-"}</div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Graph understanding</div>
+          <div class="value">matched=${summary.matched_count || 0} / candidates=${summary.candidate_count || 0} | manual=${manualSummary.count || 0}</div>
+        </div>
+      `;
+      els.textEditor.value = view.content || "";
+      els.textEditor.disabled = !canEdit;
+      els.textPreview.innerHTML = view.annotated_html || `<div class="empty">Chua co preview.</div>`;
+      const entityCards = view.entity_cards || [];
+      els.entityList.innerHTML = entityCards.length
+        ? entityCards.map(item => `
+            <div class="entity-card">
+              <div class="eyebrow">${item.kind || "unknown"}</div>
+              <h3>${item.term || "-"}</h3>
+              <div class="muted">${item.concept_label || item.concept_id || "Chua map canonical"}${item.manual ? " • manual" : ""}</div>
+              <div class="mono-block">${(item.detail || []).join(" | ")}</div>
+            </div>
+          `).join("")
+        : `<div class="empty">Graph chua highlight duoc entity nao cho text nay.</div>`;
+      const manualLabels = view.manual_labels || [];
+      els.manualLabelList.innerHTML = manualLabels.length
+        ? manualLabels.map(item => `
+            <div class="manual-card">
+              <div class="eyebrow">${item.kind || "unknown"} • ${item.label_id || ""}</div>
+              <h3>${item.text || "-"}</h3>
+              <div class="muted">${item.concept_label || item.concept_ref || "Chua map canonical"}</div>
+              <div class="mono-block">${[
+                item.source_chunk_id ? `chunk=${item.source_chunk_id}` : "",
+                item.note ? `note=${item.note}` : "",
+                item.manual_status ? `status=${item.manual_status}` : "",
+              ].filter(Boolean).join(" | ") || "-"}</div>
+              <div class="manual-actions">
+                <button class="btn-secondary manual-edit-btn" data-label-id="${item.label_id || ""}">Nap len form</button>
+                <button class="btn-danger manual-delete-btn" data-label-id="${item.label_id || ""}">Xoa label</button>
+              </div>
+            </div>
+          `).join("")
+        : `<div class="empty">Chua co manual label nao.</div>`;
+      document.querySelectorAll(".manual-edit-btn").forEach(btn => {
+        btn.addEventListener("click", () => fillManualLabelForm((view.manual_labels || []).find(item => item.label_id === btn.dataset.labelId) || null));
+      });
+      document.querySelectorAll(".manual-delete-btn").forEach(btn => {
+        btn.addEventListener("click", () => deleteManualLabel(btn.dataset.labelId));
+      });
+      els.extractTextBtn.disabled = !canEdit;
+      els.saveTextBtn.disabled = !canEdit;
+      els.saveAndReingestBtn.disabled = !(canEdit && state.selectedAsset && (state.selectedAsset.ingest || {}).supported);
+      els.captureSelectionBtn.disabled = !canEdit;
+      els.saveManualLabelBtn.disabled = !canEdit;
+    }
+
+    function resetManualLabelForm() {
+      state.activeManualLabelId = "";
+      els.manualLabelText.value = "";
+      els.manualLabelKind.value = "sign";
+      els.manualConceptRef.value = "";
+      els.manualConceptLabel.value = "";
+      els.manualSourceChunkId.value = "";
+      els.manualLabelNote.value = "";
+    }
+
+    function fillManualLabelForm(label) {
+      if (!label) {
+        resetManualLabelForm();
+        return;
+      }
+      state.activeManualLabelId = label.label_id || "";
+      els.manualLabelText.value = label.text || "";
+      els.manualLabelKind.value = label.kind || "sign";
+      els.manualConceptRef.value = label.concept_ref || "";
+      els.manualConceptLabel.value = label.concept_label || "";
+      els.manualSourceChunkId.value = label.source_chunk_id || "";
+      els.manualLabelNote.value = label.note || "";
+    }
+
+    function renderRun(run) {
+      if (!run) {
+        els.runSummary.innerHTML = `<div class="empty">Chưa có run.</div>`;
+        els.runLog.textContent = "Chưa có run nào được chọn.";
+        return;
+      }
+      const result = run.result || {};
+      els.runSummary.innerHTML = `
+        <div class="detail-card">
+          <div class="eyebrow">Run</div>
+          <div class="value">${run.id}</div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Status</div>
+          <div class="value">${run.status}</div>
+        </div>
+        <div class="detail-card">
+          <div class="eyebrow">Mode</div>
+          <div class="value">${result.mode || "-"}</div>
+        </div>
+      `;
+      els.runLog.textContent = (run.logs || []).map(item => `[${item.timestamp}] ${item.message}`).join("\n") || "Run chưa sinh log.";
+    }
+
+    async function loadBootstrap(refresh = false) {
+      const payload = await fetchJson(`/api/knowledge/bootstrap${refresh ? "?refresh=true" : ""}`);
+      renderBootstrap(payload);
+    }
+
+    async function loadAssets() {
+      const params = new URLSearchParams();
+      if (els.domainFilter.value) params.set("domain", els.domainFilter.value);
+      if (els.kindFilter.value) params.set("kind", els.kindFilter.value);
+      if (els.queryInput.value.trim()) params.set("query", els.queryInput.value.trim());
+      const payload = await fetchJson(`/api/knowledge/assets?${params.toString()}`);
+      renderAssets(payload.assets || []);
+    }
+
+    async function selectAsset(assetId) {
+      const [asset, trace, impact] = await Promise.all([
+        fetchJson(`/api/knowledge/assets/${encodeURIComponent(assetId)}`),
+        fetchJson(`/api/knowledge/assets/${encodeURIComponent(assetId)}/graph-trace`),
+        fetchJson(`/api/knowledge/assets/${encodeURIComponent(assetId)}/impact-report`).catch(err => ({
+          error: String(err),
+          review: {
+            needs_human_review: true,
+            severity: "medium",
+            reasons: [String(err)],
+            review_items: ["Cần kiểm tra lại API impact report hoặc dữ liệu graph."],
+          },
+          impacts: {
+            ontology: { documents: [], diseases: [], services: [], signs: [] },
+            insurance: { contracts: [], benefits: [], exclusions: [], rulebooks: [], services: [] },
+          },
+        })),
+      ]);
+      state.selectedAsset = asset;
+      renderAssets(state.assets);
+      renderAssetDetail(asset, trace, impact);
+      if (assetSupportsTextWorkspace(asset)) {
+        try {
+          const textView = await fetchJson(`/api/knowledge/assets/${encodeURIComponent(assetId)}/text-workspace`);
+          renderTextWorkspace(textView);
+        } catch (err) {
+          renderTextWorkspace({
+            content: "",
+            content_length: 0,
+            workspace_relative_path: "-",
+            metadata: {},
+            annotation_summary: {},
+            can_edit: false,
+            annotated_html: `<div class="empty">${String(err)}</div>`,
+            entity_cards: [],
+          });
+        }
+      } else {
+        renderTextWorkspace(null);
+      }
+      const latestRunId = ((asset.ingest || {}).latest_run_id) || null;
+      if (latestRunId) pollRun(latestRunId);
+      else renderRun(null);
+    }
+
+    async function pollRun(runId) {
+      state.activeRunId = runId;
+      if (state.pollTimer) clearInterval(state.pollTimer);
+      const refresh = async () => {
+        try {
+          const run = await fetchJson(`/api/ingest/${encodeURIComponent(runId)}`);
+          renderRun(run);
+          if (["completed", "error", "paused_for_human_review", "aborted_by_decision_gate", "aborted_by_human_review"].includes(run.status)) {
+            clearInterval(state.pollTimer);
+            state.pollTimer = null;
+            await loadBootstrap(false);
+            await loadAssets();
+            if (state.selectedAsset) await selectAsset(state.selectedAsset.asset_id);
+          }
+        } catch (err) {
+          clearInterval(state.pollTimer);
+          state.pollTimer = null;
+          els.runLog.textContent = String(err);
+        }
+      };
+      await refresh();
+      state.pollTimer = setInterval(refresh, 4000);
+    }
+
+    async function syncRegistry(autoIngest = false) {
+      const payload = await fetchJson(`/api/knowledge/sync?auto_ingest=${autoIngest ? "true" : "false"}`, { method: "POST" });
+      await loadBootstrap(false);
+      await loadAssets();
+      const firstRun = (payload.started_runs || [])[0];
+      if (firstRun) pollRun(firstRun.run_id);
+    }
+
+    async function uploadFile(event) {
+      event.preventDefault();
+      const form = new FormData();
+      const file = document.getElementById("uploadFile").files[0];
+      if (!file) return;
+      form.append("file", file);
+      form.append("kind", els.uploadKind.value);
+      form.append("domain", els.uploadDomain.value);
+      form.append("title", els.uploadTitle.value);
+      form.append("source_type", els.uploadSourceType.value);
+      form.append("auto_ingest", els.uploadAutoIngest.value);
+      const payload = await fetchJson("/api/knowledge/upload", { method: "POST", body: form });
+      await loadBootstrap(false);
+      await loadAssets();
+      if (payload.asset) await selectAsset(payload.asset.asset_id);
+      if (payload.started_run) pollRun(payload.started_run.run_id);
+      els.uploadForm.reset();
+    }
+
+    async function saveConfig() {
+      if (!state.selectedAsset) return;
+      const payload = {
+        preferred_disease_name: els.configDisease.value.trim(),
+        source_type: els.configSourceType.value,
+        split_strategy: els.configSplitStrategy.value,
+        auto_ingest: els.configAutoIngest.value === "true",
+      };
+      await fetchJson(`/api/knowledge/assets/${encodeURIComponent(state.selectedAsset.asset_id)}/config`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      await selectAsset(state.selectedAsset.asset_id);
+    }
+
+    async function ingestSelected() {
+      if (!state.selectedAsset) return;
+      const form = new FormData();
+      form.append("namespace", "ontology_v2");
+      form.append("split_strategy", els.configSplitStrategy.value);
+      form.append("preferred_disease_name", els.configDisease.value.trim());
+      form.append("source_type", els.configSourceType.value);
+      const payload = await fetchJson(`/api/knowledge/assets/${encodeURIComponent(state.selectedAsset.asset_id)}/ingest`, {
+        method: "POST",
+        body: form,
+      });
+      return pollRun(payload.run_id);
+    }
+
+    async function exportExcelWorkbook() {
+      if (!state.selectedAsset) return;
+      els.exportExcelBtn.disabled = true;
+      try {
+        const payload = await fetchJson(`/api/knowledge/assets/${encodeURIComponent(state.selectedAsset.asset_id)}/excel-export`, {
+          method: "POST",
+        });
+        els.excelSummary.innerHTML = `
+          Export xong: <a href="${payload.download_url}" target="_blank" rel="noopener">mo workbook</a><br>
+          Sheets: ${Object.entries(payload.sheet_counts || {}).map(([key, value]) => `${key}=${value}`).join(" | ")}
+        `;
+      } finally {
+        if (state.selectedAsset) {
+          const trace = await fetchJson(`/api/knowledge/assets/${encodeURIComponent(state.selectedAsset.asset_id)}/graph-trace`);
+          els.exportExcelBtn.disabled = !(((trace.summary || {}).ontology_document_count || 0) > 0);
+        }
+      }
+    }
+
+    async function syncExcelWorkbook() {
+      if (!state.selectedAsset) return;
+      const file = els.excelSyncFile.files[0];
+      if (!file) {
+        alert("Chon workbook .xlsx truoc khi sync.");
+        return;
+      }
+      const form = new FormData();
+      form.append("file", file);
+      els.syncExcelBtn.disabled = true;
+      const payload = await fetchJson(`/api/knowledge/assets/${encodeURIComponent(state.selectedAsset.asset_id)}/excel-sync`, {
+        method: "POST",
+        body: form,
+      });
+      const applied = payload.applied || {};
+      els.excelSummary.innerHTML = `
+        Sync xong luc ${payload.synced_at || "-"}<br>
+        ${Object.entries(applied).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join("<br>")}
+      `;
+      els.excelSyncFile.value = "";
+      await selectAsset(state.selectedAsset.asset_id);
+    }
+
+    async function extractTextWorkspace() {
+      if (!state.selectedAsset) return;
+      const payload = await fetchJson(`/api/knowledge/assets/${encodeURIComponent(state.selectedAsset.asset_id)}/text-extract`, {
+        method: "POST",
+      });
+      renderTextWorkspace(payload);
+    }
+
+    async function saveTextWorkspace() {
+      if (!state.selectedAsset) return;
+      const payload = await fetchJson(`/api/knowledge/assets/${encodeURIComponent(state.selectedAsset.asset_id)}/text-save`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: els.textEditor.value,
+          note: "manual_dashboard_edit",
+        }),
+      });
+      renderTextWorkspace(payload);
+    }
+
+    async function saveTextAndReingest() {
+      await saveTextWorkspace();
+      await ingestSelected();
+    }
+
+    function captureTextSelection() {
+      const start = els.textEditor.selectionStart || 0;
+      const end = els.textEditor.selectionEnd || 0;
+      const selected = els.textEditor.value.slice(start, end).trim();
+      if (!selected) {
+        alert("Hay boi den doan text can gan nhan trong o Text workspace.");
+        return;
+      }
+      els.manualLabelText.value = selected;
+      if (!state.activeManualLabelId) {
+        els.manualConceptRef.value = "";
+        els.manualConceptLabel.value = "";
+        els.manualSourceChunkId.value = "";
+      }
+    }
+
+    async function saveManualLabel() {
+      if (!state.selectedAsset) return;
+      const text = els.manualLabelText.value.trim();
+      if (!text) {
+        alert("Can nhap hoac chon doan text de gan nhan.");
+        return;
+      }
+      if (state.textWorkspace && els.textEditor.value !== (state.textWorkspace.content || "")) {
+        await saveTextWorkspace();
+      }
+      const payload = await fetchJson(`/api/knowledge/assets/${encodeURIComponent(state.selectedAsset.asset_id)}/text-labels`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          label_id: state.activeManualLabelId || undefined,
+          text,
+          kind: els.manualLabelKind.value,
+          concept_ref: els.manualConceptRef.value.trim(),
+          concept_label: els.manualConceptLabel.value.trim(),
+          source_chunk_id: els.manualSourceChunkId.value.trim(),
+          note: els.manualLabelNote.value.trim(),
+          start_offset: els.textEditor.selectionStart || null,
+          end_offset: els.textEditor.selectionEnd || null,
+        }),
+      });
+      renderTextWorkspace(payload);
+      resetManualLabelForm();
+    }
+
+    async function deleteManualLabel(labelId) {
+      if (!state.selectedAsset || !labelId) return;
+      const confirmed = window.confirm(`Xoa manual label ${labelId}?`);
+      if (!confirmed) return;
+      const payload = await fetchJson(`/api/knowledge/assets/${encodeURIComponent(state.selectedAsset.asset_id)}/text-labels/${encodeURIComponent(labelId)}`, {
+        method: "DELETE",
+      });
+      renderTextWorkspace(payload);
+      if (state.activeManualLabelId === labelId) resetManualLabelForm();
+    }
+
+    function openManagedDir() {
+      if (!state.managedProtocolDir) return;
+      navigator.clipboard?.writeText(state.managedProtocolDir);
+      alert(`Thu muc protocol_pdfs:\n${state.managedProtocolDir}\n\nDa copy vao clipboard neu trinh duyet cho phep.`);
+    }
+
+    els.syncBtn.addEventListener("click", () => syncRegistry(false));
+    els.autoSyncBtn.addEventListener("click", () => syncRegistry(true));
+    els.uploadForm.addEventListener("submit", uploadFile);
+    els.saveConfigBtn.addEventListener("click", saveConfig);
+    els.ingestBtn.addEventListener("click", ingestSelected);
+    els.extractTextBtn.addEventListener("click", extractTextWorkspace);
+    els.saveTextBtn.addEventListener("click", saveTextWorkspace);
+    els.saveAndReingestBtn.addEventListener("click", saveTextAndReingest);
+    els.captureSelectionBtn.addEventListener("click", captureTextSelection);
+    els.saveManualLabelBtn.addEventListener("click", saveManualLabel);
+    els.exportExcelBtn.addEventListener("click", exportExcelWorkbook);
+    els.syncExcelBtn.addEventListener("click", syncExcelWorkbook);
+    els.filterBtn.addEventListener("click", loadAssets);
+    els.openManagedDirBtn.addEventListener("click", openManagedDir);
+
+    (async () => {
+      await loadBootstrap(false);
+      await loadAssets();
+      renderRun(null);
+      renderTextWorkspace(null);
+    })().catch(err => {
+      els.runLog.textContent = String(err);
+    });
+  </script>
+</body>
+</html>

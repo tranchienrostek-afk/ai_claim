@@ -1,0 +1,250 @@
+{
+  "disease_name": "Viêm họng cấp",
+  "icd_code": "J02",
+  "protocol_name": "Phác đồ Viêm họng cấp (BYT)",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": false,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "Paracetamol",
+        "Amoxicillin",
+        "Ibuprofen",
+        "Azithromycin"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "Viêm họng cấp",
+        "Viêm amidan cấp",
+        "Viêm amidan đáy lưới",
+        "Viêm họng - viêm amidan cấp"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "Đau họng",
+        "Khó nuốt",
+        "Sốt",
+        "Ho"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "Xét nghiệm máu",
+        "Cấy dịch họng",
+        "Test nhanh vi khuẩn"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "Nội soi họng",
+        "Sinh thiết amidan",
+        "Chọc hút dịch họng"
+      ]
+    },
+    {
+      "label": "Stage",
+      "examples": [
+        "Giai đoạn cấp tính",
+        "Giai đoạn mãn tính"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese internal medicine texts about acute pharyngitis (Viêm họng cấp). Extract all entities explicitly mentioned in the input text and return a valid JSON object with an array named \"entities\". Each entity should have a \"name\" field with the exact text span and a \"type\" field indicating the entity category. Only include entities explicitly mentioned in the text. The entity types to extract are Drug, Disease, Symptom, LabTest, Procedure, and Stage.",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text from the section {section_path} and extract all explicitly mentioned entities. The entity types and examples are:\n- Drug: Paracetamol, Amoxicillin, Ibuprofen, Azithromycin\n- Disease: Viêm họng cấp, Viêm amidan cấp, Viêm amidan đáy lưới, Viêm họng - viêm amidan cấp\n- Symptom: Đau họng, Khó nuốt, Sốt, Ho\n- LabTest: Xét nghiệm máu, Cấy dịch họng, Test nhanh vi khuẩn\n- Procedure: Nội soi họng, Sinh thiết amidan, Chọc hút dịch họng\n- Stage: Giai đoạn cấp tính, Giai đoạn mãn tính\n\nText to analyze:\n\"\"\"\n{chunk_content}\n\"\"\"\n\nReturn a JSON object in the format: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}. Only include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the respiratory system",
+      "properties": {
+        "code": "J00-J99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Acute upper respiratory infections",
+      "properties": {
+        "code": "J00-J06"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Viêm họng cấp",
+      "properties": {
+        "code": "J02"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Viêm họng cấp",
+      "properties": {
+        "aliases": "Acute pharyngitis, Acute sore throat"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Paracetamol",
+      "properties": {
+        "code": "N02BE01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Ibuprofen",
+      "properties": {
+        "code": "M01AE01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Amoxicillin",
+      "properties": {
+        "code": "J01CA04"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Phenylephrine",
+      "properties": {
+        "code": "R01BA02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Chlorpheniramine",
+      "properties": {
+        "code": "R06AB04"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Throat swab culture",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Rapid antigen detection test (RADT)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete blood count (CBC)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "C-reactive protein (CRP)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Erythrocyte sedimentation rate (ESR)",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the respiratory system",
+      "to_label": "ICD_Category",
+      "to_name": "Acute upper respiratory infections",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Acute upper respiratory infections",
+      "to_label": "ICD_Category",
+      "to_name": "Viêm họng cấp",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm họng cấp",
+      "to_label": "ICD_Category",
+      "to_name": "Viêm họng cấp",
+      "rel_type": "CLASSIFIED_AS"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm họng cấp",
+      "to_label": "Drug",
+      "to_name": "Paracetamol",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm họng cấp",
+      "to_label": "Drug",
+      "to_name": "Ibuprofen",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm họng cấp",
+      "to_label": "Drug",
+      "to_name": "Amoxicillin",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm họng cấp",
+      "to_label": "Drug",
+      "to_name": "Phenylephrine",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm họng cấp",
+      "to_label": "Drug",
+      "to_name": "Chlorpheniramine",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm họng cấp",
+      "to_label": "LabTest",
+      "to_name": "Throat swab culture",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm họng cấp",
+      "to_label": "LabTest",
+      "to_name": "Rapid antigen detection test (RADT)",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm họng cấp",
+      "to_label": "LabTest",
+      "to_name": "Complete blood count (CBC)",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm họng cấp",
+      "to_label": "LabTest",
+      "to_name": "C-reactive protein (CRP)",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm họng cấp",
+      "to_label": "LabTest",
+      "to_name": "Erythrocyte sedimentation rate (ESR)",
+      "rel_type": "INSTANCE_OF"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

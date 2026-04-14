@@ -23,6 +23,17 @@ data/benchmarks/
 # Graphify cache
 graphify-out/
 
+# Services — build artifacts
+services/9router/node_modules/
+services/9router/.next/
+services/pathway/data/
+services/pathway/logs/
+services/pathway/workspaces/
+services/pathway/assets/
+services/pathway/graphify-out/
+services/azure-proxy/__pycache__/
+services/azure-proxy/runtime/
+
 # IDE / OS
 .vscode/
 .idea/

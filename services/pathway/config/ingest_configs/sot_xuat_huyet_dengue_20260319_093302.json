@@ -1,0 +1,208 @@
+{
+  "disease_name": "Sốt xuất huyết Dengue",
+  "icd_code": "A90",
+  "protocol_name": "Phác đồ Sốt xuất huyết Dengue - Bộ Y tế 2023",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": true,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Disease",
+      "examples": [
+        "Sốt xuất huyết Dengue",
+        "Malaria",
+        "Chikungunya"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "Sốt cao",
+        "Đau cơ",
+        "Xuất huyết"
+      ]
+    },
+    {
+      "label": "Drug",
+      "examples": [
+        "Paracetamol",
+        "Ibuprofen",
+        "Dexamethasone"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "Xét nghiệm huyết học",
+        "Xét nghiệm dengue NS1",
+        "Xét nghiệm IgM"
+      ]
+    },
+    {
+      "label": "ICD_Category",
+      "examples": [
+        "A90",
+        "A91",
+        "A92"
+      ]
+    },
+    {
+      "label": "ICD_Chapter",
+      "examples": [
+        "Bệnh truyền nhiễm",
+        "Bệnh ký sinh trùng",
+        "Bệnh virus"
+      ]
+    },
+    {
+      "label": "Protocol",
+      "examples": [
+        "Hướng dẫn chẩn đoán sốt xuất huyết",
+        "Quy trình điều trị sốt xuất huyết",
+        "Hướng dẫn theo dõi bệnh nhân"
+      ]
+    },
+    {
+      "label": "Treatment",
+      "examples": [
+        "Điều trị triệu chứng",
+        "Truyền dịch",
+        "Theo dõi huyết áp"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are an NER model specialized in extracting medical entities from Vietnamese text. Your task is to identify and classify entities related to internal medicine, specifically focusing on Dengue fever. Return the results in valid JSON format with an 'entities' array containing the identified entities.",
+  "extraction_user_prompt_template": "Analyze the following text: {chunk_content} from the section: {section_path}. Identify and extract the following entities: Disease (e.g., Sốt xuất huyết Dengue, Malaria, Chikungunya), Symptom (e.g., Sốt cao, Đau cơ, Xuất huyết), Drug (e.g., Paracetamol, Ibuprofen, Dexamethasone), LabTest (e.g., Xét nghiệm huyết học, Xét nghiệm dengue NS1, Xét nghiệm IgM), ICD_Category (e.g., A90, A91, A92), ICD_Chapter (e.g., Bệnh truyền nhiễm, Bệnh ký sinh trùng, Bệnh virus), Protocol (e.g., Hướng dẫn chẩn đoán sốt xuất huyết, Quy trình điều trị sốt xuất huyết, Hướng dẫn theo dõi bệnh nhân), Treatment (e.g., Điều trị triệu chứng, Truyền dịch, Theo dõi huyết áp). Only include entities EXPLICITLY mentioned in the text. Return JSON: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Infectious and Parasitic Diseases",
+      "properties": {
+        "code": "A00-B99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Dengue Fever",
+      "properties": {
+        "code": "A90"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Sốt xuất huyết Dengue",
+      "properties": {
+        "aliases": "Dengue Fever, Dengue"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Paracetamol",
+      "properties": {
+        "ATC_code": "N02BE01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Ibuprofen",
+      "properties": {
+        "ATC_code": "M01AE01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Dexamethasone",
+      "properties": {
+        "ATC_code": "H02AB02"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete Blood Count (CBC)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Dengue NS1 Antigen Test",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Dengue IgM and IgG Antibody Test",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Platelet Count",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Infectious and Parasitic Diseases",
+      "to_label": "ICD_Category",
+      "to_name": "Dengue Fever",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Dengue Fever",
+      "to_label": "Disease",
+      "to_name": "Sốt xuất huyết Dengue",
+      "rel_type": "CLASSIFIED_AS"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Sốt xuất huyết Dengue",
+      "to_label": "Drug",
+      "to_name": "Paracetamol",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Sốt xuất huyết Dengue",
+      "to_label": "Drug",
+      "to_name": "Ibuprofen",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Sốt xuất huyết Dengue",
+      "to_label": "Drug",
+      "to_name": "Dexamethasone",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Sốt xuất huyết Dengue",
+      "to_label": "LabTest",
+      "to_name": "Complete Blood Count (CBC)",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Sốt xuất huyết Dengue",
+      "to_label": "LabTest",
+      "to_name": "Dengue NS1 Antigen Test",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Sốt xuất huyết Dengue",
+      "to_label": "LabTest",
+      "to_name": "Dengue IgM and IgG Antibody Test",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Sốt xuất huyết Dengue",
+      "to_label": "LabTest",
+      "to_name": "Platelet Count",
+      "rel_type": "HAS_CATEGORY"
+    }
+  ],
+  "needs_ocr_cleanup": true
+}

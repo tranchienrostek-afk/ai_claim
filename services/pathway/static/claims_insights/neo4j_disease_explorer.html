@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bản đồ Bệnh lý & Nghiệp vụ - CMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fff5f5;
+      --panel: rgba(255, 255, 255, 0.82);
+      --panel-solid: #ffffff;
+      --panel-hover: #fff0f0;
+      --line: #ffd1d1;
+      --line-hover: #ff9e9e;
+      --text: #2d3748;
+      --muted: #718096;
+      --accent: #ed8936;
+      --accent-soft: rgba(237, 137, 54, 0.08);
+      --accent-glow: 0 0 15px rgba(237, 137, 54, 0.4);
+      --good: #38a169;
+      --warn: #d69e2e;
+      --bad: #e53e3e;
+      --violet: #805ad5;
+      --blue: #3182ce;
+      --cyan: #00b5ad;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.12);
+      --radius: 16px;
+      --font-main: 'Be Vietnam Pro', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-main);
+      color: var(--text);
+      background-color: var(--bg);
+      line-height: 1.5;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 0% 0%, rgba(237, 137, 54, 0.08), transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(237, 137, 54, 0.1), transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4), transparent 80%),
+        var(--bg);
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(var(--line) 0.8px, transparent 0.8px);
+      background-size: 32px 32px;
+      opacity: 0.3;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 320px 1fr 380px;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .sidebar, .detailbar {
+      background: var(--panel);
+      backdrop-filter: blur(20px);
+      padding: 30px 24px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      overflow-y: auto;
+      box-shadow: 10px 0 30px rgba(0,0,0,0.02);
+    }
+
+    .detailbar {
+      border-right: none;
+      border-left: 1px solid var(--line);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.02);
+    }
+
+    .main {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+      background: transparent;
+      min-width: 0;
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    }
+
+    h1 { font-size: 1.25rem; font-weight: 700; margin: 0; color: var(--text); }
+    h2 { font-size: 1.1rem; font-weight: 600; margin: 0; color: var(--text); }
+    h3 { font-size: 0.95rem; font-weight: 600; margin: 0; color: var(--text); }
+    p { margin: 0; }
+    .sub { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+
+    .panel {
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .panel:hover {
+      border-color: var(--line-hover);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .panel-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .panel-body { padding: 20px 24px; }
+
+    .search-input {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.6);
+      color: var(--text);
+      padding: 12px 16px;
+      outline: none;
+      font-size: 0.9rem;
+      transition: all 0.25s;
+    }
+    .search-input:focus {
+      border-color: var(--accent);
+      background: #fff;
+      box-shadow: var(--accent-glow);
+    }
+
+    .select-input {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.6);
+      padding: 12px;
+      font-size: 0.85rem;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .select-input:hover { background: #fff; border-color: var(--accent); }
+
+    .stack { display: flex; flex-direction: column; gap: 12px; }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .kpi {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.4);
+      transition: transform 0.2s;
+    }
+    .kpi:hover { transform: translateY(-2px); background: #ffffff; }
+
+    .kpi .label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .kpi .value {
+      margin-top: 6px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-shadow: 0 2px 4px rgba(237, 137, 54, 0.1);
+    }
+
+    .disease-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      overflow-y: auto;
+      padding: 4px;
+    }
+
+    .disease-item {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .disease-item:hover {
+      border-color: var(--accent);
+      background: #ffffff;
+      transform: scale(1.02);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+
+    .disease-item.active {
+      border-color: var(--accent);
+      background: #ffffff;
+      box-shadow: var(--accent-glow);
+    }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip {
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      background: #f1f5f9;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    button.ui-btn {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--text);
+      border-radius: 6px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    button.ui-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .graph-shell {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .graph-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background-color: transparent;
+      background-image: 
+        radial-gradient(var(--line) 1px, transparent 1px);
+      background-size: 50px 50px;
+      background-position: center;
+    }
+
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; padding: 8px 16px; background: rgba(255,255,255,0.4); border-radius: 99px; border: 1px solid var(--line); }
+    .legend-item { display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; color: var(--text); font-weight: 600; }
+    .swatch { width: 14px; height: 14px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+    .detail-scroll {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 4px;
+    }
+
+    .card {
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      color: var(--accent);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+    }
+
+    .list { display: flex; flex-direction: column; gap: 10px; }
+    .list-item {
+      padding: 12px;
+      border-radius: 8px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+    }
+    .list-item strong { display: block; font-size: 0.9rem; color: var(--text); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 8px;
+      text-align: left;
+    }
+
+    th {
+      color: var(--muted);
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      background: #f8fafc;
+    }
+
+    .empty {
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 1400px) {
+      .app { grid-template-columns: 300px 1fr 340px; }
+    }
+
+    @media (max-width: 1180px) {
+      .app { grid-template-columns: 1fr; height: auto; overflow: visible; }
+      .sidebar, .detailbar { height: auto; border: none; }
+      .graph-shell { height: 600px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">CMS</div>
+        <div>
+          <h1>Bản đồ Bệnh lý</h1>
+          <div class="sub">Hệ thống phân tích Đồ thị Lâm sàng</div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <input id="diseaseSearch" class="search-input" type="text" placeholder="Tìm theo ICD, tên bệnh, bệnh viện..." title="Nhập mã ICD hoặc tên bệnh để tìm kiếm nhanh" />
+        <select id="sortSelect" class="select-input" title="Sắp xếp danh sách bệnh">
+          <option value="cases">Sắp xếp theo số ca</option>
+          <option value="services">Sắp xếp theo số dịch vụ</option>
+          <option value="name">Sắp xếp theo tên bệnh</option>
+          <option value="icd">Sắp xếp theo ICD</option>
+        </select>
+      </div>
+
+      <div id="globalKpis" class="kpis"></div>
+      <div id="diseaseList" class="disease-list"></div>
+    </aside>
+
+    <main class="main">
+      <header class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 id="graphTitle">Đang tải dữ liệu...</h2>
+            <div id="graphSubtitle" class="sub">Dữ liệu chuẩn hóa từ Claim cases và Lab observations.</div>
+          </div>
+          <div class="toolbar-actions">
+            <button id="zoomOutBtn" class="ui-btn" type="button" title="Thu nhỏ">－</button>
+            <button id="zoomResetBtn" class="ui-btn" type="button" title="Đặt lại thu phóng">Reset</button>
+            <button id="zoomInBtn" class="ui-btn" type="button" title="Phóng to">＋</button>
+          </div>
+        </div>
+        <div class="panel-body" style="padding: 12px 20px;">
+          <div class="toolbar">
+            <div id="summaryChips" class="chips"></div>
+            <div class="legend">
+              <span class="legend-item"><span class="swatch" style="background:var(--blue)"></span>Bệnh lý</span>
+              <span class="legend-item"><span class="swatch" style="background:var(--cyan)"></span>Dịch vụ y tế</span>
+              <span class="legend-item"><span class="swatch" style="background:var(--good)"></span>Triệu chứng</span>
+              <span class="legend-item"><span class="swatch" style="background:var(--violet)"></span>Chỉ số xét nghiệm</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="panel graph-shell">
+        <svg id="graphSvg" class="graph-canvas" viewBox="0 0 1600 1100">
+          <g id="graphViewport"></g>
+        </svg>
+      </section>
+    </main>
+
+    <aside class="detailbar">
+      <div class="brand" style="margin-bottom:14px">
+        <div>
+          <h2>Chi tiết Hồ sơ</h2>
+          <div class="sub">Bấm vào các nút hoặc cạnh để xem bằng chứng metadata.</div>
+        </div>
+      </div>
+      <div id="detailPanel" class="detail-scroll"></div>
+    </aside>
+  </div>
+
+  <script>
+  const STATIC_DATA = { disease_index: [], graphs: {}, stats: {} };
+  let DATA = STATIC_DATA;
+  const graphCache = new Map();
+  const state = {
+    selectedDiseaseId: DATA.disease_index[0]?.disease_id || "",
+    selectedNodeId: DATA.disease_index[0]?.disease_id || "",
+    selectedEdgeId: "",
+    expandedServices: new Set(),
+    search: "",
+    sort: "cases",
+    dataSource: DATA.disease_index?.length ? "bundle-fallback" : "loading",
+    loadingGraph: false,
+    zoom: 1,
+    panX: 0,
+    panY: 0,
+    dragging: false,
+    dragStartX: 0,
+    dragStartY: 0,
+  };
+
+  const els = {
+    search: document.getElementById("diseaseSearch"),
+    sort: document.getElementById("sortSelect"),
+    diseaseList: document.getElementById("diseaseList"),
+    globalKpis: document.getElementById("globalKpis"),
+    graphTitle: document.getElementById("graphTitle"),
+    graphSubtitle: document.getElementById("graphSubtitle"),
+    summaryChips: document.getElementById("summaryChips"),
+    detailPanel: document.getElementById("detailPanel"),
+    svg: document.getElementById("graphSvg"),
+    viewport: document.getElementById("graphViewport"),
+    zoomInBtn: document.getElementById("zoomInBtn"),
+    zoomOutBtn: document.getElementById("zoomOutBtn"),
+    zoomResetBtn: document.getElementById("zoomResetBtn"),
+  };
+
+  function fmt(value) {
+    return new Intl.NumberFormat("vi-VN").format(value || 0);
+  }
+
+  function escapeHtml(text) {
+    return String(text ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function truncate(text, max = 46) {
+    const value = String(text ?? "");
+    if (value.length <= max) return value;
+    return value.slice(0, max - 1) + "…";
+  }
+
+  function degToRad(deg) {
+    return deg * Math.PI / 180;
+  }
+
+  function multiRingPositions(items, cx, cy, startDeg, endDeg, baseRadius, ringGap, maxPerRing) {
+    const positions = [];
+    for (let i = 0; i < items.length; i += maxPerRing) {
+      const ringItems = items.slice(i, i + maxPerRing);
+      const ringIndex = Math.floor(i / maxPerRing);
+      const radius = baseRadius + ringIndex * ringGap;
+      ringItems.forEach((item, idx) => {
+        const ratio = ringItems.length === 1 ? 0.5 : idx / (ringItems.length - 1);
+        const angle = degToRad(startDeg + (endDeg - startDeg) * ratio);
+        positions.push({
+          id: item.id,
+          x: cx + Math.cos(angle) * radius,
+          y: cy + Math.sin(angle) * radius,
+        });
+      });
+    }
+    return positions;
+  }
+
+  function colorForType(type) {
+    if (type === "disease") return "var(--blue)";
+    if (type === "service") return "var(--cyan)";
+    if (type === "sign") return "var(--good)";
+    if (type === "observation") return "var(--violet)";
+    return "var(--muted)";
+  }
+
+  function currentGraph() {
+    const graph = graphCache.get(state.selectedDiseaseId) || DATA.graphs?.[state.selectedDiseaseId] || null;
+    if (!graph) {
+      console.debug(`[currentGraph] No graph found for ${state.selectedDiseaseId}`);
+    }
+    return graph;
+  }
+
+  function sortDiseases(items) {
+    const sorted = [...items];
+    sorted.sort((a, b) => {
+      if (state.sort === "name") return a.disease_name.localeCompare(b.disease_name, "vi");
+      if (state.sort === "icd") return a.icd10.localeCompare(b.icd10, "vi");
+      if (state.sort === "services") return (b.linked_service_count - a.linked_service_count) || (b.case_count - a.case_count);
+      return (b.case_count - a.case_count) || (b.linked_service_count - a.linked_service_count);
+    });
+    return sorted;
+  }
+
+  function filteredDiseases() {
+    const query = state.search.trim().toLowerCase();
+    const items = sortDiseases(DATA.disease_index || []);
+    if (!query) return items;
+    return items.filter((item) =>
+      [item.icd10, item.disease_name, item.top_hospital]
+        .filter(Boolean)
+        .some((value) => value.toLowerCase().includes(query))
+    );
+  }
+
+  function currentNodeMap() {
+    const graph = currentGraph();
+    const map = new Map();
+    if (!graph) return map;
+    graph.nodes.forEach((node) => map.set(node.id, node));
+    graph.disease_observations.forEach((node) => map.set(node.id, { ...node, type: "observation" }));
+    return map;
+  }
+
+  function renderGlobalKpis() {
+    const stats = DATA.stats || {};
+    const items = [
+      { label: "Bệnh", value: fmt(stats.disease_count || 0) },
+      { label: "Có ca thật", value: fmt(stats.diseases_with_case_evidence || 0) },
+      { label: "Disease -> Service", value: fmt(stats.service_link_count || 0) },
+      { label: "Observation nodes", value: fmt(stats.disease_observation_count || 0) },
+    ];
+    els.globalKpis.innerHTML = items.map((item) => `
+      <div class="kpi">
+        <div class="label">${item.label}</div>
+        <div class="value">${item.value}</div>
+      </div>
+    `).join("");
+  }
+
+  function renderDiseaseList() {
+    const diseases = filteredDiseases();
+    if (!diseases.length) {
+      els.diseaseList.innerHTML = `<div class="empty">Không tìm thấy bệnh nào khớp từ khóa.</div>`;
+      return;
+    }
+    els.diseaseList.innerHTML = diseases.map((item) => `
+      <div class="disease-item ${item.disease_id === state.selectedDiseaseId ? "active" : ""}" data-disease-id="${item.disease_id}">
+        <div style="display:flex;justify-content:space-between;gap:8px;align-items:start">
+          <div>
+            <div style="font-weight:800">${escapeHtml(item.disease_name)}</div>
+            <div class="sub">${escapeHtml(item.icd10)} · Nhóm ${escapeHtml(item.icd_group)}</div>
+          </div>
+          <div class="chip">${fmt(item.case_count)} ca</div>
+        </div>
+        <div class="chips" style="margin-top:10px">
+          <span class="chip">${fmt(item.linked_service_count)} dịch vụ</span>
+          <span class="chip">${fmt(item.sign_count)} dấu hiệu</span>
+          <span class="chip">${fmt(item.disease_observation_count)} chỉ số</span>
+        </div>
+        ${item.top_hospital ? `<div class="sub" style="margin-top:10px">${escapeHtml(item.top_hospital)}</div>` : ``}
+      </div>
+    `).join("");
+  }
+
+  function renderSummary() {
+    const graph = currentGraph();
+    if (!graph) {
+      els.graphTitle.textContent = state.loadingGraph ? "Đang tải graph bệnh từ Neo4j..." : "Chưa có graph bệnh";
+      els.graphSubtitle.textContent = state.dataSource === "neo4j"
+        ? "Đang đợi dữ liệu graph từ Neo4j."
+        : "Đang dùng fallback bundle hoặc chưa tải xong.";
+      els.summaryChips.innerHTML = `<span class="chip">${escapeHtml(state.dataSource)}</span>`;
+      return;
+    }
+    const summary = graph.summary;
+    els.graphTitle.textContent = `${summary.disease_name} (${summary.icd10})`;
+    els.graphSubtitle.textContent = `Nguồn dữ liệu: ${state.dataSource}. Bấm vào dịch vụ để bung thông số/kết quả, bấm vào cạnh để xem bằng chứng.`;
+    const activeObservationNodes = [...state.expandedServices].reduce((sum, serviceId) => {
+      const service = graph.services.find((item) => item.id === serviceId);
+      return sum + (service?.observations?.length || 0);
+    }, 0);
+    const chips = [
+      `${state.dataSource}`,
+      `${fmt(summary.case_count)} ca claim`,
+      `${fmt(summary.linked_service_count)} dịch vụ`,
+      `${fmt(summary.sign_count)} dấu hiệu`,
+      `${fmt(summary.disease_observation_count)} observation disease-level`,
+      `${fmt(activeObservationNodes)} observation đang mở`,
+    ];
+    els.summaryChips.innerHTML = chips.map((item) => `<span class="chip">${escapeHtml(item)}</span>`).join("");
+  }
+
+  function renderDetails() {
+    const graph = currentGraph();
+    if (!graph) {
+      els.detailPanel.innerHTML = `<div class="empty">Chưa có graph nào để hiển thị.</div>`;
+      return;
+    }
+    const summary = graph.summary;
+    const nodeMap = currentNodeMap();
+    const edge = graph.edges.find((item) => item.id === state.selectedEdgeId);
+    const node = nodeMap.get(state.selectedNodeId) || nodeMap.get(state.selectedDiseaseId);
+    const cards = [];
+
+    cards.push(`
+      <div class="card">
+        <h3>${escapeHtml(summary.disease_name)} (${escapeHtml(summary.icd10)})</h3>
+        <div class="chips" style="margin-top:10px">
+          <span class="chip">${fmt(summary.case_count)} ca</span>
+          <span class="chip">${fmt(summary.linked_service_count)} dịch vụ</span>
+          <span class="chip">${fmt(summary.sign_count)} dấu hiệu</span>
+          <span class="chip">${fmt(summary.disease_observation_count)} observation</span>
+        </div>
+      </div>
+    `);
+
+    if (edge) {
+      cards.push(`
+        <div class="card">
+          <h3>Cạnh đang chọn</h3>
+          <div class="list">
+            <div class="list-item"><strong>${escapeHtml(edge.type)}</strong><div class="sub">${escapeHtml(edge.label || "")}</div></div>
+            <div class="list-item"><strong>Source</strong><div class="sub">${escapeHtml(edge.source)}</div></div>
+            <div class="list-item"><strong>Target</strong><div class="sub">${escapeHtml(edge.target)}</div></div>
+            <div class="list-item"><strong>Chi tiết</strong><div class="sub">${escapeHtml(JSON.stringify(edge.details || {}, null, 2))}</div></div>
+          </div>
+        </div>
+      `);
+    } else if (node) {
+      cards.push(renderNodeDetailCard(node, graph));
+    }
+
+    cards.push(`
+      <div class="card">
+        <h3>Top bệnh viện / khoa</h3>
+        <div class="list">
+          ${summary.top_hospitals.length ? summary.top_hospitals.map((item) => `<div class="list-item"><strong>${escapeHtml(item.name)}</strong><div class="sub">${fmt(item.count)} ca</div></div>`).join("") : `<div class="empty">Chưa có hospital evidence.</div>`}
+          ${summary.top_departments.length ? summary.top_departments.map((item) => `<div class="list-item"><strong>${escapeHtml(item.name)}</strong><div class="sub">${fmt(item.count)} ca</div></div>`).join("") : ``}
+        </div>
+      </div>
+    `);
+
+    cards.push(`
+      <div class="card">
+        <h3>Ví dụ chẩn đoán thực tế</h3>
+        <div class="list">
+          ${summary.diagnosis_examples.length ? summary.diagnosis_examples.map((item) => `<div class="list-item">${escapeHtml(item)}</div>`).join("") : `<div class="empty">Chưa gom được diagnosis example.</div>`}
+        </div>
+      </div>
+    `);
+
+    cards.push(`
+      <div class="card">
+        <h3>Observation disease-level</h3>
+        ${graph.disease_observations.length ? `
+          <table>
+            <thead><tr><th>Thông số</th><th>Count</th><th>Flags</th></tr></thead>
+            <tbody>
+              ${graph.disease_observations.slice(0, 12).map((item) => `
+                <tr>
+                  <td>${escapeHtml(item.name)}</td>
+                  <td>${fmt(item.count)}</td>
+                  <td>${escapeHtml(Object.keys(item.result_flag_counter || {}).join(", "))}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        ` : `<div class="empty">Chưa có observation disease-level cho bệnh này.</div>`}
+      </div>
+    `);
+
+    els.detailPanel.innerHTML = cards.join("");
+  }
+
+  function renderNodeDetailCard(node, graph) {
+    if (node.type === "disease") {
+      return `
+        <div class="card">
+          <h3>Bệnh / disease node</h3>
+          <div class="list">
+            <div class="list-item"><strong>${escapeHtml(graph.summary.disease_name)}</strong><div class="sub">${escapeHtml(graph.summary.icd10)} · Nhóm ${escapeHtml(graph.summary.icd_group)}</div></div>
+            <div class="list-item"><strong>Top dấu hiệu</strong><div class="sub">${escapeHtml(graph.signs.slice(0, 8).map((item) => item.label).join(" | ") || "Chưa có")}</div></div>
+            <div class="list-item"><strong>Top dịch vụ</strong><div class="sub">${escapeHtml(graph.services.slice(0, 8).map((item) => item.label).join(" | ") || "Chưa có")}</div></div>
+          </div>
+        </div>
+      `;
+    }
+
+    if (node.type === "service") {
+      const observations = node.observations || [];
+      return `
+        <div class="card">
+          <h3>Dịch vụ: ${escapeHtml(node.label)}</h3>
+          <div class="chips" style="margin-top:10px">
+            <span class="chip">${escapeHtml(node.service_code)}</span>
+            <span class="chip">${escapeHtml(node.category_name || node.category_code || "")}</span>
+            <span class="chip">${fmt(node.case_support || 0)} ca</span>
+            <span class="chip">${observations.length} observation direct</span>
+          </div>
+          <div class="list" style="margin-top:12px">
+            <div class="list-item"><strong>Vai trò</strong><div class="sub">${escapeHtml((node.roles || []).join(", ") || "unknown")}</div></div>
+            <div class="list-item"><strong>Evidence</strong><div class="sub">${escapeHtml((node.evidences || []).join(", ") || "unknown")}</div></div>
+            <div class="list-item"><strong>Score / support</strong><div class="sub">score ${escapeHtml(node.max_score)} · guideline ${fmt(node.guideline_hits || 0)} · protocol ${fmt(node.protocol_excel_hits || 0)} · statistical ${fmt(node.statistical_hits || 0)}</div></div>
+            <div class="list-item"><strong>Variants</strong><div class="sub">${escapeHtml((node.variants_preview || []).join(" | ") || "Không có")}</div></div>
+          </div>
+          <div style="margin-top:12px">
+            <strong class="tiny muted">Thông số và kết quả direct</strong>
+            ${observations.length ? `
+              <table style="margin-top:8px">
+                <thead><tr><th>Thông số</th><th>Count</th><th>Flags</th></tr></thead>
+                <tbody>
+                  ${observations.slice(0, 10).map((item) => `
+                    <tr>
+                      <td>${escapeHtml(item.name)}</td>
+                      <td>${fmt(item.count)}</td>
+                      <td>${escapeHtml(Object.keys(item.result_flag_counter || {}).join(", "))}</td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            ` : `<div class="empty" style="margin-top:8px">Dịch vụ này chưa map observation trực tiếp. Bạn vẫn có thể xem disease-level observations ở panel bên dưới.</div>`}
+          </div>
+        </div>
+      `;
+    }
+
+    if (node.type === "sign") {
+      return `
+        <div class="card">
+          <h3>Dấu hiệu / lý do vào viện</h3>
+          <div class="list">
+            <div class="list-item"><strong>${escapeHtml(node.label)}</strong><div class="sub">${fmt(node.support_cases || 0)} ca hỗ trợ</div></div>
+          </div>
+        </div>
+      `;
+    }
+
+    if (node.type === "observation") {
+      return `
+        <div class="card">
+          <h3>Observation / thông số</h3>
+          <div class="list">
+            <div class="list-item"><strong>${escapeHtml(node.label)}</strong><div class="sub">${escapeHtml(node.observation_node_code || "")}</div></div>
+            <div class="list-item"><strong>Category</strong><div class="sub">${escapeHtml(node.category_name || node.category_code || "")}</div></div>
+            <div class="list-item"><strong>Count</strong><div class="sub">${fmt(node.count || 0)}</div></div>
+            <div class="list-item"><strong>Flags</strong><div class="sub">${escapeHtml(Object.keys(node.result_flag_counter || {}).join(", "))}</div></div>
+          </div>
+          ${node.sample_results?.length ? `
+            <table style="margin-top:10px">
+              <thead><tr><th>Kết quả</th><th>Đơn vị</th><th>Flag</th><th>Ref</th></tr></thead>
+              <tbody>
+                ${node.sample_results.map((item) => `
+                  <tr>
+                    <td>${escapeHtml(item.result_raw)}</td>
+                    <td>${escapeHtml(item.unit)}</td>
+                    <td>${escapeHtml(item.result_flag)}</td>
+                    <td>${escapeHtml(item.reference_range)}</td>
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          ` : ``}
+        </div>
+      `;
+    }
+
+    return `
+      <div class="card">
+        <h3>Bệnh đang chọn</h3>
+        <div class="list">
+          <div class="list-item"><strong>${escapeHtml(graph.summary.disease_name)}</strong><div class="sub">${escapeHtml(graph.summary.icd10)}</div></div>
+        </div>
+      </div>
+    `;
+  }
+
+  function layoutGraph(graph) {
+    const visibleNodes = [];
+    const nodeMap = new Map();
+    graph.nodes.forEach((node) => nodeMap.set(node.id, node));
+
+    const MAX_SIGN = 25, MAX_SVC = 30, MAX_OBS = 15;
+    const diseaseNode = graph.nodes.find((node) => node.type === "disease");
+    const signNodes = graph.nodes.filter((node) => node.type === "sign").slice(0, MAX_SIGN);
+    const serviceNodes = graph.nodes.filter((node) => node.type === "service").slice(0, MAX_SVC);
+    const observationNodes = graph.nodes.filter((node) => node.type === "observation" && state.expandedServices.has(node.parent_service_id)).slice(0, MAX_OBS);
+
+    if (diseaseNode) visibleNodes.push(diseaseNode);
+    visibleNodes.push(...signNodes, ...serviceNodes, ...observationNodes);
+
+    const positions = new Map();
+    if (diseaseNode) positions.set(diseaseNode.id, { x: 760, y: 320 });
+
+    multiRingPositions(signNodes, 430, 360, 125, 235, 230, 120, 8).forEach((item) => positions.set(item.id, item));
+    multiRingPositions(serviceNodes, 1020, 390, -70, 70, 300, 135, 10).forEach((item) => positions.set(item.id, item));
+
+    observationNodes.forEach((node, index) => {
+      const siblings = observationNodes.filter((item) => item.parent_service_id === node.parent_service_id);
+      const servicePosition = positions.get(node.parent_service_id) || { x: 1100, y: 500 };
+      const localIndex = siblings.findIndex((item) => item.id === node.id);
+      const angle = degToRad(45 + (siblings.length === 1 ? 0 : (localIndex / Math.max(1, siblings.length - 1)) * 170));
+      const ring = Math.floor(localIndex / 8);
+      const radius = 120 + ring * 85;
+      positions.set(node.id, {
+        x: servicePosition.x + Math.cos(angle) * radius,
+        y: servicePosition.y + Math.sin(angle) * radius,
+      });
+    });
+
+    const visibleIds = new Set(visibleNodes.map((node) => node.id));
+    const visibleEdges = graph.edges.filter((edge) => visibleIds.has(edge.source) && visibleIds.has(edge.target) && (!edge.hidden || state.expandedServices.has(edge.source)));
+
+    return { visibleNodes, visibleEdges, positions, nodeMap };
+  }
+
+  function renderGraph() {
+    try {
+      const graph = currentGraph();
+      if (!graph) {
+        els.viewport.innerHTML = `
+          <text x="800" y="520" text-anchor="middle" fill="#94accf" font-size="22">
+            ${state.loadingGraph ? "Đang tải graph từ Neo4j..." : "Chưa có dữ liệu graph để hiển thị"}
+          </text>
+        `;
+        return;
+      }
+
+      const { visibleNodes, visibleEdges, positions } = layoutGraph(graph);
+      console.debug(`[Graph Render] ${visibleNodes.length} nodes, ${visibleEdges.length} edges for ${graph.summary?.disease_name || 'unknown'}`);
+      const edgeMarkup = visibleEdges.map((edge) => {
+      const source = positions.get(edge.source);
+      const target = positions.get(edge.target);
+      if (!source || !target) return "";
+      const midX = (source.x + target.x) / 2;
+      const midY = (source.y + target.y) / 2;
+      const isActiveEdge = edge.id === state.selectedEdgeId;
+      const opacity = isActiveEdge ? 1 : 0.4;
+      const activeClass = isActiveEdge ? "stroke:var(--accent);stroke-width:2.5" : "stroke:var(--line);stroke-width:1.5";
+      return `
+        <g data-edge-id="${edge.id}" style="cursor:pointer" opacity="${opacity}">
+          <line x1="${source.x}" y1="${source.y}" x2="${target.x}" y2="${target.y}" style="${activeClass};fill:none" />
+          <text x="${midX}" y="${midY - 8}" text-anchor="middle" fill="var(--muted)" font-size="9" font-weight="600" style="font-family:var(--font-main)">${escapeHtml(truncate(edge.label || edge.type, 32))}</text>
+        </g>
+      `;
+    }).join("");
+
+    const nodeMarkup = visibleNodes.map((node) => {
+      const pos = positions.get(node.id);
+      if (!pos) return "";
+      const isActive = node.id === state.selectedNodeId;
+      const color = colorForType(node.type);
+      const width = node.type === "disease" ? 280 : node.type === "service" ? 240 : 220;
+      const height = node.type === "disease" ? 100 : 84;
+      const x = pos.x - width / 2;
+      const y = pos.y - height / 2;
+      const stroke = isActive ? "var(--accent)" : "var(--line)";
+      const subtitle = node.type === "service"
+        ? `${node.service_code || ""} · ${node.category_code || ""}`
+        : node.type === "disease"
+          ? `${node.subtitle || ""}`
+          : node.type === "observation"
+            ? `${node.category_code || ""} · ${fmt(node.count || 0)}`
+            : `${fmt(node.support_cases || 0)} ca`;
+
+      return `
+        <g data-node-id="${node.id}" style="cursor:pointer">
+          <rect x="${x}" y="${y}" width="${width}" height="${height}" rx="16" fill="rgba(255,255,255,0.95)" stroke="${stroke}" stroke-width="${isActive ? 4 : 2}" filter="drop-shadow(0 ${isActive ? 8 : 4}px ${isActive ? 16 : 8}px rgba(0,0,0,0.08))"></rect>
+          <path d="M ${x} ${y+12} Q ${x} ${y} ${x+12} ${y} L ${x+(width/3)} ${y} L ${x+(width/3)} ${y+height} L ${x+12} ${y+height} Q ${x} ${y+height} ${x} ${y+height-12} Z" fill="${color}" opacity="0.15"></path>
+          <rect x="${x}" y="${y + 20}" width="5" height="${height - 40}" rx="2.5" fill="${color}" opacity="1"></rect>
+          <text x="${x + 20}" y="${y + 36}" fill="var(--text)" font-size="${node.type === "disease" ? 17 : 15}" font-weight="800" style="font-family:var(--font-main)">${escapeHtml(truncate(node.label, 26))}</text>
+          <text x="${x + 20}" y="${y + 60}" fill="var(--muted)" font-size="11" font-weight="600" style="font-family:var(--font-main)">${escapeHtml(truncate(subtitle, 36))}</text>
+        </g>
+      `;
+    }).join("");
+
+    els.viewport.innerHTML = `
+      <g transform="translate(${state.panX}, ${state.panY}) scale(${state.zoom})">
+        ${edgeMarkup}
+        ${nodeMarkup}
+      </g>
+    `;
+
+    els.viewport.querySelectorAll("[data-node-id]").forEach((element) => {
+      element.addEventListener("click", () => {
+        const nodeId = element.getAttribute("data-node-id");
+        state.selectedNodeId = nodeId;
+        state.selectedEdgeId = "";
+        const node = graph.nodes.find((item) => item.id === nodeId) || graph.disease_observations.find((item) => item.id === nodeId);
+        if (node?.type === "service") {
+          if (state.expandedServices.has(nodeId)) state.expandedServices.delete(nodeId);
+          else state.expandedServices.add(nodeId);
+        }
+        renderAll();
+      });
+    });
+
+    els.viewport.querySelectorAll("[data-edge-id]").forEach((element) => {
+      element.addEventListener("click", (event) => {
+        event.stopPropagation();
+        state.selectedEdgeId = element.getAttribute("data-edge-id");
+        renderDetails();
+      });
+    });
+    } catch (error) {
+      console.error("[renderGraph] Error rendering graph:", error);
+      els.viewport.innerHTML = `
+        <text x="800" y="520" text-anchor="middle" fill="#e53e3e" font-size="18">
+          Lỗi hiển thị graph: ${error.message}
+        </text>
+      `;
+    }
+  }
+
+  function renderAll() {
+    renderDiseaseList();
+    renderSummary();
+    renderGraph();
+    renderDetails();
+  }
+
+  async function ensureGraphLoaded(diseaseId) {
+    if (!diseaseId || graphCache.has(diseaseId) || DATA.graphs?.[diseaseId]) return;
+    state.loadingGraph = true;
+    renderSummary();
+    renderGraph();
+    try {
+      const response = await fetch(`/api/claims-insights/explorer/graph/${encodeURIComponent(diseaseId)}`);
+      if (!response.ok) throw new Error(`Graph fetch failed: ${response.status}`);
+      const payload = await response.json();
+      if (payload?.graph) {
+        graphCache.set(diseaseId, payload.graph);
+        state.dataSource = payload.source || "neo4j";
+      }
+    } catch (error) {
+      console.warn("Graph API fallback to static bundle", error);
+      if (!DATA.graphs?.[diseaseId] && state.dataSource !== "bundle-fallback") {
+        await loadBundleFallback();
+      }
+      if (DATA.graphs?.[diseaseId]) {
+        state.dataSource = "bundle-fallback";
+      }
+    } finally {
+      state.loadingGraph = false;
+    }
+  }
+
+  async function loadBootstrap() {
+    try {
+      const response = await fetch("/api/claims-insights/explorer/bootstrap");
+      if (!response.ok) throw new Error(`Bootstrap fetch failed: ${response.status}`);
+      const payload = await response.json();
+      if (payload?.disease_index?.length) {
+        DATA = { ...DATA, stats: payload.stats || DATA.stats, disease_index: payload.disease_index, graphs: {} };
+        state.dataSource = payload.source || "neo4j";
+        if (!state.selectedDiseaseId || !DATA.disease_index.some((item) => item.disease_id === state.selectedDiseaseId)) {
+          state.selectedDiseaseId = DATA.disease_index[0].disease_id;
+          state.selectedNodeId = state.selectedDiseaseId;
+        }
+      }
+    } catch (error) {
+      console.warn("Bootstrap API fallback to static bundle", error);
+      await loadBundleFallback();
+    }
+  }
+
+  async function loadBundleFallback() {
+    try {
+      const response = await fetch(`./disease_graph_explorer_data.json?t=${Date.now()}`);
+      if (!response.ok) throw new Error(`Bundle fetch failed: ${response.status}`);
+      const payload = await response.json();
+      console.debug(`[Bundle Loaded] ${payload.disease_index?.length || 0} diseases, ${Object.keys(payload.graphs || {}).length} graphs`);
+      DATA = payload;
+      state.dataSource = "bundle-fallback";
+      if (!state.selectedDiseaseId && DATA.disease_index?.length) {
+        state.selectedDiseaseId = DATA.disease_index[0].disease_id;
+        state.selectedNodeId = state.selectedDiseaseId;
+      }
+    } catch (error) {
+      console.error("Could not load bundle fallback", error);
+      state.dataSource = "unavailable";
+    }
+  }
+
+  async function selectDisease(diseaseId) {
+    console.debug(`[selectDisease] Selecting: ${diseaseId}`);
+    state.selectedDiseaseId = diseaseId;
+    state.selectedNodeId = diseaseId;
+    state.selectedEdgeId = "";
+    state.expandedServices = new Set();
+    state.zoom = 1;
+    state.panX = 0;
+    state.panY = 0;
+    await ensureGraphLoaded(diseaseId);
+    renderAll();
+  }
+
+  function bindEvents() {
+    els.search.addEventListener("input", (event) => {
+      state.search = event.target.value || "";
+      renderDiseaseList();
+    });
+
+    els.sort.addEventListener("change", (event) => {
+      state.sort = event.target.value;
+      renderDiseaseList();
+    });
+
+    els.diseaseList.addEventListener("click", (event) => {
+      const item = event.target.closest("[data-disease-id]");
+      if (!item) return;
+      selectDisease(item.getAttribute("data-disease-id"));
+    });
+
+    els.zoomInBtn.addEventListener("click", () => {
+      state.zoom = Math.min(2.2, state.zoom + 0.12);
+      renderGraph();
+    });
+    els.zoomOutBtn.addEventListener("click", () => {
+      state.zoom = Math.max(0.55, state.zoom - 0.12);
+      renderGraph();
+    });
+    els.zoomResetBtn.addEventListener("click", () => {
+      state.zoom = 1;
+      state.panX = 0;
+      state.panY = 0;
+      renderGraph();
+    });
+
+    els.svg.addEventListener("mousedown", (event) => {
+      if (event.target.closest("[data-node-id]") || event.target.closest("[data-edge-id]")) return;
+      state.dragging = true;
+      state.dragStartX = event.clientX;
+      state.dragStartY = event.clientY;
+    });
+    window.addEventListener("mousemove", (event) => {
+      if (!state.dragging) return;
+      state.panX += event.clientX - state.dragStartX;
+      state.panY += event.clientY - state.dragStartY;
+      state.dragStartX = event.clientX;
+      state.dragStartY = event.clientY;
+      renderGraph();
+    });
+    window.addEventListener("mouseup", () => {
+      state.dragging = false;
+    });
+    els.svg.addEventListener("wheel", (event) => {
+      event.preventDefault();
+      state.zoom = event.deltaY < 0 ? Math.min(2.2, state.zoom + 0.08) : Math.max(0.55, state.zoom - 0.08);
+      renderGraph();
+    }, { passive: false });
+  }
+
+  (async () => {
+    renderGlobalKpis();
+    bindEvents();
+    renderAll();
+    await loadBootstrap();
+    renderGlobalKpis();
+    renderDiseaseList();
+    if (state.selectedDiseaseId) {
+      await ensureGraphLoaded(state.selectedDiseaseId);
+    }
+    renderAll();
+  })();
+  </script>
+</body>
+</html>

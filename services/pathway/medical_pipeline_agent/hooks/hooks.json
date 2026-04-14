@@ -1,0 +1,29 @@
+{
+  "description": "Medical Pipeline Agent safety hooks — prevents destructive operations on Neo4j and filesystem",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/safety_check.py",
+            "timeout": 10
+          }
+        ],
+        "matcher": "Bash"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/audit_log.py",
+            "timeout": 5
+          }
+        ],
+        "matcher": "Bash|Write|Edit"
+      }
+    ]
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "disease_name": "ung thư vú",
+  "icd_code": "C50",
+  "protocol_name": "Phác đồ ung thư vú - Bộ Y tế Việt Nam 2020",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": true,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "trastuzumab",
+        "hóa trị",
+        "thuốc nhắm trúng đích"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "ung thư vú",
+        "ung thư vú giai đoạn sớm",
+        "ung thư vú giai đoạn muộn"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "khối u vú",
+        "đau vú",
+        "sưng hạch nách"
+      ]
+    },
+    {
+      "label": "Stage",
+      "examples": [
+        "giai đoạn I",
+        "giai đoạn II",
+        "giai đoạn III"
+      ]
+    },
+    {
+      "label": "Biomarker",
+      "examples": [
+        "HER2",
+        "ER",
+        "PR"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "phẫu thuật cắt bỏ khối u",
+        "sinh thiết vú",
+        "xạ trị"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "xét nghiệm mô bệnh học",
+        "định lượng HER2",
+        "xét nghiệm ER/PR"
+      ]
+    },
+    {
+      "label": "Protocol",
+      "examples": [
+        "phác đồ điều trị bổ trợ hệ thống",
+        "phác đồ hóa trị",
+        "phác đồ điều trị nội tiết"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical NER model specialized in Vietnamese oncology texts about breast cancer. Extract all entities explicitly mentioned in the input text. Return a valid JSON object with an \"entities\" array, where each entity is represented as {\"name\": \"...\", \"type\": \"...\"}. Only include entities explicitly mentioned in the text. Do not add any information not present in the text.",
+  "extraction_user_prompt_template": "Extract named entities from the following Vietnamese medical text about ung thư vú (breast cancer). The text is from the section: {section_path}\n\nEntity types and examples:\n- Drug: trastuzumab, hóa trị, thuốc nhắm trúng đích\n- Disease: ung thư vú, ung thư vú giai đoạn sớm, ung thư vú giai đoạn muộn\n- Symptom: khối u vú, đau vú, sưng hạch nách\n- Stage: giai đoạn I, giai đoạn II, giai đoạn III\n- Biomarker: HER2, ER, PR\n- Procedure: phẫu thuật cắt bỏ khối u, sinh thiết vú, xạ trị\n- LabTest: xét nghiệm mô bệnh học, định lượng HER2, xét nghiệm ER/PR\n- Protocol: phác đồ điều trị bổ trợ hệ thống, phác đồ hóa trị, phác đồ điều trị nội tiết\n\nText to analyze:\n\"\"\"\n{chunk_content}\n\"\"\"\n\nReturn a JSON object with the format:\n{\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\n\nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Neoplasms",
+      "properties": {
+        "code": "C00-D49"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Malignant neoplasms of breast",
+      "properties": {
+        "code": "C50"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Breast cancer",
+      "properties": {
+        "code": "C50",
+        "aliases": "Ung thư vú; Malignant neoplasm of breast; Breast carcinoma"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Tamoxifen",
+      "properties": {
+        "code": "L02BA01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Trastuzumab",
+      "properties": {
+        "code": "L01XC03"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Doxorubicin",
+      "properties": {
+        "code": "L01DB01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Paclitaxel",
+      "properties": {
+        "code": "L01CD01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Anastrozole",
+      "properties": {
+        "code": "L02BG03"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Mammography",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Breast ultrasound",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Estrogen receptor (ER) test",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Progesterone receptor (PR) test",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "HER2/neu test",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Biopsy",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "TNM staging system",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "AJCC breast cancer staging",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Neoplasms",
+      "to_label": "ICD_Category",
+      "to_name": "Malignant neoplasms of breast",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Malignant neoplasms of breast",
+      "to_label": "Disease",
+      "to_name": "Breast cancer",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Breast cancer",
+      "to_label": "Drug",
+      "to_name": "Tamoxifen",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Breast cancer",
+      "to_label": "Drug",
+      "to_name": "Trastuzumab",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Breast cancer",
+      "to_label": "Drug",
+      "to_name": "Doxorubicin",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Breast cancer",
+      "to_label": "Drug",
+      "to_name": "Paclitaxel",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Breast cancer",
+      "to_label": "Drug",
+      "to_name": "Anastrozole",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Breast cancer",
+      "to_label": "LabTest",
+      "to_name": "Mammography",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Breast cancer",
+      "to_label": "LabTest",
+      "to_name": "Breast ultrasound",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Breast cancer",
+      "to_label": "LabTest",
+      "to_name": "Estrogen receptor (ER) test",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Breast cancer",
+      "to_label": "LabTest",
+      "to_name": "Progesterone receptor (PR) test",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Breast cancer",
+      "to_label": "LabTest",
+      "to_name": "HER2/neu test",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Breast cancer",
+      "to_label": "LabTest",
+      "to_name": "Biopsy",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Breast cancer",
+      "to_label": "Stage",
+      "to_name": "TNM staging system",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Breast cancer",
+      "to_label": "Stage",
+      "to_name": "AJCC breast cancer staging",
+      "rel_type": "INSTANCE_OF"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

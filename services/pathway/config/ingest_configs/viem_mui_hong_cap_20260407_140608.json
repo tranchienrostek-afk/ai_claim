@@ -1,0 +1,182 @@
+{
+  "disease_name": "Viêm mũi họng cấp",
+  "icd_code": "J00",
+  "protocol_name": "Phác đồ Viêm mũi họng cấp (BYT)",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": false,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "Paracetamol",
+        "Amoxicillin",
+        "Ibuprofen",
+        "Azithromycin"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "Viêm mũi họng cấp",
+        "Viêm amidan",
+        "Viêm VA",
+        "Viêm long đường hô hấp trên"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "Đau họng",
+        "Sổ mũi",
+        "Ho",
+        "Sốt"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "Nội soi tai mũi họng",
+        "Sinh thiết amidan",
+        "Chụp X-quang phổi"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "Công thức máu",
+        "Xét nghiệm CRP",
+        "Cấy dịch họng"
+      ]
+    },
+    {
+      "label": "Stage",
+      "examples": [
+        "Giai đoạn cấp tính",
+        "Giai đoạn đầu",
+        "Giai đoạn mãn tính"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese internal medicine texts about acute nasopharyngitis (Viêm mũi họng cấp). Extract all entities explicitly mentioned in the input text and return a valid JSON object with an \"entities\" array. Each entity should have a \"name\" (the exact text span) and a \"type\" (one of the predefined entity types). Do not infer or add entities not explicitly present in the text. The JSON format must be: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text from section: {section_path}\n\nText:\n{chunk_content}\n\nExtract all entities explicitly mentioned in the text. The entity types and examples are:\n- Drug: Paracetamol, Amoxicillin, Ibuprofen, Azithromycin\n- Disease: Viêm mũi họng cấp, Viêm amidan, Viêm VA, Viêm long đường hô hấp trên\n- Symptom: Đau họng, Sổ mũi, Ho, Sốt\n- Procedure: Nội soi tai mũi họng, Sinh thiết amidan, Chụp X-quang phổi\n- LabTest: Công thức máu, Xét nghiệm CRP, Cấy dịch họng\n- Stage: Giai đoạn cấp tính, Giai đoạn đầu, Giai đoạn mãn tính\n\nReturn a JSON object in the format: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the respiratory system",
+      "properties": {
+        "code": "J00-J99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Acute upper respiratory infections",
+      "properties": {
+        "code": "J00-J06"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Viêm mũi họng cấp",
+      "properties": {
+        "code": "J00"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Viêm mũi họng cấp",
+      "properties": {
+        "code": "J00",
+        "aliases": "Acute nasopharyngitis, Common cold, Acute upper respiratory infection"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Paracetamol",
+      "properties": {
+        "ATC_code": "N02BE01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Ibuprofen",
+      "properties": {
+        "ATC_code": "M01AE01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Pseudoephedrine",
+      "properties": {
+        "ATC_code": "R01BA02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Chlorpheniramine",
+      "properties": {
+        "ATC_code": "R06AB04"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Amoxicillin",
+      "properties": {
+        "ATC_code": "J01CA04"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete blood count",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "C-reactive protein",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Throat swab culture",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Rapid antigen detection test",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Nasal swab PCR",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the respiratory system",
+      "to_label": "ICD_Category",
+      "to_name": "Acute upper respiratory infections",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Acute upper respiratory infections",
+      "to_label": "ICD_Category",
+      "to_name": "Viêm mũi họng cấp",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm mũi họng cấp",
+      "to_label": "ICD_Category",
+      "to_name": "Viêm mũi họng cấp",
+      "rel_type": "CLASSIFIED_AS"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

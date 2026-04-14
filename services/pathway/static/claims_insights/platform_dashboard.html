@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bảng Điều Khiển Trung Tâm | Pathway</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fff5f5;
+      --panel: #ffffff;
+      --panel2: #fff0f0;
+      --line: #ffd1d1;
+      --line-hover: #ff9e9e;
+      --ink: #2d3748;
+      --muted: #718096;
+      --accent: #ed8936;
+      --accent-glow: 0 0 15px rgba(237, 137, 54, 0.4), inset 0 0 15px rgba(237, 137, 54, 0.1);
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      --radius: 8px;
+      --font-ui: 'Inter', sans-serif;
+      --font-display: 'Be Vietnam Pro', 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; min-height: 100%;
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-ui);
+    }
+    
+    body::before {
+      content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: 
+        none,
+        none;
+      background-size: 40px 40px;
+      z-index: -1; pointer-events: none;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0.05em; margin: 0; color: var(--ink); text-transform: uppercase; }
+    p { margin: 0; }
+    .sub { color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.02em; }
+    .stack { display: grid; gap: 12px; }
+
+    .app { display: grid; grid-template-columns: 310px 1fr 390px; min-height: 100vh; }
+    .sidebar, .detailbar {
+      padding: 24px; display: flex; flex-direction: column; gap: 20px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      border-right: 1px solid var(--line);
+    }
+    .detailbar { border-right: none; border-left: 1px solid var(--line); }
+    .main { padding: 24px; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+
+    .panel, .hero, .kpi, .nav-btn, .asset, .meta-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .panel::after, .kpi::after {
+      content: ''; position: absolute; bottom: 0; right: 0;
+      width: 12px; height: 12px;
+      border-bottom: 2px solid var(--accent);
+      border-right: 2px solid var(--accent);
+      pointer-events: none; opacity: 0.7;
+    }
+
+    .panel-header {
+      padding: 14px 18px; border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      background: rgba(237, 137, 54, 0.03);
+    }
+    .panel-body { padding: 18px; }
+
+    .brand { display: flex; gap: 16px; align-items: center; }
+    .logo {
+      width: 52px; height: 52px; border-radius: var(--radius);
+      display: grid; place-items: center;
+      background: rgba(237, 137, 54, 0.1);
+      border: 1px solid var(--accent);
+      color: var(--accent); font-weight: 700; font-family: var(--font-display); font-size: 20px;
+      box-shadow: var(--accent-glow);
+    }
+
+    button, a.btn {
+      border-radius: 6px; padding: 10px 16px; font-family: var(--font-display);
+      font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.2s;
+    }
+    .btn-primary {
+      background: rgba(237, 137, 54, 0.15); color: var(--accent); border: 1px solid var(--accent);
+      box-shadow: 0 0 10px rgba(237, 137, 54, 0.2);
+    }
+    .btn-primary:hover:not(:disabled) { background: rgba(237, 137, 54, 0.3); box-shadow: var(--accent-glow); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; border-color: var(--muted); color: var(--muted); box-shadow: none; }
+    .btn-secondary {
+      background: transparent; color: var(--ink); border: 1px dashed var(--muted);
+    }
+    .btn-secondary:hover { border-color: var(--ink); background: rgba(255,255,255,0.05); }
+
+    .hero {
+      padding: 24px; display: flex; justify-content: space-between; gap: 16px; align-items: flex-start;
+      background: linear-gradient(135deg, rgba(237, 137, 54, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+      border-left: 3px solid var(--accent);
+    }
+    .badge {
+      display: inline-flex; padding: 6px 12px; border-radius: 4px; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; font-family: var(--font-mono);
+      background: rgba(237, 137, 54, 0.15); color: var(--accent);
+      box-shadow: 0 0 8px rgba(237, 137, 54, 0.3);
+      animation: pulse 2s infinite alternate;
+    }
+    @keyframes pulse { from { opacity: 0.8; } to { opacity: 1; text-shadow: 0 0 5px var(--accent); } }
+
+    .nav-list, .asset-list, .meta-list { display: grid; gap: 10px; }
+    .nav-btn {
+      padding: 16px; text-align: left; display: grid; gap: 6px; cursor: pointer;
+      background: #ffffff; border-left: 2px solid transparent; transition: all 0.2s;
+    }
+    .nav-btn:hover { background: var(--panel2); border-color: var(--line-hover); }
+    .nav-btn.active {
+      border-left-color: var(--accent); background: rgba(237, 137, 54, 0.08); box-shadow: inset 20px 0 30px -20px rgba(237, 137, 54, 0.2);
+    }
+    .nav-btn .label { font-size: 14px; font-weight: 600; font-family: var(--font-display); letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); }
+    .nav-btn .desc { font-size: 12px; color: var(--muted); font-family: var(--font-ui); }
+
+    .kpis { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
+    .kpi { padding: 18px 10px; text-align: center; border-top: 2px solid rgba(237, 137, 54, 0.3); background: linear-gradient(180deg, rgba(237, 137, 54, 0.05) 0%, rgba(255, 255, 255, 0) 100%); }
+    .kpi .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-family: var(--font-mono); }
+    .kpi .value { margin-top: 10px; font-size: 28px; font-weight: 700; font-family: var(--font-display); color: var(--accent); text-shadow: none; }
+
+    .overview { display: grid; gap: 20px; }
+    .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    
+    .meta-card { padding: 14px; background: #fff0f0; border: 1px dashed var(--line); }
+    .meta-card .title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-family: var(--font-display); }
+    .meta-card .value { margin-top: 8px; font-size: 13px; line-height: 1.5; word-break: break-word; color: var(--ink); }
+
+    .table-wrap { max-height: 420px; overflow: auto; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; }
+    th { position: sticky; top: 0; background: #fff5f5; color: var(--accent); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--font-mono); font-weight: 600; box-shadow: 0 1px 0 var(--line); z-index: 10;}
+    tr.run-row { cursor: pointer; transition: background 0.2s; }
+    tr.run-row:hover { background: rgba(237, 137, 54, 0.05); }
+    tr.run-row.active { background: rgba(237, 137, 54, 0.1); box-shadow: inset 4px 0 0 var(--accent); }
+
+    .workspace { display: none; flex-direction: column; gap: 16px; flex: 1; min-height: 0; }
+    .workspace.active { display: flex; }
+    .frame-wrap { 
+      flex: 1; 
+      min-height: 800px; 
+      border-radius: var(--radius); 
+      overflow: hidden; 
+      border: 1px solid var(--line); 
+      box-shadow: var(--shadow-lg); 
+      background: #ffffff; 
+      position: relative;
+    }
+    iframe { 
+      width: 100%; 
+      height: 100%; 
+      min-height: 800px; 
+      border: none; 
+      opacity: 0; 
+      transition: opacity 0.4s ease-in-out; 
+    }
+    iframe.loaded { opacity: 1; }
+
+    .asset-select {
+      width: 100%;
+      background: #fffcf5;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--ink);
+      padding: 10px 32px 10px 12px;
+      font-size: 0.85rem;
+      font-family: var(--font-main);
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(237, 137, 54, 0.8)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .asset-select:hover {
+      background-color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 2px 8px rgba(237, 137, 54, 0.1);
+    }
+    .asset-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.2);
+    }
+    .asset-select option {
+      background: #fff;
+      color: var(--ink);
+    }
+    .asset { display: none; }
+
+    .log-box, .json-box {
+      border-radius: 6px; border: 1px solid var(--line);
+      background: #fff0f0; color: #e65100; padding: 16px;
+      font-family: var(--font-mono); font-size: 12px; line-height: 1.6;
+      white-space: pre-wrap; overflow: auto;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    }
+    .log-box { min-height: 260px; max-height: 380px; text-shadow: none; }
+    .json-box { min-height: 220px; max-height: 320px; color: #1a365d; }
+
+    .empty { border: 1px dashed var(--muted); border-radius: 8px; padding: 24px; text-align: center; background: #fff5f5; color: var(--muted); font-family: var(--font-mono); font-size: 12px; }
+    .action-bar { display: flex; gap: 12px; flex-wrap: wrap; }
+    .decision-note { font-size: 13px; line-height: 1.6; color: var(--muted); background: #ffebd6; padding: 12px; border-radius: 6px; border-left: 2px solid var(--accent); }
+    .decision-note strong { color: var(--ink); font-family: var(--font-display); letter-spacing: 0.05em; text-transform: uppercase; }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); border: 1px solid var(--line); }
+    ::-webkit-scrollbar-thumb { background: rgba(237, 137, 54, 0.3); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(237, 137, 54, 0.6); }
+
+    .scan-layer { position: relative; overflow: hidden; }
+    .scan-layer::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 100px;
+      background: linear-gradient(to bottom, transparent, rgba(237, 137, 54, 0.1), transparent);
+      animation: scan 4s linear infinite; pointer-events: none; z-index: 10;
+    }
+    @keyframes scan { 0% { transform: translateY(-100px); } 100% { transform: translateY(1000px); } }
+
+    @media (max-width: 1480px){ .app{ grid-template-columns: 320px 1fr; } .detailbar{ grid-column: 1 / -1; border-left: none; border-top: 1px solid var(--line); flex-direction: row; flex-wrap: wrap; } .detailbar > * { flex: 1; min-width: 300px; } .kpis{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 1080px){ .app{ grid-template-columns: 1fr; } .hero, .stats, .kpis{ grid-template-columns: 1fr; } .frame-wrap, iframe{ min-height: 560px; } }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">CMS</div>
+        <div>
+          <h1>Hệ thống Quản trị Nghiệp vụ</h1>
+          <p class="sub">Vận hành lõi • Cổng kết nối :9600</p>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Hệ thống Điều phối Phác đồ</h3>
+            <p class="sub">Quản trị các phân hệ nghiệp vụ & logic</p>
+          </div>
+          <button id="refreshBtn" class="btn-secondary">ĐỒNG BỘ</button>
+        </div>
+        <div class="panel-body"><div id="moduleList" class="nav-list"></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><h3>Trạng thái Hạ tầng</h3><p class="sub">Cổng kết nối hệ thống</p></div></div>
+        <div class="panel-body"><div id="portCards" class="meta-list"></div></div>
+      </div>
+      <div class="panel" style="flex:1;">
+        <div class="panel-header"><div><h3>Thư viện Tài liệu Nghiệp vụ</h3><p class="sub">Nguồn cấp dữ liệu lâm sàng</p></div></div>
+        <div class="panel-body stack">
+          <div><div class="sub" style="margin-bottom: 8px;">TÀI LIỆU PDF</div><div id="pdfList" class="asset-list"></div></div>
+          <div><div class="sub" style="margin-bottom: 8px;">GÓI DỮ LIỆU JSON</div><div id="jsonList" class="asset-list"></div></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="hero scan-layer">
+        <div class="stack" style="gap:12px;">
+          <div class="badge" id="moduleBadge">TỔNG QUAN</div>
+          <div>
+            <h2 id="heroTitle">Bảng Giám sát Xử lý Hồ sơ</h2>
+            <p class="sub" id="heroSubtitle">Theo dõi toàn diện quy trình nghiệp vụ và dữ liệu vận hành.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a id="openModuleBtn" class="btn btn-secondary" href="#" target="_blank" rel="noopener">TRUY CẬP CHUYÊN SÂU</a>
+          <a class="btn btn-primary" href="http://127.0.0.1:7475" target="_blank" rel="noopener">LIÊN KẾT NEO4J</a>
+        </div>
+      </section>
+
+      <section class="kpis">
+        <div class="kpi"><div class="label">DỊCH VỤ HỆ THỐNG</div><div class="value" id="kpiApi">-</div></div>
+        <div class="kpi"><div class="label">CÔNG CỤ PHÂN TÍCH</div><div class="value" id="kpiNeo4j">-</div></div>
+        <div class="kpi"><div class="label">DANH MỤC BỆNH LÝ</div><div class="value" id="kpiNamespaces">0</div></div>
+        <div class="kpi"><div class="label">SỐ LƯỢNG TÀI LIỆU</div><div class="value" id="kpiPdfs">0</div></div>
+        <div class="kpi"><div class="label">TIẾN ĐỘ XỬ LÝ</div><div class="value" id="kpiRuns">0</div></div>
+        <div class="kpi"><div class="label">CƠ SỞ DỮ LIỆU LOG</div><div class="value" id="kpiJsons">0</div></div>
+      </section>
+
+      <section id="overviewPanel" class="overview">
+        <div class="panel">
+          <div class="panel-header"><div><h3>Chỉ Số Hệ Thống</h3><p class="sub">Thông lượng của hệ sinh thái đồ thị</p></div></div>
+          <div class="panel-body"><div id="systemStats" class="stats"></div></div>
+        </div>
+        <div class="panel scan-layer">
+          <div class="panel-header"><div><h3>Tiến độ Xử lý Hồ sơ</h3><p class="sub">Theo dõi các phiên phân tích và phê duyệt nghiệp vụ</p></div></div>
+          <div class="panel-body">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>ID Hồ sơ</th><th>Phân Loại</th><th>Trạng Thái</th><th>Danh Mục</th><th>Khởi Tạo</th></tr></thead>
+                <tbody id="runTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="workspacePanel" class="workspace">
+        <div class="panel"><div class="panel-header"><div><h3 id="workspaceTitle">Không gian Phân tích Nghiệp vụ</h3><p class="sub" id="workspaceSubtitle">Môi trường phân tích chi tiết hồ sơ bệnh lý.</p></div></div></div>
+        <div class="frame-wrap"><iframe id="workspaceFrame" title="Workspace frame"></iframe></div>
+      </section>
+    </main>
+
+    <aside class="detailbar">
+      <div class="panel">
+        <div class="panel-header"><div><h3>Thông tin Hồ sơ Hiện hành</h3><p class="sub">Chi tiết hồ sơ đang được lựa chọn.</p></div></div>
+        <div class="panel-body"><div id="selectedRunMeta" class="meta-list"><div class="empty">Chưa chọn hồ sơ.</div></div></div>
+      </div>
+      <div class="panel scan-layer" style="border-color: rgba(239, 68, 68, 0.4);">
+        <div class="panel-header" style="background: rgba(239, 68, 68, 0.05);">
+          <div><h3 style="color: var(--danger);">Khu vực Phê duyệt Chuyên gia</h3><p class="sub">Điểm kiểm soát chờ phê duyệt nghiệp vụ</p></div>
+        </div>
+        <div class="panel-body stack">
+          <div id="decisionGateMeta" class="meta-list"><div class="empty">Không có điểm phê duyệt hiện hành.</div></div>
+          <div id="decisionGateActions" class="action-bar"></div>
+          <div id="decisionGateFeedback" class="decision-note"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><h3>Nhật ký Xử lý Hệ thống</h3><p class="sub">Lịch sử vận hành & xử lý nghiệp vụ.</p></div><div class="mono" id="runPhaseMeta" style="color: var(--accent);">phiên xử lý: - | trạng thái: chờ kết nối</div></div>
+        <div class="panel-body"><div id="logBox" class="log-box">Chưa có dữ liệu nhật ký nào.</div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><h3>Kết Quả Dữ Liệu Tóm Tắt</h3><p class="sub">Cấu trúc dữ kiện JSON.</p></div></div>
+        <div class="panel-body"><pre id="resultJson" class="json-box">{}</pre></div>
+      </div>
+    </aside>
+  </div>
+<script>
+
+    const FINAL_RUN_STATUSES = new Set(["completed", "error", "paused_for_human_review", "aborted_by_decision_gate", "aborted_by_human_review"]);
+    const ACTION_LABELS = {
+      continue_to_ingestion: "Tiếp Tục Nạp Dữ Liệu",
+      accept_current_result: "Chấp Nhận Kết Quả",
+      run_optimization: "Chạy Tối Ưu Hóa",
+      abort_run: "Hủy Lượt Chạy",
+    };
+    const state = { bootstrap: null, activeModuleId: "overview", activeRunId: null, ws: null, pollTimer: null, controlPending: false };
+    const els = {
+      refreshBtn: document.getElementById("refreshBtn"),
+      moduleList: document.getElementById("moduleList"),
+      portCards: document.getElementById("portCards"),
+      pdfList: document.getElementById("pdfList"),
+      jsonList: document.getElementById("jsonList"),
+      moduleBadge: document.getElementById("moduleBadge"),
+      heroTitle: document.getElementById("heroTitle"),
+      heroSubtitle: document.getElementById("heroSubtitle"),
+      openModuleBtn: document.getElementById("openModuleBtn"),
+      kpiApi: document.getElementById("kpiApi"),
+      kpiNeo4j: document.getElementById("kpiNeo4j"),
+      kpiNamespaces: document.getElementById("kpiNamespaces"),
+      kpiPdfs: document.getElementById("kpiPdfs"),
+      kpiRuns: document.getElementById("kpiRuns"),
+      kpiJsons: document.getElementById("kpiJsons"),
+      systemStats: document.getElementById("systemStats"),
+      runTableBody: document.getElementById("runTableBody"),
+      overviewPanel: document.getElementById("overviewPanel"),
+      workspacePanel: document.getElementById("workspacePanel"),
+      workspaceTitle: document.getElementById("workspaceTitle"),
+      workspaceSubtitle: document.getElementById("workspaceSubtitle"),
+      workspaceFrame: document.getElementById("workspaceFrame"),
+      selectedRunMeta: document.getElementById("selectedRunMeta"),
+      decisionGateMeta: document.getElementById("decisionGateMeta"),
+      decisionGateActions: document.getElementById("decisionGateActions"),
+      decisionGateFeedback: document.getElementById("decisionGateFeedback"),
+      logBox: document.getElementById("logBox"),
+      runPhaseMeta: document.getElementById("runPhaseMeta"),
+      resultJson: document.getElementById("resultJson"),
+    };
+
+    const esc = (v) => String(v ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    const fmtDate = (v) => {
+      if (!v) return "-";
+      const d = new Date(v);
+      return Number.isNaN(d.getTime()) ? esc(v) : `${d.toLocaleDateString("vi-VN")} ${d.toLocaleTimeString("vi-VN")}`;
+    };
+    const inferRunModule = (kind) => kind === "ontology_ingest" ? "ontology" : kind === "testcase_trace" ? "trace" : "overview";
+    const isFinalStatus = (status) => FINAL_RUN_STATUSES.has(String(status || ""));
+    const decisionActionsForCheckpoint = (checkpoint) => {
+      if (checkpoint === "post_design") return ["continue_to_ingestion", "abort_run"];
+      if (checkpoint === "post_test") return ["accept_current_result", "run_optimization", "abort_run"];
+      return [];
+    };
+
+    async function fetchJson(url, options) {
+      const response = await fetch(url, options);
+      if (!response.ok) throw new Error(await response.text() || `Request failed: ${response.status}`);
+      return response.json();
+    }
+
+    function extractDecisionGate(run) {
+      if (!run) return null;
+      if (run.decision_gate) return run.decision_gate;
+      const result = run.result || {};
+      const events = result.decision_gate_events || [];
+      if (!events.length) return null;
+      const latest = events[events.length - 1] || {};
+      const decision = latest.decision || {};
+      const humanEvents = result.human_decision_events || run.human_decision_events || [];
+      return {
+        checkpoint: latest.checkpoint,
+        recommended_action: decision.recommended_action,
+        confidence: decision.confidence,
+        reasoning: decision.reasoning,
+        risks: decision.risks || [],
+        suggested_changes: decision.suggested_changes || [],
+        next_owner: decision.next_owner,
+        next_step: decision.next_step,
+        stop_signal: decision.stop_signal,
+        pending_operator_action: run.status === "paused_for_human_review",
+        allowed_actions: run.status === "paused_for_human_review" ? decisionActionsForCheckpoint(latest.checkpoint) : [],
+        last_human_event: humanEvents.length ? humanEvents[humanEvents.length - 1] : null,
+      };
+    }
+
+    function resetLog() {
+      els.logBox.textContent = "Chưa có dữ liệu log nào.";
+      els.runPhaseMeta.textContent = "lượt chạy: - | trạng thái: nhàn rỗi";
+      els.resultJson.textContent = "{}";
+    }
+
+    function closeStreams() {
+      if (state.ws) {
+        try { state.ws.close(); } catch (_) {}
+        state.ws = null;
+      }
+      if (state.pollTimer) {
+        clearInterval(state.pollTimer);
+        state.pollTimer = null;
+      }
+    }
+
+    function renderAssets(items, container, kind) {
+      if (!items.length) {
+        container.innerHTML = `<div class="empty">Chưa có dữ liệu.</div>`;
+        return;
+      }
+      const label = kind === "pdf" ? "-- Chọn Tài liệu PDF --" : "-- Chọn Gói Dữ liệu JSON --";
+      const options = items.map((item) => {
+        const title = item.filename || item.name || item.relative_path || item.path || "Không xác định";
+        const val = kind === "pdf" && item.path ? `/pdfs/${encodeURI(item.path)}` : "";
+        return `<option value="${esc(val)}">${esc(title)}</option>`;
+      }).join("");
+
+      container.innerHTML = `<select class="asset-select" onchange="if(this.value) { window.open(this.value, '_blank'); this.selectedIndex=0; }">
+        <option value="" selected disabled>${esc(label)}</option>
+        ${options}
+      </select>`;
+    }
+
+    function renderModules(modules) {
+      els.moduleList.innerHTML = modules.map((module) => `<button class="nav-btn ${module.id === state.activeModuleId ? "active" : ""}" data-id="${esc(module.id)}"><span class="label">${esc(module.label)}</span><span class="desc">${esc(module.description)}</span></button>`).join("");
+      els.moduleList.querySelectorAll(".nav-btn").forEach((node) => node.onclick = () => selectModule(node.dataset.id));
+    }
+
+    function renderPortCards(platform) {
+      const cards = [["API", `:${platform.api_port}`], ["Neo4j Browser", `:${platform.neo4j_browser_port}`], ["Neo4j Bolt", `:${platform.neo4j_bolt_port}`]];
+      els.portCards.innerHTML = cards.map(([title, value]) => `<div class="meta-card"><div class="title">${esc(title)}</div><div class="value mono">${esc(value)}</div></div>`).join("");
+    }
+
+    function renderKpis(payload) {
+      els.kpiApi.textContent = (payload.health?.api?.status || "-").toUpperCase();
+      els.kpiNeo4j.textContent = (payload.health?.neo4j?.status || "-").toUpperCase();
+      els.kpiNamespaces.textContent = String(payload.overview?.namespace_count || 0);
+      els.kpiPdfs.textContent = String(payload.overview?.pdf_count || 0);
+      els.kpiRuns.textContent = String(payload.overview?.pipeline_run_count || 0);
+      els.kpiJsons.textContent = String(payload.overview?.testcase_json_count || 0);
+    }
+
+    function renderStats(payload) {
+      const overview = payload.overview || {};
+      const ontology = payload.ontology?.summary || {};
+      const cards = [
+        ["Tổng Lượt Chạy", overview.pipeline_run_count || 0, `${overview.completed_count || 0} hoàn thành`],
+        ["Đang chạy", overview.active_running_count ?? overview.running_count ?? 0, `${overview.paused_review_count || 0} tạm dừng • ${overview.error_count || 0} lỗi`],
+        ["Khai báo bệnh", ontology.diseases || 0, "vùng không gian"],
+        ["Đoạn (Chunks)", ontology.chunks || 0, "đoạn dữ liệu thô"],
+        ["Xác nhận (Assertion)", ontology.assertions || 0, "xác nhận phác đồ"],
+        ["Tóm tắt", ontology.summaries || 0, "nút tóm tắt"],
+      ];
+      els.systemStats.innerHTML = cards.map((card) => `<div class="meta-card"><div class="title">${esc(card[0])}</div><div class="value">${esc(card[1])}</div><div class="sub">${esc(card[2])}</div></div>`).join("");
+    }
+
+    function renderRuns(runs) {
+      if (!runs.length) {
+        els.runTableBody.innerHTML = `<tr><td colspan="5"><div class="empty">Chưa có lượt chạy nào.</div></td></tr>`;
+        return;
+      }
+      els.runTableBody.innerHTML = runs.map((run) => {
+        const gate = run.decision_gate;
+        const statusLabel = run.status === "running" && run.is_stale ? "quá hạn" : (run.status || "-");
+        const gateLine = gate?.pending_operator_action ? `<div class="sub">decision: ${esc(gate.checkpoint || "-")}</div>` : "";
+        return `<tr class="run-row ${run.id === state.activeRunId ? "active" : ""}" data-id="${esc(run.id)}"><td><div style="font-weight:800">${esc(run.name || run.id)}</div><div class="sub mono">${esc(run.id)}</div>${gateLine}</td><td>${esc(run.kind || "-")}</td><td>${esc(statusLabel)}</td><td class="mono">${esc(run.namespace || "-")}</td><td>${esc(fmtDate(run.start_time))}</td></tr>`;
+      }).join("");
+      els.runTableBody.querySelectorAll(".run-row").forEach((node) => node.onclick = () => selectRun(node.dataset.id, true));
+    }
+
+    function renderDecisionGate(run) {
+      const gate = extractDecisionGate(run);
+      if (!gate) {
+        els.decisionGateMeta.innerHTML = `<div class="empty">Lượt chạy này chưa có Điểm Quyết Định (Decision Gate).</div>`;
+        els.decisionGateActions.innerHTML = "";
+        els.decisionGateFeedback.textContent = "";
+        return;
+      }
+      const cards = [
+        ["Điểm Kiểm Soát", gate.checkpoint || "-"],
+        ["Khuyến Nghị", gate.recommended_action || "-"],
+        ["Độ Tin Cậy", gate.confidence || "-"],
+        ["Tín Hiệu Dừng", gate.stop_signal || "-"],
+        ["Người Xử Lý Tiếp Theo", gate.next_owner || "-"],
+        ["Bước Tiếp Theo", gate.next_step || "-"],
+      ];
+      if (gate.last_human_event) {
+        cards.push(["Hành Động Của Kỹ Thuật Viên", gate.last_human_event.action || "-"]);
+        cards.push(["Thời Gian Hành Động", fmtDate(gate.last_human_event.timestamp)]);
+      }
+      els.decisionGateMeta.innerHTML = cards.map((card) => `<div class="meta-card"><div class="title">${esc(card[0])}</div><div class="value">${esc(card[1])}</div></div>`).join("")
+        + `<div class="meta-card"><div class="title">Lập Luận</div><div class="value">${esc(gate.reasoning || "-")}</div></div>`
+        + (gate.risks?.length ? `<div class="meta-card"><div class="title">Rủi Ro</div><div class="value">${esc(gate.risks.join(" | "))}</div></div>` : "")
+        + (gate.suggested_changes?.length ? `<div class="meta-card"><div class="title">Đề Xuất Thay Đổi</div><div class="value">${esc(gate.suggested_changes.join(" | "))}</div></div>` : "");
+
+      if (gate.pending_operator_action) {
+        els.decisionGateActions.innerHTML = (gate.allowed_actions || []).map((action) => `<button class="${action === "abort_run" ? "btn-secondary" : "btn-primary"}" data-action="${esc(action)}" ${state.controlPending ? "disabled" : ""}>${esc(ACTION_LABELS[action] || action)}</button>`).join("");
+        els.decisionGateActions.querySelectorAll("button").forEach((button) => button.onclick = () => submitDecisionAction(button.dataset.action));
+        if (!state.controlPending) {
+          els.decisionGateFeedback.innerHTML = `<strong>Cho kỹ thuật viên:</strong> Phiên xử lý đang tạm dừng ở ${esc(gate.checkpoint || "điểm kiểm soát")}.`;
+        }
+      } else {
+        els.decisionGateActions.innerHTML = "";
+        if (!state.controlPending) {
+          els.decisionGateFeedback.innerHTML = gate.last_human_event ? `<strong>Kỹ thuât viên:</strong> ${esc(gate.last_human_event.action || "-")}` : "";
+        }
+      }
+    }
+
+    function renderSelectedRun(run) {
+      if (!run) {
+        els.selectedRunMeta.innerHTML = `<div class="empty">Chưa chọn lượt chạy nào.</div>`;
+        els.resultJson.textContent = "{}";
+        renderDecisionGate(null);
+        return;
+      }
+      const result = run.result || {};
+      const statusLabel = run.status === "running" && run.is_stale ? "quá hạn" : (run.status || "-");
+      const cards = [
+        ["ID Lượt Chạy", run.id || "-"],
+        ["Trạng Thái", statusLabel],
+        ["Loại", run.kind || "pipeline"],
+        ["Tên Tệp", run.filename || "-"],
+        ["Bắt Đầu Lúc", fmtDate(run.start_time)],
+        ["Không Gian (Vùng gian)", result.namespace || result.graph_namespace || run.namespace || run.graph_namespace || "-"],
+        ["Trường Kết Quả", Object.keys(result).join(", ") || "(trống)"],
+      ];
+      els.selectedRunMeta.innerHTML = cards.map((card) => `<div class="meta-card"><div class="title">${esc(card[0])}</div><div class="value ${card[0].includes("ID") || card[0] === "Không Gian (Vùng gian)" ? "mono" : ""}">${esc(card[1])}</div></div>`).join("");
+      els.resultJson.textContent = JSON.stringify(result, null, 2);
+      renderDecisionGate(run);
+    }
+
+    function applyModule(module) {
+      state.activeModuleId = module.id;
+      renderModules(state.bootstrap.modules || []);
+      els.moduleBadge.textContent = module.label;
+      els.heroTitle.textContent = module.id === "overview" ? "Hệ thống Quản trị Nghiệp vụ Thẩm định" : module.label;
+      els.heroSubtitle.textContent = module.description || "";
+      els.openModuleBtn.style.visibility = module.url ? "visible" : "hidden";
+      els.openModuleBtn.href = module.url || "#";
+      const isOverview = module.id === "overview";
+      els.overviewPanel.style.display = isOverview ? "grid" : "none";
+      els.workspacePanel.classList.toggle("active", !isOverview);
+      if (!isOverview) {
+        els.workspaceTitle.textContent = module.label;
+        els.workspaceSubtitle.textContent = module.description || "";
+        if (els.workspaceFrame.dataset.loadedUrl !== module.url) {
+          els.workspaceFrame.classList.remove("loaded");
+          els.workspaceFrame.src = module.url;
+          els.workspaceFrame.dataset.loadedUrl = module.url;
+        } else {
+          els.workspaceFrame.classList.add("loaded");
+        }
+      }
+    }
+
+    function selectModule(id) {
+      const module = (state.bootstrap?.modules || []).find((item) => item.id === id);
+      if (module) applyModule(module);
+    }
+
+    async function loadRun(runId) {
+      return fetchJson(`/api/ingest/${encodeURIComponent(runId)}`);
+    }
+
+    function connectRun(runId) {
+      closeStreams();
+      const proto = location.protocol === "https:" ? "wss" : "ws";
+      try {
+        state.ws = new WebSocket(`${proto}://${location.host}/ws/pipeline/${encodeURIComponent(runId)}`);
+        state.ws.onmessage = (event) => {
+          const payload = JSON.parse(event.data);
+          if (payload.type === "log" && payload.message) {
+            const current = els.logBox.textContent === "Chưa có dữ liệu log nào." ? "" : els.logBox.textContent;
+            els.logBox.textContent = `${current}${payload.message}\n`;
+            els.logBox.scrollTop = els.logBox.scrollHeight;
+          }
+          if (payload.type === "complete") {
+            els.runPhaseMeta.textContent = `lượt chạy: ${runId} | trạng thái: ${payload.status || "đã hoàn thành"}`;
+          }
+        };
+      } catch (_) {}
+
+      state.pollTimer = setInterval(async () => {
+        try {
+          const snapshot = await loadRun(runId);
+          renderSelectedRun(snapshot);
+          const logs = (snapshot.logs || []).map((item) => item.message).join("\n");
+          els.logBox.textContent = logs || "Chưa có dữ liệu log nào.";
+          els.logBox.scrollTop = els.logBox.scrollHeight;
+          els.runPhaseMeta.textContent = `lượt chạy: ${runId} | trạng thái: ${snapshot.status || "không xác định"}`;
+          if (isFinalStatus(snapshot.status)) closeStreams();
+        } catch (_) {}
+      }, 3500);
+    }
+
+    async function selectRun(runId, autoSwitch) {
+      state.activeRunId = runId;
+      renderRuns(state.bootstrap?.pipeline_runs || []);
+      resetLog();
+      try {
+        const snapshot = await loadRun(runId);
+        renderSelectedRun(snapshot);
+        const logs = (snapshot.logs || []).map((item) => item.message).join("\n");
+        els.logBox.textContent = logs || "Chưa có dữ liệu log nào.";
+        els.runPhaseMeta.textContent = `lượt chạy: ${runId} | trạng thái: ${snapshot.status || "không xác định"}`;
+        if (!isFinalStatus(snapshot.status)) connectRun(runId);
+        if (autoSwitch) {
+          const target = inferRunModule(snapshot.kind || "pipeline");
+          if (target !== "overview") selectModule(target);
+        }
+      } catch (error) {
+        els.logBox.textContent = `Khong load duoc run ${runId}.\n${error}`;
+        els.runPhaseMeta.textContent = `run: ${runId} | phase: lỗi`;
+        renderDecisionGate(null);
+      }
+    }
+
+    async function submitDecisionAction(action) {
+      if (!state.activeRunId || state.controlPending) return;
+      const label = ACTION_LABELS[action] || action;
+      if (action === "abort_run" && !window.confirm(`Xac nhan ${label}?`)) return;
+      state.controlPending = true;
+      renderDecisionGate(await loadRun(state.activeRunId).catch(() => null));
+      els.decisionGateFeedback.innerHTML = `<strong>Dang gui:</strong> ${esc(label)}`;
+      try {
+        await fetchJson(`/api/ingest/${encodeURIComponent(state.activeRunId)}/control`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action }),
+        });
+        await loadBootstrap();
+        await selectRun(state.activeRunId, false);
+        els.decisionGateFeedback.innerHTML = `<strong>Da gui:</strong> ${esc(label)}`;
+      } catch (error) {
+        els.decisionGateFeedback.innerHTML = `<strong>Loi:</strong> ${esc(String(error))}`;
+      } finally {
+        state.controlPending = false;
+      }
+    }
+
+    async function loadBootstrap() {
+      const payload = await fetchJson("/api/platform/bootstrap");
+      state.bootstrap = payload;
+      renderPortCards(payload.platform || { api_port: 9600, neo4j_browser_port: 7475, neo4j_bolt_port: 7688 });
+      renderModules(payload.modules || []);
+      renderAssets(payload.ontology?.pdfs || [], els.pdfList, "pdf");
+      renderAssets(payload.trace?.json_files || [], els.jsonList, "json");
+      renderKpis(payload);
+      renderStats(payload);
+      renderRuns(payload.pipeline_runs || []);
+      applyModule((payload.modules || []).find((item) => item.id === state.activeModuleId) || (payload.modules || [])[0]);
+      const preferredRun = state.activeRunId && (payload.pipeline_runs || []).find((item) => item.id === state.activeRunId);
+      const targetRun = preferredRun || (payload.pipeline_runs || [])[0];
+      if (targetRun) {
+        await selectRun(targetRun.id, false);
+      } else {
+        renderSelectedRun(null);
+      }
+    }
+
+    els.refreshBtn.onclick = async () => {
+      closeStreams();
+      await loadBootstrap();
+    };
+    els.workspaceFrame.onload = () => {
+      els.workspaceFrame.classList.add("loaded");
+    };
+    window.addEventListener("beforeunload", () => closeStreams());
+    loadBootstrap().catch((error) => {
+      els.systemStats.innerHTML = `<div class="empty">Khong load duoc dashboard.<br>${esc(String(error))}</div>`;
+    });
+  </script>
+</body>
+</html>

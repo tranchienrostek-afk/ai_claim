@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude Duet Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#efe7db;
+      --panel:rgba(255,251,244,.94);
+      --panel-2:rgba(246,239,228,.96);
+      --line:#dccdb6;
+      --ink:#1f2937;
+      --muted:#6b7280;
+      --accent:#0f766e;
+      --accent-2:#b45309;
+      --good:#0f9d58;
+      --bad:#c2410c;
+      --shadow:0 18px 40px rgba(78,55,24,.12);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Manrope",sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top right,rgba(15,118,110,.12),transparent 18%),
+        radial-gradient(circle at bottom left,rgba(192,102,42,.14),transparent 24%),
+        linear-gradient(180deg,#f8f3eb 0%,#efe7db 100%);
+    }
+    .app{
+      min-height:100vh;
+      display:grid;
+      grid-template-columns:430px 1fr;
+      gap:18px;
+      padding:18px;
+    }
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .left{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+    .right{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      min-width:0;
+    }
+    .panel-header{
+      padding:16px 18px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+    }
+    .panel-body{padding:18px}
+    h1,h2,h3,p{margin:0}
+    .sub{color:var(--muted);font-size:12px;line-height:1.6}
+    .mono{font-family:"IBM Plex Mono",monospace}
+    .hero{
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .badge-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:800;
+      border:1px solid rgba(15,118,110,.18);
+      background:rgba(15,118,110,.08);
+      color:var(--accent);
+    }
+    .badge.bad{border-color:rgba(194,65,12,.18);background:rgba(194,65,12,.08);color:var(--bad)}
+    .badge.good{border-color:rgba(15,157,88,.18);background:rgba(15,157,88,.08);color:var(--good)}
+    .grid{
+      display:grid;
+      gap:14px;
+    }
+    .grid.two{grid-template-columns:1fr 1fr}
+    label{
+      display:block;
+      font-size:12px;
+      font-weight:800;
+      color:var(--muted);
+      margin-bottom:6px;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+    input, textarea, select{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px 14px;
+      font:inherit;
+      color:var(--ink);
+      background:rgba(255,255,255,.78);
+      outline:none;
+    }
+    textarea{resize:vertical;min-height:110px}
+    textarea.small{min-height:88px}
+    input:focus, textarea:focus, select:focus{
+      border-color:rgba(15,118,110,.48);
+      box-shadow:0 0 0 4px rgba(15,118,110,.08);
+    }
+    .btn-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:4px;
+    }
+    button{
+      border:none;
+      border-radius:14px;
+      padding:12px 16px;
+      font:inherit;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,var(--accent),#0d9488);
+      color:#fff;
+    }
+    .btn-secondary{
+      background:var(--panel-2);
+      color:var(--ink);
+      border:1px solid var(--line);
+    }
+    .status-box{
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(255,251,244,.72);
+      border:1px solid var(--line);
+      font-size:13px;
+      line-height:1.6;
+    }
+    .transcript{
+      display:grid;
+      gap:12px;
+      min-height:320px;
+    }
+    .empty{
+      border:1px dashed var(--line);
+      border-radius:18px;
+      padding:26px;
+      text-align:center;
+      color:var(--muted);
+      background:rgba(255,251,244,.6);
+    }
+    .turn{
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,251,244,.78);
+      overflow:hidden;
+    }
+    .turn.agent-a .turn-head{background:rgba(15,118,110,.10);color:var(--accent)}
+    .turn.agent-b .turn-head{background:rgba(180,83,9,.10);color:var(--accent-2)}
+    .turn-head{
+      padding:12px 14px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      font-size:12px;
+      font-weight:800;
+      border-bottom:1px solid var(--line);
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+    .turn-body{
+      padding:16px 16px 18px;
+      font-size:14px;
+    }
+    .turn-structured{
+      display:grid;
+      gap:12px;
+    }
+    .turn-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+    .turn-field,.next-box,.raw-box{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,.56);
+      padding:12px 14px;
+    }
+    .turn-label{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted);
+      font-weight:800;
+      margin-bottom:6px;
+    }
+    .turn-value{
+      line-height:1.65;
+      word-break:break-word;
+    }
+    .turn-list{
+      margin:0;
+      padding-left:18px;
+      line-height:1.65;
+    }
+    .phase-pill,.signal-pill{
+      display:inline-flex;
+      align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      background:rgba(15,118,110,.10);
+      color:var(--accent);
+      border:1px solid rgba(15,118,110,.18);
+    }
+    .signal-pill{
+      background:rgba(180,83,9,.10);
+      color:var(--accent-2);
+      border-color:rgba(180,83,9,.18);
+    }
+    .raw-box summary{
+      cursor:pointer;
+      font-size:12px;
+      font-weight:800;
+      color:var(--muted);
+    }
+    .raw-box pre,.final-json{
+      margin:10px 0 0;
+      white-space:pre-wrap;
+      word-break:break-word;
+      font:12px/1.7 "IBM Plex Mono",monospace;
+    }
+    .final-box{
+      padding:18px;
+      border-radius:18px;
+      border:1px solid rgba(15,118,110,.18);
+      background:linear-gradient(135deg,rgba(15,118,110,.09),rgba(15,118,110,.02));
+      font-size:14px;
+    }
+    .mini-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:12px;
+    }
+    .mini-card{
+      padding:14px;
+      border-radius:16px;
+      background:rgba(255,251,244,.72);
+      border:1px solid var(--line);
+    }
+    .mini-card .label{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted);
+      font-weight:800;
+    }
+    .mini-card .value{
+      margin-top:8px;
+      font-size:20px;
+      font-weight:800;
+    }
+    @media (max-width:1200px){
+      .app{grid-template-columns:1fr}
+      .mini-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width:720px){
+      .grid.two,.mini-grid,.turn-grid{grid-template-columns:1fr}
+      .app{padding:12px}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section class="left">
+      <div class="panel hero">
+        <div class="badge-row">
+          <div class="badge">Claude Duet Lab</div>
+          <div id="authBadge" class="badge">Dang kiem tra Claude...</div>
+        </div>
+        <div>
+          <h1>2 tac the Claude orchestration chat tren web</h1>
+          <p class="sub">Dung giao dien nay de cho hai vai tro Claude tuong tac theo protocol chat co schema machine-readable. Backend goi truc tiep `claude -p` trong container API, parse JSON tung luot, va mac dinh dang su dung chinh auth Claude cua ban.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Cau hinh cuoc doi thoai</h3>
+            <p class="sub">Nhap bai toan, bieu dien vai tro cua 2 con, va so luot qua lai.</p>
+          </div>
+        </div>
+        <div class="panel-body grid">
+          <div>
+            <label for="topic">Chu de / bai toan</label>
+            <textarea id="topic">Thiet ke cho web Pathway mot giao thuc multi-agent orchestration chat cho 2 Claude: moi luot phai tra ve JSON schema thong nhat, mot con de xuat protocol, mot con kiem tra invariant, de hoi thoai hoi tu nhanh va co termination rule ro rang.</textarea>
+          </div>
+
+          <div>
+            <label for="context">Boi canh them</label>
+            <textarea id="context" class="small">Web dang chay trong stack Pathway o port 9600. Can uu tien state machine ro rang, owner moi luot, timeout, retry cap, stale cleanup, va handoff machine-readable voi next.target va termination_signal ro rang.</textarea>
+          </div>
+
+          <div class="grid two">
+            <div>
+              <label for="model">Model</label>
+              <input id="model" value="claude-opus-4-6" />
+            </div>
+            <div>
+              <label for="turns">So luot</label>
+              <select id="turns">
+                <option value="2">2</option>
+                <option value="4" selected>4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div>
+              <label for="agentAName">Tac the A</label>
+              <input id="agentAName" value="Claude Strategist" />
+            </div>
+            <div>
+              <label for="agentBName">Tac the B</label>
+              <input id="agentBName" value="Claude Challenger" />
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div>
+              <label for="agentAPrompt">Prompt he thong A</label>
+              <textarea id="agentAPrompt" class="small">Ban la Claude Strategist cho Pathway trong che do multi-agent orchestration chat. Nhiem vu cua ban la chot phase hien tai, control flow, ownership, protocol delta, va handoff tiep theo. Moi luot phai tra ve JSON schema hop le, khong prose tu do.</textarea>
+            </div>
+            <div>
+              <label for="agentBPrompt">Prompt he thong B</label>
+              <textarea id="agentBPrompt" class="small">Ban la Claude Challenger cho Pathway trong che do multi-agent orchestration chat. Nhiem vu cua ban la kiem tra invariant, timeout, retry cap, stale state, termination, va cac guardrail. Moi luot phai tra ve JSON schema hop le, khong prose tu do.</textarea>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button id="runBtn" class="btn-primary">Chay Claude Duet</button>
+            <button id="presetBtn" class="btn-secondary">Preset Tight Orchestration</button>
+            <button id="statusBtn" class="btn-secondary">Refresh Claude Status</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Trang thai Claude</h3>
+            <p class="sub">Kiem tra xem container API co thay `claude` va auth hien tai hay khong.</p>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="statusBox" class="status-box mono">Dang tai...</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="right">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Tong quan ket qua</h3>
+            <p class="sub">Mot luot duoi day tuong ung mot lan goi Claude voi vai tro khac nhau va duoc parse thanh schema chung.</p>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="mini-grid">
+            <div class="mini-card">
+              <div class="label">Model</div>
+              <div id="kpiModel" class="value">-</div>
+            </div>
+            <div class="mini-card">
+              <div class="label">So luot</div>
+              <div id="kpiTurns" class="value">0</div>
+            </div>
+            <div class="mini-card">
+              <div class="label">Tac the A</div>
+              <div id="kpiAgentA" class="value" style="font-size:16px">-</div>
+            </div>
+            <div class="mini-card">
+              <div class="label">Tac the B</div>
+              <div id="kpiAgentB" class="value" style="font-size:16px">-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Transcript</h3>
+            <p class="sub">Hoi thoai luan phien giua 2 tac the Claude, hien theo cac truong machine-readable.</p>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="transcript" class="transcript">
+            <div class="empty">Chua co transcript. Bam "Chay Claude Duet" de bat dau.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Ket qua cuoi</h3>
+            <p class="sub">Noi dung cua luot cuoi, uu tien hien schema da duoc parse va chuan hoa.</p>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="finalOutput" class="final-box">Chua co ket qua.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const els = {
+      topic: document.getElementById("topic"),
+      context: document.getElementById("context"),
+      model: document.getElementById("model"),
+      turns: document.getElementById("turns"),
+      agentAName: document.getElementById("agentAName"),
+      agentBName: document.getElementById("agentBName"),
+      agentAPrompt: document.getElementById("agentAPrompt"),
+      agentBPrompt: document.getElementById("agentBPrompt"),
+      runBtn: document.getElementById("runBtn"),
+      presetBtn: document.getElementById("presetBtn"),
+      statusBtn: document.getElementById("statusBtn"),
+      authBadge: document.getElementById("authBadge"),
+      statusBox: document.getElementById("statusBox"),
+      transcript: document.getElementById("transcript"),
+      finalOutput: document.getElementById("finalOutput"),
+      kpiModel: document.getElementById("kpiModel"),
+      kpiTurns: document.getElementById("kpiTurns"),
+      kpiAgentA: document.getElementById("kpiAgentA"),
+      kpiAgentB: document.getElementById("kpiAgentB"),
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    async function fetchJson(url, options) {
+      const response = await fetch(url, options);
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload.detail || `Request failed: ${response.status}`);
+      }
+      return payload;
+    }
+
+    function renderStatus(data) {
+      const auth = data.auth || {};
+      const projectContext = data.project_context || {};
+      const available = data.available === true;
+      const sub = auth.subscriptionType || "unknown";
+      els.authBadge.textContent = available ? `Claude ${sub}` : "Claude unavailable";
+      els.authBadge.className = `badge ${available ? "good" : "bad"}`;
+
+      const lines = [
+        `available: ${available}`,
+        `binary: ${data.binary || "-"}`,
+        `version: ${data.version || data.version_error || "-"}`,
+        `authMethod: ${auth.authMethod || "-"}`,
+        `apiProvider: ${auth.apiProvider || "-"}`,
+        `email: ${auth.email || "-"}`,
+        `subscriptionType: ${auth.subscriptionType || "-"}`,
+        `defaultModel: ${data.default_model || "-"}`,
+        `projectContext: ${projectContext.available ? "loaded" : "missing"}`,
+        `projectContextPath: ${projectContext.path || "-"}`,
+        `projectContextChars: ${projectContext.chars || 0}`,
+      ];
+      if (data.auth_error) {
+        lines.push(`auth_error: ${data.auth_error}`);
+      }
+      els.statusBox.textContent = lines.join("\n");
+    }
+
+    async function loadStatus() {
+      els.statusBox.textContent = "Dang tai...";
+      try {
+        const data = await fetchJson("/api/claude/status");
+        renderStatus(data);
+      } catch (error) {
+        els.authBadge.textContent = "Claude unavailable";
+        els.authBadge.className = "badge bad";
+        els.statusBox.textContent = error.message;
+      }
+    }
+
+    function renderTranscript(payload) {
+      const transcript = payload.transcript || [];
+      els.kpiModel.textContent = payload.model || "-";
+      els.kpiTurns.textContent = String(payload.turns || transcript.length || 0);
+      els.kpiAgentA.textContent = els.agentAName.value || "Agent A";
+      els.kpiAgentB.textContent = els.agentBName.value || "Agent B";
+      renderFinalOutput(payload.final_structured_output, payload.final_output);
+
+      if (!transcript.length) {
+        els.transcript.innerHTML = '<div class="empty">Khong co transcript nao duoc tra ve.</div>';
+        return;
+      }
+
+      els.transcript.innerHTML = transcript.map(turn => `
+        <article class="turn ${turn.role === "agent_a" ? "agent-a" : "agent-b"}">
+          <div class="turn-head">
+            <span>Luot ${escapeHtml(turn.index)} | ${escapeHtml(turn.speaker)}</span>
+            <span>${escapeHtml(renderTurnMeta(turn))}</span>
+          </div>
+          <div class="turn-body">${renderTurnBody(turn)}</div>
+        </article>
+      `).join("");
+    }
+
+    function renderTurnMeta(turn) {
+      const parts = [];
+      if (turn.duration_ms) {
+        parts.push(`${Math.round(turn.duration_ms)} ms`);
+      }
+      if (turn.repair_attempts) {
+        parts.push(`repair ${turn.repair_attempts}`);
+      }
+      return parts.join(" | ") || "-";
+    }
+
+    function renderList(items) {
+      const values = Array.isArray(items) && items.length ? items : ["none material"];
+      return `<ul class="turn-list">${values.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+    }
+
+    function renderTurnBody(turn) {
+      const data = turn.structured;
+      if (!data) {
+        return `<div class="turn-value">${escapeHtml(turn.content || turn.raw_content || "-")}</div>`;
+      }
+
+      const next = data.next || {};
+      const rawDebug = turn.raw_content && turn.raw_content.trim() !== turn.content.trim()
+        ? `
+          <details class="raw-box">
+            <summary>Raw model output</summary>
+            <pre>${escapeHtml(turn.raw_content)}</pre>
+          </details>
+        `
+        : "";
+
+      return `
+        <div class="turn-structured">
+          <div class="turn-grid">
+            <div class="turn-field">
+              <div class="turn-label">Schema</div>
+              <div class="turn-value mono">${escapeHtml(data.schema_version || "-")}</div>
+            </div>
+            <div class="turn-field">
+              <div class="turn-label">Phase</div>
+              <div class="turn-value"><span class="phase-pill">${escapeHtml(data.phase || "-")}</span></div>
+            </div>
+          </div>
+
+          <div class="turn-field">
+            <div class="turn-label">Decision</div>
+            <div class="turn-value">${escapeHtml(data.decision || "-")}</div>
+          </div>
+
+          <div class="turn-field">
+            <div class="turn-label">Why</div>
+            <div class="turn-value">${escapeHtml(data.why || "-")}</div>
+          </div>
+
+          <div class="turn-grid">
+            <div class="turn-field">
+              <div class="turn-label">Protocol Delta</div>
+              ${renderList(data.protocol_delta)}
+            </div>
+            <div class="turn-field">
+              <div class="turn-label">Risks</div>
+              ${renderList(data.risks)}
+            </div>
+          </div>
+
+          <div class="next-box">
+            <div class="turn-label">Next Handoff</div>
+            <div class="turn-grid">
+              <div class="turn-field">
+                <div class="turn-label">Target</div>
+                <div class="turn-value">${escapeHtml(next.target || "-")}</div>
+              </div>
+              <div class="turn-field">
+                <div class="turn-label">Signal</div>
+                <div class="turn-value"><span class="signal-pill">${escapeHtml(next.termination_signal || "continue")}</span></div>
+              </div>
+            </div>
+            <div class="turn-field" style="margin-top:12px">
+              <div class="turn-label">Request</div>
+              <div class="turn-value">${escapeHtml(next.request || "-")}</div>
+            </div>
+          </div>
+
+          ${rawDebug}
+        </div>
+      `;
+    }
+
+    function renderFinalOutput(structured, fallback) {
+      if (structured) {
+        els.finalOutput.innerHTML = `<pre class="final-json">${escapeHtml(JSON.stringify(structured, null, 2))}</pre>`;
+        return;
+      }
+      els.finalOutput.textContent = fallback || "Chua co ket qua.";
+    }
+
+    async function runDuet() {
+      const payload = {
+        topic: els.topic.value.trim(),
+        context: els.context.value.trim() || null,
+        turns: Number(els.turns.value),
+        model: els.model.value.trim() || "claude-opus-4-6",
+        agent_a_name: els.agentAName.value.trim() || "Claude Strategist",
+        agent_a_prompt: els.agentAPrompt.value.trim(),
+        agent_b_name: els.agentBName.value.trim() || "Claude Challenger",
+        agent_b_prompt: els.agentBPrompt.value.trim(),
+      };
+
+      if (!payload.topic) {
+        alert("Can nhap chu de.");
+        return;
+      }
+
+      els.runBtn.disabled = true;
+      els.runBtn.textContent = "Dang chay...";
+      els.transcript.innerHTML = '<div class="empty">Dang goi Claude trong container API. Qua trinh nay co the mat vai giay den hon mot phut tuy so luot.</div>';
+      els.finalOutput.textContent = "Dang cho ket qua...";
+
+      try {
+        const result = await fetchJson("/api/claude/duet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        renderTranscript(result);
+        if (result.claude_status) {
+          renderStatus(result.claude_status);
+        }
+      } catch (error) {
+        els.transcript.innerHTML = `<div class="empty">Khong chay duoc Claude duet.<br>${escapeHtml(error.message)}</div>`;
+        els.finalOutput.textContent = error.message;
+      } finally {
+        els.runBtn.disabled = false;
+        els.runBtn.textContent = "Chay Claude Duet";
+      }
+    }
+
+    function applyClinicalPreset() {
+      els.topic.value = "Danh gia mot giao thuc multi-agent orchestration chat cho web Pathway. Mot tac the de xuat protocol, mot tac the kiem tra invariant. Hai ben phai hoi tu thanh mot flow co state machine, timeout, retry cap, termination rule ro rang, va moi luot tra ve JSON schema thong nhat.";
+      els.context.value = "He thong web dang chay trong Docker va Claude hien duoc auth bang Claude Pro cua chu may. Can uu tien owner moi luot, protocol delta machine-readable, next.target, termination_signal, stale cleanup, va human override tai diem can thiet.";
+      els.agentAName.value = "Claude Strategist";
+      els.agentBName.value = "Claude Challenger";
+      els.agentAPrompt.value = "Ban la Claude Strategist cho Pathway trong che do multi-agent orchestration chat. Nhiem vu cua ban la chot phase, state transition, ownership, protocol delta, va handoff tiep theo. Moi luot phai tra ve JSON schema hop le, khong prose tu do.";
+      els.agentBPrompt.value = "Ban la Claude Challenger cho Pathway trong che do multi-agent orchestration chat. Nhiem vu cua ban la kiem tra invariant, timeout, retry cap, stale state, race condition, termination, va guardrail. Moi luot phai tra ve JSON schema hop le, khong prose tu do.";
+      els.turns.value = "4";
+    }
+
+    els.runBtn.addEventListener("click", runDuet);
+    els.statusBtn.addEventListener("click", loadStatus);
+    els.presetBtn.addEventListener("click", applyClinicalPreset);
+
+    loadStatus();
+  </script>
+</body>
+</html>

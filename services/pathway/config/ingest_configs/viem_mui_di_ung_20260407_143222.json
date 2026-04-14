@@ -1,0 +1,186 @@
+{
+  "disease_name": "Viêm mũi dị ứng",
+  "icd_code": "J30",
+  "protocol_name": "Phác đồ Viêm mũi dị ứng (BYT)",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": false,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "antihistamines",
+        "corticosteroids",
+        "decongestants"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "Viêm mũi dị ứng",
+        "Viêm mũi xoang dị ứng theo mùa",
+        "Viêm mũi xoang dị ứng quanh năm"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "hắt hơi",
+        "ngạt",
+        "ngứa",
+        "chảy mũi"
+      ]
+    },
+    {
+      "label": "RiskFactor",
+      "examples": [
+        "phấn hoa",
+        "bào tử",
+        "bụi"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "chẩn đoán lâm sàng",
+        "xét nghiệm dị nguyên",
+        "test da"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "xét nghiệm máu",
+        "test dị ứng",
+        "test da"
+      ]
+    },
+    {
+      "label": "ICD_Category",
+      "examples": [
+        "J30 - Viêm mũi dị ứng"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical NER model specialized in Vietnamese internal medicine texts about allergic rhinitis (Viêm mũi dị ứng). Extract all entities explicitly mentioned in the input text. Return a valid JSON object with an \"entities\" array, where each entity has a \"name\" and a \"type\". Only include entities explicitly mentioned in the text.",
+  "extraction_user_prompt_template": "Dưới đây là đoạn văn bản y khoa về Viêm mũi dị ứng trong lĩnh vực Nội khoa, phần {section_path}:\n\n\"\"\"\n{chunk_content}\n\"\"\"\n\nVui lòng trích xuất các thực thể y tế được đề cập rõ ràng trong đoạn văn trên, theo các loại sau với ví dụ:\n- Drug (Thuốc): antihistamines, corticosteroids, decongestants\n- Disease (Bệnh): Viêm mũi dị ứng, Viêm mũi xoang dị ứng theo mùa, Viêm mũi xoang dị ứng quanh năm\n- Symptom (Triệu chứng): hắt hơi, ngạt, ngứa, chảy mũi\n- RiskFactor (Yếu tố nguy cơ): phấn hoa, bào tử, bụi\n- Procedure (Thủ thuật): chẩn đoán lâm sàng, xét nghiệm dị nguyên, test da\n- LabTest (Xét nghiệm): xét nghiệm máu, test dị ứng, test da\n- ICD_Category (Mã ICD): J30 - Viêm mũi dị ứng\n\nTrả về kết quả dưới dạng JSON với cấu trúc:\n{\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\n\nChỉ bao gồm các thực thể được đề cập RÕ RÀNG trong văn bản.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the Respiratory System",
+      "properties": {
+        "code": "J00-J99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Viêm mũi dị ứng",
+      "properties": {
+        "code": "J30"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Viêm mũi dị ứng",
+      "properties": {
+        "aliases": "Allergic Rhinitis; Hay Fever; Allergic Nasal Inflammation"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Loratadine",
+      "properties": {
+        "ATC_code": "R06AX13"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Cetirizine",
+      "properties": {
+        "ATC_code": "R06AE07"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Fexofenadine",
+      "properties": {
+        "ATC_code": "R06AX26"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Fluticasone propionate",
+      "properties": {
+        "ATC_code": "R01AD12"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Mometasone furoate",
+      "properties": {
+        "ATC_code": "R01AD09"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Serum IgE",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Skin Prick Test",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Nasal Smear Eosinophil Count",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete Blood Count",
+      "properties": {}
+    },
+    {
+      "label": "Symptom",
+      "name": "Nasal congestion",
+      "properties": {}
+    },
+    {
+      "label": "Symptom",
+      "name": "Sneezing",
+      "properties": {}
+    },
+    {
+      "label": "Symptom",
+      "name": "Itchy nose",
+      "properties": {}
+    },
+    {
+      "label": "Symptom",
+      "name": "Runny nose",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the Respiratory System",
+      "to_label": "ICD_Category",
+      "to_name": "Viêm mũi dị ứng",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Viêm mũi dị ứng",
+      "to_label": "ICD_Category",
+      "to_name": "Viêm mũi dị ứng",
+      "rel_type": "CLASSIFIED_AS"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

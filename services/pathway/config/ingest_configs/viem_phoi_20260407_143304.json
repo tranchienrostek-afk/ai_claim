@@ -1,0 +1,175 @@
+{
+  "disease_name": "Viêm phổi",
+  "icd_code": "J18",
+  "protocol_name": "Phác đồ Viêm phổi (BYT)",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": false,
+  "extra_heading_patterns": [
+    "^Bảng\\s+\\d+"
+  ],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "Amoxicillin",
+        "Azithromycin",
+        "Ceftriaxone",
+        "Paracetamol"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "Viêm phổi",
+        "Viêm phế nang",
+        "Viêm tổ chức kẽ phổi",
+        "Trực khuẩn lao"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "Sốt cao",
+        "Rét run",
+        "Ho",
+        "Khó thở"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "X-quang phổi",
+        "Công thức máu",
+        "CRP",
+        "Cấy đờm"
+      ]
+    },
+    {
+      "label": "Stage",
+      "examples": [
+        "Giai đoạn cấp",
+        "Giai đoạn mãn tính"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "Chụp X-quang",
+        "Nội soi phế quản",
+        "Sinh thiết phổi"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical NER model specialized in Vietnamese internal medicine texts about pneumonia (Viêm phổi). Extract all entities explicitly mentioned in the input text and return a valid JSON object with an array named \"entities\". Each entity should have a \"name\" field with the exact text span and a \"type\" field indicating the entity category. Only include entities explicitly mentioned in the text. The JSON format must be: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}",
+  "extraction_user_prompt_template": "Dưới đây là đoạn văn bản y khoa tiếng Việt liên quan đến Viêm phổi trong lĩnh vực Nội khoa. Vui lòng trích xuất các thực thể y tế được đề cập rõ ràng trong đoạn văn này.\n\nPhân loại thực thể và ví dụ:\n- Drug (Thuốc): Amoxicillin, Azithromycin, Ceftriaxone, Paracetamol\n- Disease (Bệnh): Viêm phổi, Viêm phế nang, Viêm tổ chức kẽ phổi, Trực khuẩn lao\n- Symptom (Triệu chứng): Sốt cao, Rét run, Ho, Khó thở\n- LabTest (Xét nghiệm): X-quang phổi, Công thức máu, CRP, Cấy đờm\n- Stage (Giai đoạn): Giai đoạn cấp, Giai đoạn mãn tính\n- Procedure (Thủ thuật): Chụp X-quang, Nội soi phế quản, Sinh thiết phổi\n\nVăn bản cần phân tích (mục {section_path}):\n\"\"\"\n{chunk_content}\n\"\"\"\n\nHãy trả về kết quả dưới dạng JSON với cấu trúc:\n{\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\nChỉ bao gồm các thực thể được đề cập RÕ RÀNG trong văn bản.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the respiratory system",
+      "properties": {
+        "code": "J00-J99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Pneumonia, organism unspecified",
+      "properties": {
+        "code": "J18"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Viêm phổi",
+      "properties": {
+        "aliases": "Pneumonia, Lobar pneumonia, Bronchopneumonia",
+        "code": "J18"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Amoxicillin",
+      "properties": {
+        "ATC_code": "J01CA04"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Azithromycin",
+      "properties": {
+        "ATC_code": "J01FA10"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Ceftriaxone",
+      "properties": {
+        "ATC_code": "J01DD04"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Levofloxacin",
+      "properties": {
+        "ATC_code": "J01MA12"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Doxycycline",
+      "properties": {
+        "ATC_code": "J01AA02"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Chest X-ray",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete blood count",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "C-reactive protein",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Sputum culture",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Blood culture",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Arterial blood gas analysis",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the respiratory system",
+      "to_label": "ICD_Category",
+      "to_name": "Pneumonia, organism unspecified",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Pneumonia, organism unspecified",
+      "to_label": "Disease",
+      "to_name": "Viêm phổi",
+      "rel_type": "HAS_SUBCATEGORY"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

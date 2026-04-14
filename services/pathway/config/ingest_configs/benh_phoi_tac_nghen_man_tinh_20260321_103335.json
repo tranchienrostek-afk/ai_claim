@@ -1,0 +1,275 @@
+{
+  "disease_name": "bệnh phổi tắc nghẽn mạn tính",
+  "icd_code": "J44",
+  "protocol_name": "Phác đồ bệnh phổi tắc nghẽn mạn tính - Bộ Y tế 2023",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": true,
+  "extra_heading_patterns": [
+    "^Bảng\\s+\\d+"
+  ],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "Salbutamol",
+        "Tiotropium",
+        "Prednisone",
+        "Theophylline"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "bệnh phổi tắc nghẽn mạn tính",
+        "COPD",
+        "viêm phổi",
+        "hen phế quản"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "ho",
+        "khó thở",
+        "khạc đờm",
+        "mệt mỏi"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "đo chức năng hô hấp",
+        "X-quang ngực",
+        "đo khí máu động mạch"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "thở oxy",
+        "thở máy",
+        "phẫu thuật cắt bỏ phổi"
+      ]
+    },
+    {
+      "label": "Stage",
+      "examples": [
+        "giai đoạn nhẹ",
+        "giai đoạn trung bình",
+        "giai đoạn nặng"
+      ]
+    },
+    {
+      "label": "Protocol",
+      "examples": [
+        "hướng dẫn chẩn đoán COPD",
+        "quy trình điều trị COPD"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese internal medicine texts. Extract all entities explicitly mentioned in the input text related to chronic obstructive pulmonary disease (bệnh phổi tắc nghẽn mạn tính) and return a valid JSON object with an array of entities. Each entity should have a \"name\" (the exact text span) and a \"type\" (one of the predefined entity types). Do not infer or add entities not explicitly present in the text. The output format must be: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text from section: {section_path}\n\nText:\n{chunk_content}\n\nExtract all entities explicitly mentioned in the text. The entity types and examples are:\n- Drug: Salbutamol, Tiotropium, Prednisone, Theophylline\n- Disease: bệnh phổi tắc nghẽn mạn tính, COPD, viêm phổi, hen phế quản\n- Symptom: ho, khó thở, khạc đờm, mệt mỏi\n- LabTest: đo chức năng hô hấp, X-quang ngực, đo khí máu động mạch\n- Procedure: thở oxy, thở máy, phẫu thuật cắt bỏ phổi\n- Stage: giai đoạn nhẹ, giai đoạn trung bình, giai đoạn nặng\n- Protocol: hướng dẫn chẩn đoán COPD, quy trình điều trị COPD\n\nReturn a JSON object in the format: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the respiratory system",
+      "properties": {
+        "code": "J00-J99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Other chronic obstructive pulmonary disease",
+      "properties": {
+        "code": "J44"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Bệnh phổi tắc nghẽn mạn tính",
+      "properties": {
+        "code": "J44",
+        "aliases": "Chronic Obstructive Pulmonary Disease"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Tiotropium",
+      "properties": {
+        "code": "ATC:R03BB04"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Salmeterol",
+      "properties": {
+        "code": "ATC:R03AC12"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Fluticasone",
+      "properties": {
+        "code": "ATC:R03BA05"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Formoterol",
+      "properties": {
+        "code": "ATC:R03AC13"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Budesonide",
+      "properties": {
+        "code": "ATC:R03BA02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Theophylline",
+      "properties": {
+        "code": "ATC:R03DA04"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Spirometry",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Arterial blood gas analysis",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Chest X-ray",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete blood count",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Alpha-1 antitrypsin level",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "GOLD classification",
+      "properties": {
+        "description": "Global Initiative for Chronic Obstructive Lung Disease staging system"
+      }
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the respiratory system",
+      "to_label": "ICD_Category",
+      "to_name": "Other chronic obstructive pulmonary disease",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Other chronic obstructive pulmonary disease",
+      "to_label": "Disease",
+      "to_name": "Bệnh phổi tắc nghẽn mạn tính",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh phổi tắc nghẽn mạn tính",
+      "to_label": "Drug",
+      "to_name": "Tiotropium",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh phổi tắc nghẽn mạn tính",
+      "to_label": "Drug",
+      "to_name": "Salmeterol",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh phổi tắc nghẽn mạn tính",
+      "to_label": "Drug",
+      "to_name": "Fluticasone",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh phổi tắc nghẽn mạn tính",
+      "to_label": "Drug",
+      "to_name": "Formoterol",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh phổi tắc nghẽn mạn tính",
+      "to_label": "Drug",
+      "to_name": "Budesonide",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh phổi tắc nghẽn mạn tính",
+      "to_label": "Drug",
+      "to_name": "Theophylline",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh phổi tắc nghẽn mạn tính",
+      "to_label": "LabTest",
+      "to_name": "Spirometry",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh phổi tắc nghẽn mạn tính",
+      "to_label": "LabTest",
+      "to_name": "Arterial blood gas analysis",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh phổi tắc nghẽn mạn tính",
+      "to_label": "LabTest",
+      "to_name": "Chest X-ray",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh phổi tắc nghẽn mạn tính",
+      "to_label": "LabTest",
+      "to_name": "Complete blood count",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh phổi tắc nghẽn mạn tính",
+      "to_label": "LabTest",
+      "to_name": "Alpha-1 antitrypsin level",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Bệnh phổi tắc nghẽn mạn tính",
+      "to_label": "Stage",
+      "to_name": "GOLD classification",
+      "rel_type": "INSTANCE_OF"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

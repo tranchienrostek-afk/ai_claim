@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "pathway-local": {
+      "source": {
+        "source": "directory",
+        "path": "./claude_marketplace"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "pathway-intelligence@pathway-local": true
+  }
+}

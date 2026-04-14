@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claims Adjudication Trace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg:#f6f0e7; --panel:#fffaf3; --line:#dccbb3; --ink:#1f2937; --muted:#6b7280; --accent:#0f766e; --good:#0f9d58; --warn:#d97706; --bad:#c2410c; --shadow:0 18px 44px rgba(92,60,22,.12); --radius:18px; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; color:var(--ink); font-family:"Manrope",sans-serif; background:linear-gradient(180deg,#fbf6ef 0%,#f0e7da 100%); }
+    .app { min-height:100vh; display:grid; grid-template-columns:320px 1fr 340px; }
+    .sidebar,.detailbar { padding:20px; display:flex; flex-direction:column; gap:16px; background:rgba(255,251,243,.86); border-right:1px solid var(--line); }
+    .detailbar { border-right:none; border-left:1px solid var(--line); }
+    .main { padding:18px; display:flex; flex-direction:column; gap:16px; min-width:0; }
+    .panel,.card,.run-status { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); }
+    .panel-head { padding:14px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .panel-body { padding:16px; }
+    .stack { display:grid; gap:12px; }
+    .brand { display:flex; gap:12px; align-items:center; }
+    .logo { width:44px; height:44px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg,var(--accent),#0d9488); color:#fff; font-weight:800; box-shadow:var(--shadow); }
+    h1,h2,h3,h4,p { margin:0; }
+    .sub { color:var(--muted); font-size:12px; line-height:1.5; }
+    .mono { font-family:"IBM Plex Mono",monospace; font-size:12px; }
+    label { display:block; margin-bottom:6px; font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:800; }
+    input[type="text"],select,input[type="file"] { width:100%; border-radius:14px; border:1px solid var(--line); background:#f6eee2; color:var(--ink); padding:12px 14px; font:inherit; }
+    button { border-radius:14px; padding:12px 14px; font:inherit; font-weight:800; cursor:pointer; border:1px solid transparent; }
+    .btn-primary { background:linear-gradient(135deg,var(--accent),#0f766e); color:#fff; }
+    .btn-secondary { background:#f6eee2; color:var(--ink); border-color:var(--line); }
+    .list { display:grid; gap:10px; max-height:300px; overflow:auto; }
+    .item { padding:12px; border:1px solid var(--line); border-radius:16px; background:rgba(255,251,244,.72); cursor:pointer; }
+    .item.active { border-color:rgba(15,118,110,.45); background:rgba(15,118,110,.12); }
+    .kpis { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+    .kpi { padding:14px; }
+    .kpi .label { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:800; }
+    .kpi .value { margin-top:8px; font-size:26px; font-weight:800; }
+    .log-box,.json-box { border-radius:16px; border:1px solid var(--line); background:#1f2937; color:#f9fafb; padding:12px; white-space:pre-wrap; font-family:"IBM Plex Mono",monospace; font-size:12px; line-height:1.5; overflow:auto; }
+    .log-box { min-height:140px; max-height:240px; }
+    .json-box { min-height:240px; max-height:620px; }
+    .tabs { display:flex; flex-wrap:wrap; gap:8px; }
+    .tab { border-radius:999px; border:1px solid var(--line); padding:8px 10px; font-size:12px; font-weight:700; background:#f6eee2; cursor:pointer; }
+    .tab.active { background:rgba(15,118,110,.12); border-color:rgba(15,118,110,.4); color:var(--accent); }
+    .tab-panel { display:none; }
+    .tab-panel.active { display:block; }
+    .timeline { display:grid; gap:12px; }
+    .timeline-item,.chat-bubble,.detail { border:1px solid var(--line); border-radius:16px; background:rgba(255,251,244,.72); padding:14px; }
+    .chat-bubble.system { background:rgba(15,118,110,.08); }
+    .chat-bubble.decision { background:rgba(217,119,6,.08); }
+    .table-wrap { max-height:580px; overflow:auto; border:1px solid var(--line); border-radius:16px; background:rgba(255,251,244,.7); }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th,td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+    th { position:sticky; top:0; z-index:1; background:#f8efe2; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.08em; }
+    .status { display:inline-flex; padding:5px 8px; border-radius:999px; font-size:11px; font-weight:800; border:1px solid transparent; }
+    .good { background:rgba(15,157,88,.14); color:var(--good); border-color:rgba(15,157,88,.28); }
+    .warn { background:rgba(217,119,6,.14); color:var(--warn); border-color:rgba(217,119,6,.28); }
+    .bad { background:rgba(194,65,12,.12); color:var(--bad); border-color:rgba(194,65,12,.26); }
+    .neutral { background:rgba(107,114,128,.12); color:var(--muted); border-color:rgba(107,114,128,.24); }
+    .empty { border:1px dashed var(--line); border-radius:18px; padding:28px; text-align:center; color:var(--muted); background:rgba(255,251,244,.5); }
+    @media (max-width:1360px) { .app { grid-template-columns:320px 1fr; } .detailbar { grid-column:1 / -1; border-left:none; border-top:1px solid var(--line); } }
+    @media (max-width:1040px) { .app { grid-template-columns:1fr; } .sidebar,.detailbar { border:none; border-bottom:1px solid var(--line); } .kpis { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">CT</div>
+        <div><h1>Claims Trace</h1><p class="sub">Import testcase JSON, xem kế hoạch, reasoning và audit log thẩm định.</p></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div><h3>Run Input</h3><p class="sub">Chọn file có sẵn hoặc upload mới.</p></div><button id="refreshBootstrapBtn" class="btn-secondary">Refresh</button></div>
+        <div class="panel-body stack">
+          <div><label for="graphNamespaceInput">Graph Namespace</label><input id="graphNamespaceInput" type="text" value="ontology_v2" /></div>
+          <div><label for="jsonSelect">Existing JSON</label><select id="jsonSelect"><option value="">-- chọn file có sẵn --</option></select></div>
+          <div><label for="jsonUpload">Upload JSON</label><input id="jsonUpload" type="file" accept=".json,application/json" /></div>
+          <button id="runTraceBtn" class="btn-primary">Run Trace Console</button>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div><h3>Recent Runs</h3><p class="sub">Mở lại run cũ để xem trace.</p></div></div>
+        <div class="panel-body"><div id="recentRuns" class="list"></div></div>
+      </div>
+      <div class="panel" style="flex:1;">
+        <div class="panel-head"><div><h3>Cases</h3><p class="sub">Chọn case để xem chi tiết.</p></div></div>
+        <div class="panel-body"><div id="caseList" class="list"></div></div>
+      </div>
+    </aside>
+    <main class="main">
+      <div class="run-status panel-body" id="runStatus"><strong>Chưa có run nào.</strong><div class="sub">Bấm <code>Run Trace Console</code> để bắt đầu.</div></div>
+      <div class="kpis">
+        <div class="panel kpi"><div class="label">Cases</div><div class="value" id="kpiCases">0</div></div>
+        <div class="panel kpi"><div class="label">Service Lines</div><div class="value" id="kpiLines">0</div></div>
+        <div class="panel kpi"><div class="label">Top-1 Hits</div><div class="value" id="kpiTop1">0</div></div>
+        <div class="panel kpi"><div class="label">Label Accuracy</div><div class="value" id="kpiAccuracy">0</div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div><h3>Live Pipeline Log</h3><p class="sub">Quan sát planner, mapper, reasoner và adjudicator chạy theo thời gian thực.</p></div><div class="sub mono" id="activeRunMeta">run: - | phase: idle</div></div>
+        <div class="panel-body"><div id="logBox" class="log-box"></div></div>
+      </div>
+      <div class="panel" style="flex:1;">
+        <div class="panel-head">
+          <div><h3 id="caseTitle">Case Detail</h3><p class="sub" id="caseSubtitle">Chọn một case từ bên trái để xem reasoning.</p></div>
+          <div class="tabs">
+            <div class="tab active" data-tab="overview">Overview</div>
+            <div class="tab" data-tab="plan">Plan</div>
+            <div class="tab" data-tab="chat">Chat</div>
+            <div class="tab" data-tab="adjudication">Adjudication</div>
+            <div class="tab" data-tab="json">JSON</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="tab-overview" class="tab-panel active"><div id="overviewContent" class="empty">Chưa có case nào được chọn.</div></div>
+          <div id="tab-plan" class="tab-panel"><div id="planContent" class="empty">Chưa có planning trace.</div></div>
+          <div id="tab-chat" class="tab-panel"><div id="chatContent" class="empty">Chưa có chat trace.</div></div>
+          <div id="tab-adjudication" class="tab-panel"><div id="adjudicationContent" class="empty">Chưa có adjudication log.</div></div>
+          <div id="tab-json" class="tab-panel"><pre id="jsonContent" class="json-box">{}</pre></div>
+        </div>
+      </div>
+    </main>
+    <aside class="detailbar">
+      <div class="panel">
+        <div class="panel-head"><div><h3>Run Snapshot</h3><p class="sub">Metadata và artifact của run hiện tại.</p></div></div>
+        <div class="panel-body stack" id="runMeta"></div>
+      </div>
+      <div class="panel" style="flex:1;">
+        <div class="panel-head"><div><h3>Selected Case Snapshot</h3><p class="sub">Tóm tắt nhanh cho reviewer bảo hiểm.</p></div></div>
+        <div class="panel-body stack" id="caseMeta"></div>
+      </div>
+    </aside>
+  </div>
+  <script>
+    const state = { bootstrap:null, activeRunId:null, selectedCaseId:null, currentRun:null, ws:null, pollTimer:null, latestPhase:"idle" };
+    const els = {
+      refreshBootstrapBtn:document.getElementById("refreshBootstrapBtn"),
+      graphNamespaceInput:document.getElementById("graphNamespaceInput"),
+      jsonSelect:document.getElementById("jsonSelect"),
+      jsonUpload:document.getElementById("jsonUpload"),
+      runTraceBtn:document.getElementById("runTraceBtn"),
+      recentRuns:document.getElementById("recentRuns"),
+      caseList:document.getElementById("caseList"),
+      runStatus:document.getElementById("runStatus"),
+      logBox:document.getElementById("logBox"),
+      activeRunMeta:document.getElementById("activeRunMeta"),
+      kpiCases:document.getElementById("kpiCases"),
+      kpiLines:document.getElementById("kpiLines"),
+      kpiTop1:document.getElementById("kpiTop1"),
+      kpiAccuracy:document.getElementById("kpiAccuracy"),
+      caseTitle:document.getElementById("caseTitle"),
+      caseSubtitle:document.getElementById("caseSubtitle"),
+      overviewContent:document.getElementById("overviewContent"),
+      planContent:document.getElementById("planContent"),
+      chatContent:document.getElementById("chatContent"),
+      adjudicationContent:document.getElementById("adjudicationContent"),
+      jsonContent:document.getElementById("jsonContent"),
+      runMeta:document.getElementById("runMeta"),
+      caseMeta:document.getElementById("caseMeta"),
+      tabs:Array.from(document.querySelectorAll(".tab")),
+      panels:Array.from(document.querySelectorAll(".tab-panel")),
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function statusBadge(value) {
+      const raw = String(value || "").toUpperCase();
+      if (["PAYMENT", "CONFIRMED", "COMPLETED", "STRONG"].includes(raw)) return `<span class="status good">${escapeHtml(raw || "OK")}</span>`;
+      if (["DENIAL", "ERROR", "RULED_OUT", "NONE"].includes(raw)) return `<span class="status bad">${escapeHtml(raw || "NONE")}</span>`;
+      if (["REVIEW", "RUNNING", "ACTIVE", "MODERATE", "WEAK"].includes(raw)) return `<span class="status warn">${escapeHtml(raw || "REVIEW")}</span>`;
+      return `<span class="status neutral">${escapeHtml(raw || "-")}</span>`;
+    }
+
+    function appendLog(text) {
+      els.logBox.textContent += `${text}\n`;
+      els.logBox.scrollTop = els.logBox.scrollHeight;
+    }
+
+    function resetRunTracking() {
+      state.activeRunId = null;
+      state.selectedCaseId = null;
+      state.currentRun = null;
+      state.latestPhase = "idle";
+      if (state.ws) { state.ws.close(); state.ws = null; }
+      if (state.pollTimer) { clearInterval(state.pollTimer); state.pollTimer = null; }
+      els.logBox.textContent = "";
+      els.activeRunMeta.textContent = "run: - | phase: idle";
+      renderRun(null);
+    }
+
+    async function fetchJson(url, options) {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(text || `Request failed: ${response.status}`);
+      }
+      return response.json();
+    }
+
+    function renderBootstrap(bootstrap) {
+      state.bootstrap = bootstrap;
+      els.graphNamespaceInput.value = bootstrap.default_graph_namespace || "ontology_v2";
+      els.jsonSelect.innerHTML = `<option value="">-- chọn file có sẵn --</option>`;
+      (bootstrap.json_files || []).forEach((item) => {
+        const option = document.createElement("option");
+        option.value = item.path;
+        option.textContent = `${item.name} (${item.size_bytes} bytes)`;
+        els.jsonSelect.appendChild(option);
+      });
+      renderRecentRuns(bootstrap.recent_runs || []);
+    }
+
+    function renderRecentRuns(items) {
+      els.recentRuns.innerHTML = "";
+      if (!items.length) {
+        els.recentRuns.innerHTML = `<div class="empty">Chưa có run testcase trace.</div>`;
+        return;
+      }
+      items.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `
+          <div style="display:flex; justify-content:space-between; gap:10px;">
+            <strong>${escapeHtml(item.filename || item.id)}</strong>
+            ${statusBadge(item.status)}
+          </div>
+          <div class="sub">${escapeHtml(item.id || "-")}</div>
+          <div class="sub">namespace ${escapeHtml(item.graph_namespace || "ontology_v2")}</div>
+        `;
+        div.addEventListener("click", async () => {
+          const run = await fetchJson(`/api/ingest/${encodeURIComponent(item.id)}`);
+          state.activeRunId = item.id;
+          els.activeRunMeta.textContent = `run: ${item.id} | phase: ${state.latestPhase}`;
+          renderRun(run);
+          if (run.status === "running") {
+            startRunPolling(item.id);
+            connectRunLogs(item.id);
+          }
+        });
+        els.recentRuns.appendChild(div);
+      });
+    }
+
+    function renderRunMeta(run) {
+      els.runMeta.innerHTML = "";
+      if (!run) {
+        els.runMeta.innerHTML = `<div class="empty">Chưa có metadata.</div>`;
+        return;
+      }
+      const result = run.result || {};
+      const aggregate = result.aggregate || {};
+      const artifacts = result.artifact_paths || {};
+      [
+        ["Run ID", run.id || "-"],
+        ["Status", run.status || "-"],
+        ["Input", result.input_file || run.filename || "-"],
+        ["Namespace", result.graph_namespace || run.graph_namespace || "-"],
+        ["Cases", aggregate.case_count ?? 0],
+        ["Service Lines", aggregate.service_line_count ?? 0],
+        ["Top-1 Hits", aggregate.top1_hit_count ?? 0],
+        ["Label Accuracy", aggregate.service_label_accuracy ?? 0],
+        ["Summary JSON", artifacts.summary_json || "-"],
+        ["Summary MD", artifacts.summary_md || "-"],
+      ].forEach(([label, value]) => {
+        const div = document.createElement("div");
+        div.className = "detail";
+        div.innerHTML = `<div class="sub">${escapeHtml(label)}</div><div style="margin-top:6px; font-weight:800;">${escapeHtml(value)}</div>`;
+        els.runMeta.appendChild(div);
+      });
+    }
+
+    function renderCaseList(cases) {
+      els.caseList.innerHTML = "";
+      if (!cases.length) {
+        els.caseList.innerHTML = `<div class="empty">Chưa có case nào.</div>`;
+        return;
+      }
+      cases.forEach((item) => {
+        const summary = item.summary || {};
+        const div = document.createElement("div");
+        div.className = "item";
+        if (state.selectedCaseId === item.case_id) div.classList.add("active");
+        div.innerHTML = `
+          <div style="display:flex; justify-content:space-between; gap:10px;">
+            <strong>${escapeHtml(item.case_id || "-")}</strong>
+            ${statusBadge(summary.top1_status || "-")}
+          </div>
+          <div class="sub">${escapeHtml(summary.testcase_title || item.story_title || "-")}</div>
+          <div class="sub">Top1: ${escapeHtml(summary.top1_disease || "-")}</div>
+          <div class="sub">GT match ${escapeHtml(summary.ground_truth_match_count || 0)}/${escapeHtml(summary.service_line_count || 0)}</div>
+        `;
+        div.addEventListener("click", () => {
+          state.selectedCaseId = item.case_id;
+          renderCaseList(cases);
+          renderCase(item);
+        });
+        els.caseList.appendChild(div);
+      });
+    }
+
+    function renderOverview(caseData) {
+      const summary = caseData.summary || {};
+      const hypotheses = (caseData.hypothesis_result || {}).hypotheses || [];
+      const top = hypotheses[0] || {};
+      const evidence = top.evidence_items || [];
+      const cards = `
+        <div class="kpis" style="margin-bottom:12px;">
+          <div class="panel kpi"><div class="label">Top-1 Disease</div><div class="value" style="font-size:20px;">${escapeHtml(summary.top1_disease || "-")}</div></div>
+          <div class="panel kpi"><div class="label">Confidence</div><div class="value">${Number(summary.top1_confidence || 0).toFixed(2)}</div></div>
+          <div class="panel kpi"><div class="label">Memory</div><div class="value">${escapeHtml(summary.memory_match_count || 0)}</div></div>
+          <div class="panel kpi"><div class="label">GT Match</div><div class="value">${escapeHtml(summary.ground_truth_match_count || 0)}/${escapeHtml(summary.service_line_count || 0)}</div></div>
+        </div>`;
+      const table = hypotheses.length ? `
+        <div class="table-wrap"><table>
+          <thead><tr><th>Disease</th><th>Status</th><th>Score</th><th>Confidence</th><th>Graph</th></tr></thead>
+          <tbody>${hypotheses.slice(0, 6).map((item) => `
+            <tr>
+              <td>${escapeHtml(item.disease_name || "-")}</td>
+              <td>${statusBadge(item.status)}</td>
+              <td>${escapeHtml(item.score ?? 0)}</td>
+              <td>${escapeHtml(item.confidence ?? 0)}</td>
+              <td>${escapeHtml(item.graph_context_match_count ?? 0)}</td>
+            </tr>`).join("")}
+          </tbody>
+        </table></div>` : `<div class="empty">Không có hypotheses.</div>`;
+      const evidenceHtml = evidence.length ? `<div class="timeline">${evidence.slice(0, 6).map((item) => `
+        <div class="timeline-item">
+          <h4>${escapeHtml(item.source || "evidence")}</h4>
+          <div class="sub">score ${escapeHtml(item.score_contribution ?? 0)}</div>
+          <div style="margin-top:8px;">${escapeHtml(item.summary || item.candidate_disease || JSON.stringify(item))}</div>
+        </div>`).join("")}</div>` : `<div class="empty">Top hypothesis chưa có evidence items.</div>`;
+      els.overviewContent.innerHTML = `${cards}<h4>Hypotheses</h4><div style="height:12px"></div>${table}<div style="height:16px"></div><h4>Top Evidence</h4><div style="height:12px"></div>${evidenceHtml}`;
+    }
+
+    function renderPlan(caseData) {
+      const rows = caseData.planning_trace || [];
+      if (!rows.length) { els.planContent.innerHTML = `<div class="empty">Chưa có planning trace.</div>`; return; }
+      els.planContent.innerHTML = `<div class="timeline">${rows.map((row) => `
+        <div class="timeline-item">
+          <h4>Step ${escapeHtml(row.step_no)} · ${escapeHtml(row.agent)}</h4>
+          <div class="sub">${escapeHtml(row.title || "-")}</div>
+          <div style="margin-top:8px;">${escapeHtml(row.summary || "-")}</div>
+          <pre class="json-box" style="margin-top:10px; min-height:auto; max-height:180px;">${escapeHtml(JSON.stringify(row.details || {}, null, 2))}</pre>
+        </div>`).join("")}</div>`;
+    }
+
+    function renderChat(caseData) {
+      const rows = caseData.chat_trace || [];
+      if (!rows.length) { els.chatContent.innerHTML = `<div class="empty">Chưa có chat trace.</div>`; return; }
+      els.chatContent.innerHTML = `<div class="timeline">${rows.map((row) => `
+        <div class="chat-bubble ${escapeHtml(row.tone || "analysis")}">
+          <h4>${escapeHtml(row.speaker || "Agent")}</h4>
+          <div>${escapeHtml(row.content || "-")}</div>
+        </div>`).join("")}</div>`;
+    }
+
+    function renderAdjudication(caseData) {
+      const payload = caseData.adjudication_log || {};
+      const rows = payload.service_lines || [];
+      if (!rows.length) { els.adjudicationContent.innerHTML = `<div class="empty">Chưa có adjudication log.</div>`; return; }
+      els.adjudicationContent.innerHTML = `
+        <div class="detail" style="margin-bottom:12px;"><div class="sub">Disclaimer</div><div style="margin-top:6px;">${escapeHtml(payload.disclaimer || "-")}</div></div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Line</th><th>Service</th><th>GT</th><th>Proposed</th><th>Support</th><th>Mapped</th><th>Reason</th></tr></thead>
+          <tbody>${rows.map((row) => `
+            <tr>
+              <td>${escapeHtml(row.line_no)}</td>
+              <td><strong>${escapeHtml(row.service_name_raw || "-")}</strong><div class="sub">${escapeHtml(row.matched_target_service || "-")}</div></td>
+              <td>${statusBadge(row.ground_truth_label)}</td>
+              <td>${statusBadge(row.proposed_label)}</td>
+              <td>${statusBadge(row.support_strength)}</td>
+              <td><div>${escapeHtml(row.mapped_service_code || "-")}</div><div class="sub">${escapeHtml(row.mapped_canonical_name || "-")}</div></td>
+              <td><div>${escapeHtml(row.explanation || "-")}</div>${(row.evidence || []).length ? `<div class="sub" style="margin-top:6px;">${escapeHtml((row.evidence || []).map((item) => `${item.source}:${item.summary || "-"}`).join(" | "))}</div>` : ""}</td>
+            </tr>`).join("")}
+          </tbody>
+        </table></div>`;
+    }
+
+    function renderCaseMeta(caseData) {
+      const summary = caseData.summary || {};
+      const artifacts = caseData.artifact_paths || {};
+      els.caseMeta.innerHTML = "";
+      [
+        ["Request ID", caseData.case_id || "-"],
+        ["Expected Disease", caseData.expected_disease || "-"],
+        ["Top-1", summary.top1_disease || "-"],
+        ["Status", summary.top1_status || "-"],
+        ["Confidence", Number(summary.top1_confidence || 0).toFixed(2)],
+        ["Artifact JSON", artifacts.json || "-"],
+        ["Artifact MD", artifacts.md || "-"],
+        ["Chat MD", artifacts.chat_md || "-"],
+      ].forEach(([label, value]) => {
+        const div = document.createElement("div");
+        div.className = "detail";
+        div.innerHTML = `<div class="sub">${escapeHtml(label)}</div><div style="margin-top:6px; font-weight:800;">${escapeHtml(value)}</div>`;
+        els.caseMeta.appendChild(div);
+      });
+    }
+
+    function renderCase(caseData) {
+      if (!caseData) {
+        els.caseTitle.textContent = "Case Detail";
+        els.caseSubtitle.textContent = "Chọn một case từ bên trái để xem reasoning.";
+        els.overviewContent.innerHTML = `<div class="empty">Chưa có case nào được chọn.</div>`;
+        els.planContent.innerHTML = `<div class="empty">Chưa có planning trace.</div>`;
+        els.chatContent.innerHTML = `<div class="empty">Chưa có chat trace.</div>`;
+        els.adjudicationContent.innerHTML = `<div class="empty">Chưa có adjudication log.</div>`;
+        els.jsonContent.textContent = "{}";
+        els.caseMeta.innerHTML = `<div class="empty">Chưa có case snapshot.</div>`;
+        return;
+      }
+      const summary = caseData.summary || {};
+      els.caseTitle.textContent = summary.testcase_title || caseData.story_title || caseData.case_id || "Case Detail";
+      els.caseSubtitle.textContent = `${caseData.case_id || "-"} · ${caseData.expected_disease || "-"}`;
+      renderOverview(caseData);
+      renderPlan(caseData);
+      renderChat(caseData);
+      renderAdjudication(caseData);
+      els.jsonContent.textContent = JSON.stringify(caseData, null, 2);
+      renderCaseMeta(caseData);
+    }
+
+    function renderRun(run) {
+      state.currentRun = run;
+      renderRunMeta(run);
+      if (!run) {
+        els.runStatus.innerHTML = `<strong>Chưa có run nào.</strong><div class="sub">Bấm <code>Run Trace Console</code> để bắt đầu.</div>`;
+        els.kpiCases.textContent = "0";
+        els.kpiLines.textContent = "0";
+        els.kpiTop1.textContent = "0";
+        els.kpiAccuracy.textContent = "0";
+        renderCaseList([]);
+        renderCase(null);
+        return;
+      }
+      const result = run.result || {};
+      const aggregate = result.aggregate || {};
+      els.runStatus.innerHTML = `
+        <div style="display:flex; justify-content:space-between; gap:10px;">
+          <strong>${escapeHtml(run.filename || run.id || "-")}</strong>
+          ${statusBadge(run.status)}
+        </div>
+        <div class="sub">Run ${escapeHtml(run.id || "-")} · namespace ${escapeHtml(result.graph_namespace || run.graph_namespace || "-")}</div>
+        <div class="sub">Input ${escapeHtml(result.input_file || run.filename || "-")}</div>`;
+      els.kpiCases.textContent = aggregate.case_count ?? 0;
+      els.kpiLines.textContent = aggregate.service_line_count ?? 0;
+      els.kpiTop1.textContent = aggregate.top1_hit_count ?? 0;
+      els.kpiAccuracy.textContent = Number(aggregate.service_label_accuracy || 0).toFixed(2);
+      renderCaseList(result.cases || []);
+      const firstCase = (result.cases || []).find((item) => item.case_id === state.selectedCaseId) || (result.cases || [])[0];
+      state.selectedCaseId = firstCase ? firstCase.case_id : null;
+      renderCase(firstCase || null);
+      renderCaseList(result.cases || []);
+    }
+
+    async function loadBootstrap() {
+      const payload = await fetchJson("/api/claims-insights/testcase-trace/bootstrap");
+      renderBootstrap(payload);
+    }
+
+    async function handleRunCompletion(runId) {
+      const run = await fetchJson(`/api/ingest/${encodeURIComponent(runId)}`);
+      renderRun(run);
+    }
+
+    function startRunPolling(runId) {
+      if (state.pollTimer) clearInterval(state.pollTimer);
+      state.pollTimer = setInterval(async () => {
+        try {
+          const run = await fetchJson(`/api/ingest/${encodeURIComponent(runId)}`);
+          if (run.result) renderRun(run);
+          if (run.status === "completed" || run.status === "error") {
+            clearInterval(state.pollTimer);
+            state.pollTimer = null;
+            appendLog(`[POLL] status=${run.status}`);
+          }
+        } catch (error) {
+          appendLog(`[ERROR] Poll failed: ${error.message}`);
+        }
+      }, 1800);
+    }
+
+    function connectRunLogs(runId) {
+      if (state.ws) state.ws.close();
+      const proto = window.location.protocol === "https:" ? "wss" : "ws";
+      const ws = new WebSocket(`${proto}://${window.location.host}/ws/pipeline/${runId}`);
+      state.ws = ws;
+      ws.onopen = () => appendLog(`[WS] Connected to ${runId}`);
+      ws.onmessage = async (event) => {
+        const data = JSON.parse(event.data);
+        if (data.type === "complete") {
+          appendLog(`[COMPLETE] status=${data.status}`);
+          await handleRunCompletion(runId);
+          return;
+        }
+        if (data.message) {
+          appendLog(`${data.type || "log"} | ${data.message}`);
+          const phaseMatch = String(data.message).match(/^\[(Planner|Mapper|Reasoner|Adjudicator|Trace)\]/i);
+          if (phaseMatch) {
+            state.latestPhase = phaseMatch[1];
+            els.activeRunMeta.textContent = `run: ${runId} | phase: ${phaseMatch[1]}`;
+          }
+        } else {
+          appendLog(JSON.stringify(data));
+        }
+      };
+      ws.onerror = () => appendLog("[WARN] WebSocket issue, UI sẽ fallback sang polling.");
+      ws.onclose = () => appendLog("[WS] Closed.");
+    }
+
+    async function submitRun() {
+      if (!els.jsonUpload.files.length && !els.jsonSelect.value) {
+        alert("Chọn file JSON có sẵn hoặc upload JSON mới.");
+        return;
+      }
+      resetRunTracking();
+      const form = new FormData();
+      form.append("graph_namespace", els.graphNamespaceInput.value.trim() || "ontology_v2");
+      if (els.jsonUpload.files.length) form.append("file", els.jsonUpload.files[0]);
+      else if (els.jsonSelect.value) form.append("existing_json_path", els.jsonSelect.value);
+      els.runStatus.innerHTML = `<strong>Submitting run...</strong><div class="sub">Đang gửi testcase JSON lên backend.</div>`;
+      const payload = await fetchJson("/api/claims-insights/testcase-trace", { method:"POST", body:form });
+      state.activeRunId = payload.run_id;
+      els.activeRunMeta.textContent = `run: ${payload.run_id} | phase: submitting`;
+      appendLog(`[START] ${payload.run_id}`);
+      startRunPolling(payload.run_id);
+      connectRunLogs(payload.run_id);
+    }
+
+    function bindEvents() {
+      els.refreshBootstrapBtn.addEventListener("click", loadBootstrap);
+      els.runTraceBtn.addEventListener("click", submitRun);
+      els.tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const nextTab = tab.dataset.tab;
+          els.tabs.forEach((item) => item.classList.toggle("active", item.dataset.tab === nextTab));
+          els.panels.forEach((panel) => panel.classList.toggle("active", panel.id === `tab-${nextTab}`));
+        });
+      });
+    }
+
+    async function init() {
+      bindEvents();
+      await loadBootstrap();
+    }
+
+    init().catch((error) => {
+      els.runStatus.innerHTML = `<div class="mono">Init error: ${escapeHtml(error.message)}</div>`;
+    });
+  </script>
+</body>
+</html>

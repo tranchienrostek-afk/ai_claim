@@ -1,0 +1,304 @@
+{
+  "schema_version": "pathway_data_architecture.v1",
+  "updated": "2026-04-06",
+  "mission": "Pathway must understand the medical, insurance, benchmark, runtime, and memory data system the way Claude Code understands a source-code workspace.",
+  "principles": [
+    "medical_truth_separate_from_contract_truth",
+    "raw_evidence_separate_from_compiled_inference",
+    "every_decision_must_trace_back_to_evidence",
+    "benchmarks_and_testcases_must_not_pollute_runtime_truth",
+    "memory_and_feedback_are_supervision_layers_not_medical_facts",
+    "namespaces_and_storage_surfaces_must_be_explicit",
+    "filesystem_and_neo4j_are_both_first_class_data_surfaces"
+  ],
+  "logical_layers": [
+    {
+      "id": "L0_storage_surfaces",
+      "label": "Storage Surfaces",
+      "description": "Filesystem directories, Neo4j namespaces, runtime memory files, and generated artifacts."
+    },
+    {
+      "id": "L1_raw_evidence",
+      "label": "Raw Evidence",
+      "description": "PDFs, raw chunks, extracted text, raw claims, raw contract documents, and testcase inputs."
+    },
+    {
+      "id": "L2_canonical_models",
+      "label": "Canonical Models",
+      "description": "Disease, sign, service, observation, policy, and alias concepts with stable identifiers."
+    },
+    {
+      "id": "L3_assertions_and_rules",
+      "label": "Assertions And Rules",
+      "description": "Protocol assertions, contract rules, contraindications, summaries, and provenance chains."
+    },
+    {
+      "id": "L4_reasoning_runtime",
+      "label": "Reasoning Runtime",
+      "description": "Hypotheses, expected services, reasoning traces, adjudication evidence, and coverage signals."
+    },
+    {
+      "id": "L5_supervision_memory",
+      "label": "Supervision And Memory",
+      "description": "Benchmarks, testcase traces, bridge interactions, experience memory, and operator feedback."
+    }
+  ],
+  "question_families": [
+    "symptoms_to_top_diseases",
+    "known_diseases_to_reasonable_services",
+    "service_line_to_medical_support_or_contraindication",
+    "claim_case_to_medical_truth_vs_contract_truth",
+    "which_data_surface_contains_the_needed_evidence",
+    "what_is_missing_from_the_current_knowledge_system"
+  ],
+  "operating_contract": {
+    "required_fields": [
+      "mission",
+      "data_domain",
+      "verification_plan",
+      "knowledge_access_plan",
+      "evidence_ledger",
+      "coverage_gaps",
+      "audit_summary",
+      "decision_rule",
+      "next_actions"
+    ],
+    "evidence_ledger_categories": [
+      "filesystem_fact",
+      "neo4j_fact",
+      "benchmark_fact",
+      "memory_signal",
+      "runtime_signal",
+      "inference",
+      "unknown"
+    ],
+    "design_rule": "Pathway must separate what is stored, what is retrieved, what is inferred, and what is still unknown."
+  },
+  "domains": [
+    {
+      "id": "medical_knowledge",
+      "label": "Medical Knowledge",
+      "description": "Clinical protocols, extracted text, ontology contracts, chunks, assertions, and disease-level compiled knowledge.",
+      "neo4j_namespaces": [
+        "ontology_v2"
+      ],
+      "query_contracts": [
+        "disease -> chunks/assertions/summaries",
+        "service -> indication/contraindication evidence",
+        "symptom -> disease reasoning"
+      ],
+      "surfaces": [
+        {
+          "kind": "directory",
+          "path_ref": "UPLOADS_DIR",
+          "role": "uploaded_medical_pdfs",
+          "required": true,
+          "create_if_missing": true,
+          "status": "active"
+        },
+        {
+          "kind": "directory",
+          "path_ref": "REFERENCE_PDFS_DIR",
+          "role": "curated_reference_protocols",
+          "required": true,
+          "status": "active"
+        },
+        {
+          "kind": "directory",
+          "path_ref": "EXTRACTED_TEXT_DIR",
+          "role": "clean_extracted_text",
+          "required": true,
+          "create_if_missing": true,
+          "status": "active"
+        },
+        {
+          "kind": "directory",
+          "path_ref": "INGEST_CONFIGS_DIR",
+          "role": "per_run_ingest_configs",
+          "required": true,
+          "create_if_missing": true,
+          "status": "active"
+        },
+        {
+          "kind": "file",
+          "relative_path": "config/ontology_v2_schema.json",
+          "role": "ontology_contract",
+          "required": true,
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "id": "claims_and_contracts",
+      "label": "Claims And Contracts",
+      "description": "Claims corpora, insurance rules, exclusions, and adjudication benchmark material.",
+      "neo4j_namespaces": [
+        "claims_insights_explorer_v1"
+      ],
+      "query_contracts": [
+        "claim -> service lines and claim context",
+        "contract -> exclusion and benefit evidence",
+        "claim + disease + service -> adjudication support"
+      ],
+      "surfaces": [
+        {
+          "kind": "directory",
+          "path_ref": "CLAIMS_INSIGHTS_CLAIMS_DIR",
+          "role": "claims_corpora",
+          "required": true,
+          "status": "active"
+        },
+        {
+          "kind": "directory",
+          "path_ref": "CLAIMS_INSIGHTS_INSURANCE_DIR",
+          "role": "contract_and_exclusion_sources",
+          "required": true,
+          "status": "active"
+        },
+        {
+          "kind": "directory",
+          "path_ref": "CLAIMS_INSIGHTS_REPORTS_DIR",
+          "role": "claims_reports",
+          "required": false,
+          "status": "active"
+        },
+        {
+          "kind": "file",
+          "relative_path": "server_support/adjudication/test_sample_100.jsonl",
+          "role": "adjudication_smoke_benchmark",
+          "required": true,
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "id": "benchmarks_and_testcases",
+      "label": "Benchmarks And Testcases",
+      "description": "Canonical datatest layout, legacy benchmark corpora, and generated testcase traces.",
+      "neo4j_namespaces": [],
+      "query_contracts": [
+        "testcase -> expected reasoning trace",
+        "benchmark -> failure cluster and regression surface"
+      ],
+      "surfaces": [
+        {
+          "kind": "directory",
+          "path_ref": "DATATEST_DIR",
+          "role": "canonical_datatest_layout",
+          "required": true,
+          "create_if_missing": true,
+          "status": "active"
+        },
+        {
+          "kind": "directory",
+          "path_ref": "DATATEST_V02_DIR",
+          "role": "legacy_benchmark_v02",
+          "required": false,
+          "status": "legacy"
+        },
+        {
+          "kind": "directory",
+          "path_ref": "DATATEST_V03_DIR",
+          "role": "benchmark_v03",
+          "required": false,
+          "status": "active"
+        },
+        {
+          "kind": "directory",
+          "path_ref": "TESTCASE_TRACE_RUNS_DIR",
+          "role": "generated_testcase_traces",
+          "required": true,
+          "create_if_missing": true,
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "id": "runtime_and_observability",
+      "label": "Runtime And Observability",
+      "description": "Pipeline run state, logs, reports, and runtime-generated diagnostics.",
+      "neo4j_namespaces": [],
+      "query_contracts": [
+        "run_id -> pipeline phase and logs",
+        "recent runs -> operational health",
+        "runtime artifact -> reproducibility path"
+      ],
+      "surfaces": [
+        {
+          "kind": "directory",
+          "path_ref": "RUNS_DIR",
+          "role": "pipeline_run_state",
+          "required": true,
+          "create_if_missing": true,
+          "status": "active"
+        },
+        {
+          "kind": "directory",
+          "path_ref": "REPORTS_DIR",
+          "role": "generated_reports",
+          "required": true,
+          "create_if_missing": true,
+          "status": "active"
+        },
+        {
+          "kind": "directory",
+          "path_ref": "LOGS_DIR",
+          "role": "server_and_pipeline_logs",
+          "required": true,
+          "create_if_missing": true,
+          "status": "active"
+        },
+        {
+          "kind": "directory",
+          "path_ref": "DATA_VIEW_DIR",
+          "role": "manual_runtime_views",
+          "required": false,
+          "status": "legacy"
+        }
+      ]
+    },
+    {
+      "id": "memory_and_supervision",
+      "label": "Memory And Supervision",
+      "description": "Claude bridge traces, operator feedback, project memory, and distilled lessons from prior runs.",
+      "neo4j_namespaces": [],
+      "query_contracts": [
+        "recent failure -> what Pathway should remember",
+        "bridge interaction -> what Claude taught Pathway",
+        "operator feedback -> what should change next"
+      ],
+      "surfaces": [
+        {
+          "kind": "directory",
+          "path_ref": "CLAUDE_BRIDGE_DIR",
+          "role": "bridge_trace_store",
+          "required": true,
+          "create_if_missing": true,
+          "status": "active"
+        },
+        {
+          "kind": "directory",
+          "path_ref": "EXPERIENCE_MEMORY_DIR",
+          "role": "persistent_experience_memory",
+          "required": true,
+          "create_if_missing": true,
+          "status": "active"
+        },
+        {
+          "kind": "file",
+          "relative_path": "CLAUDE_PROJECT_MAP.md",
+          "role": "project_memory",
+          "required": true,
+          "status": "active"
+        },
+        {
+          "kind": "file",
+          "relative_path": "CLAUDE_RUNTIME_MEMORY.md",
+          "role": "runtime_memory",
+          "required": false,
+          "status": "active"
+        }
+      ]
+    }
+  ]
+}

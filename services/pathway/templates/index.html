@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity Bio-Medical | Clinical Knowledge Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --sidebar: #1e293b;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+            --card: #1e293b;
+            --border: #334155;
+            --glass: rgba(30, 41, 59, 0.7);
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg); color: var(--text);
+            display: flex; height: 100vh; overflow: hidden;
+        }
+
+        /* ── Sidebar (Navigation) ── */
+        .main-nav {
+            width: 80px; background: var(--sidebar);
+            border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; align-items: center; padding: 20px 0;
+            gap: 24px;
+        }
+        .nav-item {
+            width: 48px; height: 48px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-dim); cursor: pointer; transition: all 0.2s;
+            font-size: 1.4rem; position: relative;
+        }
+        .nav-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+        .nav-item.active { color: var(--accent); background: rgba(59,130,246,0.1); }
+        .nav-item.active::after {
+            content: ''; position: absolute; left: -10px; width: 4px; height: 24px;
+            background: var(--accent); border-radius: 0 4px 4px 0;
+        }
+        .nav-item .tooltip {
+            position: absolute; left: 70px; background: #000; color: #fff;
+            padding: 4px 10px; border-radius: 6px; font-size: 0.75rem;
+            white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s;
+            z-index: 100;
+        }
+        .nav-item:hover .tooltip { opacity: 1; }
+
+        /* ── Main Layout ── */
+        .split-layout { flex: 1; display: flex; overflow: hidden; }
+        
+        /* ── Left/Center: Viewports ── */
+        .viewport { flex: 1; display: none; flex-direction: column; overflow: hidden; position: relative; }
+        .viewport.active { display: flex; }
+
+        /* PDF Viewer Container */
+        .pdf-container {
+            flex: 1.3; background: #000;
+            border-right: 1px solid var(--border);
+            display: flex; flex-direction: column;
+        }
+        .pdf-container iframe { flex: 1; width: 100%; border: none; }
+        .pdf-placeholder {
+            flex: 1; display: flex; align-items: center; justify-content: center;
+            color: var(--text-dim); font-size: 1.1rem; text-align: center; padding: 40px;
+        }
+
+        /* ── Chat Panel ── */
+        .chat-panel { flex: 1; display: flex; flex-direction: column; min-width: 450px; background: var(--bg); }
+        
+        .header {
+            padding: 16px 24px; background: var(--glass); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center; gap: 12px;
+        }
+        .logo-text { font-family: 'Outfit'; font-weight: 700; color: #60a5fa; font-size: 1.1rem; }
+        .header-controls { display: flex; gap: 8px; align-items: center; }
+        .header select {
+            background: #0f172a; color: #fff; border: 1px solid var(--border);
+            border-radius: 8px; padding: 6px 10px; font-size: 0.8rem; outline: none;
+        }
+
+        .chat-area { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+        .bubble {
+            background: var(--card); padding: 18px 20px; border-radius: 14px;
+            border: 1px solid var(--border); line-height: 1.75; font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); max-width: 90%;
+        }
+        .bubble-user { align-self: flex-end; background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.3); }
+        .citation-link {
+            background: rgba(59, 130, 246, 0.15); color: #60a5fa; padding: 1px 6px;
+            border-radius: 4px; font-size: 0.85em; font-weight: 700; cursor: pointer;
+            border-bottom: 1px solid #60a5fa; margin: 0 2px; display: inline-block;
+        }
+
+        .input-box {
+            padding: 16px 24px; background: var(--sidebar); border-top: 1px solid var(--border);
+            display: flex; gap: 12px; align-items: center;
+        }
+        .input-box input {
+            flex: 1; background: #0f172a; border: 1px solid var(--border);
+            border-radius: 10px; padding: 12px 16px; color: white; outline: none;
+        }
+        .input-box button { background: var(--accent); border: none; padding: 12px 20px; border-radius: 10px; color: white; font-weight: 700; cursor: pointer; }
+
+        /* Deep Reasoning Toggle */
+        .deep-toggle {
+            display: flex; align-items: center; gap: 6px; cursor: pointer;
+            padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border);
+            background: #0f172a; transition: all 0.3s; user-select: none; white-space: nowrap;
+        }
+        .deep-toggle.active { border-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+        .deep-toggle .toggle-dot {
+            width: 14px; height: 14px; border-radius: 50%;
+            background: var(--text-dim); transition: all 0.3s;
+        }
+        .deep-toggle.active .toggle-dot { background: #f59e0b; box-shadow: 0 0 8px rgba(245,158,11,0.5); }
+        .deep-toggle .toggle-label { font-size: 0.75rem; color: var(--text-dim); }
+        .deep-toggle.active .toggle-label { color: #f59e0b; }
+
+        /* Reasoning Trace */
+        .trace-container {
+            margin-top: 12px; border: 1px solid rgba(245,158,11,0.3); border-radius: 10px;
+            overflow: hidden; background: rgba(245,158,11,0.03);
+        }
+        .trace-header {
+            padding: 10px 14px; cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-size: 0.8rem; color: #f59e0b; font-weight: 600;
+        }
+        .trace-header:hover { background: rgba(245,158,11,0.05); }
+        .trace-body { display: none; padding: 0 14px 14px; }
+        .trace-body.open { display: block; }
+        .trace-step {
+            padding: 8px 0; border-bottom: 1px solid rgba(245,158,11,0.1);
+            font-size: 0.8rem; display: flex; gap: 10px; align-items: flex-start;
+        }
+        .trace-step:last-child { border-bottom: none; }
+        .trace-icon { font-size: 1rem; min-width: 20px; text-align: center; }
+        .trace-text { flex: 1; color: var(--text-dim); line-height: 1.5; }
+        .trace-text strong { color: var(--text); }
+        .trace-time { color: #f59e0b; font-size: 0.7rem; white-space: nowrap; font-weight: 600; }
+        .verification-badge {
+            display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; margin-top: 8px;
+        }
+        .verification-badge.safe { background: rgba(16,185,129,0.15); color: var(--success); }
+        .verification-badge.unsafe { background: rgba(239,68,68,0.15); color: var(--error); }
+
+        /* ── Pipeline Panel ── */
+        .pipeline-panel { padding: 32px; overflow-y: auto; display: none; flex-direction: column; gap: 32px; width: 100%; max-width: 1000px; margin: 0 auto; }
+        .pipeline-panel.active { display: flex; }
+
+        .pipeline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+        .card-title { font-family: 'Outfit'; font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px; }
+        .form-group input, .form-group select {
+            width: 100%; background: #0f172a; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; color: white; outline: none;
+        }
+
+        .log-container {
+            background: #000; border-radius: 10px; padding: 16px; font-family: 'Consolas', monospace;
+            font-size: 0.85rem; height: 400px; overflow-y: auto; line-height: 1.5; color: #d1d5db;
+            border: 1px solid var(--border);
+        }
+        .log-entry { margin-bottom: 4px; }
+        .log-time { color: var(--text-dim); margin-right: 8px; }
+        .log-phase { color: var(--accent); font-weight: 700; border: 1px solid; border-radius: 4px; padding: 0 4px; font-size: 0.7rem; margin-right: 8px; }
+        .log-msg-success { color: var(--success); }
+        .log-msg-error { color: var(--error); }
+        .log-msg-warning { color: var(--warning); }
+
+        .progress-stepper { display: flex; justify-content: space-between; margin-bottom: 20px; position: relative; }
+        .progress-stepper::before { content: ''; position: absolute; top: 15px; left: 0; right: 0; height: 2px; background: var(--border); z-index: 1; }
+        .step { width: 32px; height: 32px; border-radius: 50%; background: var(--sidebar); border: 2px solid var(--border); z-index: 2; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: var(--text-dim); transition: all 0.3s; }
+        .step.active { border-color: var(--accent); color: var(--accent); background: #0f172a; transform: scale(1.2); }
+        .step.done { background: var(--success); border-color: var(--success); color: white; }
+
+        /* ── History Panel ── */
+        .history-panel { padding: 32px; overflow-y: auto; display: none; }
+        .history-panel.active { display: flex; flex-direction: column; }
+        .history-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .run-card {
+            background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; cursor: pointer; transition: all 0.2s;
+        }
+        .run-card:hover { border-color: var(--accent); transform: translateY(-3px); background: rgba(59,130,246,0.05); }
+        .run-card h4 { margin: 0 0 8px; color: #fff; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .run-meta { font-size: 0.75rem; color: var(--text-dim); display: flex; justify-content: space-between; margin-top: 10px; }
+        .acc-badge { background: rgba(16, 185, 129, 0.15); color: var(--success); padding: 2px 8px; border-radius: 6px; font-weight: 700; }
+
+        /* ── Evaluation Dashboard ── */
+        .eval-view { display: none; position: fixed; inset: 0; z-index: 1000; background: var(--bg); padding: 40px; overflow-y: auto; }
+        .eval-view.active { display: block; }
+        .eval-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
+        .eval-grid { display: grid; grid-template-columns: 350px 1fr; gap: 30px; }
+        .score-bar { height: 12px; background: var(--border); border-radius: 6px; overflow: hidden; margin: 4px 0 12px; }
+        .score-fill { height: 100%; background: var(--accent); }
+        .question-row { border-bottom: 1px solid var(--border); padding: 12px 0; display: grid; grid-template-columns: 40px 80px 150px 1fr; cursor: pointer; }
+        .question-row:hover { background: rgba(255,255,255,0.02); }
+        .score-val { font-weight: 700; color: var(--success); }
+        .score-val.low { color: var(--warning); }
+        .score-val.zero { color: var(--error); }
+
+        /* ── Right: Sidebar (Stats/Sources) ── */
+        .right-sidebar { width: 300px; background: var(--sidebar); border-left: 1px solid var(--border); display: flex; flex-direction: column; }
+        .sidebar-section { padding: 20px; border-bottom: 1px solid var(--border); }
+        .sidebar-title { font-size: 0.75rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .mini-stat { background: #0f172a; padding: 12px; border-radius: 10px; text-align: center; }
+        .mini-stat .val { display: block; font-size: 1.2rem; font-weight: 700; color: #60a5fa; }
+        .mini-stat .lbl { font-size: 0.6rem; color: var(--text-dim); margin-top: 2px; }
+        
+        .source-list { flex: 1; overflow-y: auto; padding: 12px; }
+        .source-card { background: #0f172a; border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s; }
+        .source-card:hover { border-color: var(--accent); }
+        .source-card h5 { margin: 0 0 6px; font-size: 0.85rem; color: #fff; line-height: 1.4; }
+        .source-card .meta { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-dim); }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <nav class="main-nav">
+        <div class="logo-icon" style="font-size:1.8rem;">🧬</div>
+        <div class="nav-item active" onclick="switchTab('qa')" id="nav-qa">
+            💬 <span class="tooltip">Hỏi đáp & Tra cứu</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('pipeline')" id="nav-pipeline">
+            ⚙️ <span class="tooltip">Pipeline Ingestion</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('history')" id="nav-history">
+            📜 <span class="tooltip">Lịch sử & Đánh giá</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('crawler')" id="nav-crawler">
+            🕷️ <span class="tooltip">VN Protocol Crawler</span>
+        </div>
+        <div style="margin-top:auto" class="nav-item" onclick="window.open('/pdfs/clinical_benchmark_analysis.md')">
+            📊 <span class="tooltip">Báo cáo Benchmark</span>
+        </div>
+    </nav>
+
+    <div class="split-layout">
+        
+        <!-- Tab 1: QA View -->
+        <div id="tab-qa" class="viewport active" style="flex-direction:row;">
+            <div class="pdf-container">
+                <div class="pdf-placeholder" id="pdf-placeholder">Chọn tài liệu PDF để trình chiếu</div>
+                <iframe id="pdf-viewer" style="display:none"></iframe>
+            </div>
+            <div class="chat-panel">
+                <div class="header">
+                    <div class="logo-text">Clinical Knowledge Engine</div>
+                    <div class="header-controls">
+                        <select id="disease-select" onchange="onDiseaseChange()">
+                            <option value="">-- Chọn bệnh lý --</option>
+                        </select>
+                        <select id="hospital-select">
+                            <option value="">-- Nguồn: BYT --</option>
+                        </select>
+                        <span class="header-badge" id="status-badge" style="background:rgba(59,130,246,0.1); color:#60a5fa">Neo4j Active</span>
+                    </div>
+                </div>
+                <div class="chat-area" id="chat-area">
+                    <div class="bubble">Chào mừng Thầy đến với Antigravity Clinical Engine. Hệ thống đã sẵn sàng hỗ trợ tra cứu phác đồ điều trị.</div>
+                </div>
+                <div class="input-box">
+                    <div class="deep-toggle" id="deep-toggle" onclick="toggleDeep()" title="Bật/tắt Deep Reasoning (ReAct Loop)">
+                        <div class="toggle-dot"></div>
+                        <span class="toggle-label">Deep</span>
+                    </div>
+                    <input type="text" id="question" placeholder="Nhập câu hỏi tại đây..." onkeypress="if(event.key==='Enter') ask()">
+                    <button onclick="ask()" id="ask-btn">Gửi</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Pipeline View -->
+        <div id="tab-pipeline" class="viewport">
+            <div class="pipeline-panel active">
+                <div class="card-title">🚀 Khởi chạy Autonomous Pipeline</div>
+                <div class="pipeline-grid">
+                    <div class="card">
+                        <div class="form-group">
+                            <label>Phác đồ y khoa (PDF)</label>
+                            <input type="file" id="pdf-file" accept=".pdf">
+                        </div>
+                        <div class="form-group">
+                            <label>Dữ liệu kiểm thử (JSON - Optional)</label>
+                            <input type="file" id="test-file" accept=".json">
+                        </div>
+                        <div class="form-group">
+                            <label>Bệnh viện (Scope)</label>
+                            <input type="text" id="pipe-hospital" placeholder="Ví dụ: BV Chợ Rẫy (Bỏ trống nếu là BYT)">
+                        </div>
+                        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px;">
+                            <div class="form-group">
+                                <label>Target Accuracy</label>
+                                <input type="number" id="pipe-acc" value="0.85" step="0.05" min="0.5" max="1.0">
+                            </div>
+                            <div class="form-group">
+                                <label>Max Workers</label>
+                                <input type="number" id="pipe-workers" value="10">
+                            </div>
+                            <div class="form-group">
+                                <label>Max Optimize Iterations</label>
+                                <input type="number" id="pipe-max-iter" value="10" min="1" max="20">
+                            </div>
+                        </div>
+                        <button onclick="startPipeline()" id="start-btn" style="width:100%; padding:14px; background:var(--success); border:none; border-radius:12px; color:white; font-weight:700; cursor:pointer; margin-top:10px;">BẮT ĐẦU PIPELINE</button>
+                    </div>
+
+                    <div class="card" style="display:flex; flex-direction:column;">
+                        <div class="progress-stepper" id="stepper">
+                            <div class="step" id="step0">0</div>
+                            <div class="step" id="step1">1</div>
+                            <div class="step" id="step2">2</div>
+                            <div class="step" id="step3">3</div>
+                            <div class="step" id="step4">4</div>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:0.8rem;">
+                            <span id="pipe-status">Ready</span>
+                            <span id="pipe-timer">00:00</span>
+                        </div>
+                        <div class="log-container" id="log-display">
+                            <div style="color:var(--text-dim)">Chờ khởi lệnh...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: History View -->
+        <div id="tab-history" class="viewport">
+            <div class="history-panel active">
+                <div class="card-title">📜 Lịch sử Ingestion & Đánh giá</div>
+                <div class="history-list" id="history-list">
+                    <!-- Cards injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Crawler View -->
+        <div id="tab-crawler" class="viewport">
+            <div class="pipeline-panel active" style="max-width: 800px;">
+                <div class="card-title">🕷️ VN Medical Protocol Crawler (kcb.vn)</div>
+                <div class="card">
+                    <p style="font-size:0.9rem; color:var(--text-dim); margin-bottom:20px;">
+                        Tự động cào phác đồ điều trị từ Cổng Thông tin Cục Quản lý Khám chữa bệnh (Bộ Y tế). 
+                        Dữ liệu sẽ được trích xuất và đưa vào Pipeline Ingestion tự động.
+                    </p>
+                    <div class="form-group">
+                        <label>Từ khóa tìm kiếm (Ví dụ: "Ung thư", "Tăng huyết áp")</label>
+                        <input type="text" id="crawl-query" placeholder="Để trống để cào các phác đồ mới nhất">
+                    </div>
+                    <div class="form-group">
+                        <label>Số lượng trang tối đa</label>
+                        <input type="number" id="crawl-limit" value="5">
+                    </div>
+                    <button onclick="startCrawler()" id="crawl-btn" style="width:100%; padding:14px; background:var(--accent); border:none; border-radius:12px; color:white; font-weight:700; cursor:pointer;">KHỞI CHẠY CRAWLER</button>
+                    
+                    <div id="crawl-status-container" style="margin-top:24px; display:none;">
+                        <div class="sidebar-title">Trạng thái Crawling</div>
+                        <div class="log-container" id="crawl-logs" style="height:300px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="right-sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-title">Hệ thống</div>
+            <div class="stat-grid">
+                <div class="mini-stat"><span class="val" id="st-diseases">-</span><span class="lbl">Bệnh lý</span></div>
+                <div class="mini-stat"><span class="val" id="st-chunks">-</span><span class="lbl">Chunks</span></div>
+                <div class="mini-stat"><span class="val" id="st-protocols">-</span><span class="lbl">Phác đồ</span></div>
+                <div class="mini-stat"><span class="val" id="st-hospitals">-</span><span class="lbl">Cơ sở</span></div>
+            </div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-title">Nguồn trích dẫn</div>
+            <div class="source-list" id="source-sidebar">
+                <div style="color:var(--text-dim); text-align:center; padding-top:20px; font-size:0.8rem;">Chưa có trích dẫn</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Evaluation Modal -->
+    <div class="eval-view" id="eval-dashboard">
+        <div class="eval-header">
+            <div>
+                <h1 id="eval-title" style="margin:0; font-family:'Outfit'">Đánh giá Pipeline</h1>
+                <p id="eval-subtitle" style="color:var(--text-dim)"></p>
+            </div>
+            <button onclick="closeEval()" style="background:var(--border); border:none; color:white; padding:10px 20px; border-radius:8px; cursor:pointer;">Đóng Dashboard</button>
+        </div>
+        <div class="eval-grid">
+            <div class="card">
+                <div style="text-align:center; margin-bottom:24px;">
+                    <div style="font-size:3rem; font-weight:700; color:var(--success)" id="eval-acc">85%</div>
+                    <div style="font-size:0.8rem; color:var(--text-dim); text-transform:uppercase;">Overall Accuracy</div>
+                </div>
+                <div class="sidebar-title">Thông tin chung</div>
+                <div id="score-dist">
+                    <!-- Stats injected here -->
+                </div>
+            </div>
+            <div class="card">
+                <div class="sidebar-title">Chi tiết câu hỏi kiểm thử</div>
+                <div id="eval-table" style="max-height:600px; overflow-y:auto;">
+                    <!-- Table injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        let diseases = [];
+        let ws = null;
+        let pipeTimer = null;
+        let pipeStart = null;
+        let deepMode = false;
+        let sessionId = null;
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.viewport').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            
+            const tab = document.getElementById('tab-' + tabName);
+            if (tab) tab.classList.add('active');
+            const nav = document.getElementById('nav-' + tabName);
+            if (nav) nav.classList.add('active');
+            
+            if (tabName === 'history') loadHistory();
+            if (tabName === 'qa') {
+                loadStats();
+                loadDiseases();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStats();
+            loadDiseases();
+            switchTab('qa');
+        });
+
+        async function loadStats() {
+            try {
+                const res = await fetch('/api/stats');
+                const data = await res.json();
+                if (data && !data.detail) {
+                    document.getElementById('st-diseases').innerText = data.diseases || 0;
+                    document.getElementById('st-chunks').innerText = data.chunks || 0;
+                    document.getElementById('st-protocols').innerText = data.protocols || 0;
+                    document.getElementById('st-hospitals').innerText = data.hospitals || 0;
+                }
+            } catch(e) { console.error(e); }
+        }
+
+        async function loadDiseases() {
+            try {
+                const res = await fetch('/api/diseases');
+                const data = await res.json();
+                diseases = data;
+                const sel = document.getElementById('disease-select');
+                sel.innerHTML = '<option value="">-- Chọn bệnh lý --</option>';
+                data.forEach(d => {
+                    const opt = document.createElement('option');
+                    opt.value = d.name;
+                    opt.textContent = `${d.name}${d.icd_code ? ' ('+d.icd_code+')' : ''}`;
+                    if(d.pdf_file) opt.dataset.pdf = d.pdf_file;
+                    sel.appendChild(opt);
+                });
+
+                const hRes = await fetch('/api/hospitals');
+                const hospitals = await hRes.json();
+                const hSel = document.getElementById('hospital-select');
+                hSel.innerHTML = '<option value="">-- Nguồn: BYT --</option>';
+                hospitals.forEach(h => {
+                    hSel.innerHTML += `<option value="${h.name}">BV: ${h.name}</option>`;
+                });
+            } catch(e) { console.error(e); }
+        }
+
+        function onDiseaseChange() {
+            const sel = document.getElementById('disease-select');
+            const opt = sel.selectedOptions[0];
+            if(opt && opt.dataset.pdf) {
+                const viewer = document.getElementById('pdf-viewer');
+                document.getElementById('pdf-placeholder').style.display = 'none';
+                viewer.src = `/pdfs/${opt.dataset.pdf}`;
+                viewer.style.display = 'block';
+            }
+        }
+
+        function appendMsg(content, type) {
+            const chat = document.getElementById('chat-area');
+            const bubble = document.createElement('div');
+            bubble.className = `bubble bubble-${type}`;
+            bubble.innerHTML = content;
+            chat.appendChild(bubble);
+            chat.scrollTop = chat.scrollHeight;
+            return bubble;
+        }
+
+        function renderSources(sources) {
+            const side = document.getElementById('source-sidebar');
+            side.innerHTML = '';
+            if (!sources || sources.length === 0) {
+                side.innerHTML = '<div style="color:var(--text-dim); text-align:center; padding-top:20px; font-size:0.8rem;">Chưa có trích dẫn</div>';
+                return;
+            }
+            sources.forEach((s, i) => {
+                const sc = document.createElement('div');
+                sc.className = 'source-card';
+                sc.innerHTML = `<h5>[${i+1}] ${s.title}</h5><div class="meta"><span>Trang ${s.page}</span><span>${s.hospital_name || 'BYT'}</span></div>`;
+                sc.onclick = () => viewSource(i);
+                side.appendChild(sc);
+            });
+        }
+
+        function toggleDeep() {
+            deepMode = !deepMode;
+            const el = document.getElementById('deep-toggle');
+            el.classList.toggle('active', deepMode);
+            document.getElementById('question').placeholder = deepMode
+                ? 'Deep Reasoning — AI sẽ suy luận nhiều bước...'
+                : 'Nhập câu hỏi tại đây...';
+        }
+
+        function renderTrace(trace, verification) {
+            if (!trace || trace.length === 0) return '';
+            const stepIcons = {
+                'preprocess': '🧠', 'disease_routing': '🎯', 'scoped_search': '🔍',
+                'sub_query_expansion': '🔄', 'graph_traversal': '🕸️', 'llm_rerank': '🏆',
+                'generate': '✍️', 'verify': '✅', 'reflect_retry': '🔁'
+            };
+            let stepsHtml = trace.map(t => {
+                const icon = stepIcons[t.step] || '▸';
+                const timeStr = t.duration_ms ? `${Math.round(t.duration_ms)}ms` : '';
+                let detailStr = '';
+                if (t.detail) {
+                    if (typeof t.detail === 'string') detailStr = t.detail;
+                    else {
+                        const parts = [];
+                        for (const [k, v] of Object.entries(t.detail)) {
+                            if (v !== null && v !== undefined && v !== '') parts.push(`<strong>${k}:</strong> ${typeof v === 'object' ? JSON.stringify(v) : v}`);
+                        }
+                        detailStr = parts.join(' · ');
+                    }
+                }
+                return `<div class="trace-step"><span class="trace-icon">${icon}</span><div class="trace-text">${detailStr || t.step}</div><span class="trace-time">${timeStr}</span></div>`;
+            }).join('');
+
+            let verifyHtml = '';
+            if (verification) {
+                const safe = verification.is_safe !== false;
+                const conf = verification.confidence ? `${Math.round(verification.confidence * 100)}%` : '';
+                verifyHtml = `<div class="verification-badge ${safe ? 'safe' : 'unsafe'}">${safe ? '✓ An toàn' : '⚠ Cần xem xét'} ${conf ? '· Confidence: ' + conf : ''}</div>`;
+                if (verification.issues && verification.issues.length > 0) {
+                    verifyHtml += `<div style="font-size:0.75rem; color:var(--warning); margin-top:4px;">${verification.issues.join(', ')}</div>`;
+                }
+            }
+
+            return `
+                <div class="trace-container">
+                    <div class="trace-header" onclick="this.nextElementSibling.classList.toggle('open')">
+                        <span>🧠 Reasoning Trace (${trace.length} steps)</span>
+                        <span style="font-size:0.7rem;">▼ Xem chi tiết</span>
+                    </div>
+                    <div class="trace-body">${stepsHtml}${verifyHtml}</div>
+                </div>`;
+        }
+
+        async function ask() {
+            const q = document.getElementById('question').value;
+            if(!q) return;
+            const hospital = document.getElementById('hospital-select').value;
+
+            appendMsg(q, 'user');
+            document.getElementById('question').value = '';
+            const thinkMsg = deepMode ? 'Đang suy luận sâu (ReAct)...' : 'Đang suy nghĩ...';
+            const typing = appendMsg(`<div style="opacity:0.6">${thinkMsg}</div>`, 'ai');
+
+            try {
+                const payload = {
+                    question: q,
+                    hospital_name: hospital || null,
+                    deep_reasoning: deepMode,
+                    session_id: sessionId,
+                };
+                const res = await fetch('/api/ask', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+
+                // Handle server errors
+                if (!res.ok) {
+                    const errorMsg = data.detail || "Đã xảy ra lỗi không xác định trên máy chủ.";
+                    typing.innerHTML = `<div style="color:#ef4444; font-weight:600;">⚠️ Lỗi máy chủ: ${errorMsg}</div>`;
+                    return;
+                }
+
+                // Save session ID for multi-turn
+                if (data.session_id) sessionId = data.session_id;
+
+                let answer = data.answer || "";
+                if (answer) {
+                    answer = answer.replace(/\[(\d+)\]/g, (m, p1) => {
+                        const idx = parseInt(p1) - 1;
+                        if (data.sources && data.sources[idx]) return `<a href="#" class="citation-link" onclick="viewSource(${idx}); return false;">[${p1}]</a>`;
+                        return m;
+                    });
+                } else {
+                    answer = "Xin lỗi, hệ thống không nhận được câu trả lời phản hồi từ Agent.";
+                }
+
+                let html = marked.parse(answer);
+
+                // Append reasoning trace if deep mode
+                if (data.trace && data.trace.length > 0) {
+                    html += renderTrace(data.trace, data.verification);
+                }
+
+                typing.innerHTML = html;
+                window.currentSources = data.sources;
+                renderSources(data.sources);
+            } catch(e) {
+                typing.innerHTML = "Lỗi: " + e.message;
+            }
+        }
+
+        function viewSource(idx) {
+            if (!window.currentSources || !window.currentSources[idx]) return;
+            const s = window.currentSources[idx];
+            const viewer = document.getElementById('pdf-viewer');
+            document.getElementById('pdf-placeholder').style.display='none';
+            viewer.src = `/pdfs/${s.pdf_file}#page=${s.page}`;
+            viewer.style.display='block';
+        }
+
+        async function startPipeline() {
+            const pdf = document.getElementById('pdf-file').files[0];
+            if(!pdf) { alert('Chọn file PDF!'); return; }
+            const fd = new FormData();
+            fd.append('file', pdf);
+            fd.append('hospital_name', document.getElementById('pipe-hospital').value);
+            fd.append('target_accuracy', document.getElementById('pipe-acc').value);
+            
+            document.getElementById('start-btn').disabled = true;
+            try {
+                const res = await fetch('/api/ingest', { method: 'POST', body: fd });
+                const data = await res.json();
+                connectWS(data.run_id);
+                startTimer();
+            } catch(e) { alert(e.message); document.getElementById('start-btn').disabled = false; }
+        }
+
+        function connectWS(runId) {
+            ws = new WebSocket(`${window.location.protocol==='https:'?'wss:':'ws:'}//${window.location.host}/ws/pipeline/${runId}`);
+            ws.onmessage = (e) => {
+                const data = JSON.parse(e.data);
+                const logs = document.getElementById('log-display');
+                if(data.type === 'log') {
+                    const div = document.createElement('div');
+                    div.className = 'log-entry';
+                    div.innerHTML = `<span class="log-time">[${data.timestamp.split('T')[1].split('.')[0]}]</span> ${data.message}`;
+                    logs.appendChild(div);
+                    logs.scrollTop = logs.scrollHeight;
+                } else if(data.type === 'complete') {
+                    document.getElementById('pipe-status').innerText = 'Hoàn thành';
+                    document.getElementById('start-btn').disabled = false;
+                    clearInterval(pipeTimer);
+                }
+            };
+        }
+
+        function startTimer() {
+            pipeStart = Date.now();
+            pipeTimer = setInterval(() => {
+                const sec = Math.floor((Date.now() - pipeStart)/1000);
+                document.getElementById('pipe-timer').innerText = `${Math.floor(sec/60).toString().padStart(2,'0')}:${(sec%60).toString().padStart(2,'0')}`;
+            }, 1000);
+        }
+
+        async function loadHistory() {
+            try {
+                const res = await fetch('/api/pipeline-runs');
+                const runs = await res.json();
+                const list = document.getElementById('history-list');
+                list.innerHTML = '';
+                runs.forEach(r => {
+                    const div = document.createElement('div');
+                    div.className = 'run-card';
+                    const acc = r.summary && r.summary.accuracy !== undefined ? Number(r.summary.accuracy).toFixed(1) : '0';
+                    div.innerHTML = `<h4>${r.name}</h4><div class="run-meta"><span>${r.start_time.split('T')[0]}</span><span class="acc-badge">${acc}%</span></div>`;
+                    div.onclick = () => viewEval(r.id, r);
+                    list.appendChild(div);
+                });
+            } catch(e) { console.error(e); }
+        }
+
+        async function viewEval(runId, cachedRun) {
+            document.getElementById('eval-dashboard').classList.add('active');
+            const table = document.getElementById('eval-table');
+            const distDiv = document.getElementById('score-dist');
+            table.innerHTML = 'Đang tải...';
+
+            try {
+                const res = await fetch(`/api/ingest/${runId}`);
+                const data = await res.json();
+                const result = data.result || {};
+                const summary = result.summary || result || {};
+
+                document.getElementById('eval-title').innerText = data.filename || runId;
+                const acc = summary.accuracy || summary.final_accuracy || 0;
+                document.getElementById('eval-acc').innerText = acc.toFixed(1) + '%';
+                
+                const stats = [
+                    ['Bệnh lý', summary.total_diseases || 0],
+                    ['Chunks', summary.total_chunks || 0],
+                    ['Câu hỏi test', summary.total_questions || 0]
+                ];
+                distDiv.innerHTML = stats.map(([l, v]) => `<div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border);"><span>${l}</span><span>${v}</span></div>`).join('');
+
+                const questions = result.questions || [];
+                if (questions.length > 0) {
+                    table.innerHTML = `
+                        <table style="width:100%; border-collapse:collapse; margin-top:10px;">
+                            ${questions.map((q, i) => `
+                                <tr style="border-bottom:1px solid var(--border);">
+                                    <td style="padding:10px;">${i+1}</td>
+                                    <td style="padding:10px; font-size:0.85rem;">${q.question}</td>
+                                    <td style="padding:10px;"><span class="acc-badge">${q.score}/${q.max_score||1}</span></td>
+                                </tr>`).join('')}
+                        </table>`;
+                } else {
+                    table.innerHTML = 'Không có dữ liệu câu hỏi.';
+                }
+            } catch(e) { table.innerHTML = 'Lỗi: ' + e.message; }
+        }
+
+        function closeEval() { document.getElementById('eval-dashboard').classList.remove('active'); }
+
+        async function startCrawler() {
+            const query = document.getElementById('crawl-query').value;
+            const limit = document.getElementById('crawl-limit').value;
+            const logs = document.getElementById('crawl-logs');
+            document.getElementById('crawl-status-container').style.display = 'block';
+            logs.innerHTML = 'Đang bắt đầu...';
+            try {
+                const res = await fetch('/api/crawl', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ query, limit: parseInt(limit) })
+                });
+                const data = await res.json();
+                logs.innerHTML += `\nĐã bắt đầu Crawler (PID: ${data.pid})`;
+            } catch(e) { logs.innerHTML += `\nLỗi: ${e.message}`; }
+        }
+    </script>
+</body>
+</html>

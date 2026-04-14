@@ -1,0 +1,219 @@
+{
+  "disease_name": "bệnh thận mạn",
+  "icd_code": "N18",
+  "protocol_name": "Phác đồ bệnh thận mạn - Bộ Y tế Việt Nam 2024",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": true,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "Erythropoietin",
+        "Furosemide",
+        "Calcium carbonate",
+        "Sevelamer"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "bệnh thận mạn",
+        "suy thận mạn",
+        "viêm cầu thận",
+        "bệnh thận đa nang"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "phù",
+        "mệt mỏi",
+        "thiếu máu",
+        "đau lưng"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "creatinine huyết thanh",
+        "đo lọc cầu thận (GFR)",
+        "điện giải đồ",
+        "định lượng protein niệu"
+      ]
+    },
+    {
+      "label": "Stage",
+      "examples": [
+        "giai đoạn 1",
+        "giai đoạn 3",
+        "giai đoạn cuối suy thận"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "lọc màng bụng",
+        "chạy thận nhân tạo",
+        "sinh thiết thận"
+      ]
+    },
+    {
+      "label": "Protocol",
+      "examples": [
+        "hướng dẫn chẩn đoán bệnh thận mạn",
+        "quản lý bệnh nhân lọc màng bụng",
+        "phác đồ điều trị suy thận mạn"
+      ]
+    },
+    {
+      "label": "RiskFactor",
+      "examples": [
+        "tăng huyết áp",
+        "đái tháo đường",
+        "tiền sử gia đình bệnh thận"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese internal medicine texts about chronic kidney disease (bệnh thận mạn). Extract all entities explicitly mentioned in the input text and return a valid JSON object with an array named \"entities\". Each entity should have a \"name\" (the exact text span) and a \"type\" (entity category). Only include entities explicitly mentioned in the text. The JSON format must be: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text from the section: {section_path}\n\nText:\n{chunk_content}\n\nExtract all explicitly mentioned entities of the following types with examples:\n- Drug: Erythropoietin, Furosemide, Calcium carbonate, Sevelamer\n- Disease: bệnh thận mạn, suy thận mạn, viêm cầu thận, bệnh thận đa nang\n- Symptom: phù, mệt mỏi, thiếu máu, đau lưng\n- LabTest: creatinine huyết thanh, đo lọc cầu thận (GFR), điện giải đồ, định lượng protein niệu\n- Stage: giai đoạn 1, giai đoạn 3, giai đoạn cuối suy thận\n- Procedure: lọc màng bụng, chạy thận nhân tạo, sinh thiết thận\n- Protocol: hướng dẫn chẩn đoán bệnh thận mạn, quản lý bệnh nhân lọc màng bụng, phác đồ điều trị suy thận mạn\n- RiskFactor: tăng huyết áp, đái tháo đường, tiền sử gia đình bệnh thận\n\nReturn a JSON object in the format: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the genitourinary system",
+      "properties": {
+        "code": "N00-N99"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Chronic kidney disease",
+      "properties": {
+        "code": "N18"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Bệnh thận mạn",
+      "properties": {
+        "aliases": "Chronic kidney disease, Bệnh thận mạn tính"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Lisinopril",
+      "properties": {
+        "ATC_code": "C09AA03"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Losartan",
+      "properties": {
+        "ATC_code": "C09CA01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Furosemide",
+      "properties": {
+        "ATC_code": "C03CA01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Erythropoietin",
+      "properties": {
+        "ATC_code": "B03XA01"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Calcium carbonate",
+      "properties": {
+        "ATC_code": "A12AA04"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Serum creatinine",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Glomerular filtration rate (GFR)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Urinalysis",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Blood urea nitrogen (BUN)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Serum potassium",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "CKD Stage 1",
+      "properties": {
+        "description": "GFR ≥ 90 ml/min/1.73 m² with kidney damage"
+      }
+    },
+    {
+      "label": "Stage",
+      "name": "CKD Stage 2",
+      "properties": {
+        "description": "GFR 60-89 ml/min/1.73 m² with kidney damage"
+      }
+    },
+    {
+      "label": "Stage",
+      "name": "CKD Stage 3",
+      "properties": {
+        "description": "GFR 30-59 ml/min/1.73 m²"
+      }
+    },
+    {
+      "label": "Stage",
+      "name": "CKD Stage 4",
+      "properties": {
+        "description": "GFR 15-29 ml/min/1.73 m²"
+      }
+    },
+    {
+      "label": "Stage",
+      "name": "CKD Stage 5",
+      "properties": {
+        "description": "GFR < 15 ml/min/1.73 m² or dialysis"
+      }
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the genitourinary system",
+      "to_label": "ICD_Category",
+      "to_name": "Chronic kidney disease",
+      "rel_type": "HAS_CATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Chronic kidney disease",
+      "to_label": "Disease",
+      "to_name": "Bệnh thận mạn",
+      "rel_type": "INSTANCE_OF"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}

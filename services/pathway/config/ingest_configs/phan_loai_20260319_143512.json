@@ -1,0 +1,252 @@
+{
+  "disease_name": "PHÂN LOẠI",
+  "icd_code": "H60-H95",
+  "protocol_name": "HD Chẩn đoán Điều trị TMH - PHÂN LOẠI",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": false,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Disease",
+      "examples": [
+        "Viêm tai giữa",
+        "Viêm mũi dị ứng",
+        "Viêm họng cấp"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "Đau tai",
+        "Chảy mũi",
+        "Khó thở"
+      ]
+    },
+    {
+      "label": "Drug",
+      "examples": [
+        "Paracetamol",
+        "Amoxicillin",
+        "Ibuprofen"
+      ]
+    },
+    {
+      "label": "ICD_Block",
+      "examples": [
+        "H60-H95"
+      ]
+    },
+    {
+      "label": "LabTest",
+      "examples": [
+        "Xét nghiệm dịch tai",
+        "Xét nghiệm máu",
+        "Nội soi mũi họng"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "Rửa mũi",
+        "Phẫu thuật tai",
+        "Nội soi họng"
+      ]
+    },
+    {
+      "label": "Treatment",
+      "examples": [
+        "Kháng sinh",
+        "Thuốc giảm đau",
+        "Điều trị triệu chứng"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are an NER model specialized in extracting medical entities from Vietnamese text related to diseases of the ear, nose, and throat. Your task is to identify and extract entities such as diseases, symptoms, drugs, ICD blocks, lab tests, procedures, and treatments. Return the results in valid JSON format with an 'entities' array containing objects with 'name' and 'type' fields. Only include entities EXPLICITLY mentioned in the text.",
+  "extraction_user_prompt_template": "Analyze the following text: {chunk_content} from section: {section_path}. Identify and extract the following entities: \n- Disease (e.g., Viêm tai giữa, Viêm mũi dị ứng, Viêm họng cấp) \n- Symptom (e.g., Đau tai, Chảy mũi, Khó thở) \n- Drug (e.g., Paracetamol, Amoxicillin, Ibuprofen) \n- ICD_Block (e.g., H60-H95) \n- LabTest (e.g., Xét nghiệm dịch tai, Xét nghiệm máu, Nội soi mũi họng) \n- Procedure (e.g., Rửa mũi, Phẫu thuật tai, Nội soi họng) \n- Treatment (e.g., Kháng sinh, Thuốc giảm đau, Điều trị triệu chứng) \nReturn JSON: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Diseases of the Ear, Nose, and Throat",
+      "properties": {
+        "code": "H60-H95"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Diseases of the Ear",
+      "properties": {
+        "code": "H60-H62"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Diseases of the Nose",
+      "properties": {
+        "code": "H65-H67"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "Diseases of the Throat",
+      "properties": {
+        "code": "J00-J99"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "Ear, Nose, and Throat Disorders",
+      "properties": {
+        "aliases": "Ear, Nose, and Throat Diseases"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Amoxicillin",
+      "properties": {
+        "code": "J01CA04"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Ciprofloxacin",
+      "properties": {
+        "code": "J01MA02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Phenylephrine",
+      "properties": {
+        "code": "R01AA02"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "Audiometry",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Nasal Swab",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Throat Culture",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Hearing Test",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Allergy Testing",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the Ear, Nose, and Throat",
+      "to_label": "ICD_Category",
+      "to_name": "Diseases of the Ear",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the Ear, Nose, and Throat",
+      "to_label": "ICD_Category",
+      "to_name": "Diseases of the Nose",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Diseases of the Ear, Nose, and Throat",
+      "to_label": "ICD_Category",
+      "to_name": "Diseases of the Throat",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Diseases of the Ear",
+      "to_label": "Disease",
+      "to_name": "Ear, Nose, and Throat Disorders",
+      "rel_type": "CLASSIFIED_AS"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Diseases of the Nose",
+      "to_label": "Disease",
+      "to_name": "Ear, Nose, and Throat Disorders",
+      "rel_type": "CLASSIFIED_AS"
+    },
+    {
+      "from_label": "ICD_Category",
+      "from_name": "Diseases of the Throat",
+      "to_label": "Disease",
+      "to_name": "Ear, Nose, and Throat Disorders",
+      "rel_type": "CLASSIFIED_AS"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ear, Nose, and Throat Disorders",
+      "to_label": "Drug",
+      "to_name": "Amoxicillin",
+      "rel_type": "HAS_TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ear, Nose, and Throat Disorders",
+      "to_label": "Drug",
+      "to_name": "Ciprofloxacin",
+      "rel_type": "HAS_TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ear, Nose, and Throat Disorders",
+      "to_label": "Drug",
+      "to_name": "Phenylephrine",
+      "rel_type": "HAS_TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ear, Nose, and Throat Disorders",
+      "to_label": "LabTest",
+      "to_name": "Audiometry",
+      "rel_type": "HAS_TEST"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ear, Nose, and Throat Disorders",
+      "to_label": "LabTest",
+      "to_name": "Nasal Swab",
+      "rel_type": "HAS_TEST"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ear, Nose, and Throat Disorders",
+      "to_label": "LabTest",
+      "to_name": "Throat Culture",
+      "rel_type": "HAS_TEST"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ear, Nose, and Throat Disorders",
+      "to_label": "LabTest",
+      "to_name": "Hearing Test",
+      "rel_type": "HAS_TEST"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "Ear, Nose, and Throat Disorders",
+      "to_label": "LabTest",
+      "to_name": "Allergy Testing",
+      "rel_type": "HAS_TEST"
+    }
+  ],
+  "needs_ocr_cleanup": true
+}

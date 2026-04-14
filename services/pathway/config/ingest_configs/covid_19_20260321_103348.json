@@ -1,0 +1,331 @@
+{
+  "disease_name": "COVID-19",
+  "icd_code": "U07.1",
+  "protocol_name": "Phác đồ COVID-19 - Bộ Y tế 2021",
+  "max_chunk_size": 3000,
+  "min_chunk_size": 100,
+  "skip_first_page": true,
+  "extra_heading_patterns": [],
+  "skip_pages": [],
+  "entity_types": [
+    {
+      "label": "Drug",
+      "examples": [
+        "thuốc hạ sốt",
+        "thuốc cân bằng điện giải",
+        "thuốc kháng vi rút",
+        "thuốc chống viêm corticosteroid",
+        "thuốc chống đông máu"
+      ]
+    },
+    {
+      "label": "Disease",
+      "examples": [
+        "COVID-19"
+      ]
+    },
+    {
+      "label": "Symptom",
+      "examples": [
+        "sốt",
+        "mệt mỏi",
+        "ho",
+        "khó thở"
+      ]
+    },
+    {
+      "label": "Procedure",
+      "examples": [
+        "kê đơn thuốc",
+        "quản lý người nhiễm COVID-19 tại nhà"
+      ]
+    },
+    {
+      "label": "Protocol",
+      "examples": [
+        "hướng dẫn tạm thời về danh mục thuốc điều trị ngoại trú",
+        "nguyên tắc kê đơn và sử dụng thuốc"
+      ]
+    },
+    {
+      "label": "ICD_Category",
+      "examples": [
+        "U07.1"
+      ]
+    }
+  ],
+  "extraction_system_prompt": "You are a medical Named Entity Recognition (NER) model specialized in Vietnamese internal medicine texts about COVID-19. Extract all entities explicitly mentioned in the input text and return a valid JSON object with an \"entities\" array. Each entity should have a \"name\" (the exact text span) and a \"type\" (one of the predefined entity types). Do not infer or add entities not explicitly present in the text. The JSON format must be: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}",
+  "extraction_user_prompt_template": "Analyze the following Vietnamese medical text from the section: {section_path}\n\nText to analyze:\n{chunk_content}\n\nExtract all entities explicitly mentioned in the text. The entity types and examples are:\n- Drug: thuốc hạ sốt, thuốc cân bằng điện giải, thuốc kháng vi rút, thuốc chống viêm corticosteroid, thuốc chống đông máu\n- Disease: COVID-19\n- Symptom: sốt, mệt mỏi, ho, khó thở\n- Procedure: kê đơn thuốc, quản lý người nhiễm COVID-19 tại nhà\n- Protocol: hướng dẫn tạm thời về danh mục thuốc điều trị ngoại trú, nguyên tắc kê đơn và sử dụng thuốc\n- ICD_Category: U07.1\n\nReturn a JSON object in the format: {\"entities\": [{\"name\": \"...\", \"type\": \"...\"}]}\nOnly include entities EXPLICITLY mentioned in the text.",
+  "ontology_nodes": [
+    {
+      "label": "ICD_Chapter",
+      "name": "Certain infectious and parasitic diseases",
+      "properties": {
+        "code": "Chapter I"
+      }
+    },
+    {
+      "label": "ICD_Block",
+      "name": "Other viral diseases",
+      "properties": {
+        "code": "B97-B98"
+      }
+    },
+    {
+      "label": "ICD_Category",
+      "name": "COVID-19",
+      "properties": {
+        "code": "U07.1"
+      }
+    },
+    {
+      "label": "Disease",
+      "name": "COVID-19",
+      "properties": {
+        "aliases": "Coronavirus Disease 2019; SARS-CoV-2 infection"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Remdesivir",
+      "properties": {
+        "ATC_code": "J05AB16"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Dexamethasone",
+      "properties": {
+        "ATC_code": "H02AB02"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Tocilizumab",
+      "properties": {
+        "ATC_code": "L04AC07"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Baricitinib",
+      "properties": {
+        "ATC_code": "L04AA37"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Casirivimab",
+      "properties": {
+        "ATC_code": "J06BD03"
+      }
+    },
+    {
+      "label": "Drug",
+      "name": "Imdevimab",
+      "properties": {
+        "ATC_code": "J06BD03"
+      }
+    },
+    {
+      "label": "LabTest",
+      "name": "RT-PCR for SARS-CoV-2",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Antigen test for SARS-CoV-2",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Complete blood count",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "C-reactive protein (CRP)",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "D-dimer",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Ferritin",
+      "properties": {}
+    },
+    {
+      "label": "LabTest",
+      "name": "Lactate dehydrogenase (LDH)",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "Mild COVID-19",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "Moderate COVID-19",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "Severe COVID-19",
+      "properties": {}
+    },
+    {
+      "label": "Stage",
+      "name": "Critical COVID-19",
+      "properties": {}
+    }
+  ],
+  "ontology_relationships": [
+    {
+      "from_label": "ICD_Chapter",
+      "from_name": "Certain infectious and parasitic diseases",
+      "to_label": "ICD_Block",
+      "to_name": "Other viral diseases",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "ICD_Block",
+      "from_name": "Other viral diseases",
+      "to_label": "ICD_Category",
+      "to_name": "COVID-19",
+      "rel_type": "HAS_SUBCATEGORY"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "ICD_Category",
+      "to_name": "COVID-19",
+      "rel_type": "CLASSIFIED_AS"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "Drug",
+      "to_name": "Remdesivir",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "Drug",
+      "to_name": "Dexamethasone",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "Drug",
+      "to_name": "Tocilizumab",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "Drug",
+      "to_name": "Baricitinib",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "Drug",
+      "to_name": "Casirivimab",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "Drug",
+      "to_name": "Imdevimab",
+      "rel_type": "TREATMENT"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "LabTest",
+      "to_name": "RT-PCR for SARS-CoV-2",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "LabTest",
+      "to_name": "Antigen test for SARS-CoV-2",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "LabTest",
+      "to_name": "Complete blood count",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "LabTest",
+      "to_name": "C-reactive protein (CRP)",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "LabTest",
+      "to_name": "D-dimer",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "LabTest",
+      "to_name": "Ferritin",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "LabTest",
+      "to_name": "Lactate dehydrogenase (LDH)",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "Stage",
+      "to_name": "Mild COVID-19",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "Stage",
+      "to_name": "Moderate COVID-19",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "Stage",
+      "to_name": "Severe COVID-19",
+      "rel_type": "INSTANCE_OF"
+    },
+    {
+      "from_label": "Disease",
+      "from_name": "COVID-19",
+      "to_label": "Stage",
+      "to_name": "Critical COVID-19",
+      "rel_type": "INSTANCE_OF"
+    }
+  ],
+  "source_type": "BYT",
+  "hospital_name": null,
+  "needs_ocr_cleanup": true
+}
