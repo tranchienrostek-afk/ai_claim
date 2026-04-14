@@ -1,0 +1,191 @@
+{
+  "batch_id": "intake_2026_03_24_001",
+  "submitted_by": "owner_name",
+  "submitted_at": "2026-03-24T10:00:00Z",
+  "diseases": [
+    {
+      "disease_id": "viem_phoi_cong_dong",
+      "disease_name_vi": "Viêm phổi cộng đồng",
+      "icd10_primary": "J18.9",
+      "icd10_secondary": ["J15", "J12"],
+      "specialty": "Noi",
+      "clinical_context": {
+        "core_symptoms": ["sot", "ho", "kho tho"],
+        "red_flags": ["suy ho hap", "SpO2 thap"],
+        "suspected_vs_final_logic": "Can danh gia tai thoi diem chi dinh, khong chi dua vao ket qua cuoi."
+      },
+      "guideline_sources": [
+        {
+          "source_type": "BYT",
+          "source_name": "Huong dan chan doan dieu tri viem phoi",
+          "location": "05_reference/phac_do/...pdf#page=12"
+        }
+      ],
+      "expected_services": [
+        {
+          "service_code": "IMG-XRY-001",
+          "service_name_raw": "Chup X-quang nguc thang",
+          "role": "diagnostic",
+          "evidence": "guideline",
+          "priority": "core"
+        },
+        {
+          "service_code": "LAB-HEM-001",
+          "service_name_raw": "Cong thuc mau",
+          "role": "monitoring",
+          "evidence": "guideline",
+          "priority": "core"
+        }
+      ]
+    }
+  ],
+  "services": [
+    {
+      "service_code": "LAB-BIO-999",
+      "canonical_name": "Dinh luong marker X [Mau]",
+      "category_code": "LAB-BIO",
+      "category_name": "Sinh hoa",
+      "variants": [
+        "Dinh luong marker X [Mau]",
+        "XN marker X",
+        "Marker X dinh luong"
+      ],
+      "service_nature": {
+        "specimen": "mau",
+        "modality": "lab_test",
+        "unit": "U/L"
+      },
+      "clinical_definition": {
+        "description": "Xet nghiem danh gia marker X trong mau.",
+        "clinical_indications": ["Danh gia benh Y", "Theo doi dieu tri Z"],
+        "contraindications": [],
+        "pre_conditions": ["Nhan an 8 gio"]
+      },
+      "reference_ranges": [
+        {
+          "population": "adult",
+          "lower": 10,
+          "upper": 40,
+          "unit": "U/L",
+          "source": "textbook_xyz"
+        }
+      ],
+      "interpretation": {
+        "increased_meaning": ["Nghi benh Y"],
+        "decreased_meaning": ["Co the lien quan benh W"],
+        "critical_values": {
+          "high": 200,
+          "note": "Can danh gia cap cuu neu >200."
+        }
+      },
+      "related_conditions": [
+        {
+          "icd10": "J18.9",
+          "relevance": "secondary",
+          "evidence": "guideline",
+          "score": 0.82
+        }
+      ],
+      "billing_context": {
+        "bhyt_code": "",
+        "bhyt_price_vnd": null,
+        "typical_price_range_vnd": {
+          "min": 50000,
+          "max": 150000
+        }
+      },
+      "contract_matching_features": {
+        "service_role": "monitoring",
+        "result_type": "quantitative",
+        "care_setting": ["outpatient", "inpatient"]
+      },
+      "audit": {
+        "created_by": "owner_name",
+        "reviewed_by": "medical_reviewer",
+        "approved_by": "ops_owner",
+        "created_at": "2026-03-24T10:00:00Z",
+        "approved_at": "2026-03-24T11:00:00Z",
+        "version": "1.0",
+        "change_note": "New service onboarding",
+        "source_documents": [
+          "05_reference/sach_y_khoa/...pdf#page=100"
+        ],
+        "confidence_overall": 0.86
+      }
+    }
+  ],
+  "contract_corpus_updates": [
+    {
+      "contract_id": "FPT-NT 2026",
+      "insurer": "FPT",
+      "product": "FPT-NT 2026",
+      "effective_from": "2026-01-01",
+      "effective_to": null,
+      "conflict_resolution_policy": "specific_clause_overrides_general_clause",
+      "clause_library": [
+        {
+          "clause_id": "FPTNT2026-C001",
+          "clause_type": "coverage",
+          "title": "Chi tra neu can thiet y khoa",
+          "raw_text": "Chi tra cac chi phi can lam sang neu can thiet ve y khoa.",
+          "normalized_rule": "pay_if_medically_necessary",
+          "priority": 100,
+          "applies_to": {
+            "service_categories": ["LAB-*", "IMG-*", "END-*", "FUN-*", "PAT-*", "PRO-*"],
+            "service_code_patterns": [],
+            "clinical_roles": ["screening", "diagnostic", "confirmatory", "monitoring", "rule_out"],
+            "care_setting": ["outpatient", "inpatient"],
+            "result_dependency": "none",
+            "requires_preauth": false,
+            "requires_documents": []
+          },
+          "decision_effect": "allow",
+          "financial_terms": {
+            "copay_percent": 0,
+            "sublimit_amount_vnd": null,
+            "annual_limit_vnd": null
+          },
+          "source_anchor": {
+            "file": "06_insurance/.../FPT NT 2026.xlsx",
+            "sheet": "Quyen loi",
+            "page": null,
+            "clause_ref": "Section 1"
+          }
+        },
+        {
+          "clause_id": "FPTNT2026-C002",
+          "clause_type": "exclusion",
+          "title": "Khong chi tra cho tam soat don thuan",
+          "raw_text": "Khong chi tra cho xet nghiem tam soat neu khong co chi dinh lam sang.",
+          "normalized_rule": "screening_not_covered_without_clinical_indication",
+          "priority": 200,
+          "applies_to": {
+            "service_categories": ["LAB-*", "IMG-*"],
+            "service_code_patterns": [],
+            "clinical_roles": ["screening"],
+            "care_setting": ["outpatient", "inpatient"],
+            "result_dependency": "none",
+            "requires_preauth": false,
+            "requires_documents": ["clinical_indication"]
+          },
+          "decision_effect": "deny",
+          "financial_terms": {
+            "copay_percent": 0,
+            "sublimit_amount_vnd": null,
+            "annual_limit_vnd": null
+          },
+          "source_anchor": {
+            "file": "06_insurance/.../FPT NT 2026.xlsx",
+            "sheet": "Dieu kien",
+            "page": null,
+            "clause_ref": "Section 2"
+          }
+        }
+      ],
+      "taxonomy_bindings": [
+        "diagnostic_workup_allowed",
+        "screening_not_covered"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "cau_chuyen_y_khoa": {
+    "tieu_de": "Cơn sốt cao đột ngột và những chấm mủ trắng đáng ngờ",
+    "benh_nhan": {
+      "gioi_tinh": "Nam",
+      "tuoi": 12
+    },
+    "benh_su_va_trieu_chung": {
+      "trieu_chung_co_nang": [
+        "Sốt cao đột ngột 39.5 độ C, kèm theo ớn lạnh và mệt mỏi.",
+        "Đau rát họng dữ dội, đặc biệt nuốt đau nhói lan lên tai.",
+        "Ho khan, ngạt mũi và chảy nước mũi nhầy đục.",
+        "Chán ăn, mệt mỏi rã rời."
+      ],
+      "tien_su": "Đi dã ngoại gặp thời tiết lạnh đột ngột 2 ngày trước."
+    },
+    "nhan_dinh_ban_dau": "Bệnh nhân có biểu hiện của viêm mũi họng cấp tính rầm rộ. Khám họng thấy niêm mạc họng đỏ rực, hai amiđan sưng to, sung huyết và xuất hiện các chấm mủ trắng trên bề mặt, kèm hạch góc hàm sưng đau nhẹ. Bác sĩ nhận định cần phải phân biệt rõ đây là viêm do virus thông thường hay đã bội nhiễm vi khuẩn (đặc biệt là liên cầu khuẩn tan huyết nhóm A) để có phác đồ kháng sinh kịp thời, phòng ngừa biến chứng viêm cầu thận, thấp khớp cấp.",
+    "chi_dinh_can_lam_sang": {
+      "xet_nghiem_loai_tru_va_danh_gia_chung": [
+        {
+          "ten_xet_nghiem": "Tổng phân tích tế bào máu (CBC)",
+          "muc_dich": "Đánh giá tình trạng nhiễm trùng. Nếu bạch cầu giảm và nhiều lympho là nhiễm virus; nếu bạch cầu tăng cao, chủ yếu đa nhân trung tính là nhiễm vi khuẩn.",
+          "ket_qua": "Số lượng bạch cầu tăng cao, bạch cầu đa nhân trung tính chiếm ưu thế."
+        },
+        {
+          "ten_xet_nghiem": "Phản ứng ASLO trong máu",
+          "muc_dich": "Tìm kháng thể chống lại liên cầu khuẩn tan huyết beta nhóm A.",
+          "ket_qua": "Chỉ số ASLO tăng cao > 500 đơn vị."
+        }
+      ],
+      "xet_nghiem_truc_tiep_tim_ra_benh": [
+        {
+          "ten_xet_nghiem": "Nội soi tai mũi họng",
+          "muc_dich": "Quan sát trực tiếp, phóng đại tổn thương niêm mạc vùng mũi, họng và amidan.",
+          "ket_qua": "Niêm mạc họng đỏ rực, xuất tiết. Hai amiđan sưng to có lớp bựa trắng, mủ trắng ở miệng các hốc. Niêm mạc mũi sung huyết, xuất tiết nhầy đục."
+        },
+        {
+          "ten_xet_nghiem": "Phết dịch họng nuôi cấy vi khuẩn và làm kháng sinh đồ",
+          "muc_dich": "Định danh chính xác loại vi khuẩn gây bệnh để điều chỉnh kháng sinh phù hợp.",
+          "ket_qua": "Dương tính với Liên cầu khuẩn tan huyết beta nhóm A (Streptococcus pyogenes)."
+        }
+      ]
+    },
+    "chan_doan_cuoi_cung": "Viêm mũi họng cấp tính có mủ do Liên cầu khuẩn tan huyết beta nhóm A."
+  },
+  "du_lieu_labeling_mau": {
+    "case_level": {
+      "request_id": "tc_259",
+      "selected_profile_id": "prof_259",
+      "testcase_title": "TC259_AcuteNasopharyngitis_StrepA",
+      "main_disease_name_vi": "Viêm mũi họng cấp tính",
+      "primary_icd10": "<chua_co_ICD>",
+      "secondary_icd10_list_pipe": "",
+      "specialty": "Họng thanh quản",
+      "message_hash_id": "msg_259",
+      "claim_id_or_sohoso": "claim_259",
+      "why_this_case_was_selected": "Ca bệnh minh họa một trường hợp viêm mũi họng cấp tính do vi khuẩn có triệu chứng rầm rộ, cần làm các xét nghiệm đặc hiệu (cấy dịch họng, ASLO) để tìm liên cầu khuẩn, qua đó phòng ngừa biến chứng xa như thấp khớp, viêm cầu thận.",
+      "claim_raw_json": "claim_259.json",
+      "icd_source": "phac_do_tmh_2015",
+      "signs_history_source": "phac_do_tmh_2015",
+      "lab_result_source": "phac_do_tmh_2015",
+      "reviewer_or_insurer_note_source": "note_259",
+      "contract_or_plan_source": "plan_259",
+      "chief_complaint": "Sốt cao đột ngột, nuốt đau nhói lên tai và ngạt mũi.",
+      "initial_signs_pipe": "Sốt 39.5 độ C | Niêm mạc họng đỏ rực | Hai amiđan sưng to có chấm mủ trắng | Hạch góc hàm sưng đau",
+      "medical_history_pipe": "Gặp lạnh đột ngột",
+      "initial_clinical_question": "Bác sĩ cần xác định bệnh nhân bị viêm mũi họng do virus hay do vi khuẩn (đặc biệt là liên cầu khuẩn tan huyết nhóm A) để kê kháng sinh đặc trị.",
+      "total_lines": 4,
+      "target_lines_for_labeling": 4,
+      "panel_services_present_pipe": "Nội soi tai mũi họng | Tổng phân tích tế bào máu | Phản ứng ASLO | Phết dịch họng nuôi cấy vi khuẩn",
+      "delivery_deadline": "2026-03-28",
+      "employee_name": "bs_demo_6",
+      "review_status": "submitted",
+      "manager_note": "Testcase chuẩn chỉ về cách chẩn đoán phân biệt tác nhân gây viêm mũi họng cấp."
+    },
+    "service_lines": [
+      {
+        "line_no": 1,
+        "service_name_raw": "Nội soi tai mũi họng",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Chỉ định khám thực thể cơ bản và trực tiếp nhất. Giúp bác sĩ quan sát rõ niêm mạc họng đỏ rực, tình trạng sung huyết, xuất tiết ở mũi và các chấm mủ trắng trên bề mặt amiđan, từ đó định hướng nguyên nhân do vi khuẩn.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Chỉ định hình ảnh trực tiếp đánh giá tổn thương viêm."
+      },
+      {
+        "line_no": 2,
+        "service_name_raw": "Tổng phân tích tế bào máu (CBC)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Trong viêm mũi họng cấp, xét nghiệm công thức máu có giá trị phân biệt nguyên nhân: nếu bạch cầu giảm và nhiều lympho là nhiễm virus; nếu bạch cầu tăng cao, chủ yếu đa nhân trung tính là do nhiễm vi khuẩn hoặc bội nhiễm vi khuẩn.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm cơ bản đánh giá tình trạng nhiễm trùng toàn thân."
+      },
+      {
+        "line_no": 3,
+        "service_name_raw": "Phết dịch họng nuôi cấy vi khuẩn làm kháng sinh đồ",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Khi viêm mũi họng có xu hướng nặng, sốt cao, có mủ trắng ở amidan, việc phết dịch họng nuôi cấy vi khuẩn là chỉ định bắt buộc để tìm chính xác loại vi khuẩn gây bệnh (liên cầu, tụ cầu, v.v.) và làm kháng sinh đồ điều trị cho hiệu quả.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm vi sinh tìm nguyên nhân trực tiếp."
+      },
+      {
+        "line_no": 4,
+        "service_name_raw": "Phản ứng ASLO",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Chỉ định cần thiết nhằm tìm kháng thể trong máu đối với liên cầu khuẩn tan huyết beta nhóm A, giúp khẳng định tác nhân gây bệnh để có kế hoạch điều trị triệt để, phòng ngừa biến chứng nguy hiểm như thấp khớp cấp, viêm cầu thận.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm miễn dịch đặc hiệu với liên cầu khuẩn."
+      }
+    ]
+  }
+}

@@ -1,0 +1,1005 @@
+{
+  "total": 99,
+  "correct": 80,
+  "accuracy_pct": 80.81,
+  "confusion_matrix": {
+    "tp": 75,
+    "fp": 18,
+    "tn": 5,
+    "fn": 1
+  },
+  "precision_pct": 80.65,
+  "recall_pct": 98.68,
+  "results": [
+    {
+      "stt": 1,
+      "service": "Nội soi tai mũi họng [ PTM 1-070 - Phòng Khám TMH",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 2,
+      "service": "Chụp X-quang cột sống cổ thẳng nghiêng [số hóa 1 phim]",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 3,
+      "service": "Siêu âm tuyến giáp",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve_with_flag",
+      "confidence": 0.659,
+      "explanation": "Clinical=True (Matched service-disease matrix: IMG-USG-004 ↔ K21 (Bệnh trào ngược dạ dày- thực quản) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 4,
+      "service": "Điện tim thường tại giường",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 5,
+      "service": "Thời gian máu chảy phương pháp Duke",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 6,
+      "service": "Thời gian prothrombil (PT: Prothrombin Time), (Các tên khác: TQ; Tỷ lệ Prothrombin) bằng máy tự động",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.739,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-HEM-002 ↔ K01 (Răng mọc kẹt và răng mọc ngầm) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 7,
+      "service": "Thời gian thromboplastin một phần hoạt hóa (APTT: Activated Partial Thromboplastin Time), (tên khác: TCK) bằng máy tự động",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.683,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-HEM-004 ↔ K01 (Răng mọc kẹt và răng mọc ngầm) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 8,
+      "service": "Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-HEM-001 ↔ K01 (Răng mọc kẹt và răng mọc ngầm) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 9,
+      "service": "Chụp Xquang răng toàn cảnh (số hóa 1 phim)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 10,
+      "service": "Thời gian prothrombin (PT: Prothrombin Time), (Các tên khác: TQ; Tỷ lệ Prothrombin) bằng máy tự động",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.739,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-HEM-002 ↔ K01 (Răng mọc kẹt và răng mọc ngầm) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 11,
+      "service": "Thời gian thrombin (TT: Thrombin Time) bằng mảy tự động",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 12,
+      "service": "Thời gian thromboplastin một phần hoạt hoá (APTT: Activated Partial Thromboplastin Time), (Tên khác: TCK) bằng máy tự động",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.683,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-HEM-004 ↔ K01 (Răng mọc kẹt và răng mọc ngầm) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 13,
+      "service": "Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-HEM-001 ↔ K01 (Răng mọc kẹt và răng mọc ngầm) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 14,
+      "service": "Nội soi can thiệp - làm Clo test chân đoán nhiễm H.Pylori",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.603,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-006 ↔ K29 (Viêm dạ dày và tá tràng) via statistical); Contract=True (unknown_contract_fallback); Anomalies=duplicate_service."
+    },
+    {
+      "stt": 15,
+      "service": "Chẩn đoán hình ảnh",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=duplicate_service."
+    },
+    {
+      "stt": 16,
+      "service": "Đo hoạt độ ALT (GPT) [Máu]",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve_with_flag",
+      "confidence": 0.715,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-BIO-002 ↔ M10 (Gút (thống phong)) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_extreme,duplicate_service."
+    },
+    {
+      "stt": 17,
+      "service": "Đo hoạt độ AST (GOT) [Máu]",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve_with_flag",
+      "confidence": 0.715,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-BIO-003 ↔ M10 (Gút (thống phong)) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_extreme,duplicate_service."
+    },
+    {
+      "stt": 18,
+      "service": "Định lượng Acid Uric [Máu]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.715,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-BIO-010 ↔ M10 (Gút (thống phong)) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier,duplicate_service."
+    },
+    {
+      "stt": 19,
+      "service": "Nội soi tai",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=duplicate_service."
+    },
+    {
+      "stt": 20,
+      "service": "Dengue virus NS1Ag test nhanh",
+      "human": "REJECT",
+      "ours": "REJECT",
+      "match": true,
+      "decision": "deny",
+      "confidence": 0.774,
+      "explanation": "Clinical=False (Pathogen-specific test lacks corresponding viral clinical context.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 21,
+      "service": "Siêu âm ổ bụng (gan mật, tụy, lách, thận, bàng quang)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 22,
+      "service": "Trứng giun, sán soi tươi",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 23,
+      "service": "Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 24,
+      "service": "Định lượng CRP (C-Reactive Protein)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 25,
+      "service": "Nội soi tai mũi họng [Gồm tiền khám TMH]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 26,
+      "service": "HBsAb định lượng [máu]",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 27,
+      "service": "HBsAg miễn dịch tự động [máu]",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 28,
+      "service": "HCV Ab miễn dịch tự động [máu]",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 29,
+      "service": "Nội soi Họng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.785,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-010 ↔ K21 (Bệnh trào ngược dạ dày-thực quản) via hybrid); Contract=True (unknown_contract_fallback); Anomalies=price_extreme."
+    },
+    {
+      "stt": 30,
+      "service": "Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-HEM-001 ↔ K21.9 (Bệnh trào ngược dạ dày- thực quản không có viêm thực quản) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 31,
+      "service": "Xét nghiệm H.Pylori hơi thở 14C",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 32,
+      "service": "Đo hoạt độ ALT (GPT) [Máu]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-BIO-002 ↔ K21.9 (Bệnh trào ngược dạ dày- thực quản không có viêm thực quản) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 33,
+      "service": "Đo hoạt độ AST (GOT) [Máu]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-BIO-003 ↔ K21.9 (Bệnh trào ngược dạ dày- thực quản không có viêm thực quản) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 34,
+      "service": "Đo hoạt độ GGT (Gama Glutamyl Transferase) [Máu]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-BIO-009 ↔ K21 (Bệnh trào ngược dạ dày- thực quản) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 35,
+      "service": "Định lượng Creatinin (máu)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.739,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-BIO-001 ↔ K21.9 (Bệnh trào ngược dạ dày- thực quản không có viêm thực quản) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 36,
+      "service": "Định lượng Urê máu [Máu]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 37,
+      "service": "XN Dengue IgG / IgM",
+      "human": "REJECT",
+      "ours": "REJECT",
+      "match": true,
+      "decision": "deny",
+      "confidence": 0.774,
+      "explanation": "Clinical=False (Pathogen-specific test lacks corresponding viral clinical context.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 38,
+      "service": "XN Tổng phân tích tế bào máu bằng máy đếm laser",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=duplicate_service."
+    },
+    {
+      "stt": 39,
+      "service": "Xn CRP Latex",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=duplicate_service."
+    },
+    {
+      "stt": 40,
+      "service": "Xn Dengue NS1Ag",
+      "human": "REJECT",
+      "ours": "REJECT",
+      "match": true,
+      "decision": "deny",
+      "confidence": 0.694,
+      "explanation": "Clinical=False (Pathogen-specific test lacks corresponding viral clinical context.); Contract=True (unknown_contract_fallback); Anomalies=duplicate_service."
+    },
+    {
+      "stt": 41,
+      "service": "Siêu âm ổ bụng (gan mật, tụy, lách, thận, bàng quang)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 42,
+      "service": "Nội soi tai mũi họng + EAR NOSE THROIT HOSPITAL WEMe",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 43,
+      "service": "Chụp Xquang ngực thẳng [tim phối thẳng]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 44,
+      "service": "Nội soi tai mũi họng [Nội soi họng]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 45,
+      "service": "Nội soi tai mũi họng [mũi]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-001 ↔ J01 (Viêm mũi xoang cấp tính) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 46,
+      "service": "Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser) [24TS]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 47,
+      "service": "Định lượng CRP",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.603,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-IMM-001 ↔ J01.9 (Viêm mũi xoang cấp, không đặc hiệu) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 48,
+      "service": "Đường máu mao mạch tại phòng khám",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.603,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-BIO-423 ↔ E11 (Bệnh đái tháo đường type 2) via statistical); Contract=True (unknown_contract_fallback); Anomalies=duplicate_service."
+    },
+    {
+      "stt": 49,
+      "service": "Nội soi tai mũi họng | KNT10 - Phòng 25 - NS TMH",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.715,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-001 ↔ J06.0 (Viêm họng- thanh quản cấp) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 50,
+      "service": "Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 51,
+      "service": "Virus test nhanh [3 loại kháng nguyên Cúm A, Cúm B và RSV trong bệnh phẩm đường hô hấp]",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-MIC-005 ↔ J00 (Viêm mũi họng cấp [cảm thường]) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 52,
+      "service": "Định lượng CRP (C-Reactive Protein)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-IMM-002 ↔ J00 (Viêm mũi họng cấp [cảm thường]) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 53,
+      "service": "Nội soi Họng ống cứng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 54,
+      "service": "Khám và nội soi TMH",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 55,
+      "service": "Tim phổi thẳng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 56,
+      "service": "Nội soi tai mũi họng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-001 ↔ J31.1 (Viêm mũi họng mạn tính) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 57,
+      "service": "Chụp X-quang ngực thẳng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 58,
+      "service": "Nội soi tai mũi họng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-001 ↔ J02 (Viêm họng cấp) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 59,
+      "service": "Nội soi Tai Mũi Họng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.715,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-001 ↔ J01 (Viêm mũi xoang cấp tính) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 60,
+      "service": "Influenza virus A, B test nhanh",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.603,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-MIC-001 ↔ R50 (Sốt không rõ nguyên nhân và khác) via statistical); Contract=True (unknown_contract_fallback); Anomalies=duplicate_service."
+    },
+    {
+      "stt": 61,
+      "service": "X Quang Tim Phổi thẳng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 62,
+      "service": "Chẩn đoán hình ảnh; Khám bệnh; Thủ thuật, phẫu thuật",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 63,
+      "service": "Nội soi tai",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_extreme."
+    },
+    {
+      "stt": 64,
+      "service": "EV71 IgM/IgG test nhanh [Test nhanh EV71]",
+      "human": "REJECT",
+      "ours": "REJECT",
+      "match": true,
+      "decision": "deny",
+      "confidence": 0.774,
+      "explanation": "Clinical=False (Pathogen-specific test lacks corresponding viral clinical context.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 65,
+      "service": "Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-HEM-001 ↔ J02 (Viêm họng cấp) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 66,
+      "service": "Virus test nhanh [3 loại kháng nguyên Cúm A, Cúm B và RSV trong bệnh phẩm đường hô hấp]",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve",
+      "confidence": 0.683,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-MIC-005 ↔ J02 (Viêm họng cấp) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 67,
+      "service": "Virus test nhanh [Virus test nhanh Adeno (trong dịch hô hấp)]",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve",
+      "confidence": 0.683,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-MIC-009 ↔ J02 (Viêm họng cấp) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 68,
+      "service": "Định lượng CRP (C-Reactive Protein)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-IMM-002 ↔ J02 (Viêm họng cấp) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 69,
+      "service": "Nội soi tai mũi họng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.715,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-001 ↔ J01 (Viêm mũi xoang cấp tính) via statistical); Contract=True (unknown_contract_fallback); Anomalies=duplicate_service."
+    },
+    {
+      "stt": 70,
+      "service": "Đo nhĩ lượng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_extreme,duplicate_service."
+    },
+    {
+      "stt": 71,
+      "service": "Đo thính lực đơn âm",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_extreme,duplicate_service."
+    },
+    {
+      "stt": 72,
+      "service": "Chụp X-quang ngực thẳng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 73,
+      "service": "EV71 IgM test nhanh",
+      "human": "PAYMENT",
+      "ours": "REJECT",
+      "match": false,
+      "decision": "deny",
+      "confidence": 0.694,
+      "explanation": "Clinical=False (Pathogen-specific test lacks corresponding viral clinical context.); Contract=True (unknown_contract_fallback); Anomalies=duplicate_service."
+    },
+    {
+      "stt": 74,
+      "service": "Nội soi tai mũi họng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.715,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-001 ↔ J00 (Viêm mũi họng cấp [cảm thường]) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier,duplicate_service."
+    },
+    {
+      "stt": 75,
+      "service": "Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_outlier,duplicate_service."
+    },
+    {
+      "stt": 76,
+      "service": "Virus test nhanh (RSV Ag)",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-MIC-007 ↔ J00 (Viêm mũi họng cấp [cảm thường]) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 77,
+      "service": "Định lượng CRP",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.715,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-IMM-001 ↔ J00 (Viêm mũi họng cấp [cảm thường]) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier,duplicate_service."
+    },
+    {
+      "stt": 78,
+      "service": "Nội soi tai mũi họng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.715,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-001 ↔ J00 (Viêm mũi họng cấp [cảm thường]) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 79,
+      "service": "EV71 IgM test nhanh",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.603,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-IMM-011 ↔ B08.4 (Viêm họng có phỏng nước do vi rút Entero có phát ban [Bệnh Tay chân miệng]) via statistical); Contract=True (unknown_contract_fallback); Anomalies=duplicate_service."
+    },
+    {
+      "stt": 80,
+      "service": "Nội soi tai mũi họng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.603,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-001 ↔ B08.4 (Viêm họng có phỏng nước do vi rút Entero có phát ban [Bệnh Tay chân miệng]) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier,duplicate_service."
+    },
+    {
+      "stt": 81,
+      "service": "Tổng phân tích tế bào máu ngoại vi",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 82,
+      "service": "Định lượng CRP",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.659,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-IMM-001 ↔ B08.4 (Viêm họng có phỏng nước do vi rút Entero có phát ban [Bệnh Tay chân miệng]) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier,duplicate_service."
+    },
+    {
+      "stt": 83,
+      "service": "Khám tai mũi họng với nội soi (có hẹn/ không hẹn)",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_extreme,duplicate_service."
+    },
+    {
+      "stt": 84,
+      "service": "Virus test nhanh (SARS-COV-2 /FluA/FluB+ADV/RSV/SA)",
+      "human": "REJECT",
+      "ours": "REJECT",
+      "match": true,
+      "decision": "deny",
+      "confidence": 0.694,
+      "explanation": "Clinical=False (Pathogen-specific test lacks corresponding viral clinical context.); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 85,
+      "service": "AFB trực tiếp nhuộm Ziehl-Neelsen [D]",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 86,
+      "service": "Chụp Xquang ngực thẳng [D]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.659,
+      "explanation": "Clinical=True (Matched service-disease matrix: IMG-XRY-002 ↔ J18.0 (Viêm phế quản phổi, không đặc hiệu) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 87,
+      "service": "Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser) [C]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-HEM-001 ↔ J18.0 (Viêm phế quản phổi, không đặc hiệu) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 88,
+      "service": "Điện giải đồ (Na, K, CI) [Máu] [C]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.659,
+      "explanation": "Clinical=True (Matched service-disease matrix: LAB-BIO-006 ↔ J18.0 (Viêm phế quản phổi, không đặc hiệu) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 89,
+      "service": "Đo chức năng hô hấp [gối] [D]",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 90,
+      "service": "Định lượng Calci ion hóa [Máu] [C]",
+      "human": "REJECT",
+      "ours": "PAYMENT",
+      "match": false,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 91,
+      "service": "Nội soi tai mũi họng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.715,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-001 ↔ J01 (Viêm mũi xoang cấp tính) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier,duplicate_service."
+    },
+    {
+      "stt": 92,
+      "service": "Chụp X-quang số hóa 1 phim: Tim phổi thẳng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.795,
+      "explanation": "Clinical=True (Matched service-disease matrix: IMG-XRY-013 ↔ J20 (Viêm phế quản cấp) via statistical); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 93,
+      "service": "Nội soi họng",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_extreme."
+    },
+    {
+      "stt": 94,
+      "service": "Nội soi mũi",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_extreme."
+    },
+    {
+      "stt": 95,
+      "service": "Nội soi tai mũi họng [Gồm tiền khám TMH]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.603,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-019 ↔ J00 (Viêm mũi họng cấp [cảm thường]) via statistical); Contract=True (unknown_contract_fallback); Anomalies=price_outlier."
+    },
+    {
+      "stt": 96,
+      "service": "Chụp X-quang ngực thăng [Trái - Phối thẳng và nghiêng] | P.102 (Tầng 1) - XQuang",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.505,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=price_extreme."
+    },
+    {
+      "stt": 97,
+      "service": "Nội soi tai mũi họng [Khám Miễn phí chuyển NSTMH]",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 98,
+      "service": "Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser) | Phòng 105 - Xét Nghiệm 1",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve",
+      "confidence": 0.585,
+      "explanation": "Clinical=True (No direct matrix evidence; fallback to cautious approve in outpatient diagnostic workflow.); Contract=True (unknown_contract_fallback); Anomalies=none."
+    },
+    {
+      "stt": 99,
+      "service": "Nội soi mũi",
+      "human": "PAYMENT",
+      "ours": "PAYMENT",
+      "match": true,
+      "decision": "approve_with_flag",
+      "confidence": 0.715,
+      "explanation": "Clinical=True (Matched service-disease matrix: END-ENS-002 ↔ J01 (Viêm mũi xoang cấp tính) via statistical); Contract=True (unknown_contract_fallback); Anomalies=duplicate_service."
+    }
+  ]
+}

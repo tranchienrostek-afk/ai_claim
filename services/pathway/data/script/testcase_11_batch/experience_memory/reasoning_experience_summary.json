@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-03-29T20:29:51.584683+07:00",
+  "run_experience_count": 12,
+  "memory_append": {
+    "appended": 0,
+    "total": 48
+  },
+  "memory_promotion": {
+    "source_episodic_count": 12,
+    "generated_count": 24,
+    "appended": 0,
+    "total": 48
+  },
+  "memory_normalization": {
+    "normalized_rows": 48,
+    "memory_path": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\experience_memory\\reasoning_experience_memory.jsonl"
+  },
+  "memory_stats": {
+    "memory_path": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\experience_memory\\reasoning_experience_memory.jsonl",
+    "experience_count": 48,
+    "by_category": {
+      "service_code_gap": 20,
+      "successful_pattern": 12,
+      "service_family_gap": 8,
+      "service_expectation_gap": 8
+    },
+    "by_severity": {
+      "medium": 20,
+      "low": 12,
+      "high": 16
+    },
+    "by_kind": {
+      "episodic": 24,
+      "procedural": 12,
+      "semantic": 12
+    },
+    "by_scope": {
+      "ingest": 28,
+      "shared": 12,
+      "reasoning": 8
+    }
+  },
+  "categories": {
+    "service_code_gap": 5,
+    "successful_pattern": 3,
+    "service_family_gap": 2,
+    "service_expectation_gap": 2
+  },
+  "severity": {
+    "medium": 5,
+    "low": 3,
+    "high": 4
+  },
+  "by_scope": {
+    "ingest": 7,
+    "shared": 3,
+    "reasoning": 2
+  },
+  "by_kind": {
+    "episodic": 12
+  }
+}

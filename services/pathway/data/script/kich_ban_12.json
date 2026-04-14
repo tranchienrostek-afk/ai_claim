@@ -1,0 +1,169 @@
+[
+  {
+    "cau_chuyen_y_khoa": {
+      "tieu_de": "Test 9: Bức màn sương mù của bộ ba tử thần trên nền suy giảm miễn dịch",
+      "benh_nhan": {
+        "gioi_tinh": "Nam",
+        "tuoi": 62
+      },
+      "benh_su_va_trieu_chung": {
+        "raw_sign_mentions": [
+          "Ho khạc đờm mủ lẫn máu, sốt về chiều, gầy sút 6kg trong 1 tháng rưỡi nay, hay vã mồ hôi trộm.",
+          "Đau nhức dữ dội vùng mặt phải, chảy mũi lờ lờ máu cá.",
+          "Cổ bên phải tự nhiên sưng to một cục, sờ vào nóng rát, nuốt rất đau và nghẹn.",
+          "Làm nghề nông (tiếp xúc bùn đất thường xuyên), có tiền sử đái tháo đường và bệnh phổi tắc nghẽn mạn tính (COPD)."
+        ],
+        "ontology_extraction": {
+          "sign_concepts": [
+            {"concept": "Ho", "modifiers": ["Khạc đờm mủ", "Lẫn máu", "Mạn tính kéo dài"]},
+            {"concept": "Hội chứng nhiễm trùng", "modifiers": ["Sốt về chiều", "Vã mồ hôi trộm", "Gầy sút cân"]},
+            {"concept": "Đau nhức sọ mặt", "modifiers": ["Dữ dội", "Bên phải"]},
+            {"concept": "Chảy máu mũi", "modifiers": ["Lờ lờ máu cá"]},
+            {"concept": "Khối sưng vùng cổ", "modifiers": ["Nóng đỏ đau", "Nuốt khó, nghẹn"]},
+            {"concept": "Yếu tố nguy cơ (Risk Factor)", "modifiers": ["Nông dân tiếp xúc đất/nước bề mặt", "Đái tháo đường", "COPD"]}
+          ]
+        }
+      },
+      "nhan_dinh_ban_dau": "Bệnh cảnh vô cùng rối rắm. Các triệu chứng ho máu, sốt chiều, sút cân làm bác sĩ nghĩ ngay đến Lao phổi. Triệu chứng đau mặt, chảy mũi máu cá và hạch cổ sưng to lại hướng đến Ung thư vòm mũi họng di căn hạch. Tuy nhiên, ứng dụng hệ thống suy luận Ontology V2, Graph nhận diện yếu tố nguy cơ 'Đái tháo đường, làm ruộng' và kích hoạt các DiseaseHypothesis (Giả thuyết bệnh lý) hiểm hóc hơn: Viêm phổi do Burkholderia pseudomallei (Whitmore), Viêm xoang do nấm thể xâm nhập và Nhiễm trùng khoang cổ sâu thứ phát. Bác sĩ quyết định tung ra lưới 10 cận lâm sàng để thu thập LabFeature làm bằng chứng khẳng định và loại trừ.",
+      "chi_dinh_can_lam_sang": {
+        "xet_nghiem_loai_tru_negative_exclusion_clue": [
+          {
+            "ten_xet_nghiem": "1. Soi đờm trực tiếp tìm AFB và PCR (Gen Xpert) lao",
+            "muc_dich": "Loại trừ Lao phổi vì triệu chứng lâm sàng và hình ảnh X-quang rất dễ nhầm lẫn.",
+            "ket_qua": "Âm tính 3 mẫu liên tiếp với vi khuẩn Lao (MTB)."
+          }
+        ],
+        "xet_nghiem_danh_gia_hinh_anh_hoc": [
+          {
+            "ten_xet_nghiem": "2. Chụp X-quang ngực thẳng",
+            "muc_dich": "Tầm soát nhanh tổn thương phổi ban đầu.",
+            "ket_qua": "Có tổn thương dạng hang và thâm nhiễm thùy trên phổi phải."
+          },
+          {
+            "ten_xet_nghiem": "3. Chụp cắt lớp vi tính (CT Scan) lồng ngực lớp mỏng 1mm",
+            "muc_dich": "Khảo sát chi tiết tổn thương hang, loại trừ giãn phế quản bội nhiễm và ung thư phổi.",
+            "ket_qua": "Tổn thương đông đặc, thâm nhiễm và hang thùy trên phổi phải, không thấy khối u ác tính."
+          },
+          {
+            "ten_xet_nghiem": "4. Chụp cắt lớp vi tính (CT Scan) sọ mặt - cổ có cản quang",
+            "muc_dich": "Đánh giá mức độ tàn phá xương của viêm xoang nấm, phân biệt áp xe cổ sâu với hạch di căn ung thư.",
+            "ket_qua": "Mờ đặc xoang hàm phải có tiêu xương mờ nhạt (thể xâm nhập giả u). Vùng cổ có ổ áp xe khoang dưới hàm lan xuống khoang cảnh."
+          },
+          {
+            "ten_xet_nghiem": "5. Siêu âm vùng cổ",
+            "muc_dich": "Hướng dẫn chọc hút áp xe cổ sâu an toàn.",
+            "ket_qua": "Ổ tụ dịch mủ khoang cổ bên."
+          }
+        ],
+        "xet_nghiem_truc_tiep_tim_ra_benh_direct_positive_clue": [
+          {
+            "ten_xet_nghiem": "6. Nội soi tai mũi họng phóng đại",
+            "muc_dich": "Tìm tổn thương nguyên phát tại hốc mũi xoang.",
+            "ket_qua": "Khe giữa phải có khối màu xám nâu hoại tử, chảy dịch máu cá."
+          },
+          {
+            "ten_xet_nghiem": "7. Sinh thiết khối hoại tử hốc mũi xoang và giải phẫu bệnh",
+            "muc_dich": "Xác định bản chất khối giả u tại mũi xoang.",
+            "ket_qua": "Mô bệnh học có chứa các sợi nấm. Cấy nấm mọc Aspergillus."
+          },
+          {
+            "ten_xet_nghiem": "8. Nuôi cấy đờm tìm vi khuẩn và làm kháng sinh đồ",
+            "muc_dich": "Định danh tác nhân vi khuẩn gây viêm phổi mạn tính.",
+            "ket_qua": "Mọc vi khuẩn Burkholderia pseudomallei (Whitmore)."
+          },
+          {
+            "ten_xet_nghiem": "9. Chọc hút mủ ổ áp xe vùng cổ để cấy vi khuẩn",
+            "muc_dich": "Tìm tác nhân gây nhiễm trùng khoang cổ sâu.",
+            "ket_qua": "Mọc hỗn hợp vi khuẩn kỵ khí và hiếu khí."
+          }
+        ],
+        "xet_nghiem_toan_than": [
+          {
+            "ten_xet_nghiem": "10. Định lượng Procalcitonin (PCT) và HbA1c",
+            "muc_dich": "PCT giúp đánh giá mức độ nặng của nhiễm khuẩn hô hấp dưới, HbA1c đánh giá kiểm soát đường huyết nền.",
+            "ket_qua": "PCT tăng rất cao > 2 ng/ml. HbA1c 11.5% (đái tháo đường mất kiểm soát nặng)."
+          }
+        ]
+      },
+      "chan_doan_cuoi_cung": "Bệnh nhân mắc CÙNG LÚC 3 bệnh lý trên nền Đái tháo đường và COPD: \n1. Viêm phổi mắc phải cộng đồng do Burkholderia pseudomallei (Melioidosis) thể mạn tính.\n2. Viêm mũi xoang do nấm Aspergillus thể xâm nhập giả u.\n3. Áp xe khoang cổ sâu (Nhiễm trùng khoang cổ sâu)."
+    },
+    "du_lieu_labeling_mau": {
+      "case_level": {
+        "request_id": "tc_onto_009",
+        "selected_profile_id": "prof_onto_09",
+        "testcase_title": "TC_Onto_TripleThreat_Melioidosis_Fungus_Abscess",
+        "main_disease_name_vi": "Hội chứng đa bệnh lý nhiễm trùng trên cơ địa đái tháo đường",
+        "primary_icd10": "<chua_co_ICD>",
+        "secondary_icd10_list_pipe": "Đái tháo đường type 2 | COPD",
+        "specialty": "Hô hấp / Tai Mũi Họng / Truyền nhiễm",
+        "message_hash_id": "msg_onto_009",
+        "claim_id_or_sohoso": "claim_onto_009",
+        "why_this_case_was_selected": "Kịch bản siêu khó (Master-class) tích hợp tri thức đa chuyên khoa. Thử thách hệ thống Ontology V2 bóc tách sự giao thoa triệu chứng của 3 căn bệnh nặng. Chứng minh tính hợp lý của việc chỉ định tới 10 cận lâm sàng phức tạp để cứu sống bệnh nhân.",
+        "claim_raw_json": "claim_onto_009.json",
+        "icd_source": "phac_do_tmh_2015 | phac_do_viem_phoi_2024",
+        "signs_history_source": "phac_do_tmh_2015 | phac_do_viem_phoi_2024",
+        "lab_result_source": "phac_do_tmh_2015 | phac_do_viem_phoi_2024",
+        "reviewer_or_insurer_note_source": "note_onto_009",
+        "contract_or_plan_source": "plan_onto_009",
+        "chief_complaint": "Ho khạc máu, sút cân, đau nhức sọ mặt phải và sưng nghẹn vùng cổ.",
+        "initial_signs_pipe": "Ho máu, sút cân (giống Lao) | Đau nhức mặt, chảy máu mũi (giống U vòm) | Cổ sưng nóng đỏ | PCT tăng vọt",
+        "medical_history_pipe": "Đái tháo đường mất kiểm soát | COPD | Làm nông nghiệp",
+        "initial_clinical_question": "Cần phân biệt khẩn cấp đây là Lao phổi + Ung thư di căn hay là nhóm bệnh lý nhiễm trùng cơ hội đa ổ (Melioidosis + Nấm + Áp xe) trên nền suy giảm miễn dịch do tiểu đường.",
+        "total_lines": 5,
+        "target_lines_for_labeling": 5,
+        "panel_services_present_pipe": "PCR Lao | CT Scan ngực | CT Scan cổ cản quang | Cấy đờm | Sinh thiết nấm mũi xoang",
+        "delivery_deadline": "2026-03-31",
+        "employee_name": "ai_onto_master_adjudicator",
+        "review_status": "submitted",
+        "manager_note": "Test 9 - Đỉnh cao của Evidence-based Reasoning (Dùng LabFeature để bẻ gãy giả thuyết Lao/Ung thư và khẳng định 3 bệnh nhiễm trùng)."
+      },
+      "service_lines": [
+        {
+          "line_no": 1,
+          "service_name_raw": "AFB đờm và PCR (Gen Xpert) lao",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Theo phác đồ, biểu hiện mạn tính của Melioidosis (ho máu, sút cân, mồ hôi đêm) và tổn thương hang thùy trên X-quang cực kỳ giống Lao phổi. Do đó, xét nghiệm này mang vai trò 'Negative exclusion clue' (Bằng chứng loại trừ) bắt buộc để loại trừ trực khuẩn lao (MTB) trước khi hướng tới vi khuẩn Whitmore.",
+          "evidence_source": "phac_do_viem_phoi_2024",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 2,
+          "service_name_raw": "Chụp cắt lớp vi tính (CT Scan) sọ mặt - cổ có tiêm thuốc cản quang",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Bệnh nhân có đau nhức mặt, chảy máu mũi kèm sưng to vùng cổ. CT Scan sọ mặt cổ là bắt buộc để chẩn đoán phân biệt khối u ác tính, đồng thời xác định mức độ phá hủy xương của nấm xoang và hướng dẫn rạch dẫn lưu chính xác ổ áp xe khoang cổ sâu (tránh các cấu trúc mạch máu sinh tồn).",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 3,
+          "service_name_raw": "Phẫu thuật nội soi xoang sinh thiết và cấy nấm",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Trên nền bệnh nhân đái tháo đường suy giảm miễn dịch, tổn thương hoại tử màu xám nâu ở hốc mũi là dấu hiệu 'Red flag' của Viêm xoang nấm thể xâm nhập giả u. Bắt buộc sinh thiết và cấy nấm để tìm sợi nấm Aspergillus, ngăn chặn nấm xâm lấn lên não gây tử vong.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 4,
+          "service_name_raw": "Nuôi cấy đờm tìm vi khuẩn và kháng sinh đồ",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Bệnh nhân có yếu tố nguy cơ cao (nông dân tiếp xúc bùn đất, đái tháo đường, COPD). Phân lập được B. pseudomallei qua cấy đờm là tiêu chuẩn vàng (Direct positive clue) để khẳng định bệnh Melioidosis và áp dụng phác đồ kháng sinh đặc hiệu Ceftazidime dài ngày.",
+          "evidence_source": "phac_do_viem_phoi_2024",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 5,
+          "service_name_raw": "Định lượng Procalcitonin (PCT)",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Theo hướng dẫn chẩn đoán viêm phổi mắc phải cộng đồng, định lượng Procalcitonin máu được chỉ định để đánh giá mức độ nặng của tình trạng nhiễm khuẩn đường hô hấp dưới ở bệnh nhân nhập viện, hỗ trợ quyết định liệu pháp kháng sinh theo động học.",
+          "evidence_source": "phac_do_viem_phoi_2024",
+          "confidence": "strong"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,118 @@
+{
+  "cau_chuyen_y_khoa": {
+    "tieu_de": "Cuộc rượt đuổi căn bệnh ẩn sau mác 'cảm cúm thông thường'",
+    "benh_nhan": {
+      "gioi_tinh": "Nam",
+      "tuoi": 26
+    },
+    "benh_su_va_trieu_chung": {
+      "trieu_chung_co_nang": [
+        "Khởi phát cách đây 5 ngày với triệu chứng hắt hơi, ngạt mũi, chảy nước mũi trong và sốt nhẹ (giống hệt cảm cúm).",
+        "Đột ngột hôm nay sốt cao 39.5 độ C, ớn lạnh, người mệt mỏi rã rời, chán ăn.",
+        "Đau rát họng dữ dội, nuốt đau nhói lan lên tận tai (kể cả khi nuốt chất lỏng), ho có đờm nhầy đục."
+      ],
+      "tien_su": "Là nhân viên văn phòng, thời tiết đang chuyển lạnh. Đã tự mua thuốc cảm cúm (Paracetamol + Antihistamin) uống 4 ngày nhưng bệnh đột ngột nặng lên."
+    },
+    "nhan_dinh_ban_dau": "Lúc đầu, cả bệnh nhân và bác sĩ phòng khám tuyến dưới đều nghĩ đây chỉ là đợt viêm đường hô hấp trên do virus (cảm thường). Tuy nhiên, việc bệnh đột ngột trở nặng sau 5 ngày với triệu chứng nuốt đau nhói lên tai và sốt cao rét run là hồi chuông cảnh báo. Bác sĩ Tai Mũi Họng nhận định: Khởi đầu là nhiễm virus, nhưng hiện tại sức đề kháng giảm sút đã tạo điều kiện cho bội nhiễm vi khuẩn khu trú (rất có thể là Liên cầu khuẩn tan huyết nhóm A). Cần phải thăm khám nội soi kỹ lưỡng và làm các xét nghiệm máu, vi sinh để phân biệt rõ với các bệnh lây nhiễm nguy hiểm (như bạch hầu) và phòng ngừa biến chứng thấp tim, viêm cầu thận.",
+    "chi_dinh_can_lam_sang": {
+      "xet_nghiem_loai_tru_va_danh_gia_chung": [
+        {
+          "ten_xet_nghiem": "Tổng phân tích tế bào máu ngoại vi (CBC)",
+          "muc_dich": "Phân biệt bản chất viêm mũi họng. Nếu số lượng bạch cầu giảm và nhiều lympho thì chỉ là nhiễm virus cảm cúm; nếu số lượng tăng chủ yếu đa nhân trung tính là đã có bội nhiễm vi khuẩn.",
+          "ket_qua": "Số lượng bạch cầu tăng rất cao, bạch cầu đa nhân trung tính chiếm ưu thế tuyệt đối."
+        },
+        {
+          "ten_xet_nghiem": "Phản ứng ASLO trong máu",
+          "muc_dich": "Định lượng kháng thể trong máu để xác định nguyên nhân có phải do Liên cầu khuẩn beta tan huyết nhóm A gây ra hay không, nhằm phòng ngừa biến chứng xa.",
+          "ket_qua": "Chỉ số ASLO tăng vọt > 500 đơn vị."
+        }
+      ],
+      "xet_nghiem_truc_tiep_tim_ra_benh": [
+        {
+          "ten_xet_nghiem": "Nội soi Tai Mũi Họng phóng đại",
+          "muc_dich": "Khám bằng đè lưỡi thông thường khó thấy hết tổn thương. Nội soi giúp quan sát sâu niêm mạc mũi họng, đánh giá sung huyết và tìm các chấm mủ ẩn trong hốc amiđan.",
+          "ket_qua": "Niêm mạc mũi sung huyết, xuất tiết đục. Toàn bộ niêm mạc họng đỏ rực, hai amiđan sưng to đỏ mọng và đặc biệt có các chấm mủ trắng bám sâu trong các miệng hốc amiđan (chưa tạo thành màng giả lớn)."
+        },
+        {
+          "ten_xet_nghiem": "Phết dịch họng nuôi cấy vi khuẩn và soi tươi",
+          "muc_dich": "Bắt buộc thực hiện khi viêm mũi họng có xu hướng nặng, kéo dài dễ gây biến chứng. Soi tươi để loại trừ trực khuẩn Klebs-Loeffler (Bạch hầu), nuôi cấy để làm kháng sinh đồ.",
+          "ket_qua": "Âm tính với trực khuẩn Bạch hầu. Nuôi cấy mọc Liên cầu khuẩn beta tan huyết nhóm A."
+        }
+      ]
+    },
+    "chan_doan_cuoi_cung": "Viêm mũi họng cấp tính có mủ do bội nhiễm Liên cầu khuẩn beta tan huyết nhóm A (trên nền cảm cúm do virus)."
+  },
+  "du_lieu_labeling_mau": {
+    "case_level": {
+      "request_id": "tc_263",
+      "selected_profile_id": "prof_263",
+      "testcase_title": "TC263_AcuteNasopharyngitis_ViralToStrep",
+      "main_disease_name_vi": "Viêm mũi họng cấp tính",
+      "primary_icd10": "<chua_co_ICD>",
+      "secondary_icd10_list_pipe": "",
+      "specialty": "Họng thanh quản",
+      "message_hash_id": "msg_263",
+      "claim_id_or_sohoso": "claim_263",
+      "why_this_case_was_selected": "Kịch bản minh họa sự chuyển biến tinh vi từ viêm mũi họng do virus (cảm thường) sang bội nhiễm vi khuẩn nguy hiểm (Liên cầu A). Bác sĩ phải dùng tổ hợp xét nghiệm máu, ASLO và cấy dịch họng để chẩn đoán chính xác, tránh chủ quan coi là cảm cúm thông thường.",
+      "claim_raw_json": "claim_263.json",
+      "icd_source": "phac_do_tmh_2015",
+      "signs_history_source": "phac_do_tmh_2015",
+      "lab_result_source": "phac_do_tmh_2015",
+      "reviewer_or_insurer_note_source": "note_263",
+      "contract_or_plan_source": "plan_263",
+      "chief_complaint": "Sốt cao rét run, mệt mỏi rã rời và nuốt đau nhói lên tai sau 5 ngày bị sổ mũi.",
+      "initial_signs_pipe": "Sốt 39.5 độ C | Niêm mạc họng đỏ rực | Amiđan sưng to có chấm mủ trắng sâu trong hốc | Hạch góc hàm sưng nhẹ",
+      "medical_history_pipe": "Triệu chứng cảm cúm nhẹ kéo dài 4 ngày trước khi đột ngột trở nặng",
+      "initial_clinical_question": "Bác sĩ cần xác định đây là diễn biến nặng của nhiễm virus hay đã có sự bội nhiễm của Liên cầu khuẩn tan huyết nhóm A, đồng thời loại trừ bệnh lây nhiễm nguy hiểm như Bạch hầu do có chấm mủ trắng ở họng.",
+      "total_lines": 4,
+      "target_lines_for_labeling": 4,
+      "panel_services_present_pipe": "Nội soi tai mũi họng | Tổng phân tích tế bào máu | Phản ứng ASLO | Phết dịch họng nuôi cấy vi khuẩn",
+      "delivery_deadline": "2026-03-28",
+      "employee_name": "bs_demo_10",
+      "review_status": "submitted",
+      "manager_note": "Testcase điển hình về việc sử dụng cận lâm sàng để tìm ra tác nhân vi khuẩn ẩn sau triệu chứng cảm cúm kéo dài."
+    },
+    "service_lines": [
+      {
+        "line_no": 1,
+        "service_name_raw": "Nội soi tai mũi họng",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Theo phác đồ, triệu chứng thực thể của viêm mũi họng cấp do vi khuẩn bao gồm niêm mạc họng đỏ rực, amiđan sưng to có những chấm mủ trắng. Nội soi là chỉ định cần thiết để quan sát kỹ các hốc amiđan và khe mũi mà khám thường có thể bỏ sót.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Khám trực tiếp hình thái tổn thương viêm."
+      },
+      {
+        "line_no": 2,
+        "service_name_raw": "Tổng phân tích tế bào máu ngoại vi (CBC)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Theo Hướng dẫn điều trị, xét nghiệm công thức bạch cầu có giá trị phân biệt: nếu bạch cầu giảm/lympho tăng là nhiễm virus; nếu bạch cầu tăng chủ yếu đa nhân trung tính là do nhiễm vi trùng hoặc giai đoạn bội nhiễm của nhiễm virus. Bệnh nhân có diễn biến nặng lên sau đợt cảm cúm nên xét nghiệm này là bắt buộc.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Chỉ định chuẩn xác để xác định tình trạng bội nhiễm."
+      },
+      {
+        "line_no": 3,
+        "service_name_raw": "Phết dịch họng nuôi cấy vi khuẩn và làm kháng sinh đồ",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Phác đồ qui định rõ: nếu viêm mũi họng có xu hướng nặng kéo dài dễ gây biến chứng thì phải xét nghiệm vi trùng làm kháng sinh đồ; đặc biệt nếu nghi các bệnh lây nhiễm nguy hiểm (như có bựa trắng nghi bạch hầu) thì bắt buộc phải xét nghiệm.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm vi sinh tìm đích danh thủ phạm gây bội nhiễm."
+      },
+      {
+        "line_no": 4,
+        "service_name_raw": "Phản ứng ASLO",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Phác đồ chỉ định làm phản ứng ASLO để tìm kháng thể trong trường hợp nghi ngờ nhiễm liên cầu khuẩn bê-ta tan huyết. Việc xác định tác nhân này cực kỳ quan trọng để lên phác đồ kháng sinh triệt để, phòng ngừa biến chứng viêm cầu thận, thấp tim.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm miễn dịch khẳng định nhóm vi khuẩn nguy hiểm."
+      }
+    ]
+  }
+}

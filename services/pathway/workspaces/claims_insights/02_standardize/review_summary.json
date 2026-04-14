@@ -1,0 +1,102 @@
+{
+  "total_variants_reviewed": 2161,
+  "verdicts": {
+    "ĐÚNG": 2146,
+    "SAI": 15
+  },
+  "clusters_ok": 371,
+  "clusters_with_errors": 13,
+  "clusters_need_check": 0,
+  "wrong_merges": [
+    {
+      "service_code": "LAB-BIO-030",
+      "canonical": "creatinin",
+      "wrong_variant": "xn creatinnie",
+      "reason": "Score thấp (81.8), skeleton khác (70%) → khác DV"
+    },
+    {
+      "service_code": "GEN-OTH-012",
+      "canonical": "xét nghiệm vi sinh",
+      "wrong_variant": "xét nghiệm hoá sinh",
+      "reason": "Score thấp (81.1), skeleton khác (0%) → khác DV"
+    },
+    {
+      "service_code": "GEN-OTH-012",
+      "canonical": "xét nghiệm vi sinh",
+      "wrong_variant": "xét nghiệm sinh hòn",
+      "reason": "Score thấp (81.1), skeleton khác (14%) → khác DV"
+    },
+    {
+      "service_code": "GEN-OTH-025",
+      "canonical": "định lượng sắt (máu)",
+      "wrong_variant": "định lượng troponi (máu)",
+      "reason": "Score thấp (81.8), skeleton khác (56%) → khác DV"
+    },
+    {
+      "service_code": "IMG-CTN-003",
+      "canonical": "chụp cắt lớp vi tính lồng ngực không tiêm thuốc cản quang (từ 1- 32 dãy)",
+      "wrong_variant": "chụp cắt lớp vi tính lồng ngực (cổ-ngực/ngực) có tiêm thuốc cản quang (từ 1- 32 dãy)",
+      "reason": "Vùng cơ thể khác: variant có {'ngực'}"
+    },
+    {
+      "service_code": "GEN-OTH-046",
+      "canonical": "định lượng troponin i (máu)",
+      "wrong_variant": "định lượng transferin (máu)",
+      "reason": "Score thấp (81.5), skeleton khác (63%) → khác DV"
+    },
+    {
+      "service_code": "IMG-XRY-033",
+      "canonical": "chụp x-quang xương bàn ngón tay thẳng, nghiêng hoặc chếch (số hóa 1 phim)",
+      "wrong_variant": "chụp xquang xương bàn ngón tay thẳng, nghiêng hoặc chếch (bàn tay t thẳng nghiêng, số hóa 2 phim)",
+      "reason": "Vùng cơ thể khác: variant có {'bàn tay'}"
+    },
+    {
+      "service_code": "LAB-IMM-033",
+      "canonical": "cmv igm miễn dịch tự động",
+      "wrong_variant": "hbc igm miễn dịch tự động",
+      "reason": "XN khác loại: variant có {'hbc'}"
+    },
+    {
+      "service_code": "LAB-IMM-033",
+      "canonical": "cmv igm miễn dịch tự động",
+      "wrong_variant": "hsv 1+2 igm miễn dịch tự động",
+      "reason": "DV khác loại: canonical={'cmv'}, variant={'hsv'}"
+    },
+    {
+      "service_code": "GEN-OTH-073",
+      "canonical": "định lượng tsh",
+      "wrong_variant": "định lượng rf",
+      "reason": "DV khác loại: canonical={'tsh'}, variant={'rf'}"
+    },
+    {
+      "service_code": "LAB-IMM-122",
+      "canonical": "nhuộm miễn dịch huỳnh quang giản 1 tiếp phát hiện khẳng thể",
+      "wrong_variant": "nhuộm miễn dịch huỳnh quang trực tiếp phát hiện khẳng nguyên",
+      "reason": "Score thấp (80.7), skeleton khác (48%) → khác DV"
+    },
+    {
+      "service_code": "GEN-OTH-269",
+      "canonical": "định lượng anti ccp",
+      "wrong_variant": "định lượng anti-tg",
+      "reason": "XN khác loại: variant có {'anti-tg'}"
+    },
+    {
+      "service_code": "LAB-BIO-183",
+      "canonical": "do hoạt độ ast (got)",
+      "wrong_variant": "do hoạt độ alt (gp1)",
+      "reason": "DV khác loại: canonical={'ast', 'got'}, variant={'alt'}"
+    },
+    {
+      "service_code": "LAB-MIC-074",
+      "canonical": "xét nghiệm test nhanh cúm ab",
+      "wrong_variant": "xét nghiệm hbsag test nhanh",
+      "reason": "XN khác loại: variant có {'hbsag'}"
+    },
+    {
+      "service_code": "GEN-OTH-580",
+      "canonical": "khám bệnh, xq",
+      "wrong_variant": "khám bệnh, mri",
+      "reason": "Score thấp (81.5), skeleton khác (73%) → khác DV"
+    }
+  ]
+}

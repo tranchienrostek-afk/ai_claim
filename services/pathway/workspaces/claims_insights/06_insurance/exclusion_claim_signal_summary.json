@@ -1,0 +1,470 @@
+{
+  "generated_at": "2026-03-25T07:28:07.545103+00:00",
+  "sources": {
+    "main_claims": "06_insurance\\Mapping quyền lợi + Loại trừ\\Danh sách hồ sơ loại trừ.xlsx",
+    "reason_dictionary": "06_insurance\\Mapping quyền lợi + Loại trừ\\Loại trừ\\Lý do loại trừ.xlsx"
+  },
+  "stats": {
+    "rows": 9056,
+    "unique_claim_ids": 7181,
+    "unique_contracts": 6,
+    "requested_sum_vnd": 17420809992,
+    "paid_sum_vnd": 11834371538,
+    "gap_sum_vnd": 5586438454,
+    "decision_counts": {
+      "partial_pay": 5378,
+      "full_pay": 3602,
+      "full_deny": 76
+    },
+    "atomic_reason_total": 6914,
+    "atomic_reason_dictionary_match_pct": 97.79,
+    "reason_dictionary_size": 30
+  },
+  "signal_counts": {
+    "limit_per_year_flag": 356,
+    "generic_limit_flag": 501,
+    "copay_flag": 2076,
+    "formula_present": 1920,
+    "screening_flag": 1385,
+    "not_covered_flag": 2270,
+    "clause_reference_present": 2059,
+    "exclusion_scope_flag": 381,
+    "service_mentions_present": 800,
+    "limit_per_visit_flag": 1180,
+    "missing_documents_flag": 422,
+    "limit_per_day_flag": 134
+  },
+  "copay_percent_distribution": {
+    "20": 2061
+  },
+  "limit_type_counts": {
+    "per_year": 356,
+    "generic_limit": 501,
+    "per_visit": 1180,
+    "per_day": 134
+  },
+  "top_atomic_reasons_by_rows": [
+    {
+      "reason": "Áp dụng đồng chi trả",
+      "rows": 2034
+    },
+    {
+      "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+      "rows": 1332
+    },
+    {
+      "reason": "Vượt quá quyền lợi một lần khám",
+      "rows": 934
+    },
+    {
+      "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+      "rows": 754
+    },
+    {
+      "reason": "Chưa cung cấp đủ chứng từ",
+      "rows": 370
+    },
+    {
+      "reason": "Vượt quá hạn mức bảo hiểm trong năm hợp đồng",
+      "rows": 311
+    },
+    {
+      "reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+      "rows": 311
+    },
+    {
+      "reason": "Vượt hạn mức",
+      "rows": 190
+    },
+    {
+      "reason": "Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+      "rows": 144
+    },
+    {
+      "reason": "Vượt quá quyền lợi một ngày nằm viện",
+      "rows": 126
+    },
+    {
+      "reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+      "rows": 121
+    },
+    {
+      "reason": "Chi phí thuốc bổ, vitamin, hỗ trợ vượt quá chi phí thuốc điều trị chính",
+      "rows": 81
+    },
+    {
+      "reason": "Đơn thuốc kê quá 30 ngày theo quy định của BYT",
+      "rows": 32
+    },
+    {
+      "reason": "Thuốc không phù hợp",
+      "rows": 25
+    },
+    {
+      "reason": "Mua thuốc dư/ khác với bác sĩ kê đơn",
+      "rows": 23
+    },
+    {
+      "reason": "Không thuộc đối tượng được bảo hiểm",
+      "rows": 22
+    },
+    {
+      "reason": "Thuốc kê không nhằm mục đích điều trị",
+      "rows": 21
+    },
+    {
+      "reason": "Đang trong thời gian chờ với bệnh đặc biệt/bệnh có sẵn",
+      "rows": 17
+    },
+    {
+      "reason": "Chứng từ thanh toán chưa hợp lệ",
+      "rows": 12
+    },
+    {
+      "reason": "Lý do khác",
+      "rows": 10
+    }
+  ],
+  "top_atomic_reasons_by_gap_vnd": [
+    {
+      "reason": "Áp dụng đồng chi trả",
+      "gap_vnd": 1732641823
+    },
+    {
+      "reason": "Vượt quá quyền lợi một lần khám",
+      "gap_vnd": 1325463270
+    },
+    {
+      "reason": "Vượt quá quyền lợi một ngày nằm viện",
+      "gap_vnd": 1167773278
+    },
+    {
+      "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+      "gap_vnd": 1134219321
+    },
+    {
+      "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+      "gap_vnd": 881818928
+    },
+    {
+      "reason": "Vượt quá hạn mức bảo hiểm trong năm hợp đồng",
+      "gap_vnd": 518753636
+    },
+    {
+      "reason": "Chưa cung cấp đủ chứng từ",
+      "gap_vnd": 331930388
+    },
+    {
+      "reason": "Vượt hạn mức",
+      "gap_vnd": 242163041
+    },
+    {
+      "reason": "Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+      "gap_vnd": 187954024
+    },
+    {
+      "reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+      "gap_vnd": 181935730
+    },
+    {
+      "reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+      "gap_vnd": 51512019
+    },
+    {
+      "reason": "Chi phí thuốc bổ, vitamin, hỗ trợ vượt quá chi phí thuốc điều trị chính",
+      "gap_vnd": 34361870
+    },
+    {
+      "reason": "Đang trong thời gian chờ với bệnh đặc biệt/bệnh có sẵn",
+      "gap_vnd": 32727520
+    },
+    {
+      "reason": "Sử dụng phòng bao/Vip",
+      "gap_vnd": 26707642
+    },
+    {
+      "reason": "Đơn thuốc kê quá 30 ngày theo quy định của BYT",
+      "gap_vnd": 24918499
+    },
+    {
+      "reason": "Chi phí cho người nhà",
+      "gap_vnd": 20393098
+    },
+    {
+      "reason": "Không thuộc đối tượng được bảo hiểm",
+      "gap_vnd": 18221868
+    },
+    {
+      "reason": "Thuốc kê không nhằm mục đích điều trị",
+      "gap_vnd": 17343373
+    },
+    {
+      "reason": "Mua thuốc dư/ khác với bác sĩ kê đơn",
+      "gap_vnd": 12181625
+    },
+    {
+      "reason": "Thuốc không phù hợp",
+      "gap_vnd": 11992693
+    }
+  ],
+  "reason_group_distribution": [
+    {
+      "group": "Quy tắc bảo hiểm và hợp đồng bảo hiểm",
+      "rows": 2037
+    },
+    {
+      "group": "Hạn mức bảo hiểm",
+      "rows": 1437
+    },
+    {
+      "group": "Cận lâm sàng",
+      "rows": 1332
+    },
+    {
+      "group": "Loại trừ - Quyền lợi",
+      "rows": 923
+    },
+    {
+      "group": "Thuốc",
+      "rows": 617
+    },
+    {
+      "group": "Thiếu chứng từ",
+      "rows": 392
+    },
+    {
+      "group": "Thời gian chờ",
+      "rows": 20
+    },
+    {
+      "group": "Hóa đơn",
+      "rows": 2
+    },
+    {
+      "group": "Khám không có hướng điều trị",
+      "rows": 1
+    }
+  ],
+  "top_service_mentions_in_notes": [
+    {
+      "item_name": "Glucose",
+      "rows": 45
+    },
+    {
+      "item_name": "ALT",
+      "rows": 33
+    },
+    {
+      "item_name": "Creatinin",
+      "rows": 31
+    },
+    {
+      "item_name": "AST",
+      "rows": 31
+    },
+    {
+      "item_name": "chụp XQ ngực thẳng",
+      "rows": 28
+    },
+    {
+      "item_name": "HBsAg",
+      "rows": 26
+    },
+    {
+      "item_name": "Triglycerid",
+      "rows": 26
+    },
+    {
+      "item_name": "siêu âm ổ bụng",
+      "rows": 24
+    },
+    {
+      "item_name": "Cholesterol",
+      "rows": 23
+    },
+    {
+      "item_name": "điện giải đồ",
+      "rows": 22
+    },
+    {
+      "item_name": "HIV",
+      "rows": 18
+    },
+    {
+      "item_name": "Ure",
+      "rows": 16
+    },
+    {
+      "item_name": "HbA1c",
+      "rows": 16
+    },
+    {
+      "item_name": "TSH",
+      "rows": 16
+    },
+    {
+      "item_name": "HDL",
+      "rows": 15
+    },
+    {
+      "item_name": "HCV",
+      "rows": 14
+    },
+    {
+      "item_name": "LDL",
+      "rows": 14
+    },
+    {
+      "item_name": "Calci toàn phần",
+      "rows": 14
+    },
+    {
+      "item_name": "FT4",
+      "rows": 14
+    },
+    {
+      "item_name": "Chụp Xquang ngực thẳng",
+      "rows": 13
+    }
+  ],
+  "contracts": [
+    {
+      "contract_name": "FPT-NV",
+      "insurer": "FPT",
+      "rows": 4685,
+      "requested_sum_vnd": 9502357967,
+      "paid_sum_vnd": 6673847847,
+      "gap_sum_vnd": 2828510120,
+      "paid_ratio_pct": 70.23,
+      "decision_counts": {
+        "partial_pay": 2312,
+        "full_pay": 2343,
+        "full_deny": 30
+      },
+      "signal_counts": {
+        "limit_per_year_flag": 271,
+        "generic_limit_flag": 389,
+        "screening_flag": 759,
+        "not_covered_flag": 1144,
+        "limit_per_visit_flag": 652,
+        "missing_documents_flag": 235,
+        "exclusion_scope_flag": 147,
+        "copay_flag": 6,
+        "limit_per_day_flag": 70
+      }
+    },
+    {
+      "contract_name": "FPT-NT 2025",
+      "insurer": "FPT",
+      "rows": 3095,
+      "requested_sum_vnd": 5333492722,
+      "paid_sum_vnd": 3270134733,
+      "gap_sum_vnd": 2063357989,
+      "paid_ratio_pct": 61.31,
+      "decision_counts": {
+        "partial_pay": 2471,
+        "full_pay": 600,
+        "full_deny": 24
+      },
+      "signal_counts": {
+        "copay_flag": 2037,
+        "screening_flag": 431,
+        "not_covered_flag": 800,
+        "exclusion_scope_flag": 192,
+        "limit_per_visit_flag": 373,
+        "limit_per_year_flag": 56,
+        "generic_limit_flag": 57,
+        "limit_per_day_flag": 47,
+        "missing_documents_flag": 111
+      }
+    },
+    {
+      "contract_name": "TIN-PNC",
+      "insurer": "TIN",
+      "rows": 1034,
+      "requested_sum_vnd": 2107467857,
+      "paid_sum_vnd": 1540602572,
+      "gap_sum_vnd": 566865285,
+      "paid_ratio_pct": 73.1,
+      "decision_counts": {
+        "full_pay": 539,
+        "partial_pay": 473,
+        "full_deny": 22
+      },
+      "signal_counts": {
+        "screening_flag": 171,
+        "not_covered_flag": 262,
+        "limit_per_day_flag": 14,
+        "limit_per_visit_flag": 129,
+        "missing_documents_flag": 75,
+        "generic_limit_flag": 48,
+        "exclusion_scope_flag": 36,
+        "limit_per_year_flag": 23
+      }
+    },
+    {
+      "contract_name": "UIC",
+      "insurer": "UIC",
+      "rows": 120,
+      "requested_sum_vnd": 235427713,
+      "paid_sum_vnd": 196816831,
+      "gap_sum_vnd": 38610882,
+      "paid_ratio_pct": 83.6,
+      "decision_counts": {
+        "partial_pay": 48,
+        "full_pay": 72
+      },
+      "signal_counts": {
+        "not_covered_flag": 35,
+        "exclusion_scope_flag": 3,
+        "limit_per_visit_flag": 10,
+        "screening_flag": 10,
+        "generic_limit_flag": 1
+      }
+    },
+    {
+      "contract_name": "TCGIns",
+      "insurer": "TCGIns",
+      "rows": 68,
+      "requested_sum_vnd": 169022746,
+      "paid_sum_vnd": 105306472,
+      "gap_sum_vnd": 63716274,
+      "paid_ratio_pct": 62.3,
+      "decision_counts": {
+        "partial_pay": 48,
+        "full_pay": 20
+      },
+      "signal_counts": {
+        "copay_flag": 33,
+        "screening_flag": 9,
+        "not_covered_flag": 18,
+        "limit_per_day_flag": 3,
+        "limit_per_visit_flag": 7,
+        "exclusion_scope_flag": 3,
+        "missing_documents_flag": 1,
+        "limit_per_year_flag": 2,
+        "generic_limit_flag": 2
+      }
+    },
+    {
+      "contract_name": "BHV",
+      "insurer": "BHV",
+      "rows": 54,
+      "requested_sum_vnd": 73040987,
+      "paid_sum_vnd": 47663083,
+      "gap_sum_vnd": 25377904,
+      "paid_ratio_pct": 65.26,
+      "decision_counts": {
+        "partial_pay": 26,
+        "full_pay": 28
+      },
+      "signal_counts": {
+        "limit_per_visit_flag": 9,
+        "not_covered_flag": 11,
+        "screening_flag": 5,
+        "limit_per_year_flag": 4,
+        "generic_limit_flag": 4
+      }
+    }
+  ]
+}

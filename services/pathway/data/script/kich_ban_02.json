@@ -1,0 +1,118 @@
+{
+  "cau_chuyen_y_khoa": {
+    "tieu_de": "Sự thật bất ngờ đằng sau cơn đau đầu dữ dội",
+    "benh_nhan": {
+      "gioi_tinh": "Nữ",
+      "tuoi": 28
+    },
+    "benh_su_va_trieu_chung": {
+      "trieu_chung_co_nang": [
+        "Đau tai phải dữ dội, đập theo nhịp mạch và lan rộng ra khắp nửa đầu bên phải [1].",
+        "Không thể nhai hay há miệng ngáp do đau [1].",
+        "Tai phải ù, nghe kém tiếng trầm, bưng bít hoàn toàn [1].",
+        "Vùng da phía sau vành tai sưng tấy đỏ [1].",
+        "Mệt mỏi do mất ngủ [1]."
+      ],
+      "tien_su": "Thói quen dùng dụng cụ ngoáy tai bằng sắt cứng cạo ráy tai gây xước da ống tai [1]."
+    },
+    "nhan_dinh_ban_dau": "Triệu chứng rất rầm rộ (đau nửa đầu dữ dội, sưng đỏ sau tai) dễ nhầm lẫn với bệnh lý nguy hiểm là Viêm xương chũm cấp tính (có thể gây biến chứng thủng màng não, áp xe não) [2], [3], [4]. Cần cận lâm sàng để loại trừ bệnh nặng.",
+    "chi_dinh_can_lam_sang": {
+      "xet_nghiem_loai_tru_benh_nguy_hiem": [
+        {
+          "ten_xet_nghiem": "Chụp cắt lớp vi tính (CT Scan) xương thái dương",
+          "muc_dich": "Khảo sát toàn bộ cấu trúc xương chũm, sọ não để loại trừ ổ mủ phá hủy xương sọ, mất các thông bào trong viêm xương chũm cấp tính [3].",
+          "ket_qua": "Hệ thống sào bào xương chũm, hòm nhĩ và sọ não hoàn toàn trong sáng, không có tổn thương phá hủy xương."
+        },
+        {
+          "ten_xet_nghiem": "Đo thính lực đồ đơn âm",
+          "muc_dich": "Đánh giá mức độ nghe kém, loại trừ điếc tiếp nhận thần kinh do tổn thương sâu tai trong (điếc đột ngột) [5].",
+          "ket_qua": "Chỉ bị điếc dẫn truyền nhẹ."
+        }
+      ],
+      "xet_nghiem_danh_gia_chung": [
+        {
+          "ten_xet_nghiem": "Tổng phân tích tế bào máu (CBC)",
+          "muc_dich": "Kiểm tra mức độ nhiễm trùng toàn thân, đánh giá tình trạng tăng bạch cầu trung tính [3].",
+          "ket_qua": "Bạch cầu tăng không đáng kể."
+        }
+      ],
+      "xet_nghiem_truc_tiep_tim_ra_benh": [
+        {
+          "ten_xet_nghiem": "Nội soi tai mũi họng phóng đại kết hợp khám thực thể",
+          "muc_dich": "Thăm khám trực tiếp bề mặt ống tai và màng nhĩ [6].",
+          "ket_qua": "Kéo vành tai và ấn nắp tai bệnh nhân kêu đau chói [6]. Nội soi thấy một nhọt nhỏ đang mưng mủ trắng ở vách ống tai ngoài, sưng nề bít tắc một phần đường hầm ống tai [6]."
+        }
+      ]
+    },
+    "chan_doan_cuoi_cung": "Nhọt ống tai ngoài (Bệnh tai ngoài) [1]."
+  },
+  "du_lieu_labeling_mau": {
+    "case_level": {
+      "request_id": "tc_257",
+      "selected_profile_id": "prof_257",
+      "testcase_title": "TC257_Furuncle_BroadSymptoms",
+      "main_disease_name_vi": "Nhọt ống tai ngoài (Bệnh tai ngoài)",
+      "primary_icd10": "<chua_co_ICD>",
+      "secondary_icd10_list_pipe": "",
+      "specialty": "Tai",
+      "message_hash_id": "msg_257",
+      "claim_id_or_sohoso": "claim_257",
+      "why_this_case_was_selected": "Ca bệnh có triệu chứng lâm sàng rất rầm rộ (đau nửa đầu, sưng sau tai) dễ nhầm với bệnh lý nguy hiểm (viêm xương chũm cấp). Minh họa chỉ định cận lâm sàng đắt tiền là hợp lý để loại trừ bệnh nặng [3].",
+      "claim_raw_json": "claim_257.json",
+      "icd_source": "phac_do_tmh_2015",
+      "signs_history_source": "phac_do_tmh_2015",
+      "lab_result_source": "phac_do_tmh_2015",
+      "reviewer_or_insurer_note_source": "note_257",
+      "contract_or_plan_source": "plan_257",
+      "chief_complaint": "Đau tai phải dữ dội lan ra nửa đầu và sưng nề đỏ vùng sau tai.",
+      "initial_signs_pipe": "Đau chói khi ấn nắp tai và kéo vành tai | Nghe kém tiếng trầm ù tai | Sưng tấy đỏ vùng sau tai",
+      "medical_history_pipe": "Thói quen dùng dụng cụ lấy ráy tai bằng sắt cứng ngoáy tai thường xuyên",
+      "initial_clinical_question": "Bệnh nhân đau dữ dội và sưng sau tai cần chụp CT để loại trừ viêm xương chũm cấp tính và nội soi xác định nguyên nhân tại tai ngoài.",
+      "total_lines": 4,
+      "target_lines_for_labeling": 4,
+      "panel_services_present_pipe": "Nội soi tai | CT Scan xương thái dương | Đo thính lực đơn âm | Xét nghiệm công thức máu",
+      "delivery_deadline": "2026-03-28",
+      "employee_name": "bs_demo_3",
+      "review_status": "submitted",
+      "manager_note": "Testcase cực hay để phân tích tính hợp lý của CT Scan trong bệnh vặt."
+    },
+    "service_lines": [
+      {
+        "line_no": 1,
+        "service_name_raw": "Nội soi tai mũi họng",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Là chỉ định trực tiếp tìm ra bệnh. Quan sát thấy khối nhọt mưng mủ che lấp ống tai ngoài kết hợp dấu hiệu kéo vành tai đau chói giúp chẩn đoán xác định nhọt ống tai ngoài [6].",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong"
+      },
+      {
+        "line_no": 2,
+        "service_name_raw": "CT Scan xương thái dương không cản quang",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Triệu chứng đau dữ dội lan ra nửa đầu và sưng tấy sau tai rất dễ nhầm với bệnh lý Viêm xương chũm cấp tính [3]. CT Scan là chỉ định loại trừ cần thiết để đảm bảo không có ổ mủ phá hủy sào bào xương chũm hay mất các vách ngăn thông bào [3].",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong"
+      },
+      {
+        "line_no": 3,
+        "service_name_raw": "Đo thính lực đơn âm",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Bệnh nhân có triệu chứng ù tai và nghe kém. Xét nghiệm giúp loại trừ điếc tiếp nhận thần kinh và xác định đây chỉ là điếc dẫn truyền do nhọt bít tắc ống tai cơ học [1], [5].",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong"
+      },
+      {
+        "line_no": 4,
+        "service_name_raw": "Tổng phân tích tế bào máu (CBC)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Bệnh nhân có biểu hiện viêm tấy đỏ lan tỏa vùng sau tai kèm đau nhức mệt mỏi. Xét nghiệm máu giúp đánh giá mức độ đáp ứng viêm và tình trạng nhiễm trùng hệ thống để quyết định kháng sinh toàn thân [3].",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong"
+      }
+    ]
+  }
+}

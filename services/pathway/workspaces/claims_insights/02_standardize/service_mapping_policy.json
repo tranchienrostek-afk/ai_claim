@@ -1,0 +1,174 @@
+{
+  "version": "2026-03-28",
+  "alias_supplements": [
+    {
+      "service_code": "END-ENS-005",
+      "family_id": "endoscopy",
+      "aliases": [
+        "noi soi tai",
+        "tham kham noi soi tai",
+        "noi soi ong tai",
+        "soi tai"
+      ]
+    },
+    {
+      "service_code": "END-ENS-063",
+      "family_id": "endoscopy",
+      "aliases": [
+        "noi soi mui hong phong dai",
+        "noi soi phong dai mui hong",
+        "noi soi phong dai mui vom hong",
+        "noi soi mui vom hong",
+        "noi soi vom hong",
+        "tham kham noi soi mui vom hong",
+        "tham kham noi soi phong dai mui vom hong"
+      ]
+    },
+    {
+      "service_code": "FUN-DFT-006",
+      "family_id": "functional_test",
+      "aliases": [
+        "do thinh luc don am",
+        "thinh luc do don am",
+        "do thinh luc",
+        "audiogram don am"
+      ]
+    },
+    {
+      "service_code": "IMG-USG-010",
+      "family_id": "imaging",
+      "aliases": [
+        "sieu am he thong hach vung co",
+        "sieu am he thong hach co",
+        "sieu am hach vung co",
+        "sieu am hach co",
+        "sieu am vung co danh gia hach"
+      ]
+    },
+    {
+      "service_code": "END-ENS-138",
+      "family_id": "procedure_surgery",
+      "aliases": [
+        "sinh thiet khoi u vom",
+        "sinh thiet khoi u vom hong",
+        "sinh thiet u vom",
+        "bam sinh thiet khoi u vom",
+        "noi soi sinh thiet khoi u vom"
+      ]
+    },
+    {
+      "service_code": "IMG-CTN-015",
+      "family_id": "imaging",
+      "aliases": [
+        "ct scan mui xoang",
+        "chup ct mui xoang",
+        "ct xoang"
+      ]
+    },
+    {
+      "service_code": "END-ENS-041",
+      "family_id": "exam_consult",
+      "aliases": [
+        "kham tai duoi kinh hien vi",
+        "kham tai bang kinh hien vi",
+        "kham vi phau tai"
+      ]
+    },
+    {
+      "service_code": "END-ENS-138",
+      "family_id": "procedure_surgery",
+      "aliases": [
+        "sinh thiet khoi u hoc mui",
+        "sinh thiet khoi u hoc mui hong",
+        "sinh thiet khoi u hoc mui duong mui"
+      ]
+    },
+    {
+      "service_code": "IMG-XRY-270",
+      "family_id": "imaging",
+      "aliases": [
+        "chup mach xoa nen dsa",
+        "chup mach xoa nen",
+        "chup dsa",
+        "chup mach dsa",
+        "dsa va nut mach",
+        "chup mach xoa nen dsa va nut mach"
+      ]
+    },
+    {
+      "service_code": "END-ENS-045",
+      "family_id": "endoscopy",
+      "aliases": [
+        "soi thanh quan bang ong cung",
+        "noi soi thanh quan ong cung",
+        "soi thanh quan ong cung"
+      ]
+    },
+    {
+      "service_code": "IMG-CTN-013",
+      "family_id": "imaging",
+      "aliases": [
+        "mri so nao xuong da",
+        "mri so nao xuong da co tiem thuoc",
+        "mri so nao xuong da co tiem thuoc tuong phan",
+        "mri so nao co tiem thuoc",
+        "mri xuong da"
+      ]
+    }
+  ],
+  "family_only_aliases": [
+    {
+      "family_id": "imaging",
+      "aliases": [
+        "ct scan xuong thai duong",
+        "ct xuong thai duong",
+        "ct scan xuong thai duong khong can quang",
+        "ct xuong thai duong khong can quang",
+        "ct scan xuong chum",
+        "ct xuong chum",
+        "ct scan xuong chum khong can quang",
+        "ct xuong chum khong can quang",
+        "ct scan so mat",
+        "ct so mat",
+        "ct scan so mat co can quang",
+        "chup ct scan so mat co can quang",
+        "ct scan so mat co can quang tinh mach",
+        "ct scan co co can quang",
+        "ct co co can quang"
+      ]
+    },
+    {
+      "family_id": "endoscopy",
+      "aliases": [
+        "noi soi tai mui hong phong dai",
+        "noi soi mui hong phong dai",
+        "noi soi mui vom hong phong dai"
+      ]
+    },
+    {
+      "family_id": "functional_test",
+      "aliases": [
+        "nghiem phap ro me nhi",
+        "nghiem phap ro me",
+        "dien dong nhan do",
+        "dien dong nhan do eng",
+        "eng"
+      ]
+    },
+    {
+      "family_id": "drug_medication",
+      "aliases": [
+        "khi dung adrenaline 1 1000",
+        "tiem tinh mach corticoid"
+      ]
+    },
+    {
+      "family_id": "procedure_surgery",
+      "aliases": [
+        "mo khi quan cap cuu",
+        "phau thuat rach dan luu ap xe co",
+        "rach dan luu ap xe co"
+      ]
+    }
+  ]
+}

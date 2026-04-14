@@ -1,0 +1,426 @@
+[
+  {
+    "cau_chuyen_y_khoa": {
+      "tieu_de": "Test 1: Lời khai mang tính 'đặc hiệu' ẩn trong từ ngữ dân dã",
+      "benh_nhan": {
+        "gioi_tinh": "Nam",
+        "tuoi": 45
+      },
+      "benh_su_va_trieu_chung": {
+        "raw_sign_mentions": [
+          "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+          "Trong mủ vớt ra được vảy trắng lấp lánh như váng mỡ, thả vào nước nổi lềnh bềnh.",
+          "Đi lại hay bị lảo đảo muốn ngã."
+        ],
+        "ontology_extraction": {
+          "sign_concepts": [
+            {"concept": "Chảy mủ tai", "modifiers": ["Thối khẳn", "Lổn nhổn trắng", "Mảnh óng ánh như xà cừ", "Thả vào nước không tan", "Nổi váng"]},
+            {"concept": "Chóng mặt / Mất thăng bằng", "modifiers": ["Lảo đảo muốn ngã", "Liên quan đến tai trái"]}
+          ]
+        }
+      },
+      "nhan_dinh_ban_dau": "Từ lời khai dân dã, hệ thống bóc tách được các modifier cực kỳ đặc hiệu của khối Cholesteatoma (mủ thối khẳn, váng xà cừ không tan trong nước). Triệu chứng lảo đảo gợi ý biến chứng rò mê nhĩ. Hệ thống kích hoạt Disease Hypothesis: Viêm tai giữa mạn tính có Cholesteatoma biến chứng rò mê nhĩ.",
+      "chan_doan_cuoi_cung": "Viêm tai giữa mạn tính có Cholesteatoma trái."
+    },
+    "du_lieu_labeling_mau": {
+      "case_level": {
+        "request_id": "tc_onto_001",
+        "selected_profile_id": "prof_onto_01",
+        "testcase_title": "TC_Onto_Cholesteatoma_DirtyText",
+        "main_disease_name_vi": "Viêm tai giữa mạn tính có cholesteatoma",
+        "primary_icd10": "<chua_co_ICD>",
+        "secondary_icd10_list_pipe": "",
+        "specialty": "Tai",
+        "message_hash_id": "msg_onto_001",
+        "claim_id_or_sohoso": "claim_onto_001",
+        "why_this_case_was_selected": "Kiểm thử khả năng bóc tách modifier đặc hiệu từ văn bản thô để chẩn đoán Cholesteatoma và chỉ định nghiệm pháp rò mê nhĩ.",
+        "claim_raw_json": "claim_onto_001.json",
+        "icd_source": "phac_do_tmh_2015",
+        "signs_history_source": "phac_do_tmh_2015",
+        "lab_result_source": "phac_do_tmh_2015",
+        "reviewer_or_insurer_note_source": "note_onto_001",
+        "contract_or_plan_source": "plan_onto_001",
+        "chief_complaint": "Chảy mủ tai trái thối và đi lảo đảo.",
+        "initial_signs_pipe": "Mủ thối khẳn | Mảnh óng ánh xà cừ nổi váng | Chóng mặt",
+        "medical_history_pipe": "Chảy mủ tai mạn tính",
+        "initial_clinical_question": "Xác định bản chất mủ tai và đánh giá biến chứng tiền đình.",
+        "total_lines": 3,
+        "target_lines_for_labeling": 3,
+        "panel_services_present_pipe": "Khám tai dưới kính hiển vi | Nghiệm pháp rò mê nhĩ | CT Scan xương thái dương",
+        "delivery_deadline": "2026-03-28",
+        "employee_name": "ai_onto_tester",
+        "review_status": "submitted",
+        "manager_note": "Test 1"
+      },
+      "service_lines": [
+        {
+          "line_no": 1,
+          "service_name_raw": "Khám tai dưới kính hiển vi",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Theo phác đồ, mủ có vảy trắng óng ánh cần khám dưới kính hiển vi để xác định các mảnh biểu bì (Cholesteatoma) tại lỗ thủng góc sau trên.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 2,
+          "service_name_raw": "Nghiệm pháp rò mê nhĩ",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Bệnh nhân có chóng mặt lảo đảo trên nền viêm tai mạn tính. Phác đồ yêu cầu làm nghiệm pháp rò mê nhĩ (gây áp lực ống tai ngoài xem có chóng mặt/động mắt không) để xác định biến chứng.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 3,
+          "service_name_raw": "CT Scan xương thái dương",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Chỉ định bắt buộc để đánh giá mức độ phá hủy xương (tường thượng nhĩ, cống Fallope, ống bán khuyên) do cholesteatoma gây ra.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        }
+      ]
+    }
+  },
+  {
+    "cau_chuyen_y_khoa": {
+      "tieu_de": "Test 2: Phân biệt bệnh lý theo 'Modifier' thời gian và độ tuổi",
+      "benh_nhan": {
+        "gioi_tinh": "Nam",
+        "tuoi": 14
+      },
+      "benh_su_va_trieu_chung": {
+        "raw_sign_mentions": [
+          "Mấy hôm nay hay bị ộc máu mũi ồ ạt, máu tự chảy rồi tự cầm.",
+          "Bị tịt mũi một bên.",
+          "Soi đèn pin thấy cục thịt nhẵn màu đỏ hồng tịt kín ở sâu bên trong."
+        ],
+        "ontology_extraction": {
+          "sign_concepts": [
+            {"concept": "Chảy máu mũi", "modifiers": ["Tự phát", "Tự cầm", "Ồ ạt", "Tuổi thiếu niên", "Nam giới"]},
+            {"concept": "Ngạt mũi", "modifiers": ["Một bên", "Kéo dài"]},
+            {"concept": "Khối u hốc mũi", "modifiers": ["Màu hồng đỏ", "Nhẵn", "Che lấp cửa mũi sau"]}
+          ]
+        }
+      },
+      "nhan_dinh_ban_dau": "Sự kết hợp của các modifier: 'Nam giới', 'Tuổi thiếu niên (14 tuổi)', 'Chảy máu mũi ồ ạt tự cầm' và 'U hồng nhẵn cửa mũi sau' kích hoạt lập tức Disease Hypothesis: U xơ mạch vòm mũi họng. Hệ thống Rule Graph sẽ chặn chỉ định sinh thiết thông thường.",
+      "chan_doan_cuoi_cung": "U xơ mạch vòm mũi họng."
+    },
+    "du_lieu_labeling_mau": {
+      "case_level": {
+        "request_id": "tc_onto_002",
+        "selected_profile_id": "prof_onto_02",
+        "testcase_title": "TC_Onto_JNA_Contraindication",
+        "main_disease_name_vi": "U xơ mạch vòm mũi họng",
+        "primary_icd10": "<chua_co_ICD>",
+        "secondary_icd10_list_pipe": "",
+        "specialty": "Mũi xoang",
+        "message_hash_id": "msg_onto_002",
+        "claim_id_or_sohoso": "claim_onto_002",
+        "why_this_case_was_selected": "Kiểm thử khả năng áp dụng Rule chống chỉ định (Contraindication): Bắt lỗi chỉ định sinh thiết mù trên u xơ mạch vòm do nguy cơ chảy máu tử vong.",
+        "claim_raw_json": "claim_onto_002.json",
+        "icd_source": "phac_do_tmh_2015",
+        "signs_history_source": "phac_do_tmh_2015",
+        "lab_result_source": "phac_do_tmh_2015",
+        "reviewer_or_insurer_note_source": "note_onto_002",
+        "contract_or_plan_source": "plan_onto_002",
+        "chief_complaint": "Chảy máu mũi ồ ạt tự cầm và ngạt mũi một bên ở trẻ nam 14 tuổi.",
+        "initial_signs_pipe": "Khối u hồng đỏ nhẵn | Che lấp cửa mũi sau",
+        "medical_history_pipe": "Không",
+        "initial_clinical_question": "Chẩn đoán hình ảnh u xơ mạch và chuẩn bị can thiệp mạch máu.",
+        "total_lines": 3,
+        "target_lines_for_labeling": 3,
+        "panel_services_present_pipe": "CT Scan sọ mặt có cản quang | Chụp DSA nút mạch | Sinh thiết khối u hốc mũi",
+        "delivery_deadline": "2026-03-28",
+        "employee_name": "ai_onto_tester",
+        "review_status": "submitted",
+        "manager_note": "Test 2"
+      },
+      "service_lines": [
+        {
+          "line_no": 1,
+          "service_name_raw": "CT Scan sọ mặt có cản quang tĩnh mạch",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Chỉ định bắt buộc để xác định vị trí, sự xâm lấn của khối u xơ mạch vòm mũi họng và chuẩn bị cho bước gây tắc mạch.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 2,
+          "service_name_raw": "Sinh thiết khối u hốc mũi",
+          "final_label": "DENIAL",
+          "reason_layer": "medical",
+          "reason_text": "Chống chỉ định tuyệt đối. U xơ mạch vòm mũi họng bản chất là tăng sinh mạch máu, tổ chức xơ bao quanh các hồ máu. Việc sinh thiết thông thường tại phòng khám có thể gây chảy máu ồ ạt nguy hiểm tính mạng.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong",
+          "reviewer_note": "Bắt lỗi do vi phạm Rule an toàn."
+        },
+        {
+          "line_no": 3,
+          "service_name_raw": "Chụp mạch xóa nền (DSA) và nút mạch",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Theo nguyên tắc điều trị u xơ mạch vòm mũi họng, phải tiến hành chụp mạch và nút mạch (tắc mạch) cấp máu cho khối u trước khi mổ để hạn chế chảy máu.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        }
+      ]
+    }
+  },
+  {
+    "cau_chuyen_y_khoa": {
+      "tieu_de": "Test 3: Dấu hiệu thanh quản đặc trưng ở trẻ em",
+      "benh_nhan": {
+        "gioi_tinh": "Nam",
+        "tuoi": 2
+      },
+      "benh_su_va_trieu_chung": {
+        "raw_sign_mentions": [
+          "Nửa đêm ho ré lên, tiếng ho cứng dội vang như chó sủa.",
+          "Khi khóc thở rít lên từng hồi, ngực lõm cả vào."
+        ],
+        "ontology_extraction": {
+          "sign_concepts": [
+            {"concept": "Ho", "modifiers": ["Ông ổng", "Tiếng ho cứng", "Như chó sủa"]},
+            {"concept": "Khó thở thanh quản", "modifiers": ["Đột ngột về đêm", "Thở rít khi khóc", "Co rút lõm ngực", "Độ IIB"]}
+          ]
+        }
+      },
+      "nhan_dinh_ban_dau": "Từ các modifier đặc trưng về nhi khoa: tiếng ho ông ổng, khó thở rít về đêm, ngực lõm (Khó thở độ IIB), hệ thống loại trừ 'mềm sụn thanh quản' (bệnh bẩm sinh) và đưa ra Disease Hypothesis: Viêm thanh quản cấp tính hạ thanh môn (Croup).",
+      "chan_doan_cuoi_cung": "Viêm thanh quản cấp tính hạ thanh môn (Croup)."
+    },
+    "du_lieu_labeling_mau": {
+      "case_level": {
+        "request_id": "tc_onto_003",
+        "selected_profile_id": "prof_onto_03",
+        "testcase_title": "TC_Onto_Croup_Peds",
+        "main_disease_name_vi": "Viêm thanh quản cấp tính hạ thanh môn",
+        "primary_icd10": "<chua_co_ICD>",
+        "secondary_icd10_list_pipe": "",
+        "specialty": "Cấp cứu",
+        "message_hash_id": "msg_onto_003",
+        "claim_id_or_sohoso": "claim_onto_003",
+        "why_this_case_was_selected": "Kiểm thử khả năng nhận diện dấu hiệu lâm sàng nhi khoa (ho ông ổng, thở rít) và bắt lỗi chống chỉ định soi thanh quản ống cứng gây kích thích.",
+        "claim_raw_json": "claim_onto_003.json",
+        "icd_source": "phac_do_tmh_2015",
+        "signs_history_source": "phac_do_tmh_2015",
+        "lab_result_source": "phac_do_tmh_2015",
+        "reviewer_or_insurer_note_source": "note_onto_003",
+        "contract_or_plan_source": "plan_onto_003",
+        "chief_complaint": "Trẻ 2 tuổi khó thở rít và ho ông ổng về đêm.",
+        "initial_signs_pipe": "Rút lõm ngực | Thở rít khi khóc",
+        "medical_history_pipe": "Cảm sổ mũi 2 ngày",
+        "initial_clinical_question": "Giải quyết tình trạng suy hô hấp cấp vùng hạ thanh môn.",
+        "total_lines": 3,
+        "target_lines_for_labeling": 3,
+        "panel_services_present_pipe": "Khí dung Adrenaline | Tiêm tĩnh mạch Corticoid | Soi thanh quản bằng ống cứng",
+        "delivery_deadline": "2026-03-28",
+        "employee_name": "ai_onto_tester",
+        "review_status": "submitted",
+        "manager_note": "Test 3"
+      },
+      "service_lines": [
+        {
+          "line_no": 1,
+          "service_name_raw": "Khí dung Adrenaline 1/1000",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Bệnh nhi có biểu hiện khó thở thanh quản độ IIB (thở rít, rút lõm ngực). Theo phác đồ, nếu khó thở nhiều cần sử dụng khí dung Adrenaline để chống co thắt và phù nề.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 2,
+          "service_name_raw": "Tiêm tĩnh mạch Corticoid",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Kháng viêm dạng chích (corticoid) là chỉ định điều trị nội khoa tiêu chuẩn cho tình trạng Croup độ nặng (IIB, III) khi phải nhập viện.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 3,
+          "service_name_raw": "Soi thanh quản bằng ống cứng",
+          "final_label": "DENIAL",
+          "reason_layer": "medical",
+          "reason_text": "Phác đồ chống chỉ định: Đối với trẻ em bị viêm thanh quản cấp hạ thanh môn, không nên soi thanh quản vào lúc này vì có thể làm trẻ kích thích gây co thắt thanh quản, khó thở sẽ nặng thêm.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong",
+          "reviewer_note": "Chỉ định gây hại cho bệnh nhi cấp cứu."
+        }
+      ]
+    }
+  },
+  {
+    "cau_chuyen_y_khoa": {
+      "tieu_de": "Test 4: Dấu hiệu cấp cứu 'Red Flag' vùng cổ",
+      "benh_nhan": {
+        "gioi_tinh": "Nữ",
+        "tuoi": 55
+      },
+      "benh_su_va_trieu_chung": {
+        "raw_sign_mentions": [
+          "Cổ sưng to tướng, đau buốt, sờ nóng gian.",
+          "Nằm ngửa thở không được, nghẹn ứ, nuốt nước bọt không trôi.",
+          "Đang sốt hầm hập."
+        ],
+        "ontology_extraction": {
+          "sign_concepts": [
+            {"concept": "Khối sưng vùng cổ", "modifiers": ["Nóng, đỏ, đau", "Mất lọc cọc thanh quản cột sống"]},
+            {"concept": "Khó thở", "modifiers": ["Tăng khi nằm ngửa", "Nghẹn ứ"]},
+            {"concept": "Hội chứng nhiễm trùng", "modifiers": ["Sốt cao", "Nuốt khó"]}
+          ]
+        }
+      },
+      "nhan_dinh_ban_dau": "Bóc tách các modifier 'cổ sưng nóng đỏ', 'khó thở tăng khi nằm ngửa', 'mất lọc cọc thanh quản cột sống', hệ thống lập tức xếp vào nhóm 'Red Flag' cấp cứu. Disease Hypothesis: Nhiễm trùng khoang cổ sâu (Áp xe cổ sâu).",
+      "chan_doan_cuoi_cung": "Nhiễm trùng khoang cổ sâu."
+    },
+    "du_lieu_labeling_mau": {
+      "case_level": {
+        "request_id": "tc_onto_004",
+        "selected_profile_id": "prof_onto_04",
+        "testcase_title": "TC_Onto_DeepNeckInfection_RedFlag",
+        "main_disease_name_vi": "Nhiễm trùng khoang cổ sâu",
+        "primary_icd10": "<chua_co_ICD>",
+        "secondary_icd10_list_pipe": "",
+        "specialty": "Đầu mặt cổ",
+        "message_hash_id": "msg_onto_004",
+        "claim_id_or_sohoso": "claim_onto_004",
+        "why_this_case_was_selected": "Kiểm thử khả năng nhận diện dấu hiệu Red Flag vùng cổ (nguy cơ chèn ép đường thở) để duyệt các chỉ định hình ảnh học đắt tiền (CT Scan) và thủ thuật cấp cứu.",
+        "claim_raw_json": "claim_onto_004.json",
+        "icd_source": "phac_do_tmh_2015",
+        "signs_history_source": "phac_do_tmh_2015",
+        "lab_result_source": "phac_do_tmh_2015",
+        "reviewer_or_insurer_note_source": "note_onto_004",
+        "contract_or_plan_source": "plan_onto_004",
+        "chief_complaint": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+        "initial_signs_pipe": "Cổ sưng nóng đỏ đau | Mất lọc cọc thanh quản cột sống | Khó thở tăng khi nằm ngửa",
+        "medical_history_pipe": "Tiểu đường không kiểm soát",
+        "initial_clinical_question": "Xác định vị trí ổ áp xe cổ sâu và giải phóng chèn ép đường thở.",
+        "total_lines": 3,
+        "target_lines_for_labeling": 3,
+        "panel_services_present_pipe": "CT Scan cổ có cản quang | Mở khí quản cấp cứu | Phẫu thuật rạch dẫn lưu áp xe cổ",
+        "delivery_deadline": "2026-03-28",
+        "employee_name": "ai_onto_tester",
+        "review_status": "submitted",
+        "manager_note": "Test 4"
+      },
+      "service_lines": [
+        {
+          "line_no": 1,
+          "service_name_raw": "CT Scan cổ có cản quang",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Chỉ định cần thiết để xác định chẩn đoán, phân biệt giữa viêm mô tế bào và áp xe cổ sâu, đồng thời hướng dẫn vị trí rạch dẫn lưu an toàn tránh các cấu trúc sinh tồn.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 2,
+          "service_name_raw": "Mở khí quản cấp cứu",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Bệnh nhân có biểu hiện khó thở, tăng khi nằm ngửa do phù nề chèn ép ống họng. Theo phác đồ, bảo đảm đường thở bằng mở khí quản là nguyên tắc ưu tiên hàng đầu trong áp xe cổ sâu.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 3,
+          "service_name_raw": "Phẫu thuật rạch dẫn lưu áp xe cổ",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Đây là phương pháp điều trị ngoại khoa bắt buộc để giải phóng mủ, giảm áp lực chèn ép và điều trị dứt điểm nhiễm trùng khoang cổ sâu.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        }
+      ]
+    }
+  },
+  {
+    "cau_chuyen_y_khoa": {
+      "tieu_de": "Test 5: Sự giao thoa triệu chứng (Overlap Symptoms) và loại trừ",
+      "benh_nhan": {
+        "gioi_tinh": "Nữ",
+        "tuoi": 50
+      },
+      "benh_su_va_trieu_chung": {
+        "raw_sign_mentions": [
+          "Điếc đột ngột tai phải, trong tai ù ù tiếng xay lúa.",
+          "Chóng mặt quay cuồng, chao đảo, buồn nôn kinh khủng, kéo dài 2 tiếng."
+        ],
+        "ontology_extraction": {
+          "sign_concepts": [
+            {"concept": "Nghe kém / Điếc", "modifiers": ["Đột ngột", "Tiếp nhận", "Một bên"]},
+            {"concept": "Ù tai", "modifiers": ["Tiếng trầm", "Như tiếng xay lúa"]},
+            {"concept": "Chóng mặt", "modifiers": ["Kịch phát quay cuồng", "Kèm nôn", "Kéo dài hàng giờ"]}
+          ]
+        }
+      },
+      "nhan_dinh_ban_dau": "Hệ thống phát hiện tam chứng: Chóng mặt kịch phát, ù tai tiếng trầm, điếc tiếp nhận. Graph lập tức kích hoạt 2 Disease Hypothesis giao thoa: Bệnh Ménière và U dây thần kinh VIII. Hệ thống yêu cầu Observation Concept là MRI sọ não để đóng vai trò 'negative_exclusion_clue' loại trừ u não.",
+      "chan_doan_cuoi_cung": "Bệnh Ménière."
+    },
+    "du_lieu_labeling_mau": {
+      "case_level": {
+        "request_id": "tc_onto_005",
+        "selected_profile_id": "prof_onto_05",
+        "testcase_title": "TC_Onto_Meniere_vs_AcousticNeuroma",
+        "main_disease_name_vi": "Bệnh Ménière",
+        "primary_icd10": "<chua_co_ICD>",
+        "secondary_icd10_list_pipe": "",
+        "specialty": "Tai",
+        "message_hash_id": "msg_onto_005",
+        "claim_id_or_sohoso": "claim_onto_005",
+        "why_this_case_was_selected": "Kiểm thử khả năng xử lý Overlap Symptoms. Đánh giá tính hợp lý của chỉ định đắt tiền (MRI sọ não) khi nó đóng vai trò 'Negative Exclusion Clue' để loại trừ u dây thần kinh số 8 trong bệnh cảnh giống hệt Meniere.",
+        "claim_raw_json": "claim_onto_005.json",
+        "icd_source": "phac_do_tmh_2015",
+        "signs_history_source": "phac_do_tmh_2015",
+        "lab_result_source": "phac_do_tmh_2015",
+        "reviewer_or_insurer_note_source": "note_onto_005",
+        "contract_or_plan_source": "plan_onto_005",
+        "chief_complaint": "Chóng mặt kịch phát quay cuồng, ù tai tiếng xay lúa và điếc đột ngột tai phải.",
+        "initial_signs_pipe": "Điếc tiếp nhận tần số thấp | Chóng mặt kịch phát | Ù tai tiếng trầm",
+        "medical_history_pipe": "Không có",
+        "initial_clinical_question": "Phân biệt rối loạn tiền đình ngoại biên (Ménière) với u góc cầu tiểu não (U dây thần kinh VIII).",
+        "total_lines": 3,
+        "target_lines_for_labeling": 3,
+        "panel_services_present_pipe": "Đo thính lực đồ | Điện động nhãn đồ (ENG) | MRI sọ não - xương đá có tiêm thuốc",
+        "delivery_deadline": "2026-03-28",
+        "employee_name": "ai_onto_tester",
+        "review_status": "submitted",
+        "manager_note": "Test 5"
+      },
+      "service_lines": [
+        {
+          "line_no": 1,
+          "service_name_raw": "Đo thính lực đồ",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Chỉ định cần thiết để bộc lộ bằng chứng trực tiếp của bệnh Ménière là điếc do thần kinh cảm giác tần số thấp ở tai bệnh.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 2,
+          "service_name_raw": "Điện động nhãn đồ (ENG)",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Chỉ định để khảo sát động mắt, ghi nhận và đánh giá sự bất thường của hệ thống tiền đình ngoại biên trong cơn chóng mặt kịch phát.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 3,
+          "service_name_raw": "MRI sọ não - xương đá có tiêm thuốc",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Theo phác đồ, chụp MRI hoặc CT xương đá là bắt buộc để loại trừ u dây thần kinh thính giác (dây VIII) vì bệnh lý u não này có những triệu chứng giống hệt như bệnh Ménière.",
+          "evidence_source": "phac_do_tmh_2015",
+          "confidence": "strong",
+          "reviewer_note": "Negative exclusion clue (Loại trừ bệnh nguy hiểm)."
+        }
+      ]
+    }
+  }
+]

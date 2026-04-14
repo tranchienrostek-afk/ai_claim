@@ -1,0 +1,208 @@
+{
+  "generated_at": "2026-03-29T19:46:38.897680+07:00",
+  "input_file": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11.json",
+  "aggregate": {
+    "evaluated_case_count": 5,
+    "total_service_lines": 15,
+    "base_high_confidence_total": 1,
+    "hybrid_high_confidence_total": 1,
+    "base_family_resolved_total": 13,
+    "hybrid_family_resolved_total": 15,
+    "disease_top1_hit_count": 5,
+    "disease_top3_hit_count": 5,
+    "sign_service_overlap_case_count": 3
+  },
+  "cases": [
+    {
+      "request_id": "tc_onto_001",
+      "testcase_title": "TC_Onto_Cholesteatoma_DirtyText",
+      "expected_disease": "Viêm tai giữa mạn tính có cholesteatoma",
+      "specialty": "Tai",
+      "service_count": 3,
+      "base_high_confidence_count": 0,
+      "hybrid_high_confidence_count": 0,
+      "base_family_resolved_count": 3,
+      "hybrid_family_resolved_count": 3,
+      "top1_disease": "Viêm tai giữa mạn tính có cholesteatoma",
+      "top3_diseases": [
+        "Viêm tai giữa mạn tính có cholesteatoma",
+        "Chóng mặt kịch phát lành tính",
+        "Bệnh Ménière"
+      ],
+      "disease_top1_hit": true,
+      "disease_top3_hit": true,
+      "sign_service_overlap_codes": [
+        "END-ENS-041"
+      ],
+      "base_confidence_mix": {
+        "HIGH": 0,
+        "MEDIUM": 1,
+        "LOW": 0,
+        "REVIEW": 2
+      },
+      "hybrid_confidence_mix": {
+        "HIGH": 0,
+        "MEDIUM": 0,
+        "LOW": 0,
+        "REVIEW": 3
+      },
+      "experience_match_count": 5,
+      "report_json": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_001_test_report.json",
+      "report_md": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_001_test_report.md"
+    },
+    {
+      "request_id": "tc_onto_002",
+      "testcase_title": "TC_Onto_JNA_Contraindication",
+      "expected_disease": "U xơ mạch vòm mũi họng",
+      "specialty": "Mũi xoang",
+      "service_count": 3,
+      "base_high_confidence_count": 0,
+      "hybrid_high_confidence_count": 0,
+      "base_family_resolved_count": 3,
+      "hybrid_family_resolved_count": 3,
+      "top1_disease": "U xơ mạch vòm mũi họng",
+      "top3_diseases": [
+        "U xơ mạch vòm mũi họng",
+        "Viêm mũi họng cấp [cảm thường]",
+        "Bệnh Ménière"
+      ],
+      "disease_top1_hit": true,
+      "disease_top3_hit": true,
+      "sign_service_overlap_codes": [
+        "IMG-XRY-270"
+      ],
+      "base_confidence_mix": {
+        "HIGH": 0,
+        "MEDIUM": 1,
+        "LOW": 0,
+        "REVIEW": 2
+      },
+      "hybrid_confidence_mix": {
+        "HIGH": 0,
+        "MEDIUM": 0,
+        "LOW": 0,
+        "REVIEW": 3
+      },
+      "experience_match_count": 5,
+      "report_json": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_002_test_report.json",
+      "report_md": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_002_test_report.md"
+    },
+    {
+      "request_id": "tc_onto_003",
+      "testcase_title": "TC_Onto_Croup_Peds",
+      "expected_disease": "Viêm thanh quản cấp tính hạ thanh môn",
+      "specialty": "Cấp cứu",
+      "service_count": 3,
+      "base_high_confidence_count": 0,
+      "hybrid_high_confidence_count": 0,
+      "base_family_resolved_count": 2,
+      "hybrid_family_resolved_count": 3,
+      "top1_disease": "Viêm thanh quản cấp tính hạ thanh môn",
+      "top3_diseases": [
+        "Viêm thanh quản cấp tính hạ thanh môn",
+        "Viêm tai giữa mạn tính có cholesteatoma",
+        "Nhiễm trùng khoang cổ sâu"
+      ],
+      "disease_top1_hit": true,
+      "disease_top3_hit": true,
+      "sign_service_overlap_codes": [],
+      "base_confidence_mix": {
+        "HIGH": 0,
+        "MEDIUM": 0,
+        "LOW": 1,
+        "REVIEW": 2
+      },
+      "hybrid_confidence_mix": {
+        "HIGH": 0,
+        "MEDIUM": 0,
+        "LOW": 0,
+        "REVIEW": 3
+      },
+      "experience_match_count": 5,
+      "report_json": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_003_test_report.json",
+      "report_md": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_003_test_report.md"
+    },
+    {
+      "request_id": "tc_onto_004",
+      "testcase_title": "TC_Onto_DeepNeckInfection_RedFlag",
+      "expected_disease": "Nhiễm trùng khoang cổ sâu",
+      "specialty": "Đầu mặt cổ",
+      "service_count": 3,
+      "base_high_confidence_count": 0,
+      "hybrid_high_confidence_count": 0,
+      "base_family_resolved_count": 2,
+      "hybrid_family_resolved_count": 3,
+      "top1_disease": "Nhiễm trùng khoang cổ sâu",
+      "top3_diseases": [
+        "Nhiễm trùng khoang cổ sâu",
+        "Viêm thanh quản cấp tính hạ thanh môn",
+        "Viêm phế quản phổi, không đặc hiệu"
+      ],
+      "disease_top1_hit": true,
+      "disease_top3_hit": true,
+      "sign_service_overlap_codes": [],
+      "base_confidence_mix": {
+        "HIGH": 0,
+        "MEDIUM": 0,
+        "LOW": 0,
+        "REVIEW": 3
+      },
+      "hybrid_confidence_mix": {
+        "HIGH": 0,
+        "MEDIUM": 0,
+        "LOW": 0,
+        "REVIEW": 3
+      },
+      "experience_match_count": 5,
+      "report_json": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_004_test_report.json",
+      "report_md": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_004_test_report.md"
+    },
+    {
+      "request_id": "tc_onto_005",
+      "testcase_title": "TC_Onto_Meniere_vs_AcousticNeuroma",
+      "expected_disease": "Bệnh Ménière",
+      "specialty": "Tai",
+      "service_count": 3,
+      "base_high_confidence_count": 1,
+      "hybrid_high_confidence_count": 1,
+      "base_family_resolved_count": 3,
+      "hybrid_family_resolved_count": 3,
+      "top1_disease": "Bệnh Ménière",
+      "top3_diseases": [
+        "Bệnh Ménière",
+        "Chóng mặt kịch phát lành tính",
+        "Viêm thanh quản cấp tính hạ thanh môn"
+      ],
+      "disease_top1_hit": true,
+      "disease_top3_hit": true,
+      "sign_service_overlap_codes": [
+        "FUN-DFT-006",
+        "FUN-DFT-028",
+        "IMG-CTN-013"
+      ],
+      "base_confidence_mix": {
+        "HIGH": 1,
+        "MEDIUM": 0,
+        "LOW": 1,
+        "REVIEW": 1
+      },
+      "hybrid_confidence_mix": {
+        "HIGH": 1,
+        "MEDIUM": 0,
+        "LOW": 0,
+        "REVIEW": 2
+      },
+      "experience_match_count": 5,
+      "report_json": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_005_test_report.json",
+      "report_md": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_005_test_report.md"
+    }
+  ],
+  "experience_artifacts": {
+    "run_jsonl": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\experience_memory\\run_reasoning_experiences.jsonl",
+    "summary_json": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\experience_memory\\reasoning_experience_summary.json",
+    "summary_md": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\experience_memory\\reasoning_experience_summary.md",
+    "memory_path": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\experience_memory\\reasoning_experience_memory.jsonl",
+    "appended": 0,
+    "memory_total": 12
+  }
+}

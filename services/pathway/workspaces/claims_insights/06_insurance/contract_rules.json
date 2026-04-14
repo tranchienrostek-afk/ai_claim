@@ -1,0 +1,1292 @@
+{
+  "version": "1.0",
+  "generated_at": "2026-03-25T07:23:34.243158+00:00",
+  "sources": {
+    "main_claims": "06_insurance\\Mapping quyền lợi + Loại trừ\\Danh sách hồ sơ loại trừ.xlsx",
+    "reason_dictionary": "06_insurance\\Mapping quyền lợi + Loại trừ\\Loại trừ\\Lý do loại trừ.xlsx",
+    "summary_report": "04_reports\\tong_hop_hdbh.json"
+  },
+  "taxonomy": {
+    "exclusion_items": [
+      {
+        "code": "ma18",
+        "reason": "Đơn thuốc kê quá 30 ngày theo quy định của BYT",
+        "group": "Thuốc",
+        "process_path": "Hồ sơ => Bộ Y tế => Hợp đồng",
+        "source_note": "1. Bộ Y Tế: 26/2025/TT-BYT 2. Nhóm loại trừ \"Thuốc\" -PL3 2025-FPT NV (sheet 2)"
+      },
+      {
+        "code": "m33",
+        "reason": "Mua thuốc quá 05 ngày theo quy định Bộ Y Tế",
+        "group": "Thuốc",
+        "process_path": "Hồ sơ =>Bộ Y tế => Hợp đồng",
+        "source_note": "1. Bộ Y Tế: 26/2025/TT-BYT 2. Nhóm loại trừ \"Thuốc\" -PL3 2025-FPT NV"
+      },
+      {
+        "code": "ma03",
+        "reason": "Thuốc không phù hợp",
+        "group": "Thuốc",
+        "process_path": "Hồ sơ => Quy tắc => Hợp đồng ( Diễn giải: Xác định loại trừ trong quy tắc sau đó tới hợp đồng Hợp đồng sẽ có các trường hợp: + Hợp đồng mở rộng thanh toán cho điểm loại trừ trong quy tắc => thanh toán + Hợp đồng không đề cập những điểm loại trừ trong quy tắc => từ chối. + Hợp đồng đề cập thêm các điểm loại trừ mới so với quy tắc => từ chối",
+        "source_note": "1.Quy tắc bảo hiểm: Khoản 9 - Chương I- Quy tắc bảo hiểm số 711/2012/QĐ - Định nghĩa 2. Nhóm loại trừ \"Thuốc\" -PL3 2025-FPT NV (sheet 2)"
+      },
+      {
+        "code": "ma16",
+        "reason": "Thuốc kê không nhằm mục đích điều trị",
+        "group": "Thuốc",
+        "process_path": "Hồ sơ => Quy tắc => Hợp đồng",
+        "source_note": "1.Quy tắc bảo hiểm: Khoản 9 - Chương I- Quy tắc bảo hiểm số 711/2012/QĐ - Định nghĩa 2. Nhóm loại trừ \"Thuốc\" -PL3 2025-FPT NV (sheet 2)"
+      },
+      {
+        "code": "ma17",
+        "reason": "Chi phí thuốc bổ, vitamin, hỗ trợ vượt quá chi phí thuốc điều trị chính",
+        "group": "Thuốc",
+        "process_path": "Hồ sơ => Quy tắc => Hợp đồng",
+        "source_note": "Hiện các hợp đồng đang chọn chưa áp dụng điểm loại trừ này. Ý nghĩa tương đương điểm loại trừ \"m31\""
+      },
+      {
+        "code": "ma20",
+        "reason": "Mua thuốc dư/ khác với bác sĩ kê đơn",
+        "group": "Thuốc",
+        "process_path": "Hồ sơ=> Quy tắc",
+        "source_note": "1.Quy tắc bảo hiểm: Khoản 9 - Chương I- Quy tắc bảo hiểm số 711/2012/QĐ"
+      },
+      {
+        "code": "ma31",
+        "reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+        "group": "Thuốc",
+        "process_path": "Hồ sơ => Quy tắc => Hợp đồng",
+        "source_note": "1.Quy tắc bảo hiểm: Khoản 9 - Chương I- Quy tắc bảo hiểm số 711/2012/QĐ - Định nghĩa 2. Nhóm loại trừ \"Thuốc\" -PL3 2025-FPT NV (sheet 2)"
+      },
+      {
+        "code": "m32",
+        "reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+        "group": "Thuốc",
+        "process_path": "Hồ sơ => Quy tắc => Hợp đồng",
+        "source_note": "1. Quy tắc bảo hiểm: Khoản 17 - Chương III: Điểm loại - Quy tắc bảo hiểm số 711/2012/QĐ 2. Nhóm loại trừ \"Thuốc\" -PL3 2025-FPT NV (sheet 2)"
+      },
+      {
+        "code": "ma004",
+        "reason": "Dịch vụ không phù hợp",
+        "group": "Loại trừ - Quyền lợi",
+        "process_path": "Hồ sơ => Quy tắc => Hợp đồng",
+        "source_note": "1.Quy tắc bảo hiểm: Khoản 9 - Chương I- Quy tắc bảo hiểm số 711/2012/QĐ - Định nghĩa 2. Quy tắc bảo hiểm: Khoản 10 - Chương I- Quy tắc bảo hiểm số 711/2012/QĐ - Định nghĩa 3. Nhóm loại trừ \"Loại trừ - Quyền lợi\" -PL3 2025-FPT NV (sheet 2)"
+      },
+      {
+        "code": "ma05",
+        "reason": "Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+        "group": "Loại trừ - Quyền lợi",
+        "process_path": "Hồ sơ => Quy tắc => Hợp đồng",
+        "source_note": "1. Chương III: Điểm loại - Quy tắc bảo hiểm số 711/2012/QĐ 2. Nhóm loại trừ \"Loại trừ - Quyền lợi\" -PL3 2025-FPT NV (sheet 2)"
+      },
+      {
+        "code": "ma06",
+        "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+        "group": "Cận lâm sàng",
+        "process_path": "Hồ sơ => Quy tắc => Hợp đồng",
+        "source_note": "1.Quy tắc bảo hiểm: Khoản 9 - Chương I- Quy tắc bảo hiểm số 711/2012/QĐ - Định nghĩa 2. Nhóm loại trừ \"Cận lâm sàng\" -PL3 2025-FPT NV (sheet 2)"
+      },
+      {
+        "code": "ma21",
+        "reason": "Điều trị theo yêu cầu của người được bảo hiểm",
+        "group": "Loại trừ - Quyền lợi",
+        "process_path": "Hồ sơ => Quy tắc => Hợp đồng",
+        "source_note": "1.Quy tắc bảo hiểm: Khoản 9 - Chương I- Quy tắc bảo hiểm số 711/2012/QĐ - Định nghĩa 2. Nhóm loại trừ \"Loại trừ - Quyền lợi\" -PL3 2025-FPT NV (sheet 2)"
+      },
+      {
+        "code": "ma27",
+        "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+        "group": "Loại trừ - Quyền lợi",
+        "process_path": "Hồ sơ => Quy tắc => Hợp đồng",
+        "source_note": "1.Quy tắc bảo hiểm:Chương VI- Điều khoản mở rộng -Quy tắc bảo hiểm số 711/2012/QĐ 2.Quy tắc bảo hiểm: Chương I- Quy tắc bảo hiểm số 711/2012/QĐ - Định nghĩa 3. Nhóm loại trừ \"Loại trừ - Quyền lợi\" -PL3 2025-FPT NV (sheet 2)"
+      },
+      {
+        "code": "ma28",
+        "reason": "Không thuộc đối tượng được bảo hiểm",
+        "group": "Loại trừ - Quyền lợi",
+        "process_path": "Hồ sơ => Quy tắc => Hợp đồng",
+        "source_note": "1.Quy tắc bảo hiểm:Chương VI- Điều khoản mở rộng -Quy tắc bảo hiểm số 711/2012/QĐ 2.Quy tắc bảo hiểm: Chương I- Quy tắc bảo hiểm số 711/2012/QĐ - Định nghĩa 3. Nhóm loại trừ \"Loại trừ - Quyền lợi\" -PL3 2025-FPT NV (sheet 2)"
+      },
+      {
+        "code": "ma39",
+        "reason": "Khám không có hướng điều trị",
+        "group": "Khám không có hướng điều trị",
+        "process_path": "Hồ sơ => Quy tắc => Hợp đồng",
+        "source_note": "1.Quy tắc bảo hiểm: Khoản 9 - Chương I- Quy tắc bảo hiểm số 711/2012/QĐ - Định nghĩa 2. Nhóm loại trừ \"Khám không có hướng điều trị\" -PL3 2025-FPT NV (sheet 2)"
+      },
+      {
+        "code": "ma15",
+        "reason": "Đang trong thời gian chờ với bệnh đặc biệt/bệnh có sẵn",
+        "group": "Thời gian chờ",
+        "process_path": "Thời gian chờ: Quy tắc => Hợp đồng",
+        "source_note": "1.Quy tắc bảo hiểm: Khoản 2,3 - Chương I- Quy tắc bảo hiểm số 711/2012/QĐ 2.Quy tắc bảo hiểm: Khoản 9,10 - Chương III: Điểm loại - Quy tắc bảo hiểm số 711/2012/QĐ 3.Nhóm loại trừ \"Thời gian chờ\" -PL3 2025-FPT NV (sheet 2)"
+      },
+      {
+        "code": "ma30",
+        "reason": "Từ chối do chưa qua thời gian chờ bệnh thông thường",
+        "group": "Thời gian chờ",
+        "process_path": "Thời gian chờ: Quy tắc => Hợp đồng",
+        "source_note": "nan"
+      },
+      {
+        "code": "ma07",
+        "reason": "Chưa cung cấp đủ chứng từ",
+        "group": "Thiếu chứng từ",
+        "process_path": "Kiểm tra hồ sơ thiếu/đủ",
+        "source_note": "nan"
+      },
+      {
+        "code": "ma08",
+        "reason": "Chứng từ y tế chưa hợp lệ",
+        "group": "Thiếu chứng từ",
+        "process_path": "Kiểm tra hồ sơ thiếu/đủ",
+        "source_note": "nan"
+      },
+      {
+        "code": "ma09",
+        "reason": "Chứng từ thanh toán chưa hợp lệ",
+        "group": "Thiếu chứng từ",
+        "process_path": "Kiểm tra hồ sơ thiếu/đủ",
+        "source_note": "nan"
+      },
+      {
+        "code": "ma19",
+        "reason": "Đơn thuốc sửa chữa nhưng không có xác nhận của bác sĩ",
+        "group": "Thiếu chứng từ",
+        "process_path": "Kiểm tra hồ sơ thiếu/đủ",
+        "source_note": "nan"
+      },
+      {
+        "code": "nan",
+        "reason": "Hóa đơn xuất quá 30 ngày theo quy định hợp đồng",
+        "group": "Hóa đơn",
+        "process_path": "Rule-based",
+        "source_note": "1. Bộ tài chính: 70/2025/NĐ-CP 2. Dòng 133 -PL3. Các quyền lợi bổ sung mở rộng hợp đồng FPT NV \"Bộ tài chính quy định hóa đơn xuất ngay khi phát sinh chi phí . Nếu hóa đơn xuất sau thì kiểm tra Hợp đồng/ ĐK mở rộng ngoài của Công ty Bảo hiểm ( thường quy định hóa đơn xuất trong vòng 30 ngày kể từ ngày phát sinh và không quá năm tài chính) : + Thỏa mãn điểm mở rộng => thanh toán. + Không thỏa mãn điểm mở rộng => từ chối\""
+      },
+      {
+        "code": "ma10",
+        "reason": "Quá thời hạn yêu cầu bồi thường theo quy định trong Quy tắc/ Hợp đồng",
+        "group": "Quy tắc bảo hiểm và hợp đồng bảo hiểm",
+        "process_path": "Rule-based",
+        "source_note": "nan"
+      },
+      {
+        "code": "ma12",
+        "reason": "Áp dụng giảm trừ theo quy định của hợp đồng",
+        "group": "Quy tắc bảo hiểm và hợp đồng bảo hiểm",
+        "process_path": "Rule-based",
+        "source_note": "nan"
+      },
+      {
+        "code": "ma26",
+        "reason": "Cơ sở y tế nằm trong blacklist",
+        "group": "Quy tắc bảo hiểm và hợp đồng bảo hiểm",
+        "process_path": "Rule-based",
+        "source_note": "nan"
+      },
+      {
+        "code": "ma11",
+        "reason": "Áp dụng đồng chi trả",
+        "group": "Quy tắc bảo hiểm và hợp đồng bảo hiểm",
+        "process_path": "Cấu hình hợp đồng",
+        "source_note": "nan"
+      },
+      {
+        "code": "LD0001",
+        "reason": "Vượt hạn mức",
+        "group": "Hạn mức bảo hiểm",
+        "process_path": "Cấu hình hợp đồng",
+        "source_note": "nan"
+      },
+      {
+        "code": "ma01",
+        "reason": "Vượt quá quyền lợi một lần khám",
+        "group": "Hạn mức bảo hiểm",
+        "process_path": "Cấu hình hợp đồng",
+        "source_note": "nan"
+      },
+      {
+        "code": "ma003",
+        "reason": "Vượt quá số lần/ngày trong năm hợp đồng",
+        "group": "Hạn mức bảo hiểm",
+        "process_path": "Cấu hình hợp đồng",
+        "source_note": "nan"
+      },
+      {
+        "code": "ma04",
+        "reason": "Vượt quá hạn mức bảo hiểm trong năm hợp đồng",
+        "group": "Hạn mức bảo hiểm",
+        "process_path": "Cấu hình hợp đồng",
+        "source_note": "nan"
+      }
+    ],
+    "exclusion_groups": [
+      "Cận lâm sàng",
+      "Hóa đơn",
+      "Hạn mức bảo hiểm",
+      "Khám không có hướng điều trị",
+      "Loại trừ - Quyền lợi",
+      "Quy tắc bảo hiểm và hợp đồng bảo hiểm",
+      "Thiếu chứng từ",
+      "Thuốc",
+      "Thời gian chờ"
+    ]
+  },
+  "contract_rules": [
+    {
+      "contract_id": "BHV",
+      "insurer": "BHV",
+      "product": "BHV",
+      "rule_type": "pay_if_medically_necessary",
+      "covered_categories": [
+        "LAB-*",
+        "IMG-*",
+        "END-*",
+        "FUN-*",
+        "PAT-*",
+        "PRO-*"
+      ],
+      "requires_preauth": false,
+      "positive_result_required": false,
+      "copay_percent": 0,
+      "sublimit_per_visit": null,
+      "exclusion_groups": [
+        "Cận lâm sàng",
+        "Hóa đơn",
+        "Hạn mức bảo hiểm",
+        "Khám không có hướng điều trị",
+        "Loại trừ - Quyền lợi",
+        "Quy tắc bảo hiểm và hợp đồng bảo hiểm",
+        "Thiếu chứng từ",
+        "Thuốc",
+        "Thời gian chờ"
+      ],
+      "top_denial_reasons": [
+        {
+          "reason": "(trống)",
+          "count": 28
+        },
+        {
+          "reason": "Vượt quá quyền lợi một lần khám",
+          "count": 9
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "count": 5
+        },
+        {
+          "reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+          "count": 4
+        },
+        {
+          "reason": "Vượt quá hạn mức bảo hiểm trong năm hợp đồng",
+          "count": 4
+        },
+        {
+          "reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+          "count": 1
+        },
+        {
+          "reason": "Đang trong thời gian chờ với bệnh đặc biệt/bệnh có sẵn",
+          "count": 1
+        },
+        {
+          "reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc;Thuốc không phù hợp",
+          "count": 1
+        },
+        {
+          "reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc;Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+          "count": 1
+        }
+      ],
+      "top_rules_in_data": [
+        {
+          "rule": "QT 151B BHV",
+          "count": 54
+        }
+      ],
+      "top_benefits": [
+        {
+          "benefit": "Chi phí khám, xét nghiệm, chẩn đoán, thuốc kê toa",
+          "count": 39
+        },
+        {
+          "benefit": "Chi phí y tế",
+          "count": 4
+        },
+        {
+          "benefit": "Quyền lợi răng",
+          "count": 4
+        },
+        {
+          "benefit": "Cạo vôi răng",
+          "count": 2
+        },
+        {
+          "benefit": "Trợ cấp nằm viện tại bệnh viện công lập, trừ khoa quốc tế, khoa dịch vụ, tự nguyện",
+          "count": 1
+        },
+        {
+          "benefit": "Chi phí sau xuất viện",
+          "count": 1
+        },
+        {
+          "benefit": "Chi phí phẫu thuật",
+          "count": 1
+        },
+        {
+          "benefit": "Viện phí",
+          "count": 1
+        },
+        {
+          "benefit": "Vật lý trị liệu",
+          "count": 1
+        }
+      ],
+      "stats": {
+        "rows": 54,
+        "requested_sum_vnd": 73040987.0,
+        "paid_sum_vnd": 47663083.0,
+        "paid_ratio_pct": 65.26
+      }
+    },
+    {
+      "contract_id": "FPT-NT 2025",
+      "insurer": "FPT",
+      "product": "FPT-NT 2025",
+      "rule_type": "pay_if_medically_necessary",
+      "covered_categories": [
+        "LAB-*",
+        "IMG-*",
+        "END-*",
+        "FUN-*",
+        "PAT-*",
+        "PRO-*"
+      ],
+      "requires_preauth": false,
+      "positive_result_required": false,
+      "copay_percent": 0,
+      "sublimit_per_visit": null,
+      "exclusion_groups": [
+        "Cận lâm sàng",
+        "Hóa đơn",
+        "Hạn mức bảo hiểm",
+        "Khám không có hướng điều trị",
+        "Loại trừ - Quyền lợi",
+        "Quy tắc bảo hiểm và hợp đồng bảo hiểm",
+        "Thiếu chứng từ",
+        "Thuốc",
+        "Thời gian chờ"
+      ],
+      "top_denial_reasons": [
+        {
+          "reason": "Áp dụng đồng chi trả",
+          "count": 1125
+        },
+        {
+          "reason": "(trống)",
+          "count": 601
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Vượt quá quyền lợi một lần khám",
+          "count": 154
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "count": 124
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "count": 117
+        },
+        {
+          "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "count": 85
+        },
+        {
+          "reason": "Vượt quá quyền lợi một lần khám",
+          "count": 64
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "count": 62
+        },
+        {
+          "reason": "Vượt quá quyền lợi một lần khám;Áp dụng đồng chi trả",
+          "count": 58
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+          "count": 57
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Áp dụng đồng chi trả",
+          "count": 52
+        },
+        {
+          "reason": "Chưa cung cấp đủ chứng từ",
+          "count": 35
+        },
+        {
+          "reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc;Áp dụng đồng chi trả",
+          "count": 30
+        },
+        {
+          "reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+          "count": 28
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Vượt quá hạn mức bảo hiểm trong năm hợp đồng",
+          "count": 25
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Vượt quá quyền lợi một ngày nằm viện",
+          "count": 25
+        },
+        {
+          "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm;Áp dụng đồng chi trả",
+          "count": 24
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Chưa cung cấp đủ chứng từ",
+          "count": 22
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Chi phí thuốc bổ, vitamin, hỗ trợ vượt quá chi phí thuốc điều trị chính",
+          "count": 20
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "count": 19
+        }
+      ],
+      "top_rules_in_data": [
+        {
+          "rule": "QT 384 PJICO",
+          "count": 3095
+        }
+      ],
+      "top_benefits": [
+        {
+          "benefit": "Chi phí khám, xét nghiệm, chẩn đoán, thuốc kê toa",
+          "count": 1751
+        },
+        {
+          "benefit": "Vật tư y tế (nước muối sinh lý, nước muối biển, nước sát trùng, nước rửa vệ sinh…)",
+          "count": 221
+        },
+        {
+          "benefit": "Viện phí",
+          "count": 210
+        },
+        {
+          "benefit": "Chi phí/lần khám nếu hồ sơ bồi thường có mua thuốc tại hệ thống chuỗi nhà thuốc FPT Long Châu",
+          "count": 185
+        },
+        {
+          "benefit": "Chi phí sau xuất viện",
+          "count": 135
+        },
+        {
+          "benefit": "Có chẩn đoán bệnh nhưng chưa cần điều trị (chưa có đơn thuốc hoặc chưa thực hiện điều trị theo chỉ định)",
+          "count": 108
+        },
+        {
+          "benefit": "Quyền lợi răng",
+          "count": 83
+        },
+        {
+          "benefit": "Chi phí trước nhập viện",
+          "count": 82
+        },
+        {
+          "benefit": "Trợ cấp nằm viện tại bệnh viện ngoài công lập hoặc khoa quốc tế, dịch vụ, tự nguyện bệnh viện công lập",
+          "count": 74
+        },
+        {
+          "benefit": "Trợ cấp nằm viện tại bệnh viện công lập, trừ khoa quốc tế, khoa dịch vụ, tự nguyện",
+          "count": 73
+        },
+        {
+          "benefit": "Chi phí phẫu thuật",
+          "count": 36
+        },
+        {
+          "benefit": "Chi phí y tế",
+          "count": 32
+        },
+        {
+          "benefit": "Khám thai định kỳ",
+          "count": 23
+        },
+        {
+          "benefit": "Điều trị viêm lợi bằng việc lấy cao răng",
+          "count": 19
+        },
+        {
+          "benefit": "Trường hợp có triệu chứng, đi khám nhưng không có kết luận bệnh cụ thể",
+          "count": 14
+        },
+        {
+          "benefit": "Vật lý trị liệu",
+          "count": 11
+        },
+        {
+          "benefit": "Vật tư y tế (nước muối sinh lý, nước muối biển, nước sát trùng, nước rửa vệ sinh…) tại nhà thuốc Long Châu",
+          "count": 8
+        },
+        {
+          "benefit": "Sinh mổ",
+          "count": 5
+        },
+        {
+          "benefit": "Thương tật tạm thời theo chỉ định của bác sỹ",
+          "count": 3
+        },
+        {
+          "benefit": "Tiền giường BHYT khi NĐBH sử dụng kết hợp BHYT và phòng dịch vụ",
+          "count": 3
+        }
+      ],
+      "stats": {
+        "rows": 3095,
+        "requested_sum_vnd": 5333492722.0,
+        "paid_sum_vnd": 3270134733.0,
+        "paid_ratio_pct": 61.31
+      }
+    },
+    {
+      "contract_id": "FPT-NV",
+      "insurer": "FPT",
+      "product": "FPT-NV",
+      "rule_type": "pay_if_medically_necessary",
+      "covered_categories": [
+        "LAB-*",
+        "IMG-*",
+        "END-*",
+        "FUN-*",
+        "PAT-*",
+        "PRO-*"
+      ],
+      "requires_preauth": false,
+      "positive_result_required": false,
+      "copay_percent": 0,
+      "sublimit_per_visit": null,
+      "exclusion_groups": [
+        "Cận lâm sàng",
+        "Hóa đơn",
+        "Hạn mức bảo hiểm",
+        "Khám không có hướng điều trị",
+        "Loại trừ - Quyền lợi",
+        "Quy tắc bảo hiểm và hợp đồng bảo hiểm",
+        "Thiếu chứng từ",
+        "Thuốc",
+        "Thời gian chờ"
+      ],
+      "top_denial_reasons": [
+        {
+          "reason": "(trống)",
+          "count": 2344
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "count": 522
+        },
+        {
+          "reason": "Vượt quá quyền lợi một lần khám",
+          "count": 521
+        },
+        {
+          "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "count": 238
+        },
+        {
+          "reason": "Vượt quá hạn mức bảo hiểm trong năm hợp đồng",
+          "count": 231
+        },
+        {
+          "reason": "Vượt hạn mức",
+          "count": 156
+        },
+        {
+          "reason": "Chưa cung cấp đủ chứng từ",
+          "count": 149
+        },
+        {
+          "reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+          "count": 86
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "count": 85
+        },
+        {
+          "reason": "Vượt quá quyền lợi một ngày nằm viện",
+          "count": 60
+        },
+        {
+          "reason": "Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+          "count": 29
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+          "count": 21
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Chưa cung cấp đủ chứng từ",
+          "count": 21
+        },
+        {
+          "reason": "Chi phí thuốc bổ, vitamin, hỗ trợ vượt quá chi phí thuốc điều trị chính",
+          "count": 19
+        },
+        {
+          "reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+          "count": 14
+        },
+        {
+          "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm;Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "count": 10
+        },
+        {
+          "reason": "Không thuộc đối tượng được bảo hiểm",
+          "count": 8
+        },
+        {
+          "reason": "Đơn thuốc kê quá 30 ngày theo quy định của BYT",
+          "count": 8
+        },
+        {
+          "reason": "Chưa cung cấp đủ chứng từ;Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "count": 8
+        },
+        {
+          "reason": "Mua thuốc dư/ khác với bác sĩ kê đơn",
+          "count": 7
+        }
+      ],
+      "top_rules_in_data": [
+        {
+          "rule": "QT 711 PJICO",
+          "count": 4685
+        }
+      ],
+      "top_benefits": [
+        {
+          "benefit": "Chi phí khám, xét nghiệm, chẩn đoán, thuốc kê toa",
+          "count": 2309
+        },
+        {
+          "benefit": "Chăm sóc răng cơ bản",
+          "count": 449
+        },
+        {
+          "benefit": "Viện phí",
+          "count": 338
+        },
+        {
+          "benefit": "Có chẩn đoán bệnh nhưng chưa cần điều trị (chưa có đơn thuốc)",
+          "count": 254
+        },
+        {
+          "benefit": "Chi phí khám nếu mua thuốc tại hệ thống chuỗi nhà thuốc Long Châu",
+          "count": 250
+        },
+        {
+          "benefit": "Chi phí phẫu thuật",
+          "count": 171
+        },
+        {
+          "benefit": "Chi phí sau xuất viện",
+          "count": 164
+        },
+        {
+          "benefit": "Chi phí y tế bao gồm cả dịch vụ xe cứu thương",
+          "count": 153
+        },
+        {
+          "benefit": "Vật tư y tế (nước muối sinh lý, nước muối biển, nước sát trùng, nước rửa vệ sinh…)",
+          "count": 152
+        },
+        {
+          "benefit": "Điều trị viêm lợi bằng việc lấy cao răng",
+          "count": 135
+        },
+        {
+          "benefit": "Chi phí trước nhập viện",
+          "count": 98
+        },
+        {
+          "benefit": "Vật lý trị liệu",
+          "count": 85
+        },
+        {
+          "benefit": "Trường hợp có triệu chứng, đi khám nhưng không có kết luận bệnh cụ thể",
+          "count": 38
+        },
+        {
+          "benefit": "Thương tật tạm thời theo chỉ định của bác sỹ",
+          "count": 29
+        },
+        {
+          "benefit": "Tiền giường BHYT khi NĐBH sử dụng kết hợp BHYT và phòng dịch vụ",
+          "count": 26
+        },
+        {
+          "benefit": "Xét nghiệm Ung thư trong phẫu thuật U bướu hoặc Polyp",
+          "count": 18
+        },
+        {
+          "benefit": "Sử dụng dịch vụ phẫu thuật theo yêu cầu tại bệnh viện công (Loại trừ khoa Quốc tế)",
+          "count": 7
+        },
+        {
+          "benefit": "Điều trị trong ngày",
+          "count": 7
+        },
+        {
+          "benefit": "Tử vong/ thương tật vĩnh viễn do ốm bệnh/ thai sản",
+          "count": 1
+        },
+        {
+          "benefit": "Trợ cấp mai táng",
+          "count": 1
+        }
+      ],
+      "stats": {
+        "rows": 4685,
+        "requested_sum_vnd": 9502357968.0,
+        "paid_sum_vnd": 6673847847.0,
+        "paid_ratio_pct": 70.23
+      }
+    },
+    {
+      "contract_id": "TCGIns",
+      "insurer": "TCGIns",
+      "product": "TCGIns",
+      "rule_type": "pay_if_medically_necessary",
+      "covered_categories": [
+        "LAB-*",
+        "IMG-*",
+        "END-*",
+        "FUN-*",
+        "PAT-*",
+        "PRO-*"
+      ],
+      "requires_preauth": false,
+      "positive_result_required": false,
+      "copay_percent": 0,
+      "sublimit_per_visit": null,
+      "exclusion_groups": [
+        "Cận lâm sàng",
+        "Hóa đơn",
+        "Hạn mức bảo hiểm",
+        "Khám không có hướng điều trị",
+        "Loại trừ - Quyền lợi",
+        "Quy tắc bảo hiểm và hợp đồng bảo hiểm",
+        "Thiếu chứng từ",
+        "Thuốc",
+        "Thời gian chờ"
+      ],
+      "top_denial_reasons": [
+        {
+          "reason": "(trống)",
+          "count": 21
+        },
+        {
+          "reason": "Áp dụng đồng chi trả",
+          "count": 17
+        },
+        {
+          "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "count": 4
+        },
+        {
+          "reason": "Đang trong thời gian chờ với bệnh đặc biệt/bệnh có sẵn",
+          "count": 3
+        },
+        {
+          "reason": "Vượt quá quyền lợi một lần khám",
+          "count": 3
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Vượt quá quyền lợi một lần khám",
+          "count": 2
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Vượt quá quyền lợi một ngày nằm viện",
+          "count": 2
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "count": 2
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Áp dụng đồng chi trả",
+          "count": 2
+        },
+        {
+          "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm;Áp dụng đồng chi trả",
+          "count": 1
+        },
+        {
+          "reason": "Từ chối do chưa qua thời gian chờ bệnh thông thường",
+          "count": 1
+        },
+        {
+          "reason": "Vượt quá hạn mức bảo hiểm trong năm hợp đồng;Từ chối do chưa qua thời gian chờ bệnh thông thường",
+          "count": 1
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Đang trong thời gian chờ với bệnh đặc biệt/bệnh có sẵn;Không thuộc quyền lợi của hợp đồng bảo hiểm;Áp dụng đồng chi trả",
+          "count": 1
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "count": 1
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "count": 1
+        },
+        {
+          "reason": "Áp dụng đồng chi trả;Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "count": 1
+        },
+        {
+          "reason": "Từ chối do chưa qua thời gian chờ bệnh thông thường;Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+          "count": 1
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Không thuộc quyền lợi của hợp đồng bảo hiểm;Áp dụng đồng chi trả",
+          "count": 1
+        },
+        {
+          "reason": "Vượt quá quyền lợi một lần khám;Áp dụng đồng chi trả",
+          "count": 1
+        },
+        {
+          "reason": "Vượt quá quyền lợi một ngày nằm viện",
+          "count": 1
+        }
+      ],
+      "top_rules_in_data": [
+        {
+          "rule": "Quy tắc 106 TCGIns",
+          "count": 68
+        }
+      ],
+      "top_benefits": [
+        {
+          "benefit": "Chi phí khám, xét nghiệm, chẩn đoán, thuốc kê toa",
+          "count": 22
+        },
+        {
+          "benefit": "Viện phí",
+          "count": 12
+        },
+        {
+          "benefit": "Trợ cấp nằm viện",
+          "count": 9
+        },
+        {
+          "benefit": "Vitamin, thuốc bổ, thuốc hỗ trợ điều trị",
+          "count": 7
+        },
+        {
+          "benefit": "Chi phí sau xuất viện",
+          "count": 6
+        },
+        {
+          "benefit": "Chi phí trước nhập viện",
+          "count": 5
+        },
+        {
+          "benefit": "Vật tư y tế/ thiết bị y tế",
+          "count": 3
+        },
+        {
+          "benefit": "Chi phí y tế điều trị thương tật do tai nạn",
+          "count": 3
+        },
+        {
+          "benefit": "Thiết bị y tế/ Vật tư y tế",
+          "count": 1
+        }
+      ],
+      "stats": {
+        "rows": 68,
+        "requested_sum_vnd": 169022746.0,
+        "paid_sum_vnd": 105306472.0,
+        "paid_ratio_pct": 62.3
+      }
+    },
+    {
+      "contract_id": "TIN-PNC",
+      "insurer": "TIN",
+      "product": "TIN-PNC",
+      "rule_type": "pay_if_medically_necessary",
+      "covered_categories": [
+        "LAB-*",
+        "IMG-*",
+        "END-*",
+        "FUN-*",
+        "PAT-*",
+        "PRO-*"
+      ],
+      "requires_preauth": false,
+      "positive_result_required": false,
+      "copay_percent": 0,
+      "sublimit_per_visit": null,
+      "exclusion_groups": [
+        "Cận lâm sàng",
+        "Hóa đơn",
+        "Hạn mức bảo hiểm",
+        "Khám không có hướng điều trị",
+        "Loại trừ - Quyền lợi",
+        "Quy tắc bảo hiểm và hợp đồng bảo hiểm",
+        "Thiếu chứng từ",
+        "Thuốc",
+        "Thời gian chờ"
+      ],
+      "top_denial_reasons": [
+        {
+          "reason": "(trống)",
+          "count": 539
+        },
+        {
+          "reason": "Vượt quá quyền lợi một lần khám",
+          "count": 106
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "count": 105
+        },
+        {
+          "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "count": 58
+        },
+        {
+          "reason": "Chưa cung cấp đủ chứng từ",
+          "count": 45
+        },
+        {
+          "reason": "Vượt hạn mức",
+          "count": 31
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "count": 28
+        },
+        {
+          "reason": "Vượt quá hạn mức bảo hiểm trong năm hợp đồng",
+          "count": 17
+        },
+        {
+          "reason": "Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+          "count": 17
+        },
+        {
+          "reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+          "count": 15
+        },
+        {
+          "reason": "Vượt quá quyền lợi một ngày nằm viện",
+          "count": 12
+        },
+        {
+          "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm;Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "count": 8
+        },
+        {
+          "reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+          "count": 7
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Chưa cung cấp đủ chứng từ",
+          "count": 5
+        },
+        {
+          "reason": "Thuốc không phù hợp",
+          "count": 3
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+          "count": 3
+        },
+        {
+          "reason": "Chưa cung cấp đủ chứng từ;Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "count": 3
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Thuốc kê không nhằm mục đích điều trị",
+          "count": 2
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+          "count": 2
+        },
+        {
+          "reason": "Chưa cung cấp đủ chứng từ;Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+          "count": 2
+        }
+      ],
+      "top_rules_in_data": [
+        {
+          "rule": "QT 711 PJICO",
+          "count": 994
+        },
+        {
+          "rule": "QT 710 PJICO",
+          "count": 40
+        }
+      ],
+      "top_benefits": [
+        {
+          "benefit": "Chi phí điều trị ngoại trú",
+          "count": 305
+        },
+        {
+          "benefit": "Viện phí",
+          "count": 122
+        },
+        {
+          "benefit": "Chi phí y tế do tai nạn",
+          "count": 113
+        },
+        {
+          "benefit": "Quyền lợi răng",
+          "count": 76
+        },
+        {
+          "benefit": "Trợ cấp nằm viện tại Viện công lập có sử dụng BHYT và được BHYT chi trả trên 40%",
+          "count": 63
+        },
+        {
+          "benefit": "Trợ cấp nằm viện",
+          "count": 49
+        },
+        {
+          "benefit": "Chi phí phẫu thuật",
+          "count": 42
+        },
+        {
+          "benefit": "Chi phí khám sau khi xuất viện",
+          "count": 39
+        },
+        {
+          "benefit": "Chi phí y tế",
+          "count": 35
+        },
+        {
+          "benefit": "Trợ cấp ngày trong thời gian nghỉ điều trị thương tật theo chỉ định của bác sỹ",
+          "count": 32
+        },
+        {
+          "benefit": "Khám có kết luận bệnh nhưng chưa cần điều trị",
+          "count": 29
+        },
+        {
+          "benefit": "Cạo vôi răng",
+          "count": 16
+        },
+        {
+          "benefit": "Chi phí khám nếu mua thuốc tại hệ thống chuỗi nhà thuốc Long Châu",
+          "count": 14
+        },
+        {
+          "benefit": "Vật tư y tế (nước muối sinh lý, nước muối biển, nước sát trùng, nước rửa vệ sinh…)",
+          "count": 12
+        },
+        {
+          "benefit": "Chi phí khám trước khi nhập viện",
+          "count": 11
+        },
+        {
+          "benefit": "Viện phí (Sinh mổ)",
+          "count": 9
+        },
+        {
+          "benefit": "Trợ cấp trong trường hợp NĐBH phẫu thuật mà Bảo hiểm y tế Nhà nước thanh toán từ 50%",
+          "count": 9
+        },
+        {
+          "benefit": "Khám thai định kỳ",
+          "count": 9
+        },
+        {
+          "benefit": "Chi phí phẫu thuật (Sinh mổ)",
+          "count": 8
+        },
+        {
+          "benefit": "Dưỡng nhi",
+          "count": 6
+        }
+      ],
+      "stats": {
+        "rows": 1034,
+        "requested_sum_vnd": 2107467858.0,
+        "paid_sum_vnd": 1540602572.0,
+        "paid_ratio_pct": 73.1
+      }
+    },
+    {
+      "contract_id": "UIC",
+      "insurer": "UIC",
+      "product": "UIC",
+      "rule_type": "pay_if_medically_necessary",
+      "covered_categories": [
+        "LAB-*",
+        "IMG-*",
+        "END-*",
+        "FUN-*",
+        "PAT-*",
+        "PRO-*"
+      ],
+      "requires_preauth": false,
+      "positive_result_required": false,
+      "copay_percent": 0,
+      "sublimit_per_visit": null,
+      "exclusion_groups": [
+        "Cận lâm sàng",
+        "Hóa đơn",
+        "Hạn mức bảo hiểm",
+        "Khám không có hướng điều trị",
+        "Loại trừ - Quyền lợi",
+        "Quy tắc bảo hiểm và hợp đồng bảo hiểm",
+        "Thiếu chứng từ",
+        "Thuốc",
+        "Thời gian chờ"
+      ],
+      "top_denial_reasons": [
+        {
+          "reason": "(trống)",
+          "count": 73
+        },
+        {
+          "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "count": 13
+        },
+        {
+          "reason": "Vượt quá quyền lợi một lần khám",
+          "count": 10
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "count": 9
+        },
+        {
+          "reason": "Chi phí thuốc bổ, vitamin, hỗ trợ vượt quá chi phí thuốc điều trị chính",
+          "count": 3
+        },
+        {
+          "reason": "Chi phí cho người nhà;Sử dụng phòng bao/Vip",
+          "count": 2
+        },
+        {
+          "reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+          "count": 2
+        },
+        {
+          "reason": "Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+          "count": 2
+        },
+        {
+          "reason": "Sử dụng phòng bao/Vip;Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "count": 1
+        },
+        {
+          "reason": "Vượt hạn mức",
+          "count": 1
+        },
+        {
+          "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm;Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+          "count": 1
+        },
+        {
+          "reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm;Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+          "count": 1
+        },
+        {
+          "reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát;Không thuộc đối tượng được bảo hiểm",
+          "count": 1
+        },
+        {
+          "reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+          "count": 1
+        }
+      ],
+      "top_rules_in_data": [
+        {
+          "rule": "QT 052 UIC",
+          "count": 114
+        },
+        {
+          "rule": "QT 380 Kỷ nguyên",
+          "count": 6
+        }
+      ],
+      "top_benefits": [
+        {
+          "benefit": "Chi phí khám, xét nghiệm, chẩn đoán, thuốc kê toa",
+          "count": 67
+        },
+        {
+          "benefit": "Vật tư y tế (nước muối sinh lý, nước muối biển, nước sát trùng, nước rửa vệ sinh…)",
+          "count": 17
+        },
+        {
+          "benefit": "Quyền lợi răng",
+          "count": 10
+        },
+        {
+          "benefit": "Viện phí",
+          "count": 6
+        },
+        {
+          "benefit": "Chi phí sau xuất viện",
+          "count": 5
+        },
+        {
+          "benefit": "Chi phí trước nhập viện",
+          "count": 4
+        },
+        {
+          "benefit": "Điều trị viêm lợi bằng việc lấy cao răng",
+          "count": 3
+        },
+        {
+          "benefit": "Trợ cấp nằm viện",
+          "count": 3
+        },
+        {
+          "benefit": "Chi phí y tế",
+          "count": 2
+        },
+        {
+          "benefit": "Phục hồi chức năng",
+          "count": 1
+        },
+        {
+          "benefit": "Dược mỹ phẩm, mỹ phẩm, thực phẩm chức năng và các sản phẩm không có số đăng ký là thuốc....",
+          "count": 1
+        },
+        {
+          "benefit": "Chi phí phẫu thuật",
+          "count": 1
+        }
+      ],
+      "stats": {
+        "rows": 120,
+        "requested_sum_vnd": 235427713.0,
+        "paid_sum_vnd": 196816831.0,
+        "paid_ratio_pct": 83.6
+      }
+    }
+  ],
+  "stats": {
+    "contracts": 6,
+    "exclusion_items": 30,
+    "exclusion_groups": 9,
+    "summary_generated_at": "2026-03-24T16:07:42.395754"
+  }
+}

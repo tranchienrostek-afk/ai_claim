@@ -4,10 +4,7 @@ __pycache__
 logseq_archive/
 paper_for_graph/
 *.pdf
-data/pipeline_runs/
-data/uploads/
-data/extracted_text/
-data/reports/
-data/datatest/
-workspaces/
 .git
+graphify-out/
+assets/
+logs/

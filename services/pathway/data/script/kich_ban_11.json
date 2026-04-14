@@ -1,0 +1,117 @@
+[
+  {
+    "cau_chuyen_y_khoa": {
+      "tieu_de": "Kẻ mạo danh hoàn hảo và cạm bẫy từ vùng đất ướt",
+      "benh_nhan": {
+        "gioi_tinh": "Nam",
+        "tuoi": 58
+      },
+      "benh_su_va_trieu_chung": {
+        "raw_sign_mentions": [
+          "Ho khạc đờm mủ lẫn máu, kèm theo sút cân (5kg/2 tháng) và hay ra mồ hôi ban đêm.",
+          "Sốt nhẹ về chiều, đau tức ngực âm ỉ.",
+          "Bệnh nhân làm nghề nông, thường xuyên tiếp xúc với đất bùn."
+        ],
+        "ontology_extraction": {
+          "sign_concepts": [
+            {"concept": "Ho", "modifiers": ["Khạc đờm mủ", "Ho máu", "Mạn tính kéo dài > 1 tháng"]},
+            {"concept": "Triệu chứng toàn thân", "modifiers": ["Sút cân", "Ra mồ hôi ban đêm", "Sốt về chiều"]},
+            {"concept": "Yếu tố nguy cơ", "modifiers": ["Nông dân tiếp xúc đất/nước bề mặt", "Đái tháo đường"]}
+          ]
+        }
+      },
+      "nhan_dinh_ban_dau": "Bệnh cảnh lâm sàng (ho máu, sút cân, ra mồ hôi đêm) cực kỳ giống với Lao phổi. Thậm chí chụp X-quang và CT ngực cho thấy tổn thương thâm nhiễm và hang ở thùy trên phổi, càng củng cố giả thuyết Lao. Tuy nhiên, bệnh nhân có yếu tố nguy cơ rất lớn là đái tháo đường và làm nghề nông (tiếp xúc đất/nước bề mặt ở vùng nhiệt đới). Bác sĩ cảnh giác cao độ với 'kẻ mạo danh' là vi khuẩn Burkholderia pseudomallei gây bệnh Melioidosis thể mạn tính, một căn nguyên gây tử vong rất cao (46,7%) nếu bỏ sót.",
+      "chi_dinh_can_lam_sang": {
+        "xet_nghiem_loai_tru_benh_nguy_hiem": [
+          {
+            "ten_xet_nghiem": "Soi đờm trực tiếp tìm AFB và PCR (Gen Xpert) lao",
+            "muc_dich": "Loại trừ Lao phổi vì các triệu chứng quá giống lao. Đóng vai trò là 'Negative exclusion clue'.",
+            "ket_qua": "Âm tính 3 mẫu liên tiếp với vi khuẩn Lao (MTB)."
+          },
+          {
+            "ten_xet_nghiem": "Chụp cắt lớp vi tính (CT Scan) lồng ngực",
+            "muc_dich": "Khảo sát chi tiết tổn thương hang, thâm nhiễm, loại trừ ung thư phổi.",
+            "ket_qua": "Tổn thương đông đặc, thâm nhiễm và có hang ở thùy trên phổi phải, không có khối u ác tính."
+          }
+        ],
+        "xet_nghiem_truc_tiep_tim_ra_benh": [
+          {
+            "ten_xet_nghiem": "Nuôi cấy đờm tìm vi khuẩn và làm kháng sinh đồ",
+            "muc_dich": "Định danh tác nhân vi khuẩn gây bệnh trong VPMPCĐ khi bệnh nhân có yếu tố nguy cơ cao (đái tháo đường) và bệnh cảnh nặng phức tạp.",
+            "ket_qua": "Nuôi cấy mọc vi khuẩn Burkholderia pseudomallei."
+          }
+        ]
+      },
+      "chan_doan_cuoi_cung": "Viêm phổi mắc phải cộng đồng thể mạn tính do Burkholderia pseudomallei (Bệnh Melioidosis) trên nền Đái tháo đường."
+    },
+    "du_lieu_labeling_mau": {
+      "case_level": {
+        "request_id": "tc_onto_007",
+        "selected_profile_id": "prof_onto_07",
+        "testcase_title": "TC_Onto_Melioidosis_Mimicking_TB",
+        "main_disease_name_vi": "Viêm phổi do Burkholderia pseudomallei (Melioidosis)",
+        "primary_icd10": "<chua_co_ICD>",
+        "secondary_icd10_list_pipe": "Đái tháo đường type 2",
+        "specialty": "Hô hấp / Truyền nhiễm",
+        "message_hash_id": "msg_onto_007",
+        "claim_id_or_sohoso": "claim_onto_007",
+        "why_this_case_was_selected": "Kịch bản siêu khó thử thách hệ thống: Viêm phổi do B. pseudomallei thể mạn tính có triệu chứng và X-quang giống hệt Lao phổi (ho máu, sút cân, hang thùy trên). Đòi hỏi tư duy sử dụng AFB/PCR để loại trừ Lao và nuôi cấy để chẩn đoán xác định, sau đó áp dụng phác đồ kháng sinh đặc thù Ceftazidime.",
+        "claim_raw_json": "claim_onto_007.json",
+        "icd_source": "phac_do_viem_phoi_2024",
+        "signs_history_source": "phac_do_viem_phoi_2024",
+        "lab_result_source": "phac_do_viem_phoi_2024",
+        "reviewer_or_insurer_note_source": "note_onto_007",
+        "contract_or_plan_source": "plan_onto_007",
+        "chief_complaint": "Ho khạc đờm mủ, ho máu, sút cân và ra mồ hôi ban đêm kéo dài 2 tháng.",
+        "initial_signs_pipe": "Hội chứng nhiễm trùng mạn tính | Ran ẩm, ran nổ thùy trên | Sút cân",
+        "medical_history_pipe": "Đái tháo đường | Làm ruộng (tiếp xúc đất/nước bề mặt)",
+        "initial_clinical_question": "Phân biệt Lao phổi và Viêm phổi do Burkholderia pseudomallei (Whitmore) trên bệnh nhân đái tháo đường có tổn thương hang ở phổi.",
+        "total_lines": 4,
+        "target_lines_for_labeling": 4,
+        "panel_services_present_pipe": "AFB đờm và PCR (Gen Xpert) lao | Chụp CT Scan lồng ngực | Nuôi cấy đờm tìm vi khuẩn | Truyền tĩnh mạch Ceftazidim",
+        "delivery_deadline": "2026-03-29",
+        "employee_name": "ai_onto_respiratory_expert",
+        "review_status": "submitted",
+        "manager_note": "Test 7 - Tricky Case (Melioidosis masked as Tuberculosis)"
+      },
+      "service_lines": [
+        {
+          "line_no": 1,
+          "service_name_raw": "AFB đờm và PCR (Gen Xpert) lao",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Theo phác đồ, biểu hiện bán cấp/mạn tính của Melioidosis (ho máu, khạc đờm mủ, sút cân, mồ hôi đêm) và tổn thương hang trên X-quang rất dễ nhầm với Lao phổi. Xét nghiệm này là bắt buộc mang tính chất loại trừ (negative exclusion clue) đối với trực khuẩn lao (MTB).",
+          "evidence_source": "phac_do_viem_phoi_2024",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 2,
+          "service_name_raw": "Chụp cắt lớp vi tính (CT Scan) lồng ngực",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Chỉ định cần thiết đối với bệnh nhân nghi ngờ viêm phổi diễn biến phức tạp, kéo dài. CT ngực giúp khảo sát chi tiết tổn thương hang, thâm nhiễm thùy trên, loại trừ ung thư phổi hoặc dị vật, và đánh giá mức độ lan rộng của Melioidosis mạn tính.",
+          "evidence_source": "phac_do_viem_phoi_2024",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 3,
+          "service_name_raw": "Nuôi cấy đờm tìm vi khuẩn và kháng sinh đồ",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Bệnh nhân VPMPCĐ nội trú có yếu tố nguy cơ cao nhiễm vi khuẩn không thường gặp (đái tháo đường, làm ruộng ở vùng dịch tễ) bắt buộc phải cấy đờm. Việc phân lập được B. pseudomallei là tiêu chuẩn vàng định danh 'kẻ mạo danh' và hướng dẫn phác đồ kháng sinh chuyên biệt để cứu sống bệnh nhân.",
+          "evidence_source": "phac_do_viem_phoi_2024",
+          "confidence": "strong"
+        },
+        {
+          "line_no": 4,
+          "service_name_raw": "Truyền tĩnh mạch Ceftazidim 2g mỗi 6 giờ",
+          "final_label": "PAYMENT",
+          "reason_layer": "medical",
+          "reason_text": "Sau khi xác định nguyên nhân là Burkholderia pseudomallei, Ceftazidim truyền tĩnh mạch là kháng sinh lựa chọn đầu tay và bắt buộc cho giai đoạn tấn công. Giai đoạn tấn công này kéo dài từ 2 đến 4 tuần tùy theo tổn thương phổi để ngăn chặn suy đa tạng và tử vong.",
+          "evidence_source": "phac_do_viem_phoi_2024",
+          "confidence": "strong"
+        }
+      ]
+    }
+  }
+]

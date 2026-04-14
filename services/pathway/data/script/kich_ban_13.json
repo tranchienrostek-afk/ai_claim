@@ -1,0 +1,168 @@
+{
+  "cau_chuyen_y_khoa": {
+    "tieu_de": "Test 10: Bệnh Zona thần kinh tái hoạt động trên cơ địa suy giảm miễn dịch",
+    "benh_nhan": {
+      "gioi_tinh": "Nam",
+      "tuoi": 65
+    },
+    "benh_su_va_trieu_chung": {
+      "raw_sign_mentions": [
+        "Đau rát, nóng rát và ngứa dữ dội dọc theo nửa bên cơ thể quanh eo[cite: 53, 54, 55].",
+        "Xuất hiện các nốt phát ban đỏ, sau 3 ngày tiến triển thành mụn nước, bọng nước mọc thành từng dải dọc theo dây thần kinh[cite: 56, 57, 58].",
+        "Kèm theo triệu chứng toàn thân gồm sốt nhẹ, mệt mỏi và đau đầu[cite: 61].",
+        "Bệnh nhân mắc bệnh mãn tính tiểu đường 10 năm nay[cite: 22]."
+      ],
+      "ontology_extraction": {
+        "sign_concepts": [
+          {
+            "concept": "Đau rát ngoài da",
+            "modifiers": [
+              "Nóng rát",
+              "Ngứa",
+              "Đau nhức dọc dây thần kinh một bên cơ thể [cite: 25, 53]"
+            ]
+          },
+          {
+            "concept": "Tổn thương da",
+            "modifiers": [
+              "Phát ban đỏ",
+              "Mụn nước hình bầu dục",
+              "Bọng nước thành dải [cite: 56, 57, 58]"
+            ]
+          },
+          {
+            "concept": "Triệu chứng toàn thân",
+            "modifiers": [
+              "Sốt",
+              "Mệt mỏi",
+              "Đau đầu [cite: 61]"
+            ]
+          },
+          {
+            "concept": "Yếu tố nguy cơ (Risk Factor)",
+            "modifiers": [
+              "Người lớn tuổi",
+              "Mắc bệnh mãn tính tiểu đường",
+              "Hệ miễn dịch yếu [cite: 22, 29]"
+            ]
+          }
+        ]
+      }
+    },
+    "nhan_dinh_ban_dau": "Bệnh nhân có yếu tố nguy cơ cao do lớn tuổi và mắc đái tháo đường, dẫn đến suy giảm miễn dịch[cite: 22]. Triệu chứng nóng rát và mụn nước mọc thành dải dọc dây thần kinh vùng eo rất điển hình của bệnh Zona thần kinh do virus Varicella-Zoster (VZV) tái hoạt động[cite: 16, 18, 58]. Cần tiến hành xét nghiệm lâm sàng và cận lâm sàng để chẩn đoán xác định, loại trừ viêm da dị ứng[cite: 117]. Đồng thời, cần áp dụng phác đồ kháng virus khẩn cấp trong vòng 72 giờ đầu để ngăn chặn virus phát triển và hạn chế biến chứng[cite: 70].",
+    "chi_dinh_can_lam_sang": {
+      "xet_nghiem_loai_tru_negative_exclusion_clue": [
+        {
+          "ten_xet_nghiem": "1. Khám lâm sàng và chẩn đoán phân biệt",
+          "muc_dich": "Loại trừ các bệnh lý có triệu chứng tương tự như viêm da dị ứng, cảm cúm hoặc nhiễm virus khác[cite: 117].",
+          "ket_qua": "Đặc điểm mụn nước khu trú mọc theo dải dọc dây thần kinh giúp loại trừ viêm da dị ứng thông thường."
+        }
+      ],
+      "xet_nghiem_danh_gia_hinh_anh_hoc": [
+        {
+          "ten_xet_nghiem": "2. Đánh giá lâm sàng các triệu chứng đi kèm",
+          "muc_dich": "Kiểm tra triệu chứng trên dây thần kinh để đánh giá mức độ lan rộng và ảnh hưởng của bệnh[cite: 115].",
+          "ket_qua": "Tổn thương hiện khu trú tại vùng eo, chưa có dấu hiệu biến chứng liệt mặt hoặc tổn thương mắt[cite: 28]."
+        }
+      ],
+      "xet_nghiem_truc_tiep_tim_ra_benh_direct_positive_clue": [
+        {
+          "ten_xet_nghiem": "3. Xét nghiệm soi tươi",
+          "muc_dich": "Lấy mẫu bệnh phẩm từ bọng nước hoặc tổn thương trên da để tìm tế bào Zank, xác định rõ tình trạng nhiễm virus Zona[cite: 113].",
+          "ket_qua": "Phát hiện tế bào Zank dương tính trong dịch mụn nước[cite: 113]."
+        },
+        {
+          "ten_xet_nghiem": "4. Xét nghiệm huyết thanh",
+          "muc_dich": "Tìm kháng thể IgM, IgG trong máu để xác định sự hiện diện của virus gây bệnh và phản ứng miễn dịch của cơ thể[cite: 110, 111].",
+          "ket_qua": "Kháng thể IgM dương tính mạnh với Varicella-Zoster Virus."
+        }
+      ],
+      "xet_nghiem_toan_than": [
+        {
+          "ten_xet_nghiem": "5. Kiểm tra đường huyết",
+          "muc_dich": "Đánh giá mức độ kiểm soát đái tháo đường, do đây là bệnh mãn tính làm tăng nguy cơ mắc bệnh và tái phát nhiều lần[cite: 22].",
+          "ket_qua": "Chỉ số đường huyết HbA1c cao, hệ miễn dịch đang bị suy giảm[cite: 22, 24]."
+        }
+      ]
+    },
+    "chan_doan_cuoi_cung": "Bệnh Zona thần kinh (giời leo) vùng eo do tái hoạt động của virus Varicella-Zoster, nguy cơ biến chứng cao trên cơ địa bệnh nhân đái tháo đường[cite: 16, 18, 22]."
+  },
+  "du_lieu_labeling_mau": {
+    "case_level": {
+      "request_id": "tc_zona_010",
+      "selected_profile_id": "prof_zona_10",
+      "testcase_title": "TC_Zona_Shingles_Diabetes_Risk",
+      "main_disease_name_vi": "Bệnh Zona thần kinh trên cơ địa suy giảm miễn dịch",
+      "primary_icd10": "B02",
+      "secondary_icd10_list_pipe": "Đái tháo đường type 2",
+      "specialty": "Da liễu / Thần kinh / Truyền nhiễm",
+      "message_hash_id": "msg_zona_010",
+      "claim_id_or_sohoso": "claim_azinsu_010",
+      "why_this_case_was_selected": "Kịch bản tiêu biểu đánh giá năng lực bóc tách hệ thống cho bệnh lý do virus tái hoạt động trên nhóm nguy cơ cao (đái tháo đường). Nhấn mạnh yêu cầu tuân thủ mốc thời gian 72 giờ trong chỉ định thuốc kháng virus.",
+      "claim_raw_json": "claim_azinsu_010.json",
+      "icd_source": "phac_do_zona_than_kinh",
+      "signs_history_source": "phac_do_zona_than_kinh",
+      "lab_result_source": "phac_do_zona_than_kinh",
+      "reviewer_or_insurer_note_source": "note_zona_010",
+      "contract_or_plan_source": "plan_zona_010",
+      "chief_complaint": "Đau rát, nổi mụn nước thành dải ở quanh eo, sốt và mệt mỏi.",
+      "initial_signs_pipe": "Đau rát, nóng rát quanh eo | Mụn nước hình bầu dục thành dải | Sốt, đau đầu",
+      "medical_history_pipe": "Đái tháo đường",
+      "initial_clinical_question": "Chẩn đoán phân biệt phát ban mụn nước với viêm da dị ứng, xác định sự hiện diện của virus VZV và áp dụng phác đồ chống bội nhiễm trên nền bệnh nhân tiểu đường.",
+      "total_lines": 5,
+      "target_lines_for_labeling": 5,
+      "panel_services_present_pipe": "Xét nghiệm soi tươi tế bào Zank | Xét nghiệm huyết thanh IgM/IgG | Thuốc kháng virus | Thuốc giảm đau thần kinh | Kháng sinh chống bội nhiễm",
+      "delivery_deadline": "2026-04-10",
+      "employee_name": "ai_engineer_chien",
+      "review_status": "submitted",
+      "manager_note": "Test 10 - Xử lý chuẩn xác các mốc thời gian điều trị vàng (72 giờ) và nhận định biến chứng trên tệp bệnh nhân suy giảm miễn dịch."
+    },
+    "service_lines": [
+      {
+        "line_no": 1,
+        "service_name_raw": "Thuốc kháng virus (Valtrex / Famvir / Zovirax)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Theo phác đồ, thuốc kháng virus được chỉ định sử dụng trong vòng 72 giờ đầu tiên kể từ khi xuất hiện triệu chứng để đạt hiệu quả cao nhất, giúp làm giảm sự phát triển của virus Varicella-Zoster và hỗ trợ lành tổn thương[cite: 69, 70].",
+        "evidence_source": "phac_do_zona_than_kinh",
+        "confidence": "strong"
+      },
+      {
+        "line_no": 2,
+        "service_name_raw": "Xét nghiệm soi tươi tìm tế bào Zank",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Quy trình chẩn đoán quy định lấy mẫu bệnh phẩm từ bọng nước để xét nghiệm soi tươi, giúp xác định rõ tình trạng nhiễm virus Zona một cách trực tiếp[cite: 113].",
+        "evidence_source": "phac_do_zona_than_kinh",
+        "confidence": "strong"
+      },
+      {
+        "line_no": 3,
+        "service_name_raw": "Thuốc giảm đau thần kinh (Gabapentin / Pregabalin)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Bệnh nhân có triệu chứng đau nhức dữ dội dọc dây thần kinh. Với trường hợp đau nặng hoặc có nguy cơ đau dây thần kinh kéo dài, bác sĩ kê thêm Gabapentin hoặc Pregabalin để kiểm soát cơn đau hiệu quả[cite: 73].",
+        "evidence_source": "phac_do_zona_than_kinh",
+        "confidence": "strong"
+      },
+      {
+        "line_no": 4,
+        "service_name_raw": "Thuốc chống bội nhiễm (Clindamycin / Metronidazole)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Bệnh nhân mắc tiểu đường có hệ miễn dịch yếu, nguy cơ nhiễm trùng da rất cao khi các mụn nước bị vỡ. Việc chỉ định thuốc kháng sinh hoặc kháng viêm là bắt buộc để ngăn ngừa tình trạng bội nhiễm[cite: 22, 75, 76].",
+        "evidence_source": "phac_do_zona_than_kinh",
+        "confidence": "strong"
+      },
+      {
+        "line_no": 5,
+        "service_name_raw": "Bổ sung Vitamin nhóm B (B1, B2, B6)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Là một phần trong phác đồ hỗ trợ điều trị, việc bổ sung dinh dưỡng bằng vitamin nhóm B giúp hỗ trợ phục hồi sức khỏe thần kinh và tăng cường sức đề kháng cho cơ thể chống lại virus[cite: 84].",
+        "evidence_source": "phac_do_zona_than_kinh",
+        "confidence": "strong"
+      }
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "plan": "master_completion_plan_2026Q2.md",
+  "generated_at": "2026-03-25",
+  "sprints": [
+    {
+      "id": "S1",
+      "name": "Stabilize enrichment core",
+      "status": "pending",
+      "deliverables": [
+        "Harden enrich_llm_batch.py",
+        "Implement validate_enrichment.py",
+        "Generate enrichment_validation_report.json"
+      ],
+      "gates": [
+        "No silent batch failures",
+        "Valid entries >= 95%"
+      ]
+    },
+    {
+      "id": "S2",
+      "name": "Observation onboarding loop",
+      "status": "pending",
+      "deliverables": [
+        "Curate top priority overrides",
+        "Run remap loop daily",
+        "Reduce onboarding queue backlog"
+      ],
+      "gates": [
+        "Queue count down >= 30%",
+        "Concept-mapped rows +10pp"
+      ]
+    },
+    {
+      "id": "S3",
+      "name": "Clinical necessity v2",
+      "status": "pending",
+      "deliverables": [
+        "Implement clinical_necessity_v2.py",
+        "Add temporal-aware scoring",
+        "Add unit tests for high-risk patterns"
+      ],
+      "gates": [
+        "False positives down >= 30%",
+        "Evidence trace available"
+      ]
+    },
+    {
+      "id": "S4",
+      "name": "Contract clause engine v2",
+      "status": "pending",
+      "deliverables": [
+        "Build contract_clause_library.json",
+        "Implement contract_clause_engine_v2.py",
+        "Support clause precedence"
+      ],
+      "gates": [
+        "No unknown_contract_fallback for onboarded contracts",
+        "Clause trace available for all contract decisions"
+      ]
+    },
+    {
+      "id": "S5",
+      "name": "Unified adjudication v2",
+      "status": "pending",
+      "deliverables": [
+        "Implement adjudication_v2.py",
+        "Add decision banding",
+        "Add explainability payload"
+      ],
+      "gates": [
+        "Benchmark accuracy >= 88%",
+        "Manual-review rate in target band"
+      ]
+    },
+    {
+      "id": "S6",
+      "name": "Production deployment and guardrails",
+      "status": "pending",
+      "deliverables": [
+        "Dockerized pipeline jobs",
+        "Release gates and rollback path",
+        "Quality drift monitoring"
+      ],
+      "gates": [
+        "7-day stable run",
+        "Rollback artifact N-1 available"
+      ]
+    }
+  ]
+}

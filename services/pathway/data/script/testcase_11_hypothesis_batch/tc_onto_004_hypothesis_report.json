@@ -1,0 +1,2492 @@
+{
+  "generated_at": "2026-03-29T20:44:19.956271+07:00",
+  "input_json": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11.json",
+  "case_index": 4,
+  "case_level": {
+    "request_id": "tc_onto_004",
+    "selected_profile_id": "prof_onto_04",
+    "testcase_title": "TC_Onto_DeepNeckInfection_RedFlag",
+    "main_disease_name_vi": "Nhiễm trùng khoang cổ sâu",
+    "primary_icd10": "<chua_co_ICD>",
+    "secondary_icd10_list_pipe": "",
+    "specialty": "Đầu mặt cổ",
+    "message_hash_id": "msg_onto_004",
+    "claim_id_or_sohoso": "claim_onto_004",
+    "why_this_case_was_selected": "Kiểm thử khả năng nhận diện dấu hiệu Red Flag vùng cổ (nguy cơ chèn ép đường thở) để duyệt các chỉ định hình ảnh học đắt tiền (CT Scan) và thủ thuật cấp cứu.",
+    "claim_raw_json": "claim_onto_004.json",
+    "icd_source": "phac_do_tmh_2015",
+    "signs_history_source": "phac_do_tmh_2015",
+    "lab_result_source": "phac_do_tmh_2015",
+    "reviewer_or_insurer_note_source": "note_onto_004",
+    "contract_or_plan_source": "plan_onto_004",
+    "chief_complaint": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+    "initial_signs_pipe": "Cổ sưng nóng đỏ đau | Mất lọc cọc thanh quản cột sống | Khó thở tăng khi nằm ngửa",
+    "medical_history_pipe": "Tiểu đường không kiểm soát",
+    "initial_clinical_question": "Xác định vị trí ổ áp xe cổ sâu và giải phóng chèn ép đường thở.",
+    "total_lines": 3,
+    "target_lines_for_labeling": 3,
+    "panel_services_present_pipe": "CT Scan cổ có cản quang | Mở khí quản cấp cứu | Phẫu thuật rạch dẫn lưu áp xe cổ",
+    "delivery_deadline": "2026-03-28",
+    "employee_name": "ai_onto_tester",
+    "review_status": "submitted",
+    "manager_note": "Test 4"
+  },
+  "story_title": "Test 4: Dấu hiệu cấp cứu 'Red Flag' vùng cổ",
+  "expected_disease": "Nhiễm trùng khoang cổ sâu",
+  "patient_context": {
+    "gioi_tinh": "Nữ",
+    "tuoi": 55
+  },
+  "sign_sets": {
+    "symptom_story": [
+      "Cổ sưng to tướng, đau buốt, sờ nóng gian.",
+      "Nằm ngửa thở không được, nghẹn ứ, nuốt nước bọt không trôi.",
+      "Đang sốt hầm hập."
+    ],
+    "chief_plus_findings": [
+      "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+      "Cổ sưng to tướng, đau buốt, sờ nóng gian.",
+      "Nằm ngửa thở không được, nghẹn ứ, nuốt nước bọt không trôi.",
+      "Đang sốt hầm hập.",
+      "Cổ sưng nóng đỏ đau",
+      "Mất lọc cọc thanh quản cột sống",
+      "Khó thở tăng khi nằm ngửa",
+      "Khối sưng vùng cổ",
+      "Nóng, đỏ, đau",
+      "Khó thở",
+      "Tăng khi nằm ngửa",
+      "Nghẹn ứ",
+      "Hội chứng nhiễm trùng",
+      "Sốt cao",
+      "Nuốt khó"
+    ],
+    "structured_signs": [
+      "Khối sưng vùng cổ",
+      "Nóng, đỏ, đau",
+      "Mất lọc cọc thanh quản cột sống",
+      "Khó thở",
+      "Tăng khi nằm ngửa",
+      "Nghẹn ứ",
+      "Hội chứng nhiễm trùng",
+      "Sốt cao",
+      "Nuốt khó"
+    ],
+    "all_case_signs": [
+      "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+      "Cổ sưng to tướng, đau buốt, sờ nóng gian.",
+      "Nằm ngửa thở không được, nghẹn ứ, nuốt nước bọt không trôi.",
+      "Đang sốt hầm hập.",
+      "Cổ sưng nóng đỏ đau",
+      "Mất lọc cọc thanh quản cột sống",
+      "Khó thở tăng khi nằm ngửa",
+      "Khối sưng vùng cổ",
+      "Nóng, đỏ, đau",
+      "Khó thở",
+      "Tăng khi nằm ngửa",
+      "Nghẹn ứ",
+      "Hội chứng nhiễm trùng",
+      "Sốt cao",
+      "Nuốt khó",
+      "Tiểu đường không kiểm soát"
+    ]
+  },
+  "structured_signs": [
+    {
+      "concept": "Khối sưng vùng cổ",
+      "modifiers": [
+        "Nóng, đỏ, đau",
+        "Mất lọc cọc thanh quản cột sống"
+      ]
+    },
+    {
+      "concept": "Khó thở",
+      "modifiers": [
+        "Tăng khi nằm ngửa",
+        "Nghẹn ứ"
+      ]
+    },
+    {
+      "concept": "Hội chứng nhiễm trùng",
+      "modifiers": [
+        "Sốt cao",
+        "Nuốt khó"
+      ]
+    }
+  ],
+  "service_lines": [
+    {
+      "line_no": 1,
+      "service_name_raw": "CT Scan cổ có cản quang",
+      "final_label": "PAYMENT",
+      "reason_layer": "medical",
+      "reason_text": "Chỉ định cần thiết để xác định chẩn đoán, phân biệt giữa viêm mô tế bào và áp xe cổ sâu, đồng thời hướng dẫn vị trí rạch dẫn lưu an toàn tránh các cấu trúc sinh tồn.",
+      "evidence_source": "phac_do_tmh_2015",
+      "confidence": "strong"
+    },
+    {
+      "line_no": 2,
+      "service_name_raw": "Mở khí quản cấp cứu",
+      "final_label": "PAYMENT",
+      "reason_layer": "medical",
+      "reason_text": "Bệnh nhân có biểu hiện khó thở, tăng khi nằm ngửa do phù nề chèn ép ống họng. Theo phác đồ, bảo đảm đường thở bằng mở khí quản là nguyên tắc ưu tiên hàng đầu trong áp xe cổ sâu.",
+      "evidence_source": "phac_do_tmh_2015",
+      "confidence": "strong"
+    },
+    {
+      "line_no": 3,
+      "service_name_raw": "Phẫu thuật rạch dẫn lưu áp xe cổ",
+      "final_label": "PAYMENT",
+      "reason_layer": "medical",
+      "reason_text": "Đây là phương pháp điều trị ngoại khoa bắt buộc để giải phóng mủ, giảm áp lực chèn ép và điều trị dứt điểm nhiễm trùng khoang cổ sâu.",
+      "evidence_source": "phac_do_tmh_2015",
+      "confidence": "strong"
+    }
+  ],
+  "hypothesis_result": {
+    "input_signs": [
+      "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+      "Cổ sưng to tướng, đau buốt, sờ nóng gian.",
+      "Nằm ngửa thở không được, nghẹn ứ, nuốt nước bọt không trôi.",
+      "Đang sốt hầm hập.",
+      "Cổ sưng nóng đỏ đau",
+      "Mất lọc cọc thanh quản cột sống",
+      "Khó thở tăng khi nằm ngửa",
+      "Khối sưng vùng cổ",
+      "Nóng, đỏ, đau",
+      "Khó thở",
+      "Tăng khi nằm ngửa",
+      "Nghẹn ứ",
+      "Hội chứng nhiễm trùng",
+      "Sốt cao",
+      "Nuốt khó"
+    ],
+    "structured_signs": [
+      {
+        "concept": "Khối sưng vùng cổ",
+        "modifiers": [
+          "Nóng, đỏ, đau",
+          "Mất lọc cọc thanh quản cột sống"
+        ]
+      },
+      {
+        "concept": "Khó thở",
+        "modifiers": [
+          "Tăng khi nằm ngửa",
+          "Nghẹn ứ"
+        ]
+      },
+      {
+        "concept": "Hội chứng nhiễm trùng",
+        "modifiers": [
+          "Sốt cao",
+          "Nuốt khó"
+        ]
+      }
+    ],
+    "patient_context": {
+      "gioi_tinh": "Nữ",
+      "tuoi": 55
+    },
+    "hypotheses": [
+      {
+        "hypothesis_key": "id:profile deep neck infection",
+        "disease_name": "Nhiễm trùng khoang cổ sâu",
+        "icd10": "",
+        "status": "active",
+        "score": 0.7,
+        "confidence": 0.8235,
+        "sign_score": 0.7,
+        "service_score": 0.0,
+        "lab_support_score": 0.0,
+        "lab_exclusion_score": 0.0,
+        "memory_prior_score": 0.0,
+        "graph_context_score": 0.0,
+        "graph_context_match_count": 0,
+        "memory_match_count": 4,
+        "supporting_signs": [
+          "Khối sưng vùng cổ",
+          "Khó thở",
+          "Hội chứng nhiễm trùng",
+          "khối viêm đỏ nóng đau",
+          "đe dọa đường thở"
+        ],
+        "opposing_signals": [],
+        "matched_services": [],
+        "required_services": [],
+        "memory_recommendations": [
+          "Rà lại link Disease -> Expected Services cho 'Nhiễm trùng khoang cổ sâu', đồng thời kiểm tra sign decomposition với các dấu hiệu: Khối sưng vùng cổ, Nóng, đỏ, đau, Mất lọc cọc thanh quản cột sống, Khó thở."
+        ],
+        "memory_categories": [
+          "service_expectation_gap"
+        ],
+        "graph_context_snippets": [],
+        "evidence_items": [
+          {
+            "source": "sign_engine",
+            "score_contribution": 0.7,
+            "raw_score": 11.6,
+            "supporting_signs": [
+              "Khối sưng vùng cổ",
+              "Khó thở",
+              "Hội chứng nhiễm trùng",
+              "khối viêm đỏ nóng đau",
+              "đe dọa đường thở"
+            ]
+          },
+          {
+            "source": "experience_memory",
+            "score_contribution": 0.0,
+            "match_count": 4,
+            "categories": [
+              "service_expectation_gap"
+            ],
+            "recommendations": [
+              "Rà lại link Disease -> Expected Services cho 'Nhiễm trùng khoang cổ sâu', đồng thời kiểm tra sign decomposition với các dấu hiệu: Khối sưng vùng cổ, Nóng, đỏ, đau, Mất lọc cọc thanh quản cột sống, Khó thở."
+            ]
+          }
+        ]
+      },
+      {
+        "hypothesis_key": "icd:j18 0",
+        "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+        "icd10": "J18.0",
+        "status": "active",
+        "score": 0.2447,
+        "confidence": 0.62,
+        "sign_score": 0.2447,
+        "service_score": 0.0,
+        "lab_support_score": 0.0,
+        "lab_exclusion_score": 0.0,
+        "memory_prior_score": 0.0,
+        "graph_context_score": 0.0,
+        "graph_context_match_count": 0,
+        "memory_match_count": 0,
+        "supporting_signs": [
+          "Sốt cao",
+          "nóng, sốt, mệt",
+          "Ho, khó thở"
+        ],
+        "opposing_signals": [],
+        "matched_services": [],
+        "required_services": [
+          "định lượng crp (c-reactive protein)",
+          "tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+          "công thức máu",
+          "influenza virus a, b test nhanh",
+          "crp",
+          "procalcitonin",
+          "định lượng crp",
+          "chụp x-quang ngực thẳng (số hóa 1 phim)",
+          "định lượng creatinin (máu)",
+          "vi khuẩn nuôi cấy và định danh hệ thống tự động",
+          "đo hoạt độ ast (got) (máu)",
+          "đo hoạt độ alt (gpt) (máu)"
+        ],
+        "memory_recommendations": [],
+        "memory_categories": [],
+        "graph_context_snippets": [],
+        "evidence_items": [
+          {
+            "source": "sign_engine",
+            "score_contribution": 0.2447,
+            "raw_score": 4.0549,
+            "supporting_signs": [
+              "Sốt cao",
+              "nóng, sốt, mệt",
+              "Ho, khó thở",
+              "Ho, khó thở",
+              "Ho, khó thở",
+              "Sốt cao"
+            ]
+          }
+        ]
+      },
+      {
+        "hypothesis_key": "icd:j18",
+        "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+        "icd10": "J18",
+        "status": "active",
+        "score": 0.2401,
+        "confidence": 0.6155,
+        "sign_score": 0.2401,
+        "service_score": 0.0,
+        "lab_support_score": 0.0,
+        "lab_exclusion_score": 0.0,
+        "memory_prior_score": 0.0,
+        "graph_context_score": 0.0,
+        "graph_context_match_count": 0,
+        "memory_match_count": 0,
+        "supporting_signs": [
+          "Sốt cao",
+          "Khó thở",
+          "Sốt"
+        ],
+        "opposing_signals": [],
+        "matched_services": [],
+        "required_services": [
+          "nội soi tai mũi họng",
+          "định lượng crp (c-reactive protein)",
+          "tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+          "công thức máu",
+          "influenza virus a, b test nhanh",
+          "crp",
+          "procalcitonin",
+          "chụp x-quang ngực thẳng (số hóa 1 phim)",
+          "định lượng creatinin (máu)",
+          "đo hoạt độ ast (got) (máu)",
+          "đo hoạt độ alt (gpt) (máu)",
+          "điện giải đồ (na, k, ci) (máu)"
+        ],
+        "memory_recommendations": [],
+        "memory_categories": [],
+        "graph_context_snippets": [],
+        "evidence_items": [
+          {
+            "source": "sign_engine",
+            "score_contribution": 0.2401,
+            "raw_score": 3.9787,
+            "supporting_signs": [
+              "Sốt cao",
+              "Khó thở",
+              "Sốt",
+              "Khó thở",
+              "Khó thở",
+              "Sốt cao"
+            ]
+          }
+        ]
+      },
+      {
+        "hypothesis_key": "icd:j02",
+        "disease_name": "Viêm họng cấp",
+        "icd10": "J02",
+        "status": "active",
+        "score": 0.2347,
+        "confidence": 0.6101,
+        "sign_score": 0.2347,
+        "service_score": 0.0,
+        "lab_support_score": 0.0,
+        "lab_exclusion_score": 0.0,
+        "memory_prior_score": 0.0,
+        "graph_context_score": 0.0,
+        "graph_context_match_count": 0,
+        "memory_match_count": 0,
+        "supporting_signs": [
+          "Sốt cao",
+          "Sốt",
+          "sổ mũi, nghẹt mũi, đau họng"
+        ],
+        "opposing_signals": [],
+        "matched_services": [],
+        "required_services": [
+          "nội soi tai mũi họng",
+          "định lượng crp (c-reactive protein)",
+          "tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+          "công thức máu",
+          "influenza virus a, b test nhanh",
+          "crp",
+          "procalcitonin",
+          "định lượng crp",
+          "chụp x-quang ngực thẳng (số hóa 1 phim)",
+          "vi khuẩn nuôi cấy và định danh hệ thống tự động",
+          "virus test nhanh (3 loại kháng nguyên cúm a, cúm b và rsv trong bệnh phẩm đường hô hấp)",
+          "dengue virus ns1ag test nhanh"
+        ],
+        "memory_recommendations": [],
+        "memory_categories": [],
+        "graph_context_snippets": [],
+        "evidence_items": [
+          {
+            "source": "sign_engine",
+            "score_contribution": 0.2347,
+            "raw_score": 3.8896,
+            "supporting_signs": [
+              "Sốt cao",
+              "Sốt",
+              "sổ mũi, nghẹt mũi, đau họng",
+              "Sốt cao"
+            ]
+          }
+        ]
+      },
+      {
+        "hypothesis_key": "icd:j18 9",
+        "disease_name": "Viêm phổi, không đặc hiệu",
+        "icd10": "J18.9",
+        "status": "active",
+        "score": 0.2287,
+        "confidence": 0.6039,
+        "sign_score": 0.1205,
+        "service_score": 0.0,
+        "lab_support_score": 0.0,
+        "lab_exclusion_score": 0.0,
+        "memory_prior_score": 0.0,
+        "graph_context_score": 0.1082,
+        "graph_context_match_count": 5,
+        "memory_match_count": 0,
+        "supporting_signs": [
+          "Hôn mê, khó thở"
+        ],
+        "opposing_signals": [],
+        "matched_services": [],
+        "required_services": [
+          "chẩn đoán hình ảnh"
+        ],
+        "memory_recommendations": [],
+        "memory_categories": [],
+        "graph_context_snippets": [
+          "assertion: Bổ sung thuốc kháng virus, như oseltamivir cho bệnh nhân VPMPCĐ có kết quả xét nghiệm dương tính với cúm, không phụ thuộc vào thời gian bệnh",
+          "assertion: Xét nghiệm kháng nguyên trong nước tiểu là có thể là phương pháp chẩn đoán bổ sung hoặc thay thế để phát hiện S. pneumoniae và L. pneumophil",
+          "chunk: - Sự kết hợp nhiều yếu tố nguy cơ, chẳng hạn hút thuốc, COPD và suy tim sung \nhuyết góp phần làm tăng nguy cơ VPMPCĐ."
+        ],
+        "evidence_items": [
+          {
+            "source": "sign_engine",
+            "score_contribution": 0.1205,
+            "raw_score": 1.9963,
+            "supporting_signs": [
+              "Hôn mê, khó thở",
+              "Hôn mê, khó thở",
+              "Hôn mê, khó thở"
+            ]
+          },
+          {
+            "source": "graph_context_retriever",
+            "score_contribution": 0.1082,
+            "candidate_disease": "Viêm phổi, không đặc hiệu",
+            "retrieval_score": 1.8932,
+            "hit_sources": [
+              "assertion_fulltext",
+              "chunk_fulltext"
+            ],
+            "summary_hits": 0,
+            "assertion_hits": 4,
+            "chunk_hits": 1,
+            "snippets": [
+              "assertion: Bổ sung thuốc kháng virus, như oseltamivir cho bệnh nhân VPMPCĐ có kết quả xét nghiệm dương tính với cúm, không phụ thuộc vào thời gian bệnh",
+              "assertion: Xét nghiệm kháng nguyên trong nước tiểu là có thể là phương pháp chẩn đoán bổ sung hoặc thay thế để phát hiện S. pneumoniae và L. pneumophil",
+              "chunk: - Sự kết hợp nhiều yếu tố nguy cơ, chẳng hạn hút thuốc, COPD và suy tim sung \nhuyết góp phần làm tăng nguy cơ VPMPCĐ."
+            ]
+          }
+        ]
+      },
+      {
+        "hypothesis_key": "id:profile croup",
+        "disease_name": "Viêm thanh quản cấp tính hạ thanh môn",
+        "icd10": "",
+        "status": "active",
+        "score": 0.2233,
+        "confidence": 0.5982,
+        "sign_score": 0.2233,
+        "service_score": 0.0,
+        "lab_support_score": 0.0,
+        "lab_exclusion_score": 0.0,
+        "memory_prior_score": 0.0,
+        "graph_context_score": 0.0,
+        "graph_context_match_count": 0,
+        "memory_match_count": 2,
+        "supporting_signs": [
+          "Ho",
+          "Khó thở thanh quản"
+        ],
+        "opposing_signals": [],
+        "matched_services": [],
+        "required_services": [],
+        "memory_recommendations": [
+          "Rà lại link Disease -> Expected Services cho 'Viêm thanh quản cấp tính hạ thanh môn', đồng thời kiểm tra sign decomposition với các dấu hiệu: Ho, Ông ổng, Tiếng ho cứng, Như chó sủa."
+        ],
+        "memory_categories": [
+          "service_expectation_gap"
+        ],
+        "graph_context_snippets": [],
+        "evidence_items": [
+          {
+            "source": "sign_engine",
+            "score_contribution": 0.2233,
+            "raw_score": 3.7,
+            "supporting_signs": [
+              "Ho",
+              "Khó thở thanh quản"
+            ]
+          },
+          {
+            "source": "experience_memory",
+            "score_contribution": 0.0,
+            "match_count": 2,
+            "categories": [
+              "service_expectation_gap"
+            ],
+            "recommendations": [
+              "Rà lại link Disease -> Expected Services cho 'Viêm thanh quản cấp tính hạ thanh môn', đồng thời kiểm tra sign decomposition với các dấu hiệu: Ho, Ông ổng, Tiếng ho cứng, Như chó sủa."
+            ]
+          }
+        ]
+      },
+      {
+        "hypothesis_key": "icd:j06 0",
+        "disease_name": "Viêm họng - thanh quản cấp",
+        "icd10": "J06.0",
+        "status": "active",
+        "score": 0.1831,
+        "confidence": 0.5496,
+        "sign_score": 0.1831,
+        "service_score": 0.0,
+        "lab_support_score": 0.0,
+        "lab_exclusion_score": 0.0,
+        "memory_prior_score": 0.0,
+        "graph_context_score": 0.0,
+        "graph_context_match_count": 0,
+        "memory_match_count": 2,
+        "supporting_signs": [
+          "Ho, khó thở",
+          "Đau họng, sồ mũi",
+          "sổ mũi, đau họng"
+        ],
+        "opposing_signals": [],
+        "matched_services": [],
+        "required_services": [
+          "nội soi tai mũi họng",
+          "công thức máu",
+          "crp",
+          "procalcitonin",
+          "(nhi) nội soi tai"
+        ],
+        "memory_recommendations": [
+          "Rà lại link Disease -> Expected Services cho 'Viêm thanh quản cấp tính hạ thanh môn', đồng thời kiểm tra sign decomposition với các dấu hiệu: Ho, Ông ổng, Tiếng ho cứng, Như chó sủa."
+        ],
+        "memory_categories": [
+          "service_expectation_gap"
+        ],
+        "graph_context_snippets": [],
+        "evidence_items": [
+          {
+            "source": "sign_engine",
+            "score_contribution": 0.1831,
+            "raw_score": 3.0336,
+            "supporting_signs": [
+              "Ho, khó thở",
+              "Đau họng, sồ mũi",
+              "sổ mũi, đau họng",
+              "Ho, khó thở",
+              "Ho, khó thở"
+            ]
+          },
+          {
+            "source": "experience_memory",
+            "score_contribution": 0.0,
+            "match_count": 2,
+            "categories": [
+              "service_expectation_gap"
+            ],
+            "recommendations": [
+              "Rà lại link Disease -> Expected Services cho 'Viêm thanh quản cấp tính hạ thanh môn', đồng thời kiểm tra sign decomposition với các dấu hiệu: Ho, Ông ổng, Tiếng ho cứng, Như chó sủa."
+            ]
+          }
+        ]
+      },
+      {
+        "hypothesis_key": "icd:k30",
+        "disease_name": "Khó tiêu chức năng\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của K30 theo ICD10)",
+        "icd10": "K30",
+        "status": "active",
+        "score": 0.1327,
+        "confidence": 0.4694,
+        "sign_score": 0.1327,
+        "service_score": 0.0,
+        "lab_support_score": 0.0,
+        "lab_exclusion_score": 0.0,
+        "memory_prior_score": 0.0,
+        "graph_context_score": 0.0,
+        "graph_context_match_count": 0,
+        "memory_match_count": 0,
+        "supporting_signs": [
+          "Sốt cao",
+          "Sốt"
+        ],
+        "opposing_signals": [],
+        "matched_services": [],
+        "required_services": [
+          "công thức máu",
+          "crp",
+          "procalcitonin"
+        ],
+        "memory_recommendations": [],
+        "memory_categories": [],
+        "graph_context_snippets": [],
+        "evidence_items": [
+          {
+            "source": "sign_engine",
+            "score_contribution": 0.1327,
+            "raw_score": 2.1993,
+            "supporting_signs": [
+              "Sốt cao",
+              "Sốt",
+              "Sốt cao"
+            ]
+          }
+        ]
+      }
+    ],
+    "sign_payload": {
+      "input_signs": [
+        "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+        "Cổ sưng to tướng, đau buốt, sờ nóng gian.",
+        "Nằm ngửa thở không được, nghẹn ứ, nuốt nước bọt không trôi.",
+        "Đang sốt hầm hập.",
+        "Cổ sưng nóng đỏ đau",
+        "Mất lọc cọc thanh quản cột sống",
+        "Khó thở tăng khi nằm ngửa",
+        "Khối sưng vùng cổ",
+        "Nóng, đỏ, đau",
+        "Khó thở",
+        "Tăng khi nằm ngửa",
+        "Nghẹn ứ",
+        "Hội chứng nhiễm trùng",
+        "Sốt cao",
+        "Nuốt khó"
+      ],
+      "matched_signs": [
+        {
+          "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+          "matches": [
+            {
+              "sign_id": "SIGN-SOT_CAO-3237c2fc",
+              "sign_label": "Sốt cao",
+              "matched_alias": "Sốt cao",
+              "normalized_key": "sot cao",
+              "match_score": 1.0,
+              "match_type": "decomposed_exact",
+              "support_cases": 6
+            },
+            {
+              "sign_id": "SIGN-KHO_THO-d237e0ea",
+              "sign_label": "Khó thở",
+              "matched_alias": "Khó thở",
+              "normalized_key": "kho tho",
+              "match_score": 1.0,
+              "match_type": "decomposed_exact",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-HON_ME_KHO_THO-2d1ed9ad",
+              "sign_label": "Hôn mê, khó thở",
+              "matched_alias": "Hôn mê, khó thở",
+              "normalized_key": "hon me kho tho",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-NONG_SOT_MET-2d0a7c70",
+              "sign_label": "nóng, sốt, mệt",
+              "matched_alias": "nóng, sốt, mệt",
+              "normalized_key": "nong sot met",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-HO_KHO_THO-bc9a9a53",
+              "sign_label": "Ho, khó thở",
+              "matched_alias": "Ho, khó thở",
+              "normalized_key": "ho kho tho",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-SOT-bb6c237f",
+              "sign_label": "Sốt",
+              "matched_alias": "Sốt",
+              "normalized_key": "sot",
+              "match_score": 0.74,
+              "match_type": "single_token_overlap",
+              "support_cases": 72
+            },
+            {
+              "sign_id": "SIGN-SOT-fe21d813",
+              "sign_label": "Khám sốt",
+              "matched_alias": "Khám sốt",
+              "normalized_key": "kham sot",
+              "match_score": 0.74,
+              "match_type": "single_token_overlap",
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "input_sign": "Cổ sưng to tướng, đau buốt, sờ nóng gian.",
+          "matches": [
+            {
+              "sign_id": "SIGN-CHAY_MAU_NUOU_BUOT_DAU_NHUC-fb3a1e7c",
+              "sign_label": "Chảy máu nướu, ê buốt, đau nhức răng",
+              "matched_alias": "Chảy máu nướu, ê buốt, đau nhức răng",
+              "normalized_key": "chay mau nuou e buot dau nhuc rang",
+              "match_score": 0.805,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-DAU_SO_MUI-3cb3230e",
+              "sign_label": "Đau tai, số mũi",
+              "matched_alias": "Đau tai, số mũi",
+              "normalized_key": "dau tai so mui",
+              "match_score": 0.7883,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-DAU_BUNG_MAN_SUON_TRAI_TANG-642458d3",
+              "sign_label": "Đau bụng mạn sườn trái, tăng về đêm, phân bình thường, không tiểu buốt rắt",
+              "matched_alias": "Đau bụng mạn sườn trái, tăng về đêm, phân bình thường, không tiểu buốt rắt",
+              "normalized_key": "dau bung man suon trai tang ve dem phan binh thuong khong tieu buot rat",
+              "match_score": 0.78,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-DAU_RAT_AM_HO_DI_TIEU-08a02592",
+              "sign_label": "Khám đau rát âm hộ, đi tiểu buốt rắt, tiểu không hết bãi, thi thoang ra khí hư",
+              "matched_alias": "Khám đau rát âm hộ, đi tiểu buốt rắt, tiểu không hết bãi, thi thoang ra khí hư",
+              "normalized_key": "kham dau rat am ho di tieu buot rat tieu khong het bai thi thoang ra khi hu",
+              "match_score": 0.7729,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-DAU_HONG_SO_MUI-dacddad3",
+              "sign_label": "Đau họng, sồ mũi",
+              "matched_alias": "Đau họng, sồ mũi",
+              "normalized_key": "dau hong so mui",
+              "match_score": 0.7483,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-SO_MUI_DAU_HONG-b1fec917",
+              "sign_label": "sổ mũi, đau họng",
+              "matched_alias": "sổ mũi, đau họng",
+              "normalized_key": "so mui dau hong",
+              "match_score": 0.7483,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-SO_MUI_NGHET_MUI_DAU_HONG-251d453d",
+              "sign_label": "sổ mũi, nghẹt mũi, đau họng",
+              "matched_alias": "sổ mũi, nghẹt mũi, đau họng",
+              "normalized_key": "so mui nghet mui dau hong",
+              "match_score": 0.7233,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-HO_DAU_HONG_KHAN_TIENG_SO-1dd17b0a",
+              "sign_label": "ho, đau họng, khàn tiếng, sổ mũi",
+              "matched_alias": "ho, đau họng, khàn tiếng, sổ mũi",
+              "normalized_key": "ho dau hong khan tieng so mui",
+              "match_score": 0.6937,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "input_sign": "Nằm ngửa thở không được, nghẹn ứ, nuốt nước bọt không trôi.",
+          "matches": []
+        },
+        {
+          "input_sign": "Đang sốt hầm hập.",
+          "matches": []
+        },
+        {
+          "input_sign": "Cổ sưng nóng đỏ đau",
+          "matches": [
+            {
+              "sign_id": "SIGN-DAU_VI_NONG_HOI-995b727f",
+              "sign_label": "Đau thượng vị, nóng cổ, ợ hơi",
+              "matched_alias": "Đau thượng vị, nóng cổ, ợ hơi",
+              "normalized_key": "dau thuong vi nong co o hoi",
+              "match_score": 0.85,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-SUNG_DAU_VU_TRAI-6f435413",
+              "sign_label": "Sưng đau vú trái",
+              "matched_alias": "Sưng đau vú trái",
+              "normalized_key": "sung dau vu trai",
+              "match_score": 0.7483,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-SUNG_DAU_BAN_CHAN_TRAI-2e1753d6",
+              "sign_label": "Sưng đau cổ bàn chân trái",
+              "matched_alias": "Sưng đau cổ bàn chân trái",
+              "normalized_key": "sung dau co ban chan trai",
+              "match_score": 0.7233,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "input_sign": "Mất lọc cọc thanh quản cột sống",
+          "matches": [
+            {
+              "sign_id": "SIGN-DAU_COT_SONG_THAT_LUNG-62093a49",
+              "sign_label": "Đau cột sống thắt lưng",
+              "matched_alias": "Đau cột sống thắt lưng",
+              "normalized_key": "dau cot song that lung",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-VIEM_HONG_THANH_QUAN_CAP-a72b459c",
+              "sign_label": "Viêm họng - thanh quản cấp",
+              "matched_alias": "Viêm họng - thanh quản cấp",
+              "normalized_key": "viem hong thanh quan cap",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "input_sign": "Khó thở tăng khi nằm ngửa",
+          "matches": [
+            {
+              "sign_id": "SIGN-KHO_THO-d237e0ea",
+              "sign_label": "Khó thở",
+              "matched_alias": "Khó thở",
+              "normalized_key": "kho tho",
+              "match_score": 1.0,
+              "match_type": "decomposed_exact",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-HON_ME_KHO_THO-2d1ed9ad",
+              "sign_label": "Hôn mê, khó thở",
+              "matched_alias": "Hôn mê, khó thở",
+              "normalized_key": "hon me kho tho",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-HO_KHO_THO-bc9a9a53",
+              "sign_label": "Ho, khó thở",
+              "matched_alias": "Ho, khó thở",
+              "normalized_key": "ho kho tho",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-RA_KHI_HU_NGUA_BPSD-e6fb2e80",
+              "sign_label": "Ra khí hư, ngứa BPSD",
+              "matched_alias": "Ra khí hư, ngứa BPSD",
+              "normalized_key": "ra khi hu ngua bpsd",
+              "match_score": 0.56,
+              "match_type": "multi_token_overlap",
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "input_sign": "Khối sưng vùng cổ",
+          "matches": [
+            {
+              "sign_id": "SIGN-SUNG_VUNG_BEN_BEN_TRAI-feefde93",
+              "sign_label": "Sưng vùng bẹn bên trái",
+              "matched_alias": "Sưng vùng bẹn bên trái",
+              "normalized_key": "sung vung ben ben trai",
+              "match_score": 0.7183,
+              "match_type": "multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-NUOT_VUONG_SUNG_VUNG-a497a57c",
+              "sign_label": "Nuốt vướng, sưng vùng cổ",
+              "matched_alias": "Nuốt vướng, sưng vùng cổ",
+              "normalized_key": "nuot vuong sung vung co",
+              "match_score": 0.7183,
+              "match_type": "multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-CHAY_MAU_MUI_SUNG_NE_PHAN-b79c97b7",
+              "sign_label": "Chảy máu mũi, sưng nề phần mềm vùng mũi",
+              "matched_alias": "Chảy máu mũi, sưng nề phần mềm vùng mũi",
+              "normalized_key": "chay mau mui sung ne phan mem vung mui",
+              "match_score": 0.6542,
+              "match_type": "multi_token_overlap",
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "input_sign": "Nóng, đỏ, đau",
+          "matches": [
+            {
+              "sign_id": "SIGN-DAU_VI_NONG_HOI-995b727f",
+              "sign_label": "Đau thượng vị, nóng cổ, ợ hơi",
+              "matched_alias": "Đau thượng vị, nóng cổ, ợ hơi",
+              "normalized_key": "dau thuong vi nong co o hoi",
+              "match_score": 0.85,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "input_sign": "Khó thở",
+          "matches": [
+            {
+              "sign_id": "SIGN-KHO_THO-d237e0ea",
+              "sign_label": "Khó thở",
+              "matched_alias": "Khó thở",
+              "normalized_key": "kho tho",
+              "match_score": 1.0,
+              "match_type": "exact",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-HON_ME_KHO_THO-2d1ed9ad",
+              "sign_label": "Hôn mê, khó thở",
+              "matched_alias": "Hôn mê, khó thở",
+              "normalized_key": "hon me kho tho",
+              "match_score": 0.94,
+              "match_type": "token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-HO_KHO_THO-bc9a9a53",
+              "sign_label": "Ho, khó thở",
+              "matched_alias": "Ho, khó thở",
+              "normalized_key": "ho kho tho",
+              "match_score": 0.94,
+              "match_type": "token_subsequence",
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "input_sign": "Tăng khi nằm ngửa",
+          "matches": [
+            {
+              "sign_id": "SIGN-RA_KHI_HU_NGUA_BPSD-e6fb2e80",
+              "sign_label": "Ra khí hư, ngứa BPSD",
+              "matched_alias": "Ra khí hư, ngứa BPSD",
+              "normalized_key": "ra khi hu ngua bpsd",
+              "match_score": 0.6279,
+              "match_type": "multi_token_overlap",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-NGUA_RA_KHI_HU_AM_DAO-e0688d9e",
+              "sign_label": "Khám ngứa, ra khi hư âm đạo",
+              "matched_alias": "Khám ngứa, ra khi hư âm đạo",
+              "normalized_key": "kham ngua ra khi hu am dao",
+              "match_score": 0.6125,
+              "match_type": "multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-RA_KHI_HU_AM_DAO_VA-0de74222",
+              "sign_label": "Ra khí hư âm đạo và ngứa",
+              "matched_alias": "Ra khí hư âm đạo và ngứa",
+              "normalized_key": "ra khi hu am dao va ngua",
+              "match_score": 0.6012,
+              "match_type": "multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-XET_NGHIEM_KHI_HU_AM_VOI-e1c1827d",
+              "sign_label": "Xét nghiệm khí hư âm tính với nhiều tác nhân, bạch cầu tăng",
+              "matched_alias": "Xét nghiệm khí hư âm tính với nhiều tác nhân, bạch cầu tăng",
+              "normalized_key": "xet nghiem khi hu am tinh voi nhieu tac nhan bach cau tang",
+              "match_score": 0.5714,
+              "match_type": "multi_token_overlap",
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "input_sign": "Nghẹn ứ",
+          "matches": []
+        },
+        {
+          "input_sign": "Hội chứng nhiễm trùng",
+          "matches": [
+            {
+              "sign_id": "SIGN-CHONG_MAT_CAP_NON_CHUA_RO-2fa51864",
+              "sign_label": "Chóng mặt cấp - nôn chưa rõ nguyên nhân- Theo dõi nhiễm trùng đường ruột",
+              "matched_alias": "Chóng mặt cấp - nôn chưa rõ nguyên nhân- Theo dõi nhiễm trùng đường ruột",
+              "normalized_key": "chong mat cap non chua ro nguyen nhan theo doi nhiem trung duong ruot",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 3
+            }
+          ]
+        },
+        {
+          "input_sign": "Sốt cao",
+          "matches": [
+            {
+              "sign_id": "SIGN-SOT_CAO-3237c2fc",
+              "sign_label": "Sốt cao",
+              "matched_alias": "Sốt cao",
+              "normalized_key": "sot cao",
+              "match_score": 1.0,
+              "match_type": "exact",
+              "support_cases": 6
+            }
+          ]
+        },
+        {
+          "input_sign": "Nuốt khó",
+          "matches": []
+        }
+      ],
+      "suspected_diseases": [
+        {
+          "disease_id": "profile:deep_neck_infection",
+          "icd10": null,
+          "disease_name": "Nhiễm trùng khoang cổ sâu",
+          "case_count": 0,
+          "score": 11.6,
+          "supporting_signs": [
+            {
+              "input_sign": "Khối sưng vùng cổ",
+              "sign_id": "tmh_profile_deep_neck_infection::khoi sung vung co",
+              "matched_sign": "Khối sưng vùng cổ",
+              "matched_alias": "co sung",
+              "match_type": "ontology_profile_concept",
+              "match_score": 1.0,
+              "support_cases": 2
+            },
+            {
+              "input_sign": "Khó thở",
+              "sign_id": "tmh_profile_deep_neck_infection::kho tho",
+              "matched_sign": "Khó thở",
+              "matched_alias": "kho tho",
+              "match_type": "ontology_profile_concept",
+              "match_score": 0.94,
+              "support_cases": 2
+            },
+            {
+              "input_sign": "Hội chứng nhiễm trùng",
+              "sign_id": "tmh_profile_deep_neck_infection::hoi chung nhiem trung",
+              "matched_sign": "Hội chứng nhiễm trùng",
+              "matched_alias": "sot cao",
+              "match_type": "ontology_profile_concept",
+              "match_score": 0.92,
+              "support_cases": 2
+            },
+            {
+              "input_sign": "khối viêm đỏ nóng đau",
+              "sign_id": "tmh_profile_deep_neck_infection::khoi viem o nong au",
+              "matched_sign": "khối viêm đỏ nóng đau",
+              "matched_alias": "nong o au",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 3
+            },
+            {
+              "input_sign": "đe dọa đường thở",
+              "sign_id": "tmh_profile_deep_neck_infection::e doa uong tho",
+              "matched_sign": "đe dọa đường thở",
+              "matched_alias": "tang khi nam ngua",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 3
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:J18.0",
+          "icd10": "J18.0",
+          "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+          "case_count": 46,
+          "score": 4.0549,
+          "supporting_signs": [
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-SOT_CAO-3237c2fc",
+              "matched_sign": "Sốt cao",
+              "matched_alias": "Sốt cao",
+              "match_type": "decomposed_exact",
+              "match_score": 1.0,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-NONG_SOT_MET-2d0a7c70",
+              "matched_sign": "nóng, sốt, mệt",
+              "matched_alias": "nóng, sốt, mệt",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-HO_KHO_THO-bc9a9a53",
+              "matched_sign": "Ho, khó thở",
+              "matched_alias": "Ho, khó thở",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Khó thở tăng khi nằm ngửa",
+              "sign_id": "SIGN-HO_KHO_THO-bc9a9a53",
+              "matched_sign": "Ho, khó thở",
+              "matched_alias": "Ho, khó thở",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Khó thở",
+              "sign_id": "SIGN-HO_KHO_THO-bc9a9a53",
+              "matched_sign": "Ho, khó thở",
+              "matched_alias": "Ho, khó thở",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Sốt cao",
+              "sign_id": "SIGN-SOT_CAO-3237c2fc",
+              "matched_sign": "Sốt cao",
+              "matched_alias": "Sốt cao",
+              "match_type": "exact",
+              "match_score": 1.0,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:J18",
+          "icd10": "J18",
+          "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+          "case_count": 17,
+          "score": 3.9787,
+          "supporting_signs": [
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-SOT_CAO-3237c2fc",
+              "matched_sign": "Sốt cao",
+              "matched_alias": "Sốt cao",
+              "match_type": "decomposed_exact",
+              "match_score": 1.0,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-KHO_THO-d237e0ea",
+              "matched_sign": "Khó thở",
+              "matched_alias": "Khó thở",
+              "match_type": "decomposed_exact",
+              "match_score": 1.0,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-SOT-bb6c237f",
+              "matched_sign": "Sốt",
+              "matched_alias": "Sốt",
+              "match_type": "single_token_overlap",
+              "match_score": 0.74,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Khó thở tăng khi nằm ngửa",
+              "sign_id": "SIGN-KHO_THO-d237e0ea",
+              "matched_sign": "Khó thở",
+              "matched_alias": "Khó thở",
+              "match_type": "decomposed_exact",
+              "match_score": 1.0,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Khó thở",
+              "sign_id": "SIGN-KHO_THO-d237e0ea",
+              "matched_sign": "Khó thở",
+              "matched_alias": "Khó thở",
+              "match_type": "exact",
+              "match_score": 1.0,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Sốt cao",
+              "sign_id": "SIGN-SOT_CAO-3237c2fc",
+              "matched_sign": "Sốt cao",
+              "matched_alias": "Sốt cao",
+              "match_type": "exact",
+              "match_score": 1.0,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:J02",
+          "icd10": "J02",
+          "disease_name": "Viêm họng cấp",
+          "case_count": 115,
+          "score": 3.8896,
+          "supporting_signs": [
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-SOT_CAO-3237c2fc",
+              "matched_sign": "Sốt cao",
+              "matched_alias": "Sốt cao",
+              "match_type": "decomposed_exact",
+              "match_score": 1.0,
+              "support_cases": 2
+            },
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-SOT-bb6c237f",
+              "matched_sign": "Sốt",
+              "matched_alias": "Sốt",
+              "match_type": "single_token_overlap",
+              "match_score": 0.74,
+              "support_cases": 4
+            },
+            {
+              "input_sign": "Cổ sưng to tướng, đau buốt, sờ nóng gian.",
+              "sign_id": "SIGN-SO_MUI_NGHET_MUI_DAU_HONG-251d453d",
+              "matched_sign": "sổ mũi, nghẹt mũi, đau họng",
+              "matched_alias": "sổ mũi, nghẹt mũi, đau họng",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.7233,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Sốt cao",
+              "sign_id": "SIGN-SOT_CAO-3237c2fc",
+              "matched_sign": "Sốt cao",
+              "matched_alias": "Sốt cao",
+              "match_type": "exact",
+              "match_score": 1.0,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "profile:croup",
+          "icd10": null,
+          "disease_name": "Viêm thanh quản cấp tính hạ thanh môn",
+          "case_count": 0,
+          "score": 3.7,
+          "supporting_signs": [
+            {
+              "input_sign": "Ho",
+              "sign_id": "tmh_profile_croup::ho",
+              "matched_sign": "Ho",
+              "matched_alias": "ho",
+              "match_type": "ontology_profile_concept",
+              "match_score": 0.88,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Khó thở thanh quản",
+              "sign_id": "tmh_profile_croup::kho tho thanh quan",
+              "matched_sign": "Khó thở thanh quản",
+              "matched_alias": "kho tho thanh quan",
+              "match_type": "ontology_profile_concept",
+              "match_score": 1.0,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:J06.0",
+          "icd10": "J06.0",
+          "disease_name": "Viêm họng - thanh quản cấp",
+          "case_count": 44,
+          "score": 3.0336,
+          "supporting_signs": [
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-HO_KHO_THO-bc9a9a53",
+              "matched_sign": "Ho, khó thở",
+              "matched_alias": "Ho, khó thở",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Cổ sưng to tướng, đau buốt, sờ nóng gian.",
+              "sign_id": "SIGN-DAU_HONG_SO_MUI-dacddad3",
+              "matched_sign": "Đau họng, sồ mũi",
+              "matched_alias": "Đau họng, sồ mũi",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.7483,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Cổ sưng to tướng, đau buốt, sờ nóng gian.",
+              "sign_id": "SIGN-SO_MUI_DAU_HONG-b1fec917",
+              "matched_sign": "sổ mũi, đau họng",
+              "matched_alias": "sổ mũi, đau họng",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.7483,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Khó thở tăng khi nằm ngửa",
+              "sign_id": "SIGN-HO_KHO_THO-bc9a9a53",
+              "matched_sign": "Ho, khó thở",
+              "matched_alias": "Ho, khó thở",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Khó thở",
+              "sign_id": "SIGN-HO_KHO_THO-bc9a9a53",
+              "matched_sign": "Ho, khó thở",
+              "matched_alias": "Ho, khó thở",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:K30",
+          "icd10": "K30",
+          "disease_name": "Khó tiêu chức năng\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của K30 theo ICD10)",
+          "case_count": 16,
+          "score": 2.1993,
+          "supporting_signs": [
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-SOT_CAO-3237c2fc",
+              "matched_sign": "Sốt cao",
+              "matched_alias": "Sốt cao",
+              "match_type": "decomposed_exact",
+              "match_score": 1.0,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-SOT-bb6c237f",
+              "matched_sign": "Sốt",
+              "matched_alias": "Sốt",
+              "match_type": "single_token_overlap",
+              "match_score": 0.74,
+              "support_cases": 2
+            },
+            {
+              "input_sign": "Sốt cao",
+              "sign_id": "SIGN-SOT_CAO-3237c2fc",
+              "matched_sign": "Sốt cao",
+              "matched_alias": "Sốt cao",
+              "match_type": "exact",
+              "match_score": 1.0,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:J03",
+          "icd10": "J03",
+          "disease_name": "Viêm amidan cấp",
+          "case_count": 77,
+          "score": 2.0401,
+          "supporting_signs": [
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-SOT-bb6c237f",
+              "matched_sign": "Sốt",
+              "matched_alias": "Sốt",
+              "match_type": "single_token_overlap",
+              "match_score": 0.74,
+              "support_cases": 7
+            },
+            {
+              "input_sign": "Cổ sưng to tướng, đau buốt, sờ nóng gian.",
+              "sign_id": "SIGN-SO_MUI_NGHET_MUI_DAU_HONG-251d453d",
+              "matched_sign": "sổ mũi, nghẹt mũi, đau họng",
+              "matched_alias": "sổ mũi, nghẹt mũi, đau họng",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.7233,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:J00",
+          "icd10": "J00",
+          "disease_name": "Viêm mũi họng cấp [cảm thường]",
+          "case_count": 248,
+          "score": 2.004,
+          "supporting_signs": [
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-SOT-bb6c237f",
+              "matched_sign": "Sốt",
+              "matched_alias": "Sốt",
+              "match_type": "single_token_overlap",
+              "match_score": 0.74,
+              "support_cases": 14
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:E11",
+          "icd10": "E11",
+          "disease_name": "Bệnh đái tháo đường không phụ thuộc insulin",
+          "case_count": 58,
+          "score": 1.9963,
+          "supporting_signs": [
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-HON_ME_KHO_THO-2d1ed9ad",
+              "matched_sign": "Hôn mê, khó thở",
+              "matched_alias": "Hôn mê, khó thở",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Khó thở tăng khi nằm ngửa",
+              "sign_id": "SIGN-HON_ME_KHO_THO-2d1ed9ad",
+              "matched_sign": "Hôn mê, khó thở",
+              "matched_alias": "Hôn mê, khó thở",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Khó thở",
+              "sign_id": "SIGN-HON_ME_KHO_THO-2d1ed9ad",
+              "matched_sign": "Hôn mê, khó thở",
+              "matched_alias": "Hôn mê, khó thở",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:J18.9",
+          "icd10": "J18.9",
+          "disease_name": "Viêm phổi, không đặc hiệu",
+          "case_count": 14,
+          "score": 1.9963,
+          "supporting_signs": [
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-HON_ME_KHO_THO-2d1ed9ad",
+              "matched_sign": "Hôn mê, khó thở",
+              "matched_alias": "Hôn mê, khó thở",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Khó thở tăng khi nằm ngửa",
+              "sign_id": "SIGN-HON_ME_KHO_THO-2d1ed9ad",
+              "matched_sign": "Hôn mê, khó thở",
+              "matched_alias": "Hôn mê, khó thở",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Khó thở",
+              "sign_id": "SIGN-HON_ME_KHO_THO-2d1ed9ad",
+              "matched_sign": "Hôn mê, khó thở",
+              "matched_alias": "Hôn mê, khó thở",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:I25",
+          "icd10": "I25",
+          "disease_name": "Bệnh tim thiếu máu cục bộ mạn",
+          "case_count": 13,
+          "score": 1.9963,
+          "supporting_signs": [
+            {
+              "input_sign": "Sưng nóng đỏ cổ, sốt cao và khó thở nghẹn ứ khi nằm.",
+              "sign_id": "SIGN-HON_ME_KHO_THO-2d1ed9ad",
+              "matched_sign": "Hôn mê, khó thở",
+              "matched_alias": "Hôn mê, khó thở",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Khó thở tăng khi nằm ngửa",
+              "sign_id": "SIGN-HON_ME_KHO_THO-2d1ed9ad",
+              "matched_sign": "Hôn mê, khó thở",
+              "matched_alias": "Hôn mê, khó thở",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Khó thở",
+              "sign_id": "SIGN-HON_ME_KHO_THO-2d1ed9ad",
+              "matched_sign": "Hôn mê, khó thở",
+              "matched_alias": "Hôn mê, khó thở",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            }
+          ]
+        }
+      ],
+      "recommended_services": [
+        {
+          "service_code": "END-ENS-001",
+          "service_name": "nội soi tai mũi họng",
+          "category_code": "END-ENS",
+          "category_name": "Nội soi",
+          "score": 9.557,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18",
+              "icd10": "J18",
+              "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+              "disease_score": 3.9787,
+              "service_case_support": 5,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 36,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J06.0",
+              "icd10": "J06.0",
+              "disease_name": "Viêm họng - thanh quản cấp",
+              "disease_score": 3.0336,
+              "service_case_support": 9,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J03",
+              "icd10": "J03",
+              "disease_name": "Viêm amidan cấp",
+              "disease_score": 2.0401,
+              "service_case_support": 21,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 2.004,
+              "service_case_support": 104,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-IMM-002",
+          "service_name": "định lượng crp (c-reactive protein)",
+          "category_code": "LAB-IMM",
+          "category_name": "Miễn dịch",
+          "score": 8.9944,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 12,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J18",
+              "icd10": "J18",
+              "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+              "disease_score": 3.9787,
+              "service_case_support": 6,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 14,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J03",
+              "icd10": "J03",
+              "disease_name": "Viêm amidan cấp",
+              "disease_score": 2.0401,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 2.004,
+              "service_case_support": 20,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-HEM-001",
+          "service_name": "tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+          "category_code": "LAB-HEM",
+          "category_name": "Huyết học",
+          "score": 8.5759,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 25,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J18",
+              "icd10": "J18",
+              "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+              "disease_score": 3.9787,
+              "service_case_support": 8,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 37,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J03",
+              "icd10": "J03",
+              "disease_name": "Viêm amidan cấp",
+              "disease_score": 2.0401,
+              "service_case_support": 25,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-HEM-011",
+          "service_name": "công thức máu",
+          "category_code": "LAB-HEM",
+          "category_name": "Huyết học",
+          "score": 8.3477,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "guideline"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J18",
+              "icd10": "J18",
+              "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+              "disease_score": 3.9787,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 1,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J06.0",
+              "icd10": "J06.0",
+              "disease_name": "Viêm họng - thanh quản cấp",
+              "disease_score": 3.0336,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:K30",
+              "icd10": "K30",
+              "disease_name": "Khó tiêu chức năng\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của K30 theo ICD10)",
+              "disease_score": 2.1993,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J03",
+              "icd10": "J03",
+              "disease_name": "Viêm amidan cấp",
+              "disease_score": 2.0401,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-MIC-001",
+          "service_name": "influenza virus a, b test nhanh",
+          "category_code": "LAB-MIC",
+          "category_name": "Vi sinh",
+          "score": 7.7535,
+          "roles": [
+            "confirmatory"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:J18",
+              "icd10": "J18",
+              "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+              "disease_score": 3.9787,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 9,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J03",
+              "icd10": "J03",
+              "disease_name": "Viêm amidan cấp",
+              "disease_score": 2.0401,
+              "service_case_support": 12,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 2.004,
+              "service_case_support": 29,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-IMM-006",
+          "service_name": "crp",
+          "category_code": "LAB-IMM",
+          "category_name": "Miễn dịch",
+          "score": 7.0092,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "guideline"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J18",
+              "icd10": "J18",
+              "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+              "disease_score": 3.9787,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J06.0",
+              "icd10": "J06.0",
+              "disease_name": "Viêm họng - thanh quản cấp",
+              "disease_score": 3.0336,
+              "service_case_support": 1,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:K30",
+              "icd10": "K30",
+              "disease_name": "Khó tiêu chức năng\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của K30 theo ICD10)",
+              "disease_score": 2.1993,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J03",
+              "icd10": "J03",
+              "disease_name": "Viêm amidan cấp",
+              "disease_score": 2.0401,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-387",
+          "service_name": "procalcitonin",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 6.996,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "guideline"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J18",
+              "icd10": "J18",
+              "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+              "disease_score": 3.9787,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J06.0",
+              "icd10": "J06.0",
+              "disease_name": "Viêm họng - thanh quản cấp",
+              "disease_score": 3.0336,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:K30",
+              "icd10": "K30",
+              "disease_name": "Khó tiêu chức năng\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của K30 theo ICD10)",
+              "disease_score": 2.1993,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J03",
+              "icd10": "J03",
+              "disease_name": "Viêm amidan cấp",
+              "disease_score": 2.0401,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-IMM-001",
+          "service_name": "định lượng crp",
+          "category_code": "LAB-IMM",
+          "category_name": "Miễn dịch",
+          "score": 6.8255,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 7,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 13,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J03",
+              "icd10": "J03",
+              "disease_name": "Viêm amidan cấp",
+              "disease_score": 2.0401,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 2.004,
+              "service_case_support": 29,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "IMG-XRY-001",
+          "service_name": "chụp x-quang ngực thẳng (số hóa 1 phim)",
+          "category_code": "IMG-XRY",
+          "category_name": "X-quang",
+          "score": 6.751,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 21,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J18",
+              "icd10": "J18",
+              "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+              "disease_score": 3.9787,
+              "service_case_support": 7,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 9,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-001",
+          "service_name": "định lượng creatinin (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 5.7047,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J18",
+              "icd10": "J18",
+              "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+              "disease_score": 3.9787,
+              "service_case_support": 4,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:E11",
+              "icd10": "E11",
+              "disease_name": "Bệnh đái tháo đường không phụ thuộc insulin",
+              "disease_score": 1.9963,
+              "service_case_support": 14,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:I25",
+              "icd10": "I25",
+              "disease_name": "Bệnh tim thiếu máu cục bộ mạn",
+              "disease_score": 1.9963,
+              "service_case_support": 4,
+              "service_max_score": 0.77
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-MIC-003",
+          "service_name": "vi khuẩn nuôi cấy và định danh hệ thống tự động",
+          "category_code": "LAB-MIC",
+          "category_name": "Vi sinh",
+          "score": 5.0751,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 14,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 2.004,
+              "service_case_support": 8,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-003",
+          "service_name": "đo hoạt độ ast (got) (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 4.8413,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J18",
+              "icd10": "J18",
+              "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+              "disease_score": 3.9787,
+              "service_case_support": 4,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:E11",
+              "icd10": "E11",
+              "disease_name": "Bệnh đái tháo đường không phụ thuộc insulin",
+              "disease_score": 1.9963,
+              "service_case_support": 18,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-002",
+          "service_name": "đo hoạt độ alt (gpt) (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 4.8327,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J18",
+              "icd10": "J18",
+              "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+              "disease_score": 3.9787,
+              "service_case_support": 4,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:E11",
+              "icd10": "E11",
+              "disease_name": "Bệnh đái tháo đường không phụ thuộc insulin",
+              "disease_score": 1.9963,
+              "service_case_support": 17,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-006",
+          "service_name": "điện giải đồ (na, k, ci) (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 4.8177,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 7,
+              "service_max_score": 0.77
+            },
+            {
+              "disease_id": "disease:J18",
+              "icd10": "J18",
+              "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+              "disease_score": 3.9787,
+              "service_case_support": 4,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:E11",
+              "icd10": "E11",
+              "disease_name": "Bệnh đái tháo đường không phụ thuộc insulin",
+              "disease_score": 1.9963,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-MIC-005",
+          "service_name": "virus test nhanh (3 loại kháng nguyên cúm a, cúm b và rsv trong bệnh phẩm đường hô hấp)",
+          "category_code": "LAB-MIC",
+          "category_name": "Vi sinh",
+          "score": 4.565,
+          "roles": [
+            "confirmatory"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 4,
+              "service_max_score": 0.77
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 2.004,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-MIC-002",
+          "service_name": "dengue virus ns1ag test nhanh",
+          "category_code": "LAB-MIC",
+          "category_name": "Vi sinh",
+          "score": 4.1186,
+          "roles": [
+            "confirmatory"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 9,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J03",
+              "icd10": "J03",
+              "disease_name": "Viêm amidan cấp",
+              "disease_score": 2.0401,
+              "service_case_support": 5,
+              "service_max_score": 0.77
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 2.004,
+              "service_case_support": 9,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "GEN-OTH-001",
+          "service_name": "xét nghiệm",
+          "category_code": "GEN-OTH",
+          "category_name": "Chưa phân loại",
+          "score": 4.0655,
+          "roles": [
+            "screening"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 13,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:E11",
+              "icd10": "E11",
+              "disease_name": "Bệnh đái tháo đường không phụ thuộc insulin",
+              "disease_score": 1.9963,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:I25",
+              "icd10": "I25",
+              "disease_name": "Bệnh tim thiếu máu cục bộ mạn",
+              "disease_score": 1.9963,
+              "service_case_support": 6,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "GEN-OTH-002",
+          "service_name": "chẩn đoán hình ảnh",
+          "category_code": "GEN-OTH",
+          "category_name": "Chưa phân loại",
+          "score": 3.7554,
+          "roles": [
+            "screening"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 9,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J18.9",
+              "icd10": "J18.9",
+              "disease_name": "Viêm phổi, không đặc hiệu",
+              "disease_score": 1.9963,
+              "service_case_support": 8,
+              "service_max_score": 0.77
+            },
+            {
+              "disease_id": "disease:I25",
+              "icd10": "I25",
+              "disease_name": "Bệnh tim thiếu máu cục bộ mạn",
+              "disease_score": 1.9963,
+              "service_case_support": 3,
+              "service_max_score": 0.77
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-005",
+          "service_name": "định lượng urê máu (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 3.6528,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J18.0",
+              "icd10": "J18.0",
+              "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+              "disease_score": 4.0549,
+              "service_case_support": 7,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J18",
+              "icd10": "J18",
+              "disease_name": "Viêm phổi, tác nhân không xác định\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của I18 theo ICD10)",
+              "disease_score": 3.9787,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            }
+          ]
+        },
+        {
+          "service_code": "END-ENS-031",
+          "service_name": "(nhi) nội soi tai",
+          "category_code": "END-ENS",
+          "category_name": "Nội soi",
+          "score": 3.6367,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "guideline"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 3.8896,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J06.0",
+              "icd10": "J06.0",
+              "disease_name": "Viêm họng - thanh quản cấp",
+              "disease_score": 3.0336,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J03",
+              "icd10": "J03",
+              "disease_name": "Viêm amidan cấp",
+              "disease_score": 2.0401,
+              "service_case_support": 1,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 2.004,
+              "service_case_support": 1,
+              "service_max_score": 0.6
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hit_flags": {
+    "expected_disease": "Nhiễm trùng khoang cổ sâu",
+    "expected_tokens": [
+      "nhiem",
+      "trung",
+      "khoang",
+      "sau"
+    ],
+    "top1_score": 1.0,
+    "top3_score": 1.0,
+    "top1_hit": true,
+    "top3_hit": true
+  }
+}

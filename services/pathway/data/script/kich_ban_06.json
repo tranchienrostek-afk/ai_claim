@@ -1,0 +1,128 @@
+{
+  "cau_chuyen_y_khoa": {
+    "tieu_de": "Bí ẩn đằng sau lớp giả mạc họng và sự mệt mỏi cùng cực",
+    "benh_nhan": {
+      "gioi_tinh": "Nữ",
+      "tuoi": 22
+    },
+    "benh_su_va_trieu_chung": {
+      "trieu_chung_co_nang": [
+        "Sốt cao 39.5 độ C kéo dài, kèm theo rét run và mệt mỏi rã rời, suy nhược rõ rệt.",
+        "Đau họng dữ dội, đau nhói lên tai khi nuốt, hầu như không thể ăn uống.",
+        "Cổ sưng to, có nhiều hạch nổi hai bên góc hàm và dọc cơ ức đòn chũm."
+      ],
+      "tien_su": "Sinh viên đại học, sống ở ký túc xá, tự uống kháng sinh Amoxicillin 4 ngày ở nhà nhưng không hạ sốt mà còn nổi thêm ban đỏ rải rác toàn thân."
+    },
+    "nhan_dinh_ban_dau": "Thăm khám họng cho thấy niêm mạc họng đỏ rực, hai amiđan sưng rất to, gần như chạm nhau ở đường giữa, trên bề mặt phủ một lớp màng mủ (bựa trắng) dày, xám nhạt. Bác sĩ nhận định đây là một ca viêm họng có giả mạc lan tỏa cực kỳ phức tạp. Lớp màng mủ này đặt bác sĩ vào tình huống phải chẩn đoán phân biệt khẩn cấp với bệnh Bạch hầu (bệnh truyền nhiễm nguy hiểm tử vong cao). Đồng thời, tình trạng hạch cổ to toàn phát và suy nhược nặng yêu cầu phải loại trừ Viêm họng do bệnh máu (như bệnh bạch cầu cấp - Leucose) hoặc Viêm họng do bệnh tăng bạch cầu đơn nhân. Việc bệnh nhân bị nổi ban sau khi uống Amoxicillin là một 'chìa khóa' lâm sàng rất quan trọng gợi ý nhiễm virus EBV.",
+    "chi_dinh_can_lam_sang": {
+      "xet_nghiem_loai_tru_benh_nguy_hiem": [
+        {
+          "ten_xet_nghiem": "Phết dịch họng soi tươi và nuôi cấy",
+          "muc_dich": "Tìm trực khuẩn Klebs-Loeffer để loại trừ dứt điểm bệnh Bạch hầu; đồng thời tìm Liên cầu khuẩn tan huyết nhóm A.",
+          "ket_qua": "Âm tính với trực khuẩn Bạch hầu, không phân lập được Liên cầu khuẩn nhóm A."
+        },
+        {
+          "ten_xet_nghiem": "Phản ứng ASLO trong máu",
+          "muc_dich": "Loại trừ nguyên nhân viêm họng do Liên cầu khuẩn.",
+          "ket_qua": "ASLO bình thường (< 200 đơn vị)."
+        }
+      ],
+      "xet_nghiem_truc_tiep_tim_ra_benh": [
+        {
+          "ten_xet_nghiem": "Tổng phân tích tế bào máu ngoại vi (CBC) và phết lam máu",
+          "muc_dich": "Loại trừ bệnh bạch cầu cấp (Leucose) hoặc suy tủy, đồng thời tìm dấu hiệu của nhiễm trùng do virus.",
+          "ket_qua": "Bạch cầu tăng, nhưng đặc biệt là tỉ lệ tế bào lympho tăng rất cao (>50%), xuất hiện nhiều tế bào lympho không điển hình (bạch cầu đơn nhân to). Không có tế bào blast ác tính của ung thư máu."
+        },
+        {
+          "ten_xet_nghiem": "Xét nghiệm huyết thanh học Monospot / Tìm kháng thể IgM với EBV",
+          "muc_dich": "Khẳng định bệnh lý do nhiễm Epstein Barr Virus (EBV) gây ra khi có sự xuất hiện của bạch cầu đơn nhân tăng cao.",
+          "ket_qua": "Test Monospot dương tính mạnh, kháng thể IgM kháng EBV dương tính."
+        }
+      ]
+    },
+    "chan_doan_cuoi_cung": "Viêm họng cấp tính trong Bệnh tăng bạch cầu đơn nhân nhiễm khuẩn (Infectious Mononucleosis) do virus Epstein Barr (EBV)."
+  },
+  "du_lieu_labeling_mau": {
+    "case_level": {
+      "request_id": "tc_261",
+      "selected_profile_id": "prof_261",
+      "testcase_title": "TC261_AcutePharyngitis_EBV_Mononucleosis",
+      "main_disease_name_vi": "Viêm họng cấp tính (Viêm họng do bệnh tăng bạch cầu đơn nhân)",
+      "primary_icd10": "<chua_co_ICD>",
+      "secondary_icd10_list_pipe": "",
+      "specialty": "Họng thanh quản",
+      "message_hash_id": "msg_261",
+      "claim_id_or_sohoso": "claim_261",
+      "why_this_case_was_selected": "Kịch bản điển hình về sự phức tạp của viêm họng giả mạc. Bệnh nhân có triệu chứng rất nặng, dễ nhầm với Bạch hầu hoặc Ung thư máu. Đòi hỏi tổ hợp xét nghiệm vi sinh và huyết học chuyên sâu để chẩn đoán chính xác bệnh tăng bạch cầu đơn nhân do virus EBV.",
+      "claim_raw_json": "claim_261.json",
+      "icd_source": "phac_do_tmh_2015",
+      "signs_history_source": "phac_do_tmh_2015",
+      "lab_result_source": "phac_do_tmh_2015",
+      "reviewer_or_insurer_note_source": "note_261",
+      "contract_or_plan_source": "plan_261",
+      "chief_complaint": "Sốt cao mệt mỏi rã rời, nuốt đau dữ dội và nổi nhiều hạch cổ.",
+      "initial_signs_pipe": "Sốt 39.5 độ | Niêm mạc họng đỏ rực | Amiđan sưng to phủ màng mủ trắng xám | Hạch cổ sưng to",
+      "medical_history_pipe": "Uống Amoxicillin 4 ngày gây nổi ban đỏ toàn thân",
+      "initial_clinical_question": "Bác sĩ cần phân biệt khẩn cấp đây là viêm họng do Bạch hầu, do Liên cầu khuẩn nặng, hay là viêm họng trong các bệnh lý về máu / hệ bạch huyết.",
+      "total_lines": 5,
+      "target_lines_for_labeling": 5,
+      "panel_services_present_pipe": "Nội soi tai mũi họng | Phết dịch họng soi tươi và nuôi cấy | Phản ứng ASLO | Tổng phân tích tế bào máu ngoại vi | Xét nghiệm Monospot (EBV)",
+      "delivery_deadline": "2026-03-28",
+      "employee_name": "bs_demo_8",
+      "review_status": "submitted",
+      "manager_note": "Testcase rèn luyện tư duy loại trừ Bạch hầu và chẩn đoán bệnh lý toàn thân lẩn khuất dưới triệu chứng viêm họng."
+    },
+    "service_lines": [
+      {
+        "line_no": 1,
+        "service_name_raw": "Nội soi tai mũi họng",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Chỉ định lâm sàng đầu tay bắt buộc để đánh giá tổn thương thực thể. Phát hiện tình trạng niêm mạc họng đỏ, amiđan sưng to có lớp bựa trắng/giả mạc phủ trên bề mặt, từ đó định hướng các chẩn đoán phân biệt phức tạp.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Khám thực thể phát hiện giả mạc họng."
+      },
+      {
+        "line_no": 2,
+        "service_name_raw": "Phết dịch họng soi tươi và nuôi cấy",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Trường hợp viêm họng có màng mủ/giả mạc và bệnh nhân mệt mỏi, xanh tái, xét nghiệm này là tối quan trọng mang tính sống còn để phân biệt và loại trừ trực khuẩn Klebs-Loeffer (bệnh Bạch hầu) nhằm cách ly và điều trị cấp cứu.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm loại trừ bệnh truyền nhiễm tối nguy hiểm."
+      },
+      {
+        "line_no": 3,
+        "service_name_raw": "Phản ứng ASLO",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Chỉ định cần thiết nhằm định lượng kháng thể chống liên cầu, giúp loại trừ nguyên nhân viêm họng đỏ cấp có mủ do Liên cầu khuẩn beta tan huyết nhóm A gây ra.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Loại trừ tác nhân vi khuẩn phổ biến."
+      },
+      {
+        "line_no": 4,
+        "service_name_raw": "Tổng phân tích tế bào máu ngoại vi (CBC)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Khi viêm họng có màng giả kèm hạch cổ to toàn phát, xét nghiệm máu là bắt buộc để chẩn đoán phân biệt viêm họng do các bệnh máu (bạch cầu cấp, suy tủy). Trong trường hợp này phát hiện tỷ lệ lympho bào không điển hình tăng vọt, chỉ điểm nhiễm virus.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Tầm soát bệnh lý huyết học/hệ thống."
+      },
+      {
+        "line_no": 5,
+        "service_name_raw": "Xét nghiệm Monospot (Huyết thanh học EBV)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Dựa trên kết quả công thức máu có bạch cầu đơn nhân tăng cao và triệu chứng lâm sàng tương thích, xét nghiệm này khẳng định chẩn đoán Viêm họng cấp tính do Epstein Barr Virus (E.B.V) gây bệnh bạch cầu đơn nhân nhiễm khuẩn.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm huyết thanh học trực tiếp tìm ra bệnh."
+      }
+    ]
+  }
+}

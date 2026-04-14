@@ -1,0 +1,134 @@
+{
+  "cau_chuyen_y_khoa": {
+    "tieu_de": "Cú 'Hat-trick' tử thần và bức màn sương mù của hệ miễn dịch",
+    "benh_nhan": {
+      "gioi_tinh": "Nam",
+      "tuoi": 58
+    },
+    "benh_su_va_trieu_chung": {
+      "trieu_chung_co_nang": [
+        "HỌNG-THANH QUẢN: Khàn tiếng đặc, nuốt đau dữ dội chói lên tai, ho từng cơn rũ rượi khạc ra đờm lẫn máu. Mới xuất hiện tình trạng thở rít và rút lõm lồng ngực.",
+        "MŨI-XOANG: Đau nhức vùng đỉnh chẩm và hốc mắt phải dữ dội, lồi mắt phải nhẹ, sụp mi, chảy mũi lờ lờ máu cá.",
+        "TAI: Tai trái chảy mủ đặc thối khẳn lổn nhổn trắng. Đột ngột chóng mặt quay cuồng, đi loạng choạng, kèm theo méo mặt (liệt nửa mặt bên trái).",
+        "TOÀN THÂN: Sốt vã mồ hôi về chiều, gầy sút 8kg trong 1 tháng, suy kiệt nặng."
+      ],
+      "tien_su": "Nghiện thuốc lá nặng (40 bao/năm), đái tháo đường type 2 bỏ trị nhiều năm."
+    },
+    "nhan_dinh_ban_dau": "Bệnh nhân vào cấp cứu trong tình trạng ngạt thở thanh quản và suy kiệt đa cơ quan. Đứng trước một bệnh cảnh tàn phá khủng khiếp ở cả 3 vùng (Tai trái liệt mặt + Mũi xoang phải lồi mắt + Thanh quản sùi loét), nhận định đầu tiên của bác sĩ là: Một khối ung thư vòm mũi họng hoặc ung thư hạ họng giai đoạn cuối (T4) đã di căn phá hủy toàn bộ màng não, đáy sọ và thanh quản. Tuy nhiên, sự mất đối xứng của tổn thương (tai bên trái, mắt bên phải, thanh quản ở giữa) khiến bác sĩ nghi ngờ đây là sự hội tụ của nhiều bệnh lý độc lập bùng phát trên nền cơ địa đái tháo đường suy giảm miễn dịch nghiêm trọng. Bác sĩ quyết định mở khí quản cấp cứu, đồng thời tung ra tổ hợp xét nghiệm 'bủa lưới' toàn diện.",
+    "chi_dinh_can_lam_sang": {
+      "xet_nghiem_loai_tru_ung_thu_di_can": [
+        {
+          "ten_xet_nghiem": "Chụp Cộng hưởng từ (MRI) và Cắt lớp vi tính (CT Scan) sọ mặt - cổ có cản quang",
+          "muc_dich": "Đánh giá mức độ tàn phá xương, xác định đây là một khối u ác tính khổng lồ hay các ổ viêm phá hủy độc lập ở Tai, Mũi, Họng.",
+          "ket_qua": "Hình ảnh kinh ngạc: Có 3 ổ tổn thương hoàn toàn tách biệt không liên quan nhau. (1) Xoang bướm và sàng phải bị mờ đặc, tiêu xương xâm lấn ổ mắt. (2) Tai giữa và xương chũm trái có khối mờ phá hủy tường thượng nhĩ, ăn mòn ống Fallope (dây VII) và ống bán khuyên ngoài. (3) Dây thanh và sụn phễu dày, phù nề loét sùi nhưng không có khối u lớn lan tỏa."
+        }
+      ],
+      "xet_nghiem_truc_tiep_tim_ra_benh": [
+        {
+          "ten_xet_nghiem": "Nội soi thanh quản trực tiếp + Sinh thiết mô bệnh học",
+          "muc_dich": "Xác định bản chất khối sùi loét ở thanh quản (phân biệt Ung thư hay Lao hay Nấm).",
+          "ket_qua": "Vi thể không thấy tế bào ung thư. Thấy tổ chức hoại tử bã đậu, tế bào khổng lồ Langhans và tế bào bán liên. Kết luận: Lao thanh quản."
+        },
+        {
+          "ten_xet_nghiem": "Phẫu thuật nội soi xoang sinh thiết + Nuôi cấy định danh",
+          "muc_dich": "Đánh giá khối hoại tử ở xoang bướm/sàng phải gây lồi mắt.",
+          "ket_qua": "Nội soi thấy khối màu xám nâu hoại tử. Cấy nấm mọc Aspergillus fumigatus xâm lấn mạch máu. Kết luận: Viêm xoang do nấm thể dữ dội xâm nhập thực sự."
+        },
+        {
+          "ten_xet_nghiem": "Khám tai dưới kính hiển vi + Nghiệm pháp rò mê nhĩ",
+          "muc_dich": "Xác định nguyên nhân chảy mủ thối, liệt mặt và chóng mặt.",
+          "ket_qua": "Có khối vảy trắng óng ánh như xà cừ ở lỗ thủng góc sau trên, ấn vào bệnh nhân giật nhãn cầu. Kết luận: Viêm tai giữa mạn tính có Cholesteatoma gây biến chứng rò mê nhĩ và liệt dây VII."
+        },
+        {
+          "ten_xet_nghiem": "Xét nghiệm đường huyết và HbA1c",
+          "muc_dich": "Đánh giá nguyên nhân nền gây suy giảm miễn dịch.",
+          "ket_qua": "Đường huyết lên tới 25 mmol/L, HbA1c > 12%."
+        }
+      ]
+    },
+    "chan_doan_cuoi_cung": "Bệnh nhân mắc CÙNG LÚC 3 bệnh lý chết người trên nền Đái tháo đường mất kiểm soát: \n1. MŨI: Viêm mũi xoang do nấm Aspergillus thể dữ dội xâm nhập thực sự.\n2. HỌNG-THANH QUẢN: Lao thanh quản giai đoạn loét sùi.\n3. TAI: Viêm tai giữa mạn tính có Cholesteatoma biến chứng liệt mặt và rò mê nhĩ."
+  },
+  "du_lieu_labeling_mau": {
+    "case_level": {
+      "request_id": "tc_264",
+      "selected_profile_id": "prof_264",
+      "testcase_title": "TC264_TripleThreat_TB_Fungus_Cholesteatoma",
+      "main_disease_name_vi": "Hội chứng đa bệnh lý Tai Mũi Họng nguy kịch",
+      "primary_icd10": "<chua_co_ICD>",
+      "secondary_icd10_list_pipe": "",
+      "specialty": "Tai, Mũi xoang, Họng thanh quản",
+      "message_hash_id": "msg_264",
+      "claim_id_or_sohoso": "claim_264",
+      "why_this_case_was_selected": "Testcase siêu kinh điển thử thách trí tuệ y khoa bậc nhất. Bệnh nhân có triệu chứng tàn phá ở cả 3 vùng tai-mũi-họng dễ lầm tưởng là ung thư di căn đáy sọ. Yêu cầu bác sĩ phải chỉ định cận lâm sàng vi sinh, sinh thiết và hình ảnh học tinh vi để tách bạch 3 căn bệnh độc lập chết người trên nền suy giảm miễn dịch.",
+      "claim_raw_json": "claim_264.json",
+      "icd_source": "phac_do_tmh_2015",
+      "signs_history_source": "phac_do_tmh_2015",
+      "lab_result_source": "phac_do_tmh_2015",
+      "reviewer_or_insurer_note_source": "note_264",
+      "contract_or_plan_source": "plan_264",
+      "chief_complaint": "Khó thở rít, đau nhức sọ mặt dữ dội, lồi mắt phải, chóng mặt quay cuồng, liệt mặt trái và khạc đờm ra máu.",
+      "initial_signs_pipe": "Khó thở thanh quản | Mủ tai thối khẳn lổn nhổn trắng | Liệt dây VII trái | Sụp mi và lồi mắt phải | Khối loét sùi ở sụn phễu",
+      "medical_history_pipe": "Đái tháo đường type 2 bỏ trị | Nghiện thuốc lá nặng",
+      "initial_clinical_question": "Cần chẩn đoán phân biệt đây là Ung thư biểu mô lan rộng toàn bộ đáy sọ sọ mặt hay là sự kết hợp của các bệnh lý viêm đặc hiệu (Lao, Nấm xâm lấn, Cholesteatoma) do biến chứng của suy giảm miễn dịch (Tiểu đường).",
+      "total_lines": 5,
+      "target_lines_for_labeling": 5,
+      "panel_services_present_pipe": "MRI và CT sọ mặt cổ | Sinh thiết thanh quản | Nội soi xoang cấy nấm | Khám tai dưới kính hiển vi | Mở khí quản cấp cứu",
+      "delivery_deadline": "2026-03-28",
+      "employee_name": "bs_demo_master",
+      "review_status": "submitted",
+      "manager_note": "Testcase đỉnh cao kết hợp 3 bệnh cảnh nặng nhất của 3 phân khoa Tai - Mũi - Họng."
+    },
+    "service_lines": [
+      {
+        "line_no": 1,
+        "service_name_raw": "Chụp MRI và CT Scan sọ mặt - cổ có cản quang",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Bệnh nhân có triệu chứng liệt thần kinh sọ (dây VII, cơ vận nhãn) và tổn thương cả 3 vùng. CT và MRI là bắt buộc để đánh giá mức độ tàn phá xương, xác định ranh giới xâm lấn của xoang bướm, xương chũm và thanh quản, giúp loại trừ ung thư di căn và định hướng phẫu thuật.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Chỉ định hình ảnh học then chốt để tách bạch 3 ổ bệnh."
+      },
+      {
+        "line_no": 2,
+        "service_name_raw": "Nội soi thanh quản trực tiếp + Sinh thiết mô bệnh học",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Tổn thương thanh quản dạng loét sùi kèm khạc máu dễ nhầm với ung thư. Sinh thiết là tiêu chuẩn vàng. Hình ảnh tế bào khổng lồ Langhans và hoại tử bã đậu giúp chẩn đoán chính xác Lao thanh quản.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Tiêu chuẩn vàng chẩn đoán Lao thanh quản."
+      },
+      {
+        "line_no": 3,
+        "service_name_raw": "Phẫu thuật nội soi xoang sinh thiết + Nuôi cấy định danh vi nấm",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Bệnh nhân tiểu đường nặng có triệu chứng lồi mắt, hoại tử mũi xoang là dấu hiệu cảnh báo Viêm mũi xoang do nấm thể dữ dội xâm nhập thực sự. Bắt buộc cấy nấm và sinh thiết để tìm Aspergillus fumigatus và cứu mạng bệnh nhân.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Chỉ định sống còn đối với nhiễm nấm xâm lấn nội sọ."
+      },
+      {
+        "line_no": 4,
+        "service_name_raw": "Khám tai dưới kính hiển vi + Nghiệm pháp rò mê nhĩ",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Chảy mủ tai thối khẳn kèm chóng mặt và liệt mặt là đặc trưng của Viêm tai giữa mạn tính có Cholesteatoma gây biến chứng. Khám dưới kính hiển vi tìm mảnh xà cừ và test rò mê nhĩ giúp chẩn đoán xác định để mổ cấp cứu khoét rỗng đá chũm.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Khám chuyên sâu phát hiện biến chứng sọ não của Cholesteatoma."
+      },
+      {
+        "line_no": 5,
+        "service_name_raw": "Mở khí quản cấp cứu",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Bệnh nhân có khó thở thanh quản độ III do tổn thương phù nề loét sùi của Lao thanh quản che lấp đường thở. Theo phác đồ, mở khí quản cấp cứu là bắt buộc để cứu sống bệnh nhân trước khi tiến hành các can thiệp điều trị đặc hiệu khác.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Can thiệp ngoại khoa cấp cứu khai thông đường thở."
+      }
+    ]
+  }
+}

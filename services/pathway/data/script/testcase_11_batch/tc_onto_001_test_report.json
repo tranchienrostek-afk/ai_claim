@@ -1,0 +1,4598 @@
+{
+  "generated_at": "2026-03-29T19:43:17.628104+07:00",
+  "input_json": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11.json",
+  "case_index": 1,
+  "case_level": {
+    "request_id": "tc_onto_001",
+    "selected_profile_id": "prof_onto_01",
+    "testcase_title": "TC_Onto_Cholesteatoma_DirtyText",
+    "main_disease_name_vi": "Viêm tai giữa mạn tính có cholesteatoma",
+    "primary_icd10": "<chua_co_ICD>",
+    "secondary_icd10_list_pipe": "",
+    "specialty": "Tai",
+    "message_hash_id": "msg_onto_001",
+    "claim_id_or_sohoso": "claim_onto_001",
+    "why_this_case_was_selected": "Kiểm thử khả năng bóc tách modifier đặc hiệu từ văn bản thô để chẩn đoán Cholesteatoma và chỉ định nghiệm pháp rò mê nhĩ.",
+    "claim_raw_json": "claim_onto_001.json",
+    "icd_source": "phac_do_tmh_2015",
+    "signs_history_source": "phac_do_tmh_2015",
+    "lab_result_source": "phac_do_tmh_2015",
+    "reviewer_or_insurer_note_source": "note_onto_001",
+    "contract_or_plan_source": "plan_onto_001",
+    "chief_complaint": "Chảy mủ tai trái thối và đi lảo đảo.",
+    "initial_signs_pipe": "Mủ thối khẳn | Mảnh óng ánh xà cừ nổi váng | Chóng mặt",
+    "medical_history_pipe": "Chảy mủ tai mạn tính",
+    "initial_clinical_question": "Xác định bản chất mủ tai và đánh giá biến chứng tiền đình.",
+    "total_lines": 3,
+    "target_lines_for_labeling": 3,
+    "panel_services_present_pipe": "Khám tai dưới kính hiển vi | Nghiệm pháp rò mê nhĩ | CT Scan xương thái dương",
+    "delivery_deadline": "2026-03-28",
+    "employee_name": "ai_onto_tester",
+    "review_status": "submitted",
+    "manager_note": "Test 1"
+  },
+  "story_title": "Test 1: Lời khai mang tính 'đặc hiệu' ẩn trong từ ngữ dân dã",
+  "sign_sets": {
+    "symptom_story": [
+      "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+      "Trong mủ vớt ra được vảy trắng lấp lánh như váng mỡ, thả vào nước nổi lềnh bềnh.",
+      "Đi lại hay bị lảo đảo muốn ngã."
+    ],
+    "chief_plus_findings": [
+      "Chảy mủ tai trái thối và đi lảo đảo.",
+      "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+      "Trong mủ vớt ra được vảy trắng lấp lánh như váng mỡ, thả vào nước nổi lềnh bềnh.",
+      "Đi lại hay bị lảo đảo muốn ngã.",
+      "Mủ thối khẳn",
+      "Mảnh óng ánh xà cừ nổi váng",
+      "Chóng mặt",
+      "Chảy mủ tai",
+      "Thối khẳn",
+      "Lổn nhổn trắng",
+      "Mảnh óng ánh như xà cừ",
+      "Thả vào nước không tan",
+      "Nổi váng",
+      "Chóng mặt / Mất thăng bằng",
+      "Lảo đảo muốn ngã",
+      "Liên quan đến tai trái"
+    ],
+    "structured_signs": [
+      "Chảy mủ tai",
+      "Thối khẳn",
+      "Lổn nhổn trắng",
+      "Mảnh óng ánh như xà cừ",
+      "Thả vào nước không tan",
+      "Nổi váng",
+      "Chóng mặt / Mất thăng bằng",
+      "Lảo đảo muốn ngã",
+      "Liên quan đến tai trái"
+    ],
+    "all_case_signs": [
+      "Chảy mủ tai trái thối và đi lảo đảo.",
+      "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+      "Trong mủ vớt ra được vảy trắng lấp lánh như váng mỡ, thả vào nước nổi lềnh bềnh.",
+      "Đi lại hay bị lảo đảo muốn ngã.",
+      "Mủ thối khẳn",
+      "Mảnh óng ánh xà cừ nổi váng",
+      "Chóng mặt",
+      "Chảy mủ tai",
+      "Thối khẳn",
+      "Lổn nhổn trắng",
+      "Mảnh óng ánh như xà cừ",
+      "Thả vào nước không tan",
+      "Nổi váng",
+      "Chóng mặt / Mất thăng bằng",
+      "Lảo đảo muốn ngã",
+      "Liên quan đến tai trái",
+      "Chảy mủ tai mạn tính"
+    ]
+  },
+  "sign_test": {
+    "symptom_story": {
+      "input_signs": [
+        "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+        "Trong mủ vớt ra được vảy trắng lấp lánh như váng mỡ, thả vào nước nổi lềnh bềnh.",
+        "Đi lại hay bị lảo đảo muốn ngã."
+      ],
+      "matched_signs": [
+        {
+          "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+          "matches": [
+            {
+              "sign_id": "SIGN-CHAY_MUI_RAT_HONG_VUONG_DAM-d0e8442b",
+              "sign_label": "chảy mũi, rát họng, vướng đàm, ợ hơi",
+              "matched_alias": "chảy mũi, rát họng, vướng đàm, ợ hơi",
+              "normalized_key": "chay mui rat hong vuong dam o hoi",
+              "match_score": 0.6842,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-CHAY_MUI-c2c6e823",
+              "sign_label": "chảy mũi",
+              "matched_alias": "chảy mũi",
+              "normalized_key": "chay mui",
+              "match_score": 0.6411,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 6
+            },
+            {
+              "sign_id": "SIGN-TIEU_BUOT_TIEU_MOT_NGUA_AM-93a73cd7",
+              "sign_label": "Tiểu buốt, tiểu mót, ngứa âm hộ, huyết trắng hơi vàng có mùi",
+              "matched_alias": "Tiểu buốt, tiểu mót, ngứa âm hộ, huyết trắng hơi vàng có mùi",
+              "normalized_key": "tieu buot tieu mot ngua am ho huyet trang hoi vang co mui",
+              "match_score": 0.61,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-HO_CHAY_MUI-f510ea5a",
+              "sign_label": "Ho, chảy mũi",
+              "matched_alias": "Ho, chảy mũi",
+              "normalized_key": "ho chay mui",
+              "match_score": 0.5878,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 33
+            },
+            {
+              "sign_id": "SIGN-CHAY_MUI_HO-89fda1ef",
+              "sign_label": "Chảy mũi, ho",
+              "matched_alias": "Chảy mũi, ho",
+              "normalized_key": "chay mui ho",
+              "match_score": 0.5878,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 15
+            },
+            {
+              "sign_id": "SIGN-CHAY_MUI_NGAT_MUI-a2f72403",
+              "sign_label": "chảy mũi, ngạt mũi",
+              "matched_alias": "chảy mũi, ngạt mũi",
+              "normalized_key": "chay mui ngat mui",
+              "match_score": 0.5878,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-CHAY_MUI_XANH-8fbc8763",
+              "sign_label": "Chảy mũi xanh",
+              "matched_alias": "Chảy mũi xanh",
+              "normalized_key": "chay mui xanh",
+              "match_score": 0.5878,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "input_sign": "Trong mủ vớt ra được vảy trắng lấp lánh như váng mỡ, thả vào nước nổi lềnh bềnh.",
+          "matches": []
+        },
+        {
+          "input_sign": "Đi lại hay bị lảo đảo muốn ngã.",
+          "matches": [
+            {
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "sign_label": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "normalized_key": "non di ngoai phan long nhieu met chong mat di lai chenh choang",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-TIEP_XUC_DI_LAI_VAN_DONG-f96ffa59",
+              "sign_label": "Người bệnh tỉnh, tiếp xúc tốt, đi lại vận động tốt",
+              "matched_alias": "Người bệnh tỉnh, tiếp xúc tốt, đi lại vận động tốt",
+              "normalized_key": "nguoi benh tinh tiep xuc tot di lai van dong tot",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 2
+            }
+          ]
+        }
+      ],
+      "suspected_diseases": [
+        {
+          "disease_id": "profile:cholesteatoma",
+          "icd10": null,
+          "disease_name": "Viêm tai giữa mạn tính có cholesteatoma",
+          "case_count": 0,
+          "score": 11.5,
+          "supporting_signs": [
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "tmh_profile_cholesteatoma::chong mat mat thang bang",
+              "matched_sign": "Chóng mặt / Mất thăng bằng",
+              "matched_alias": "lao ao",
+              "match_type": "ontology_profile_concept",
+              "match_score": 0.9,
+              "support_cases": 2
+            },
+            {
+              "input_sign": "mủ tai thối khẳn",
+              "sign_id": "tmh_profile_cholesteatoma::mu tai thoi khan",
+              "matched_sign": "mủ tai thối khẳn",
+              "matched_alias": "mui nhu chuot chet",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 3
+            },
+            {
+              "input_sign": "mảnh xà cừ / váng mỡ",
+              "sign_id": "tmh_profile_cholesteatoma::manh xa cu vang mo",
+              "matched_sign": "mảnh xà cừ / váng mỡ",
+              "matched_alias": "vay trang lap lanh",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 4
+            },
+            {
+              "input_sign": "gợi ý rò mê nhĩ",
+              "sign_id": "tmh_profile_cholesteatoma::goi y ro me nhi",
+              "matched_sign": "gợi ý rò mê nhĩ",
+              "matched_alias": "lao ao muon nga",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:J00",
+          "icd10": "J00",
+          "disease_name": "Viêm mũi họng cấp [cảm thường]",
+          "case_count": 248,
+          "score": 3.2384,
+          "supporting_signs": [
+            {
+              "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+              "sign_id": "SIGN-HO_CHAY_MUI-f510ea5a",
+              "matched_sign": "Ho, chảy mũi",
+              "matched_alias": "Ho, chảy mũi",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.5878,
+              "support_cases": 18
+            },
+            {
+              "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+              "sign_id": "SIGN-CHAY_MUI_HO-89fda1ef",
+              "matched_sign": "Chảy mũi, ho",
+              "matched_alias": "Chảy mũi, ho",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.5878,
+              "support_cases": 12
+            }
+          ]
+        },
+        {
+          "disease_id": "profile:croup",
+          "icd10": null,
+          "disease_name": "Viêm thanh quản cấp tính hạ thanh môn",
+          "case_count": 0,
+          "score": 3.2,
+          "supporting_signs": [
+            {
+              "input_sign": "Ho",
+              "sign_id": "tmh_profile_croup::ho",
+              "matched_sign": "Ho",
+              "matched_alias": "ho",
+              "match_type": "ontology_profile_concept",
+              "match_score": 0.88,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "trẻ nhỏ",
+              "sign_id": "tmh_profile_croup::demographic",
+              "matched_sign": "trẻ nhỏ",
+              "matched_alias": "trẻ nhỏ",
+              "match_type": "ontology_profile_demographic",
+              "match_score": 0.85,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:J02",
+          "icd10": "J02",
+          "disease_name": "Viêm họng cấp",
+          "case_count": 115,
+          "score": 1.0318,
+          "supporting_signs": [
+            {
+              "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+              "sign_id": "SIGN-CHAY_MUI-c2c6e823",
+              "matched_sign": "chảy mũi",
+              "matched_alias": "chảy mũi",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.6411,
+              "support_cases": 4
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:K21",
+          "icd10": "K21",
+          "disease_name": "Bệnh trào ngược dạ dày- thực quản",
+          "case_count": 143,
+          "score": 0.8817,
+          "supporting_signs": [
+            {
+              "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+              "sign_id": "SIGN-CHAY_MUI_RAT_HONG_VUONG_DAM-d0e8442b",
+              "matched_sign": "chảy mũi, rát họng, vướng đàm, ợ hơi",
+              "matched_alias": "chảy mũi, rát họng, vướng đàm, ợ hơi",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.6842,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+              "sign_id": "SIGN-HO_CHAY_MUI-f510ea5a",
+              "matched_sign": "Ho, chảy mũi",
+              "matched_alias": "Ho, chảy mũi",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.5878,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:H66.0",
+          "icd10": "H66.0",
+          "disease_name": "Viêm tai giữa cấp mủ\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của H66.0 theo đúng ICD10)",
+          "case_count": 20,
+          "score": 0.8149,
+          "supporting_signs": [
+            {
+              "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+              "sign_id": "SIGN-HO_CHAY_MUI-f510ea5a",
+              "matched_sign": "Ho, chảy mũi",
+              "matched_alias": "Ho, chảy mũi",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.5878,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+              "sign_id": "SIGN-CHAY_MUI_HO-89fda1ef",
+              "matched_sign": "Chảy mũi, ho",
+              "matched_alias": "Chảy mũi, ho",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.5878,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:I10",
+          "icd10": "I10",
+          "disease_name": "Tăng huyết áp vô căn (nguyên phát)",
+          "case_count": 85,
+          "score": 0.6724,
+          "supporting_signs": [
+            {
+              "input_sign": "Đi lại hay bị lảo đảo muốn ngã.",
+              "sign_id": "SIGN-TIEP_XUC_DI_LAI_VAN_DONG-f96ffa59",
+              "matched_sign": "Người bệnh tỉnh, tiếp xúc tốt, đi lại vận động tốt",
+              "matched_alias": "Người bệnh tỉnh, tiếp xúc tốt, đi lại vận động tốt",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:R74.0",
+          "icd10": "R74.0",
+          "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+          "case_count": 21,
+          "score": 0.6724,
+          "supporting_signs": [
+            {
+              "input_sign": "Đi lại hay bị lảo đảo muốn ngã.",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            }
+          ]
+        }
+      ],
+      "recommended_services": [
+        {
+          "service_code": "END-ENS-041",
+          "service_name": "Khám tai dưới kính hiển vi",
+          "category_code": "",
+          "category_name": "",
+          "score": 11.5,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "ontology_profile"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "profile:cholesteatoma",
+              "icd10": null,
+              "disease_name": "Viêm tai giữa mạn tính có cholesteatoma",
+              "disease_score": 11.5,
+              "service_case_support": 0,
+              "service_max_score": 1.0
+            }
+          ]
+        },
+        {
+          "service_code": "END-ENS-001",
+          "service_name": "nội soi tai mũi họng",
+          "category_code": "END-ENS",
+          "category_name": "Nội soi",
+          "score": 4.5419,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 104,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 1.0318,
+              "service_case_support": 36,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:H66.0",
+              "icd10": "H66.0",
+              "disease_name": "Viêm tai giữa cấp mủ\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của H66.0 theo đúng ICD10)",
+              "disease_score": 0.8149,
+              "service_case_support": 9,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 0.6724,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-IMM-001",
+          "service_name": "định lượng crp",
+          "category_code": "LAB-IMM",
+          "category_name": "Miễn dịch",
+          "score": 3.3587,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 29,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 1.0318,
+              "service_case_support": 13,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:H66.0",
+              "icd10": "H66.0",
+              "disease_name": "Viêm tai giữa cấp mủ\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của H66.0 theo đúng ICD10)",
+              "disease_score": 0.8149,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 0.6724,
+              "service_case_support": 5,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-MIC-003",
+          "service_name": "vi khuẩn nuôi cấy và định danh hệ thống tự động",
+          "category_code": "LAB-MIC",
+          "category_name": "Vi sinh",
+          "score": 2.6018,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 8,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 1.0318,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:H66.0",
+              "icd10": "H66.0",
+              "disease_name": "Viêm tai giữa cấp mủ\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của H66.0 theo đúng ICD10)",
+              "disease_score": 0.8149,
+              "service_case_support": 4,
+              "service_max_score": 0.77
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-MIC-001",
+          "service_name": "influenza virus a, b test nhanh",
+          "category_code": "LAB-MIC",
+          "category_name": "Vi sinh",
+          "score": 2.571,
+          "roles": [
+            "confirmatory"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 29,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 1.0318,
+              "service_case_support": 9,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-IMM-002",
+          "service_name": "định lượng crp (c-reactive protein)",
+          "category_code": "LAB-IMM",
+          "category_name": "Miễn dịch",
+          "score": 2.5312,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 20,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 1.0318,
+              "service_case_support": 14,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-IMM-003",
+          "service_name": "định lượng crp hs (c-reactive protein high sesitivity) (máu)",
+          "category_code": "LAB-IMM",
+          "category_name": "Miễn dịch",
+          "score": 2.4484,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 6,
+              "service_max_score": 0.77
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 1.0318,
+              "service_case_support": 4,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:K21",
+              "icd10": "K21",
+              "disease_name": "Bệnh trào ngược dạ dày- thực quản",
+              "disease_score": 0.8817,
+              "service_case_support": 4,
+              "service_max_score": 0.77
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-MIC-002",
+          "service_name": "dengue virus ns1ag test nhanh",
+          "category_code": "LAB-MIC",
+          "category_name": "Vi sinh",
+          "score": 2.2907,
+          "roles": [
+            "confirmatory"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 9,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 1.0318,
+              "service_case_support": 9,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-MIC-005",
+          "service_name": "virus test nhanh (3 loại kháng nguyên cúm a, cúm b và rsv trong bệnh phẩm đường hô hấp)",
+          "category_code": "LAB-MIC",
+          "category_name": "Vi sinh",
+          "score": 2.1748,
+          "roles": [
+            "confirmatory"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 1.0318,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-MIC-007",
+          "service_name": "virus test nhanh (rsv ag)",
+          "category_code": "LAB-MIC",
+          "category_name": "Vi sinh",
+          "score": 2.1125,
+          "roles": [
+            "confirmatory"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 9,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:H66.0",
+              "icd10": "H66.0",
+              "disease_name": "Viêm tai giữa cấp mủ\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của H66.0 theo đúng ICD10)",
+              "disease_score": 0.8149,
+              "service_case_support": 3,
+              "service_max_score": 0.77
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-HEM-011",
+          "service_name": "công thức máu",
+          "category_code": "LAB-HEM",
+          "category_name": "Huyết học",
+          "score": 2.0092,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "guideline"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 2,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J02",
+              "icd10": "J02",
+              "disease_name": "Viêm họng cấp",
+              "disease_score": 1.0318,
+              "service_case_support": 1,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:K21",
+              "icd10": "K21",
+              "disease_name": "Bệnh trào ngược dạ dày- thực quản",
+              "disease_score": 0.8817,
+              "service_case_support": 2,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:H66.0",
+              "icd10": "H66.0",
+              "disease_name": "Viêm tai giữa cấp mủ\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của H66.0 theo đúng ICD10)",
+              "disease_score": 0.8149,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            }
+          ]
+        },
+        {
+          "service_code": "IMG-USG-006",
+          "service_name": "siêu âm ổ bụng (tổng quát)",
+          "category_code": "IMG-USG",
+          "category_name": "Siêu âm",
+          "score": 1.9866,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 0.6724,
+              "service_case_support": 4,
+              "service_max_score": 0.77
+            },
+            {
+              "disease_id": "disease:I10",
+              "icd10": "I10",
+              "disease_name": "Tăng huyết áp vô căn (nguyên phát)",
+              "disease_score": 0.6724,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            }
+          ]
+        }
+      ]
+    },
+    "chief_plus_findings": {
+      "input_signs": [
+        "Chảy mủ tai trái thối và đi lảo đảo.",
+        "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+        "Trong mủ vớt ra được vảy trắng lấp lánh như váng mỡ, thả vào nước nổi lềnh bềnh.",
+        "Đi lại hay bị lảo đảo muốn ngã.",
+        "Mủ thối khẳn",
+        "Mảnh óng ánh xà cừ nổi váng",
+        "Chóng mặt",
+        "Chảy mủ tai",
+        "Thối khẳn",
+        "Lổn nhổn trắng",
+        "Mảnh óng ánh như xà cừ",
+        "Thả vào nước không tan",
+        "Nổi váng",
+        "Chóng mặt / Mất thăng bằng",
+        "Lảo đảo muốn ngã",
+        "Liên quan đến tai trái"
+      ],
+      "matched_signs": [
+        {
+          "input_sign": "Chảy mủ tai trái thối và đi lảo đảo.",
+          "matches": []
+        },
+        {
+          "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+          "matches": [
+            {
+              "sign_id": "SIGN-CHAY_MUI_RAT_HONG_VUONG_DAM-d0e8442b",
+              "sign_label": "chảy mũi, rát họng, vướng đàm, ợ hơi",
+              "matched_alias": "chảy mũi, rát họng, vướng đàm, ợ hơi",
+              "normalized_key": "chay mui rat hong vuong dam o hoi",
+              "match_score": 0.6842,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-CHAY_MUI-c2c6e823",
+              "sign_label": "chảy mũi",
+              "matched_alias": "chảy mũi",
+              "normalized_key": "chay mui",
+              "match_score": 0.6411,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 6
+            },
+            {
+              "sign_id": "SIGN-TIEU_BUOT_TIEU_MOT_NGUA_AM-93a73cd7",
+              "sign_label": "Tiểu buốt, tiểu mót, ngứa âm hộ, huyết trắng hơi vàng có mùi",
+              "matched_alias": "Tiểu buốt, tiểu mót, ngứa âm hộ, huyết trắng hơi vàng có mùi",
+              "normalized_key": "tieu buot tieu mot ngua am ho huyet trang hoi vang co mui",
+              "match_score": 0.61,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-HO_CHAY_MUI-f510ea5a",
+              "sign_label": "Ho, chảy mũi",
+              "matched_alias": "Ho, chảy mũi",
+              "normalized_key": "ho chay mui",
+              "match_score": 0.5878,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 33
+            },
+            {
+              "sign_id": "SIGN-CHAY_MUI_HO-89fda1ef",
+              "sign_label": "Chảy mũi, ho",
+              "matched_alias": "Chảy mũi, ho",
+              "normalized_key": "chay mui ho",
+              "match_score": 0.5878,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 15
+            },
+            {
+              "sign_id": "SIGN-CHAY_MUI_NGAT_MUI-a2f72403",
+              "sign_label": "chảy mũi, ngạt mũi",
+              "matched_alias": "chảy mũi, ngạt mũi",
+              "normalized_key": "chay mui ngat mui",
+              "match_score": 0.5878,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-CHAY_MUI_XANH-8fbc8763",
+              "sign_label": "Chảy mũi xanh",
+              "matched_alias": "Chảy mũi xanh",
+              "normalized_key": "chay mui xanh",
+              "match_score": 0.5878,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "input_sign": "Trong mủ vớt ra được vảy trắng lấp lánh như váng mỡ, thả vào nước nổi lềnh bềnh.",
+          "matches": []
+        },
+        {
+          "input_sign": "Đi lại hay bị lảo đảo muốn ngã.",
+          "matches": [
+            {
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "sign_label": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "normalized_key": "non di ngoai phan long nhieu met chong mat di lai chenh choang",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-TIEP_XUC_DI_LAI_VAN_DONG-f96ffa59",
+              "sign_label": "Người bệnh tỉnh, tiếp xúc tốt, đi lại vận động tốt",
+              "matched_alias": "Người bệnh tỉnh, tiếp xúc tốt, đi lại vận động tốt",
+              "normalized_key": "nguoi benh tinh tiep xuc tot di lai van dong tot",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "input_sign": "Mủ thối khẳn",
+          "matches": []
+        },
+        {
+          "input_sign": "Mảnh óng ánh xà cừ nổi váng",
+          "matches": [
+            {
+              "sign_id": "SIGN-RO_NOI_DUNG_CU_SAU_MUC-7dc2de10",
+              "sign_label": "Không rõ (không có nội dung cụ thể sau mục 'Lý do đến khám:')",
+              "matched_alias": "Không rõ (không có nội dung cụ thể sau mục 'Lý do đến khám:')",
+              "normalized_key": "khong ro khong co noi dung cu the sau muc ly do den kham",
+              "match_score": 0.83,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "input_sign": "Chóng mặt",
+          "matches": [
+            {
+              "sign_id": "SIGN-CHONG_MAT-c2e1aed5",
+              "sign_label": "Chóng mặt",
+              "matched_alias": "Chóng mặt",
+              "normalized_key": "chong mat",
+              "match_score": 1.0,
+              "match_type": "exact",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "sign_label": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "normalized_key": "dau dau chong mat",
+              "match_score": 0.94,
+              "match_type": "token_subsequence",
+              "support_cases": 5
+            },
+            {
+              "sign_id": "SIGN-DAU_BUNG_NON_DAI_TIEN_PHAN-08cf5a65",
+              "sign_label": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "matched_alias": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "normalized_key": "dau bung non dai tien phan long nuoc dau dau chong mat",
+              "match_score": 0.94,
+              "match_type": "token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "sign_label": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "normalized_key": "non di ngoai phan long nhieu met chong mat di lai chenh choang",
+              "match_score": 0.94,
+              "match_type": "token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-CHONG_MAT_CAP-7295da7f",
+              "sign_label": "Chóng mặt cấp",
+              "matched_alias": "Chóng mặt cấp",
+              "normalized_key": "chong mat cap",
+              "match_score": 0.94,
+              "match_type": "token_subsequence",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-NON_OI_CHONG_MAT_HOI_HOP-3de26c66",
+              "sign_label": "nôn ói, chóng mặt, hồi hộp mệt",
+              "matched_alias": "nôn ói, chóng mặt, hồi hộp mệt",
+              "normalized_key": "non oi chong mat hoi hop met",
+              "match_score": 0.94,
+              "match_type": "token_subsequence",
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "input_sign": "Chảy mủ tai",
+          "matches": []
+        },
+        {
+          "input_sign": "Thối khẳn",
+          "matches": []
+        },
+        {
+          "input_sign": "Lổn nhổn trắng",
+          "matches": []
+        },
+        {
+          "input_sign": "Mảnh óng ánh như xà cừ",
+          "matches": []
+        },
+        {
+          "input_sign": "Thả vào nước không tan",
+          "matches": []
+        },
+        {
+          "input_sign": "Nổi váng",
+          "matches": []
+        },
+        {
+          "input_sign": "Chóng mặt / Mất thăng bằng",
+          "matches": [
+            {
+              "sign_id": "SIGN-CHONG_MAT-c2e1aed5",
+              "sign_label": "Chóng mặt",
+              "matched_alias": "Chóng mặt",
+              "normalized_key": "chong mat",
+              "match_score": 1.0,
+              "match_type": "decomposed_exact",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "sign_label": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "normalized_key": "dau dau chong mat",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 5
+            },
+            {
+              "sign_id": "SIGN-DAU_BUNG_NON_DAI_TIEN_PHAN-08cf5a65",
+              "sign_label": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "matched_alias": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "normalized_key": "dau bung non dai tien phan long nuoc dau dau chong mat",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "sign_label": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "normalized_key": "non di ngoai phan long nhieu met chong mat di lai chenh choang",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-CHONG_MAT_CAP-7295da7f",
+              "sign_label": "Chóng mặt cấp",
+              "matched_alias": "Chóng mặt cấp",
+              "normalized_key": "chong mat cap",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-NON_OI_CHONG_MAT_HOI_HOP-3de26c66",
+              "sign_label": "nôn ói, chóng mặt, hồi hộp mệt",
+              "matched_alias": "nôn ói, chóng mặt, hồi hộp mệt",
+              "normalized_key": "non oi chong mat hoi hop met",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-MAT-cc7c5be3",
+              "sign_label": "mắt",
+              "matched_alias": "mắt",
+              "normalized_key": "mat",
+              "match_score": 0.77,
+              "match_type": "decomposed_single_token_overlap",
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "input_sign": "Lảo đảo muốn ngã",
+          "matches": []
+        },
+        {
+          "input_sign": "Liên quan đến tai trái",
+          "matches": []
+        }
+      ],
+      "suspected_diseases": [
+        {
+          "disease_id": "profile:cholesteatoma",
+          "icd10": null,
+          "disease_name": "Viêm tai giữa mạn tính có cholesteatoma",
+          "case_count": 0,
+          "score": 14.1,
+          "supporting_signs": [
+            {
+              "input_sign": "Chảy mủ tai",
+              "sign_id": "tmh_profile_cholesteatoma::chay mu tai",
+              "matched_sign": "Chảy mủ tai",
+              "matched_alias": "chay mu tai",
+              "match_type": "ontology_profile_concept",
+              "match_score": 1.0,
+              "support_cases": 3
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "tmh_profile_cholesteatoma::chong mat mat thang bang",
+              "matched_sign": "Chóng mặt / Mất thăng bằng",
+              "matched_alias": "chong mat",
+              "match_type": "ontology_profile_concept",
+              "match_score": 0.9,
+              "support_cases": 2
+            },
+            {
+              "input_sign": "mủ tai thối khẳn",
+              "sign_id": "tmh_profile_cholesteatoma::mu tai thoi khan",
+              "matched_sign": "mủ tai thối khẳn",
+              "matched_alias": "thoi khan",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 3
+            },
+            {
+              "input_sign": "mảnh xà cừ / váng mỡ",
+              "sign_id": "tmh_profile_cholesteatoma::manh xa cu vang mo",
+              "matched_sign": "mảnh xà cừ / váng mỡ",
+              "matched_alias": "xa cu",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 4
+            },
+            {
+              "input_sign": "gợi ý rò mê nhĩ",
+              "sign_id": "tmh_profile_cholesteatoma::goi y ro me nhi",
+              "matched_sign": "gợi ý rò mê nhĩ",
+              "matched_alias": "lao ao muon nga",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:H81.1",
+          "icd10": "H81.1",
+          "disease_name": "Chóng mặt kịch phát lành tính",
+          "case_count": 17,
+          "score": 9.4526,
+          "supporting_signs": [
+            {
+              "input_sign": "Đi lại hay bị lảo đảo muốn ngã.",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-CHONG_MAT-c2e1aed5",
+              "matched_sign": "Chóng mặt",
+              "matched_alias": "Chóng mặt",
+              "match_type": "exact",
+              "match_score": 1.0,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "matched_sign": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-DAU_BUNG_NON_DAI_TIEN_PHAN-08cf5a65",
+              "matched_sign": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "matched_alias": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-CHONG_MAT_CAP-7295da7f",
+              "matched_sign": "Chóng mặt cấp",
+              "matched_alias": "Chóng mặt cấp",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "profile:meniere",
+          "icd10": null,
+          "disease_name": "Bệnh Ménière",
+          "case_count": 0,
+          "score": 4.5,
+          "supporting_signs": [
+            {
+              "input_sign": "Ù tai",
+              "sign_id": "tmh_profile_meniere::u tai",
+              "matched_sign": "Ù tai",
+              "matched_alias": "u tai",
+              "match_type": "ontology_profile_concept",
+              "match_score": 1.0,
+              "support_cases": 2
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "tmh_profile_meniere::chong mat",
+              "matched_sign": "Chóng mặt",
+              "matched_alias": "chong mat",
+              "match_type": "ontology_profile_concept",
+              "match_score": 1.0,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:J00",
+          "icd10": "J00",
+          "disease_name": "Viêm mũi họng cấp [cảm thường]",
+          "case_count": 248,
+          "score": 3.2384,
+          "supporting_signs": [
+            {
+              "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+              "sign_id": "SIGN-HO_CHAY_MUI-f510ea5a",
+              "matched_sign": "Ho, chảy mũi",
+              "matched_alias": "Ho, chảy mũi",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.5878,
+              "support_cases": 18
+            },
+            {
+              "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+              "sign_id": "SIGN-CHAY_MUI_HO-89fda1ef",
+              "matched_sign": "Chảy mũi, ho",
+              "matched_alias": "Chảy mũi, ho",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.5878,
+              "support_cases": 12
+            }
+          ]
+        },
+        {
+          "disease_id": "profile:croup",
+          "icd10": null,
+          "disease_name": "Viêm thanh quản cấp tính hạ thanh môn",
+          "case_count": 0,
+          "score": 3.2,
+          "supporting_signs": [
+            {
+              "input_sign": "Ho",
+              "sign_id": "tmh_profile_croup::ho",
+              "matched_sign": "Ho",
+              "matched_alias": "ho",
+              "match_type": "ontology_profile_concept",
+              "match_score": 0.88,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "trẻ nhỏ",
+              "sign_id": "tmh_profile_croup::demographic",
+              "matched_sign": "trẻ nhỏ",
+              "matched_alias": "trẻ nhỏ",
+              "match_type": "ontology_profile_demographic",
+              "match_score": 0.85,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:R74.0",
+          "icd10": "R74.0",
+          "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+          "case_count": 21,
+          "score": 1.9963,
+          "supporting_signs": [
+            {
+              "input_sign": "Đi lại hay bị lảo đảo muốn ngã.",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:R51",
+          "icd10": "R51",
+          "disease_name": "Đau đầu",
+          "case_count": 17,
+          "score": 1.9963,
+          "supporting_signs": [
+            {
+              "input_sign": "Đi lại hay bị lảo đảo muốn ngã.",
+              "sign_id": "SIGN-TIEP_XUC_DI_LAI_VAN_DONG-f96ffa59",
+              "matched_sign": "Người bệnh tỉnh, tiếp xúc tốt, đi lại vận động tốt",
+              "matched_alias": "Người bệnh tỉnh, tiếp xúc tốt, đi lại vận động tốt",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "matched_sign": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "matched_sign": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:A08.5",
+          "icd10": "A08.5",
+          "disease_name": "Nhiễm trùng đường ruột xác định khác",
+          "case_count": 8,
+          "score": 1.9963,
+          "supporting_signs": [
+            {
+              "input_sign": "Đi lại hay bị lảo đảo muốn ngã.",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            }
+          ]
+        }
+      ],
+      "recommended_services": [
+        {
+          "service_code": "END-ENS-041",
+          "service_name": "Khám tai dưới kính hiển vi",
+          "category_code": "",
+          "category_name": "",
+          "score": 14.1,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "ontology_profile"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "profile:cholesteatoma",
+              "icd10": null,
+              "disease_name": "Viêm tai giữa mạn tính có cholesteatoma",
+              "disease_score": 14.1,
+              "service_case_support": 0,
+              "service_max_score": 1.0
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-IMM-001",
+          "service_name": "định lượng crp",
+          "category_code": "LAB-IMM",
+          "category_name": "Miễn dịch",
+          "score": 8.2205,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 29,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 5,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:A08.5",
+              "icd10": "A08.5",
+              "disease_name": "Nhiễm trùng đường ruột xác định khác",
+              "disease_score": 1.9963,
+              "service_case_support": 5,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-006",
+          "service_name": "điện giải đồ (na, k, ci) (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 7.676,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 8,
+              "service_max_score": 1.0
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 7,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:A08.5",
+              "icd10": "A08.5",
+              "disease_name": "Nhiễm trùng đường ruột xác định khác",
+              "disease_score": 1.9963,
+              "service_case_support": 5,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-HEM-001",
+          "service_name": "tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+          "category_code": "LAB-HEM",
+          "category_name": "Huyết học",
+          "score": 7.3906,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 8,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 14,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:A08.5",
+              "icd10": "A08.5",
+              "disease_name": "Nhiễm trùng đường ruột xác định khác",
+              "disease_score": 1.9963,
+              "service_case_support": 6,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-003",
+          "service_name": "đo hoạt độ ast (got) (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 7.3504,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 8,
+              "service_max_score": 1.0
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 16,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:A08.5",
+              "icd10": "A08.5",
+              "disease_name": "Nhiễm trùng đường ruột xác định khác",
+              "disease_score": 1.9963,
+              "service_case_support": 5,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-002",
+          "service_name": "đo hoạt độ alt (gpt) (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 7.3504,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 8,
+              "service_max_score": 1.0
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 16,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:A08.5",
+              "icd10": "A08.5",
+              "disease_name": "Nhiễm trùng đường ruột xác định khác",
+              "disease_score": 1.9963,
+              "service_case_support": 5,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-004",
+          "service_name": "định lượng glucose (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 7.1819,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 5,
+              "service_max_score": 0.92
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:R51",
+              "icd10": "R51",
+              "disease_name": "Đau đầu",
+              "disease_score": 1.9963,
+              "service_case_support": 4,
+              "service_max_score": 0.69
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-001",
+          "service_name": "định lượng creatinin (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 5.9395,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 4,
+              "service_max_score": 0.92
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-015",
+          "service_name": "định lượng creatinine máu",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 5.9393,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 4,
+              "service_max_score": 0.77
+            },
+            {
+              "disease_id": "disease:A08.5",
+              "icd10": "A08.5",
+              "disease_name": "Nhiễm trùng đường ruột xác định khác",
+              "disease_score": 1.9963,
+              "service_case_support": 4,
+              "service_max_score": 0.77
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-IMM-006",
+          "service_name": "crp",
+          "category_code": "LAB-IMM",
+          "category_name": "Miễn dịch",
+          "score": 4.8877,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "guideline"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 1,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:R51",
+              "icd10": "R51",
+              "disease_name": "Đau đầu",
+              "disease_score": 1.9963,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-HEM-011",
+          "service_name": "công thức máu",
+          "category_code": "LAB-HEM",
+          "category_name": "Huyết học",
+          "score": 4.8748,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "guideline"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 2,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:R51",
+              "icd10": "R51",
+              "disease_name": "Đau đầu",
+              "disease_score": 1.9963,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-387",
+          "service_name": "procalcitonin",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 4.8468,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "guideline"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:R51",
+              "icd10": "R51",
+              "disease_name": "Đau đầu",
+              "disease_score": 1.9963,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            }
+          ]
+        }
+      ]
+    },
+    "structured_signs": {
+      "input_signs": [
+        "Chảy mủ tai",
+        "Thối khẳn",
+        "Lổn nhổn trắng",
+        "Mảnh óng ánh như xà cừ",
+        "Thả vào nước không tan",
+        "Nổi váng",
+        "Chóng mặt / Mất thăng bằng",
+        "Lảo đảo muốn ngã",
+        "Liên quan đến tai trái"
+      ],
+      "matched_signs": [
+        {
+          "input_sign": "Chảy mủ tai",
+          "matches": []
+        },
+        {
+          "input_sign": "Thối khẳn",
+          "matches": []
+        },
+        {
+          "input_sign": "Lổn nhổn trắng",
+          "matches": []
+        },
+        {
+          "input_sign": "Mảnh óng ánh như xà cừ",
+          "matches": []
+        },
+        {
+          "input_sign": "Thả vào nước không tan",
+          "matches": []
+        },
+        {
+          "input_sign": "Nổi váng",
+          "matches": []
+        },
+        {
+          "input_sign": "Chóng mặt / Mất thăng bằng",
+          "matches": [
+            {
+              "sign_id": "SIGN-CHONG_MAT-c2e1aed5",
+              "sign_label": "Chóng mặt",
+              "matched_alias": "Chóng mặt",
+              "normalized_key": "chong mat",
+              "match_score": 1.0,
+              "match_type": "decomposed_exact",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "sign_label": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "normalized_key": "dau dau chong mat",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 5
+            },
+            {
+              "sign_id": "SIGN-DAU_BUNG_NON_DAI_TIEN_PHAN-08cf5a65",
+              "sign_label": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "matched_alias": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "normalized_key": "dau bung non dai tien phan long nuoc dau dau chong mat",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "sign_label": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "normalized_key": "non di ngoai phan long nhieu met chong mat di lai chenh choang",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-CHONG_MAT_CAP-7295da7f",
+              "sign_label": "Chóng mặt cấp",
+              "matched_alias": "Chóng mặt cấp",
+              "normalized_key": "chong mat cap",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-NON_OI_CHONG_MAT_HOI_HOP-3de26c66",
+              "sign_label": "nôn ói, chóng mặt, hồi hộp mệt",
+              "matched_alias": "nôn ói, chóng mặt, hồi hộp mệt",
+              "normalized_key": "non oi chong mat hoi hop met",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-MAT-cc7c5be3",
+              "sign_label": "mắt",
+              "matched_alias": "mắt",
+              "normalized_key": "mat",
+              "match_score": 0.77,
+              "match_type": "decomposed_single_token_overlap",
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "input_sign": "Lảo đảo muốn ngã",
+          "matches": []
+        },
+        {
+          "input_sign": "Liên quan đến tai trái",
+          "matches": []
+        }
+      ],
+      "suspected_diseases": [
+        {
+          "disease_id": "profile:cholesteatoma",
+          "icd10": null,
+          "disease_name": "Viêm tai giữa mạn tính có cholesteatoma",
+          "case_count": 0,
+          "score": 14.1,
+          "supporting_signs": [
+            {
+              "input_sign": "Chảy mủ tai",
+              "sign_id": "tmh_profile_cholesteatoma::chay mu tai",
+              "matched_sign": "Chảy mủ tai",
+              "matched_alias": "chay mu tai",
+              "match_type": "ontology_profile_concept",
+              "match_score": 1.0,
+              "support_cases": 3
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "tmh_profile_cholesteatoma::chong mat mat thang bang",
+              "matched_sign": "Chóng mặt / Mất thăng bằng",
+              "matched_alias": "chong mat",
+              "match_type": "ontology_profile_concept",
+              "match_score": 0.9,
+              "support_cases": 2
+            },
+            {
+              "input_sign": "mủ tai thối khẳn",
+              "sign_id": "tmh_profile_cholesteatoma::mu tai thoi khan",
+              "matched_sign": "mủ tai thối khẳn",
+              "matched_alias": "thoi khan",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 3
+            },
+            {
+              "input_sign": "mảnh xà cừ / váng mỡ",
+              "sign_id": "tmh_profile_cholesteatoma::manh xa cu vang mo",
+              "matched_sign": "mảnh xà cừ / váng mỡ",
+              "matched_alias": "xa cu",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 4
+            },
+            {
+              "input_sign": "gợi ý rò mê nhĩ",
+              "sign_id": "tmh_profile_cholesteatoma::goi y ro me nhi",
+              "matched_sign": "gợi ý rò mê nhĩ",
+              "matched_alias": "lao ao muon nga",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "profile:meniere",
+          "icd10": null,
+          "disease_name": "Bệnh Ménière",
+          "case_count": 0,
+          "score": 4.5,
+          "supporting_signs": [
+            {
+              "input_sign": "Ù tai",
+              "sign_id": "tmh_profile_meniere::u tai",
+              "matched_sign": "Ù tai",
+              "matched_alias": "u tai",
+              "match_type": "ontology_profile_concept",
+              "match_score": 1.0,
+              "support_cases": 2
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "tmh_profile_meniere::chong mat",
+              "matched_sign": "Chóng mặt",
+              "matched_alias": "chong mat",
+              "match_type": "ontology_profile_concept",
+              "match_score": 1.0,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:H81.1",
+          "icd10": "H81.1",
+          "disease_name": "Chóng mặt kịch phát lành tính",
+          "case_count": 17,
+          "score": 4.4482,
+          "supporting_signs": [
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-CHONG_MAT-c2e1aed5",
+              "matched_sign": "Chóng mặt",
+              "matched_alias": "Chóng mặt",
+              "match_type": "decomposed_exact",
+              "match_score": 1.0,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "matched_sign": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-DAU_BUNG_NON_DAI_TIEN_PHAN-08cf5a65",
+              "matched_sign": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "matched_alias": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-CHONG_MAT_CAP-7295da7f",
+              "matched_sign": "Chóng mặt cấp",
+              "matched_alias": "Chóng mặt cấp",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 2
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-NON_OI_CHONG_MAT_HOI_HOP-3de26c66",
+              "matched_sign": "nôn ói, chóng mặt, hồi hộp mệt",
+              "matched_alias": "nôn ói, chóng mặt, hồi hộp mệt",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "profile:croup",
+          "icd10": null,
+          "disease_name": "Viêm thanh quản cấp tính hạ thanh môn",
+          "case_count": 0,
+          "score": 3.2,
+          "supporting_signs": [
+            {
+              "input_sign": "Ho",
+              "sign_id": "tmh_profile_croup::ho",
+              "matched_sign": "Ho",
+              "matched_alias": "ho",
+              "match_type": "ontology_profile_concept",
+              "match_score": 0.88,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "trẻ nhỏ",
+              "sign_id": "tmh_profile_croup::demographic",
+              "matched_sign": "trẻ nhỏ",
+              "matched_alias": "trẻ nhỏ",
+              "match_type": "ontology_profile_demographic",
+              "match_score": 0.85,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:A04",
+          "icd10": "A04",
+          "disease_name": "Nhiễm khuẩn đường ruột do vi khuẩn khác",
+          "case_count": 23,
+          "score": 0.6724,
+          "supporting_signs": [
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-DAU_BUNG_NON_DAI_TIEN_PHAN-08cf5a65",
+              "matched_sign": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "matched_alias": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:R74.0",
+          "icd10": "R74.0",
+          "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+          "case_count": 21,
+          "score": 0.6724,
+          "supporting_signs": [
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:R51",
+          "icd10": "R51",
+          "disease_name": "Đau đầu",
+          "case_count": 17,
+          "score": 0.6724,
+          "supporting_signs": [
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "matched_sign": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:H81",
+          "icd10": "H81",
+          "disease_name": "Rối loạn chức năng tiền đình",
+          "case_count": 14,
+          "score": 0.6724,
+          "supporting_signs": [
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "matched_sign": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            }
+          ]
+        }
+      ],
+      "recommended_services": [
+        {
+          "service_code": "END-ENS-041",
+          "service_name": "Khám tai dưới kính hiển vi",
+          "category_code": "",
+          "category_name": "",
+          "score": 14.1,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "ontology_profile"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "profile:cholesteatoma",
+              "icd10": null,
+              "disease_name": "Viêm tai giữa mạn tính có cholesteatoma",
+              "disease_score": 14.1,
+              "service_case_support": 0,
+              "service_max_score": 1.0
+            }
+          ]
+        },
+        {
+          "service_code": "FUN-DFT-006",
+          "service_name": "Đo thính lực đồ",
+          "category_code": "",
+          "category_name": "",
+          "score": 4.5,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "ontology_profile"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "profile:meniere",
+              "icd10": null,
+              "disease_name": "Bệnh Ménière",
+              "disease_score": 4.5,
+              "service_case_support": 0,
+              "service_max_score": 1.0
+            }
+          ]
+        },
+        {
+          "service_code": "IMG-CTN-013",
+          "service_name": "MRI sọ não - xương đá",
+          "category_code": "",
+          "category_name": "",
+          "score": 4.05,
+          "roles": [
+            "rule_out"
+          ],
+          "evidences": [
+            "ontology_profile"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "profile:meniere",
+              "icd10": null,
+              "disease_name": "Bệnh Ménière",
+              "disease_score": 4.5,
+              "service_case_support": 0,
+              "service_max_score": 0.9
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-004",
+          "service_name": "định lượng glucose (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 3.4054,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 4.4482,
+              "service_case_support": 5,
+              "service_max_score": 0.92
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 0.6724,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:R51",
+              "icd10": "R51",
+              "disease_name": "Đau đầu",
+              "disease_score": 0.6724,
+              "service_case_support": 4,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:H81",
+              "icd10": "H81",
+              "disease_name": "Rối loạn chức năng tiền đình",
+              "disease_score": 0.6724,
+              "service_case_support": 4,
+              "service_max_score": 0.69
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-006",
+          "service_name": "điện giải đồ (na, k, ci) (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 3.2631,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 4.4482,
+              "service_case_support": 8,
+              "service_max_score": 1.0
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 0.6724,
+              "service_case_support": 7,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:A04",
+              "icd10": "A04",
+              "disease_name": "Nhiễm khuẩn đường ruột do vi khuẩn khác",
+              "disease_score": 0.6724,
+              "service_case_support": 7,
+              "service_max_score": 0.69
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-HEM-001",
+          "service_name": "tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+          "category_code": "LAB-HEM",
+          "category_name": "Huyết học",
+          "score": 3.1561,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 4.4482,
+              "service_case_support": 8,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 0.6724,
+              "service_case_support": 14,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:A04",
+              "icd10": "A04",
+              "disease_name": "Nhiễm khuẩn đường ruột do vi khuẩn khác",
+              "disease_score": 0.6724,
+              "service_case_support": 9,
+              "service_max_score": 0.77
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-003",
+          "service_name": "đo hoạt độ ast (got) (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 2.838,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 4.4482,
+              "service_case_support": 8,
+              "service_max_score": 1.0
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 0.6724,
+              "service_case_support": 16,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-002",
+          "service_name": "đo hoạt độ alt (gpt) (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 2.838,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 4.4482,
+              "service_case_support": 8,
+              "service_max_score": 1.0
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 0.6724,
+              "service_case_support": 16,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-001",
+          "service_name": "định lượng creatinin (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 2.6546,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 4.4482,
+              "service_case_support": 4,
+              "service_max_score": 0.92
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 0.6724,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-015",
+          "service_name": "định lượng creatinine máu",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 2.2667,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 4.4482,
+              "service_case_support": 4,
+              "service_max_score": 0.77
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 0.6724,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-IMM-001",
+          "service_name": "định lượng crp",
+          "category_code": "LAB-IMM",
+          "category_name": "Miễn dịch",
+          "score": 2.2518,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 4.4482,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 0.6724,
+              "service_case_support": 5,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-IMM-006",
+          "service_name": "crp",
+          "category_code": "LAB-IMM",
+          "category_name": "Miễn dịch",
+          "score": 2.1982,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "guideline"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 4.4482,
+              "service_case_support": 1,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:R51",
+              "icd10": "R51",
+              "disease_name": "Đau đầu",
+              "disease_score": 0.6724,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:H81",
+              "icd10": "H81",
+              "disease_name": "Rối loạn chức năng tiền đình",
+              "disease_score": 0.6724,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:A04",
+              "icd10": "A04",
+              "disease_name": "Nhiễm khuẩn đường ruột do vi khuẩn khác",
+              "disease_score": 0.6724,
+              "service_case_support": 0,
+              "service_max_score": 0.75
+            }
+          ]
+        }
+      ]
+    },
+    "all_case_signs": {
+      "input_signs": [
+        "Chảy mủ tai trái thối và đi lảo đảo.",
+        "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+        "Trong mủ vớt ra được vảy trắng lấp lánh như váng mỡ, thả vào nước nổi lềnh bềnh.",
+        "Đi lại hay bị lảo đảo muốn ngã.",
+        "Mủ thối khẳn",
+        "Mảnh óng ánh xà cừ nổi váng",
+        "Chóng mặt",
+        "Chảy mủ tai",
+        "Thối khẳn",
+        "Lổn nhổn trắng",
+        "Mảnh óng ánh như xà cừ",
+        "Thả vào nước không tan",
+        "Nổi váng",
+        "Chóng mặt / Mất thăng bằng",
+        "Lảo đảo muốn ngã",
+        "Liên quan đến tai trái",
+        "Chảy mủ tai mạn tính"
+      ],
+      "matched_signs": [
+        {
+          "input_sign": "Chảy mủ tai trái thối và đi lảo đảo.",
+          "matches": []
+        },
+        {
+          "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+          "matches": [
+            {
+              "sign_id": "SIGN-CHAY_MUI_RAT_HONG_VUONG_DAM-d0e8442b",
+              "sign_label": "chảy mũi, rát họng, vướng đàm, ợ hơi",
+              "matched_alias": "chảy mũi, rát họng, vướng đàm, ợ hơi",
+              "normalized_key": "chay mui rat hong vuong dam o hoi",
+              "match_score": 0.6842,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-CHAY_MUI-c2c6e823",
+              "sign_label": "chảy mũi",
+              "matched_alias": "chảy mũi",
+              "normalized_key": "chay mui",
+              "match_score": 0.6411,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 6
+            },
+            {
+              "sign_id": "SIGN-TIEU_BUOT_TIEU_MOT_NGUA_AM-93a73cd7",
+              "sign_label": "Tiểu buốt, tiểu mót, ngứa âm hộ, huyết trắng hơi vàng có mùi",
+              "matched_alias": "Tiểu buốt, tiểu mót, ngứa âm hộ, huyết trắng hơi vàng có mùi",
+              "normalized_key": "tieu buot tieu mot ngua am ho huyet trang hoi vang co mui",
+              "match_score": 0.61,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-HO_CHAY_MUI-f510ea5a",
+              "sign_label": "Ho, chảy mũi",
+              "matched_alias": "Ho, chảy mũi",
+              "normalized_key": "ho chay mui",
+              "match_score": 0.5878,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 33
+            },
+            {
+              "sign_id": "SIGN-CHAY_MUI_HO-89fda1ef",
+              "sign_label": "Chảy mũi, ho",
+              "matched_alias": "Chảy mũi, ho",
+              "normalized_key": "chay mui ho",
+              "match_score": 0.5878,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 15
+            },
+            {
+              "sign_id": "SIGN-CHAY_MUI_NGAT_MUI-a2f72403",
+              "sign_label": "chảy mũi, ngạt mũi",
+              "matched_alias": "chảy mũi, ngạt mũi",
+              "normalized_key": "chay mui ngat mui",
+              "match_score": 0.5878,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-CHAY_MUI_XANH-8fbc8763",
+              "sign_label": "Chảy mũi xanh",
+              "matched_alias": "Chảy mũi xanh",
+              "normalized_key": "chay mui xanh",
+              "match_score": 0.5878,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "input_sign": "Trong mủ vớt ra được vảy trắng lấp lánh như váng mỡ, thả vào nước nổi lềnh bềnh.",
+          "matches": []
+        },
+        {
+          "input_sign": "Đi lại hay bị lảo đảo muốn ngã.",
+          "matches": [
+            {
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "sign_label": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "normalized_key": "non di ngoai phan long nhieu met chong mat di lai chenh choang",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-TIEP_XUC_DI_LAI_VAN_DONG-f96ffa59",
+              "sign_label": "Người bệnh tỉnh, tiếp xúc tốt, đi lại vận động tốt",
+              "matched_alias": "Người bệnh tỉnh, tiếp xúc tốt, đi lại vận động tốt",
+              "normalized_key": "nguoi benh tinh tiep xuc tot di lai van dong tot",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "input_sign": "Mủ thối khẳn",
+          "matches": []
+        },
+        {
+          "input_sign": "Mảnh óng ánh xà cừ nổi váng",
+          "matches": [
+            {
+              "sign_id": "SIGN-RO_NOI_DUNG_CU_SAU_MUC-7dc2de10",
+              "sign_label": "Không rõ (không có nội dung cụ thể sau mục 'Lý do đến khám:')",
+              "matched_alias": "Không rõ (không có nội dung cụ thể sau mục 'Lý do đến khám:')",
+              "normalized_key": "khong ro khong co noi dung cu the sau muc ly do den kham",
+              "match_score": 0.83,
+              "match_type": "decomposed_multi_token_overlap",
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "input_sign": "Chóng mặt",
+          "matches": [
+            {
+              "sign_id": "SIGN-CHONG_MAT-c2e1aed5",
+              "sign_label": "Chóng mặt",
+              "matched_alias": "Chóng mặt",
+              "normalized_key": "chong mat",
+              "match_score": 1.0,
+              "match_type": "exact",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "sign_label": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "normalized_key": "dau dau chong mat",
+              "match_score": 0.94,
+              "match_type": "token_subsequence",
+              "support_cases": 5
+            },
+            {
+              "sign_id": "SIGN-DAU_BUNG_NON_DAI_TIEN_PHAN-08cf5a65",
+              "sign_label": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "matched_alias": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "normalized_key": "dau bung non dai tien phan long nuoc dau dau chong mat",
+              "match_score": 0.94,
+              "match_type": "token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "sign_label": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "normalized_key": "non di ngoai phan long nhieu met chong mat di lai chenh choang",
+              "match_score": 0.94,
+              "match_type": "token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-CHONG_MAT_CAP-7295da7f",
+              "sign_label": "Chóng mặt cấp",
+              "matched_alias": "Chóng mặt cấp",
+              "normalized_key": "chong mat cap",
+              "match_score": 0.94,
+              "match_type": "token_subsequence",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-NON_OI_CHONG_MAT_HOI_HOP-3de26c66",
+              "sign_label": "nôn ói, chóng mặt, hồi hộp mệt",
+              "matched_alias": "nôn ói, chóng mặt, hồi hộp mệt",
+              "normalized_key": "non oi chong mat hoi hop met",
+              "match_score": 0.94,
+              "match_type": "token_subsequence",
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "input_sign": "Chảy mủ tai",
+          "matches": []
+        },
+        {
+          "input_sign": "Thối khẳn",
+          "matches": []
+        },
+        {
+          "input_sign": "Lổn nhổn trắng",
+          "matches": []
+        },
+        {
+          "input_sign": "Mảnh óng ánh như xà cừ",
+          "matches": []
+        },
+        {
+          "input_sign": "Thả vào nước không tan",
+          "matches": []
+        },
+        {
+          "input_sign": "Nổi váng",
+          "matches": []
+        },
+        {
+          "input_sign": "Chóng mặt / Mất thăng bằng",
+          "matches": [
+            {
+              "sign_id": "SIGN-CHONG_MAT-c2e1aed5",
+              "sign_label": "Chóng mặt",
+              "matched_alias": "Chóng mặt",
+              "normalized_key": "chong mat",
+              "match_score": 1.0,
+              "match_type": "decomposed_exact",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "sign_label": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "normalized_key": "dau dau chong mat",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 5
+            },
+            {
+              "sign_id": "SIGN-DAU_BUNG_NON_DAI_TIEN_PHAN-08cf5a65",
+              "sign_label": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "matched_alias": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "normalized_key": "dau bung non dai tien phan long nuoc dau dau chong mat",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "sign_label": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "normalized_key": "non di ngoai phan long nhieu met chong mat di lai chenh choang",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 3
+            },
+            {
+              "sign_id": "SIGN-CHONG_MAT_CAP-7295da7f",
+              "sign_label": "Chóng mặt cấp",
+              "matched_alias": "Chóng mặt cấp",
+              "normalized_key": "chong mat cap",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 2
+            },
+            {
+              "sign_id": "SIGN-NON_OI_CHONG_MAT_HOI_HOP-3de26c66",
+              "sign_label": "nôn ói, chóng mặt, hồi hộp mệt",
+              "matched_alias": "nôn ói, chóng mặt, hồi hộp mệt",
+              "normalized_key": "non oi chong mat hoi hop met",
+              "match_score": 0.97,
+              "match_type": "decomposed_token_subsequence",
+              "support_cases": 1
+            },
+            {
+              "sign_id": "SIGN-MAT-cc7c5be3",
+              "sign_label": "mắt",
+              "matched_alias": "mắt",
+              "normalized_key": "mat",
+              "match_score": 0.77,
+              "match_type": "decomposed_single_token_overlap",
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "input_sign": "Lảo đảo muốn ngã",
+          "matches": []
+        },
+        {
+          "input_sign": "Liên quan đến tai trái",
+          "matches": []
+        },
+        {
+          "input_sign": "Chảy mủ tai mạn tính",
+          "matches": []
+        }
+      ],
+      "suspected_diseases": [
+        {
+          "disease_id": "profile:cholesteatoma",
+          "icd10": null,
+          "disease_name": "Viêm tai giữa mạn tính có cholesteatoma",
+          "case_count": 0,
+          "score": 14.1,
+          "supporting_signs": [
+            {
+              "input_sign": "Chảy mủ tai",
+              "sign_id": "tmh_profile_cholesteatoma::chay mu tai",
+              "matched_sign": "Chảy mủ tai",
+              "matched_alias": "chay mu tai",
+              "match_type": "ontology_profile_concept",
+              "match_score": 1.0,
+              "support_cases": 3
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "tmh_profile_cholesteatoma::chong mat mat thang bang",
+              "matched_sign": "Chóng mặt / Mất thăng bằng",
+              "matched_alias": "chong mat",
+              "match_type": "ontology_profile_concept",
+              "match_score": 0.9,
+              "support_cases": 2
+            },
+            {
+              "input_sign": "mủ tai thối khẳn",
+              "sign_id": "tmh_profile_cholesteatoma::mu tai thoi khan",
+              "matched_sign": "mủ tai thối khẳn",
+              "matched_alias": "thoi khan",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 3
+            },
+            {
+              "input_sign": "mảnh xà cừ / váng mỡ",
+              "sign_id": "tmh_profile_cholesteatoma::manh xa cu vang mo",
+              "matched_sign": "mảnh xà cừ / váng mỡ",
+              "matched_alias": "xa cu",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 4
+            },
+            {
+              "input_sign": "gợi ý rò mê nhĩ",
+              "sign_id": "tmh_profile_cholesteatoma::goi y ro me nhi",
+              "matched_sign": "gợi ý rò mê nhĩ",
+              "matched_alias": "lao ao muon nga",
+              "match_type": "ontology_profile_modifier",
+              "match_score": 1.0,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:H81.1",
+          "icd10": "H81.1",
+          "disease_name": "Chóng mặt kịch phát lành tính",
+          "case_count": 17,
+          "score": 9.4526,
+          "supporting_signs": [
+            {
+              "input_sign": "Đi lại hay bị lảo đảo muốn ngã.",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-CHONG_MAT-c2e1aed5",
+              "matched_sign": "Chóng mặt",
+              "matched_alias": "Chóng mặt",
+              "match_type": "exact",
+              "match_score": 1.0,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "matched_sign": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-DAU_BUNG_NON_DAI_TIEN_PHAN-08cf5a65",
+              "matched_sign": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "matched_alias": "Đau bụng, nôn, đại tiện phân lỏng nước, đau đầu, chóng mặt",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-CHONG_MAT_CAP-7295da7f",
+              "matched_sign": "Chóng mặt cấp",
+              "matched_alias": "Chóng mặt cấp",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "profile:meniere",
+          "icd10": null,
+          "disease_name": "Bệnh Ménière",
+          "case_count": 0,
+          "score": 4.5,
+          "supporting_signs": [
+            {
+              "input_sign": "Ù tai",
+              "sign_id": "tmh_profile_meniere::u tai",
+              "matched_sign": "Ù tai",
+              "matched_alias": "u tai",
+              "match_type": "ontology_profile_concept",
+              "match_score": 1.0,
+              "support_cases": 2
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "tmh_profile_meniere::chong mat",
+              "matched_sign": "Chóng mặt",
+              "matched_alias": "chong mat",
+              "match_type": "ontology_profile_concept",
+              "match_score": 1.0,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:J00",
+          "icd10": "J00",
+          "disease_name": "Viêm mũi họng cấp [cảm thường]",
+          "case_count": 248,
+          "score": 3.2384,
+          "supporting_signs": [
+            {
+              "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+              "sign_id": "SIGN-HO_CHAY_MUI-f510ea5a",
+              "matched_sign": "Ho, chảy mũi",
+              "matched_alias": "Ho, chảy mũi",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.5878,
+              "support_cases": 18
+            },
+            {
+              "input_sign": "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+              "sign_id": "SIGN-CHAY_MUI_HO-89fda1ef",
+              "matched_sign": "Chảy mũi, ho",
+              "matched_alias": "Chảy mũi, ho",
+              "match_type": "decomposed_multi_token_overlap",
+              "match_score": 0.5878,
+              "support_cases": 12
+            }
+          ]
+        },
+        {
+          "disease_id": "profile:croup",
+          "icd10": null,
+          "disease_name": "Viêm thanh quản cấp tính hạ thanh môn",
+          "case_count": 0,
+          "score": 3.2,
+          "supporting_signs": [
+            {
+              "input_sign": "Ho",
+              "sign_id": "tmh_profile_croup::ho",
+              "matched_sign": "Ho",
+              "matched_alias": "ho",
+              "match_type": "ontology_profile_concept",
+              "match_score": 0.88,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "trẻ nhỏ",
+              "sign_id": "tmh_profile_croup::demographic",
+              "matched_sign": "trẻ nhỏ",
+              "matched_alias": "trẻ nhỏ",
+              "match_type": "ontology_profile_demographic",
+              "match_score": 0.85,
+              "support_cases": 2
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:R74.0",
+          "icd10": "R74.0",
+          "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+          "case_count": 21,
+          "score": 1.9963,
+          "supporting_signs": [
+            {
+              "input_sign": "Đi lại hay bị lảo đảo muốn ngã.",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:R51",
+          "icd10": "R51",
+          "disease_name": "Đau đầu",
+          "case_count": 17,
+          "score": 1.9963,
+          "supporting_signs": [
+            {
+              "input_sign": "Đi lại hay bị lảo đảo muốn ngã.",
+              "sign_id": "SIGN-TIEP_XUC_DI_LAI_VAN_DONG-f96ffa59",
+              "matched_sign": "Người bệnh tỉnh, tiếp xúc tốt, đi lại vận động tốt",
+              "matched_alias": "Người bệnh tỉnh, tiếp xúc tốt, đi lại vận động tốt",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "matched_sign": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-DAU_DAU_CHONG_MAT-6cfb4c7d",
+              "matched_sign": "Đau đầu, chóng mặt",
+              "matched_alias": "Đau đầu, chóng mặt",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            }
+          ]
+        },
+        {
+          "disease_id": "disease:A08.5",
+          "icd10": "A08.5",
+          "disease_name": "Nhiễm trùng đường ruột xác định khác",
+          "case_count": 8,
+          "score": 1.9963,
+          "supporting_signs": [
+            {
+              "input_sign": "Đi lại hay bị lảo đảo muốn ngã.",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "token_subsequence",
+              "match_score": 0.94,
+              "support_cases": 1
+            },
+            {
+              "input_sign": "Chóng mặt / Mất thăng bằng",
+              "sign_id": "SIGN-NON_DI_NGOAI_PHAN_LONG_NHIEU-02f4f546",
+              "matched_sign": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "matched_alias": "Nôn, đi ngoài phân lỏng nhiều, mệt, chóng mặt, đi lại chếnh choáng",
+              "match_type": "decomposed_token_subsequence",
+              "match_score": 0.97,
+              "support_cases": 1
+            }
+          ]
+        }
+      ],
+      "recommended_services": [
+        {
+          "service_code": "END-ENS-041",
+          "service_name": "Khám tai dưới kính hiển vi",
+          "category_code": "",
+          "category_name": "",
+          "score": 14.1,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "ontology_profile"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "profile:cholesteatoma",
+              "icd10": null,
+              "disease_name": "Viêm tai giữa mạn tính có cholesteatoma",
+              "disease_score": 14.1,
+              "service_case_support": 0,
+              "service_max_score": 1.0
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-IMM-001",
+          "service_name": "định lượng crp",
+          "category_code": "LAB-IMM",
+          "category_name": "Miễn dịch",
+          "score": 8.2205,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 29,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 5,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:A08.5",
+              "icd10": "A08.5",
+              "disease_name": "Nhiễm trùng đường ruột xác định khác",
+              "disease_score": 1.9963,
+              "service_case_support": 5,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-006",
+          "service_name": "điện giải đồ (na, k, ci) (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 7.676,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 8,
+              "service_max_score": 1.0
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 7,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:A08.5",
+              "icd10": "A08.5",
+              "disease_name": "Nhiễm trùng đường ruột xác định khác",
+              "disease_score": 1.9963,
+              "service_case_support": 5,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-HEM-001",
+          "service_name": "tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+          "category_code": "LAB-HEM",
+          "category_name": "Huyết học",
+          "score": 7.3906,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 8,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 14,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:A08.5",
+              "icd10": "A08.5",
+              "disease_name": "Nhiễm trùng đường ruột xác định khác",
+              "disease_score": 1.9963,
+              "service_case_support": 6,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-003",
+          "service_name": "đo hoạt độ ast (got) (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 7.3504,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 8,
+              "service_max_score": 1.0
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 16,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:A08.5",
+              "icd10": "A08.5",
+              "disease_name": "Nhiễm trùng đường ruột xác định khác",
+              "disease_score": 1.9963,
+              "service_case_support": 5,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-002",
+          "service_name": "đo hoạt độ alt (gpt) (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 7.3504,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 8,
+              "service_max_score": 1.0
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 16,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:A08.5",
+              "icd10": "A08.5",
+              "disease_name": "Nhiễm trùng đường ruột xác định khác",
+              "disease_score": 1.9963,
+              "service_case_support": 5,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-004",
+          "service_name": "định lượng glucose (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 7.1819,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 5,
+              "service_max_score": 0.92
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            },
+            {
+              "disease_id": "disease:R51",
+              "icd10": "R51",
+              "disease_name": "Đau đầu",
+              "disease_score": 1.9963,
+              "service_case_support": 4,
+              "service_max_score": 0.69
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-001",
+          "service_name": "định lượng creatinin (máu)",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 5.9395,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "hybrid"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 4,
+              "service_max_score": 0.92
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 10,
+              "service_max_score": 0.85
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-015",
+          "service_name": "định lượng creatinine máu",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 5.9393,
+          "roles": [
+            "monitoring"
+          ],
+          "evidences": [
+            "statistical"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 4,
+              "service_max_score": 0.77
+            },
+            {
+              "disease_id": "disease:A08.5",
+              "icd10": "A08.5",
+              "disease_name": "Nhiễm trùng đường ruột xác định khác",
+              "disease_score": 1.9963,
+              "service_case_support": 4,
+              "service_max_score": 0.77
+            },
+            {
+              "disease_id": "disease:R74.0",
+              "icd10": "R74.0",
+              "disease_name": "Tăng mức men transaminase và men acid lactic dehydrogenase (LDH)",
+              "disease_score": 1.9963,
+              "service_case_support": 3,
+              "service_max_score": 0.69
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-IMM-006",
+          "service_name": "crp",
+          "category_code": "LAB-IMM",
+          "category_name": "Miễn dịch",
+          "score": 4.8877,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "guideline"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 1,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:R51",
+              "icd10": "R51",
+              "disease_name": "Đau đầu",
+              "disease_score": 1.9963,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-HEM-011",
+          "service_name": "công thức máu",
+          "category_code": "LAB-HEM",
+          "category_name": "Huyết học",
+          "score": 4.8748,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "guideline"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 2,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:R51",
+              "icd10": "R51",
+              "disease_name": "Đau đầu",
+              "disease_score": 1.9963,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            }
+          ]
+        },
+        {
+          "service_code": "LAB-BIO-387",
+          "service_name": "procalcitonin",
+          "category_code": "LAB-BIO",
+          "category_name": "Sinh hoá",
+          "score": 4.8468,
+          "roles": [
+            "diagnostic"
+          ],
+          "evidences": [
+            "guideline"
+          ],
+          "supporting_diseases": [
+            {
+              "disease_id": "disease:H81.1",
+              "icd10": "H81.1",
+              "disease_name": "Chóng mặt kịch phát lành tính",
+              "disease_score": 9.4526,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:J00",
+              "icd10": "J00",
+              "disease_name": "Viêm mũi họng cấp [cảm thường]",
+              "disease_score": 3.2384,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            },
+            {
+              "disease_id": "disease:R51",
+              "icd10": "R51",
+              "disease_name": "Đau đầu",
+              "disease_score": 1.9963,
+              "service_case_support": 0,
+              "service_max_score": 0.6
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "service_mapping_test": {
+    "summary": {
+      "service_count": 3,
+      "base_high_confidence_count": 0,
+      "hybrid_high_confidence_count": 0,
+      "base_family_resolved_count": 3,
+      "hybrid_family_resolved_count": 3,
+      "base_mapped_codes": [
+        "END-ENS-041",
+        "FUN-DFT-084",
+        "IMG-CTN-018"
+      ],
+      "hybrid_mapped_codes": [
+        "END-ENS-041",
+        "FUN-DFT-084",
+        "IMG-CTN-018"
+      ]
+    },
+    "rows": [
+      {
+        "line_no": 1,
+        "service_name_raw": "Khám tai dưới kính hiển vi",
+        "expected_label": "PAYMENT",
+        "reason_layer": "medical",
+        "base_top": {
+          "service_code": "END-ENS-041",
+          "canonical_name": "kham tai duoi kinh hien vi",
+          "category_code": "GEN-OTH",
+          "category_name": "Chưa phân loại",
+          "matched_variant": "kham tai duoi kinh hien vi",
+          "score": 88.91,
+          "confidence": "MEDIUM",
+          "reasons": [
+            "same_service_family"
+          ],
+          "conflicts": [],
+          "family_id": "exam_consult"
+        },
+        "hybrid_top": {
+          "service_code": "END-ENS-041",
+          "canonical_name": "kham tai duoi kinh hien vi",
+          "category_code": "",
+          "category_name": "",
+          "matched_variant": "kham tai duoi kinh hien vi",
+          "score": 64.67,
+          "confidence": "REVIEW",
+          "reasons": [
+            "same_service_family",
+            "alias_source:policy_alias"
+          ],
+          "conflicts": [],
+          "family_id": "exam_consult",
+          "metrics": {
+            "lexical_score": 58.73,
+            "semantic_score": 58.53
+          }
+        },
+        "base_resolution": "coded",
+        "hybrid_resolution": "coded",
+        "base_family_hint": {
+          "family_id": "exam_consult",
+          "family_status": "unknown"
+        },
+        "hybrid_family_hint": {
+          "family_id": "exam_consult",
+          "family_status": "unknown"
+        },
+        "base_family_only_hint": null,
+        "hybrid_family_only_hint": null,
+        "base_alternatives": [
+          {
+            "service_code": "END-ENS-041",
+            "canonical_name": "kham tai duoi kinh hien vi",
+            "category_code": "GEN-OTH",
+            "category_name": "Chưa phân loại",
+            "matched_variant": "kham tai duoi kinh hien vi",
+            "score": 88.91,
+            "confidence": "MEDIUM",
+            "reasons": [
+              "same_service_family"
+            ],
+            "conflicts": [],
+            "family_id": "exam_consult"
+          },
+          {
+            "service_code": "END-ENS-001",
+            "canonical_name": "nội soi tai mũi họng",
+            "category_code": "END-ENS",
+            "category_name": "Nội soi",
+            "matched_variant": "khám nội soi tai mũi họng",
+            "score": 46.74,
+            "confidence": "ALTERNATIVE",
+            "reasons": [],
+            "conflicts": [],
+            "family_id": "endoscopy"
+          }
+        ],
+        "hybrid_alternatives": [
+          {
+            "service_code": "END-ENS-041",
+            "canonical_name": "kham tai duoi kinh hien vi",
+            "category_code": "",
+            "category_name": "",
+            "matched_variant": "kham tai duoi kinh hien vi",
+            "score": 64.67,
+            "confidence": "REVIEW",
+            "reasons": [
+              "same_service_family",
+              "alias_source:policy_alias"
+            ],
+            "conflicts": [],
+            "family_id": "exam_consult",
+            "metrics": {
+              "lexical_score": 58.73,
+              "semantic_score": 58.53
+            }
+          },
+          {
+            "service_code": "END-ENS-065",
+            "canonical_name": "khám tai mũi họng (khám nội soi tmh ống cứng - khám sáng (7g30-13g00) - khám với bs)",
+            "category_code": "END-ENS",
+            "category_name": "Nội soi",
+            "matched_variant": "khám tai mũi họng (khám nội soi tmh ống cứng - khám sáng (7g30-13g00) - khám với bs)",
+            "score": 34.31,
+            "confidence": "REVIEW",
+            "reasons": [
+              "same_service_family",
+              "alias_source:codebook_canonical"
+            ],
+            "conflicts": [],
+            "family_id": "exam_consult",
+            "metrics": {
+              "lexical_score": 18.1,
+              "semantic_score": 54.57
+            }
+          },
+          {
+            "service_code": "END-ENS-015",
+            "canonical_name": "khám tai mũi họng với nội soi (có hẹn/ không hẹn)",
+            "category_code": "END-ENS",
+            "category_name": "Nội soi",
+            "matched_variant": "khám tai mũi họng có nội soi (có hẹn/không hẹn)",
+            "score": 33.27,
+            "confidence": "REVIEW",
+            "reasons": [
+              "same_service_family"
+            ],
+            "conflicts": [],
+            "family_id": "exam_consult",
+            "metrics": {
+              "lexical_score": 15.34,
+              "semantic_score": 57.96
+            }
+          }
+        ]
+      },
+      {
+        "line_no": 2,
+        "service_name_raw": "Nghiệm pháp rò mê nhĩ",
+        "expected_label": "PAYMENT",
+        "reason_layer": "medical",
+        "base_top": {
+          "service_code": "FUN-DFT-084",
+          "canonical_name": "nghiệm pháp rượu (nghiệm pháp ethanol)",
+          "category_code": "FUN-DFT",
+          "category_name": "Thăm dò chức năng",
+          "matched_variant": "nghiệm pháp rượu (nghiệm pháp ethanol)",
+          "score": 64.23,
+          "confidence": "REVIEW",
+          "reasons": [
+            "same_service_family"
+          ],
+          "conflicts": [],
+          "family_id": "functional_test"
+        },
+        "hybrid_top": {
+          "service_code": "FUN-DFT-084",
+          "canonical_name": "nghiệm pháp rượu (nghiệm pháp ethanol)",
+          "category_code": "FUN-DFT",
+          "category_name": "Thăm dò chức năng",
+          "matched_variant": "nghiệm pháp rượu (nghiệm pháp ethanol)",
+          "score": 55.14,
+          "confidence": "REVIEW",
+          "reasons": [
+            "same_service_family",
+            "alias_source:codebook_canonical"
+          ],
+          "conflicts": [],
+          "family_id": "functional_test",
+          "metrics": {
+            "lexical_score": 48.31,
+            "semantic_score": 51.26
+          }
+        },
+        "base_resolution": "coded",
+        "hybrid_resolution": "coded",
+        "base_family_hint": {
+          "family_id": "functional_test",
+          "family_status": "ambiguous"
+        },
+        "hybrid_family_hint": {
+          "family_id": "functional_test",
+          "family_status": "ambiguous"
+        },
+        "base_family_only_hint": null,
+        "hybrid_family_only_hint": null,
+        "base_alternatives": [
+          {
+            "service_code": "FUN-DFT-084",
+            "canonical_name": "nghiệm pháp rượu (nghiệm pháp ethanol)",
+            "category_code": "FUN-DFT",
+            "category_name": "Thăm dò chức năng",
+            "matched_variant": "nghiệm pháp rượu (nghiệm pháp ethanol)",
+            "score": 64.23,
+            "confidence": "REVIEW",
+            "reasons": [
+              "same_service_family"
+            ],
+            "conflicts": [],
+            "family_id": "functional_test"
+          },
+          {
+            "service_code": "FUN-DFT-083",
+            "canonical_name": "nghiệm pháp coombs trực tiếp",
+            "category_code": "FUN-DFT",
+            "category_name": "Thăm dò chức năng",
+            "matched_variant": "nghiệm pháp coombs trực tiếp",
+            "score": 64.05,
+            "confidence": "ALTERNATIVE",
+            "reasons": [
+              "same_service_family"
+            ],
+            "conflicts": [],
+            "family_id": "functional_test"
+          },
+          {
+            "service_code": "FUN-DFT-071",
+            "canonical_name": "nghiệm pháp dung nạp đường (ogtt)",
+            "category_code": "FUN-DFT",
+            "category_name": "Thăm dò chức năng",
+            "matched_variant": "nghiệm pháp dung nạp đường (ogtt)",
+            "score": 61.66,
+            "confidence": "ALTERNATIVE",
+            "reasons": [
+              "same_service_family"
+            ],
+            "conflicts": [],
+            "family_id": "functional_test"
+          }
+        ],
+        "hybrid_alternatives": [
+          {
+            "service_code": "FUN-DFT-084",
+            "canonical_name": "nghiệm pháp rượu (nghiệm pháp ethanol)",
+            "category_code": "FUN-DFT",
+            "category_name": "Thăm dò chức năng",
+            "matched_variant": "nghiệm pháp rượu (nghiệm pháp ethanol)",
+            "score": 55.14,
+            "confidence": "REVIEW",
+            "reasons": [
+              "same_service_family",
+              "alias_source:codebook_canonical"
+            ],
+            "conflicts": [],
+            "family_id": "functional_test",
+            "metrics": {
+              "lexical_score": 48.31,
+              "semantic_score": 51.26
+            }
+          },
+          {
+            "service_code": "FUN-DFT-068",
+            "canonical_name": "nghiệm pháp gắng sức điện tâm đồ",
+            "category_code": "FUN-DFT",
+            "category_name": "Thăm dò chức năng",
+            "matched_variant": "nghiệm pháp găng sức điện tâm đồ",
+            "score": 41.07,
+            "confidence": "REVIEW",
+            "reasons": [
+              "same_service_family"
+            ],
+            "conflicts": [],
+            "family_id": "functional_test",
+            "metrics": {
+              "lexical_score": 28.06,
+              "semantic_score": 53.11
+            }
+          },
+          {
+            "service_code": "FUN-DFT-083",
+            "canonical_name": "nghiệm pháp coombs trực tiếp",
+            "category_code": "FUN-DFT",
+            "category_name": "Thăm dò chức năng",
+            "matched_variant": "nghiệm pháp coombs trực tiếp",
+            "score": 40.85,
+            "confidence": "REVIEW",
+            "reasons": [
+              "same_service_family",
+              "alias_source:codebook_canonical"
+            ],
+            "conflicts": [],
+            "family_id": "functional_test",
+            "metrics": {
+              "lexical_score": 32.09,
+              "semantic_score": 41.95
+            }
+          }
+        ]
+      },
+      {
+        "line_no": 3,
+        "service_name_raw": "CT Scan xương thái dương",
+        "expected_label": "PAYMENT",
+        "reason_layer": "medical",
+        "base_top": {
+          "service_code": "IMG-CTN-018",
+          "canonical_name": "ct scan phổi",
+          "category_code": "IMG-CTN",
+          "category_name": "CT/MRI",
+          "matched_variant": "ct scan phổi",
+          "score": 68.14,
+          "confidence": "REVIEW",
+          "reasons": [
+            "same_category_hint",
+            "same_service_family",
+            "medical_signal_overlap_high"
+          ],
+          "conflicts": [],
+          "family_id": "imaging"
+        },
+        "hybrid_top": {
+          "service_code": "IMG-CTN-018",
+          "canonical_name": "ct scan phổi",
+          "category_code": "IMG-CTN",
+          "category_name": "CT/MRI",
+          "matched_variant": "CT Scan",
+          "score": 67.95,
+          "confidence": "REVIEW",
+          "reasons": [
+            "same_service_family",
+            "alias_source:protocol_link"
+          ],
+          "conflicts": [],
+          "family_id": "imaging",
+          "metrics": {
+            "lexical_score": 62.73,
+            "semantic_score": 59.93
+          }
+        },
+        "base_resolution": "coded",
+        "hybrid_resolution": "coded",
+        "base_family_hint": {
+          "family_id": "imaging",
+          "family_status": "probable"
+        },
+        "hybrid_family_hint": {
+          "family_id": "imaging",
+          "family_status": "probable"
+        },
+        "base_family_only_hint": null,
+        "hybrid_family_only_hint": null,
+        "base_alternatives": [
+          {
+            "service_code": "IMG-CTN-018",
+            "canonical_name": "ct scan phổi",
+            "category_code": "IMG-CTN",
+            "category_name": "CT/MRI",
+            "matched_variant": "ct scan phổi",
+            "score": 68.14,
+            "confidence": "REVIEW",
+            "reasons": [
+              "same_category_hint",
+              "same_service_family",
+              "medical_signal_overlap_high"
+            ],
+            "conflicts": [],
+            "family_id": "imaging"
+          },
+          {
+            "service_code": "IMG-CTN-015",
+            "canonical_name": "ct scan mui xoang",
+            "category_code": "IMG-CTN",
+            "category_name": "CT/MRI",
+            "matched_variant": "ct scan mui xoang",
+            "score": 65.92,
+            "confidence": "ALTERNATIVE",
+            "reasons": [
+              "same_category_hint",
+              "same_service_family"
+            ],
+            "conflicts": [],
+            "family_id": "imaging"
+          },
+          {
+            "service_code": "IMG-CTN-039",
+            "canonical_name": "ct scan sọ não",
+            "category_code": "IMG-CTN",
+            "category_name": "CT/MRI",
+            "matched_variant": "ct scan sọ não",
+            "score": 64.6,
+            "confidence": "ALTERNATIVE",
+            "reasons": [
+              "same_category_hint",
+              "same_service_family"
+            ],
+            "conflicts": [],
+            "family_id": "imaging"
+          }
+        ],
+        "hybrid_alternatives": [
+          {
+            "service_code": "IMG-CTN-018",
+            "canonical_name": "ct scan phổi",
+            "category_code": "IMG-CTN",
+            "category_name": "CT/MRI",
+            "matched_variant": "CT Scan",
+            "score": 67.95,
+            "confidence": "REVIEW",
+            "reasons": [
+              "same_service_family",
+              "alias_source:protocol_link"
+            ],
+            "conflicts": [],
+            "family_id": "imaging",
+            "metrics": {
+              "lexical_score": 62.73,
+              "semantic_score": 59.93
+            }
+          },
+          {
+            "service_code": "IMG-CTN-039",
+            "canonical_name": "ct scan sọ não",
+            "category_code": "IMG-CTN",
+            "category_name": "CT/MRI",
+            "matched_variant": "ct scan sọ não",
+            "score": 50.82,
+            "confidence": "REVIEW",
+            "reasons": [
+              "same_service_family",
+              "alias_source:codebook_canonical"
+            ],
+            "conflicts": [],
+            "family_id": "imaging",
+            "metrics": {
+              "lexical_score": 37.1,
+              "semantic_score": 64.67
+            }
+          },
+          {
+            "service_code": "IMG-CTN-015",
+            "canonical_name": "ct scan mui xoang",
+            "category_code": "",
+            "category_name": "",
+            "matched_variant": "ct scan mui xoang",
+            "score": 50.1,
+            "confidence": "REVIEW",
+            "reasons": [
+              "same_service_family",
+              "alias_source:policy_alias"
+            ],
+            "conflicts": [],
+            "family_id": "imaging",
+            "metrics": {
+              "lexical_score": 33.81,
+              "semantic_score": 70.56
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "service_overlap_with_sign_engine": {
+    "recommended_codes": [
+      "END-ENS-041",
+      "LAB-BIO-001",
+      "LAB-BIO-002",
+      "LAB-BIO-003",
+      "LAB-BIO-004",
+      "LAB-BIO-006",
+      "LAB-BIO-015",
+      "LAB-BIO-387",
+      "LAB-HEM-001",
+      "LAB-HEM-011",
+      "LAB-IMM-001",
+      "LAB-IMM-006"
+    ],
+    "mapped_codes": [
+      "END-ENS-041",
+      "FUN-DFT-084",
+      "IMG-CTN-018"
+    ],
+    "overlap_codes": [
+      "END-ENS-041"
+    ]
+  },
+  "protocol_probe": {
+    "disease_name": "Viêm tai giữa mạn tính có cholesteatoma",
+    "disease_protocol_hit": true,
+    "story_title": "Test 1: Lời khai mang tính 'đặc hiệu' ẩn trong từ ngữ dân dã",
+    "story_title_protocol_hit": false,
+    "service_protocol_hits": [
+      {
+        "service_name_raw": "Khám tai dưới kính hiển vi",
+        "protocol_text_hit": false
+      },
+      {
+        "service_name_raw": "Nghiệm pháp rò mê nhĩ",
+        "protocol_text_hit": false
+      },
+      {
+        "service_name_raw": "CT Scan xương thái dương",
+        "protocol_text_hit": true
+      }
+    ]
+  },
+  "experience_memory": {
+    "memory_path": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\experience_memory\\reasoning_experience_memory.jsonl",
+    "match_count": 5,
+    "matches": [
+      {
+        "experience_id": "exp_6ebe5542736e",
+        "created_at": "2026-03-29T19:41:46.634942+07:00",
+        "category": "service_code_gap",
+        "severity": "medium",
+        "specialty": "Tai",
+        "source_request_id": "tc_onto_001",
+        "source_case_title": "TC_Onto_Cholesteatoma_DirtyText",
+        "disease_name": "Viêm tai giữa mạn tính có cholesteatoma",
+        "trigger_summary": "Only 0/3 services reached high-confidence code mapping",
+        "recommendation": "Giữ family-first, nhưng bổ sung alias/canonical code cho 'Viêm tai giữa mạn tính có cholesteatoma'. Ưu tiên code hóa các dịch vụ: Khám tai dưới kính hiển vi, Nghiệm pháp rò mê nhĩ, CT Scan xương thái dương.",
+        "sign_terms": [
+          "Chảy mủ tai",
+          "Thối khẳn",
+          "Lổn nhổn trắng",
+          "Mảnh óng ánh như xà cừ",
+          "Thả vào nước không tan",
+          "Nổi váng",
+          "Chóng mặt / Mất thăng bằng",
+          "Lảo đảo muốn ngã",
+          "Liên quan đến tai trái",
+          "Chảy mủ tai trái thối và đi lảo đảo.",
+          "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+          "Trong mủ vớt ra được vảy trắng lấp lánh như váng mỡ, thả vào nước nổi lềnh bềnh."
+        ],
+        "service_terms": [
+          "Khám tai dưới kính hiển vi",
+          "Nghiệm pháp rò mê nhĩ",
+          "CT Scan xương thái dương"
+        ],
+        "query_terms": [
+          "viem",
+          "giua",
+          "cholesteatoma",
+          "chay",
+          "thoi",
+          "khan",
+          "lon",
+          "nhon",
+          "trang",
+          "manh",
+          "ong",
+          "anh",
+          "nhu",
+          "tha",
+          "vao",
+          "nuoc",
+          "tan",
+          "noi",
+          "vang",
+          "kham",
+          "duoi",
+          "kinh",
+          "hien",
+          "nghiem",
+          "phap",
+          "nhi",
+          "scan",
+          "xuong",
+          "thai",
+          "duong"
+        ],
+        "evidence": {
+          "service_count": 3,
+          "coded_high": 0,
+          "unresolved_services": [
+            "Khám tai dưới kính hiển vi",
+            "Nghiệm pháp rò mê nhĩ",
+            "CT Scan xương thái dương"
+          ],
+          "report_json": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_001_test_report.json"
+        },
+        "match_score": 10.7114
+      },
+      {
+        "experience_id": "exp_becfa6f3432d",
+        "created_at": "2026-03-29T19:41:46.634942+07:00",
+        "category": "successful_pattern",
+        "severity": "low",
+        "specialty": "Tai",
+        "source_request_id": "tc_onto_001",
+        "source_case_title": "TC_Onto_Cholesteatoma_DirtyText",
+        "disease_name": "Viêm tai giữa mạn tính có cholesteatoma",
+        "trigger_summary": "Stable pattern for Viêm tai giữa mạn tính có cholesteatoma",
+        "recommendation": "Giữ pattern hiện tại cho 'Viêm tai giữa mạn tính có cholesteatoma': signs Chảy mủ tai, Thối khẳn, Lổn nhổn trắng, Mảnh óng ánh như xà cừ -> services Khám tai dưới kính hiển vi, Nghiệm pháp rò mê nhĩ, CT Scan xương thái dương.",
+        "sign_terms": [
+          "Chảy mủ tai",
+          "Thối khẳn",
+          "Lổn nhổn trắng",
+          "Mảnh óng ánh như xà cừ",
+          "Thả vào nước không tan",
+          "Nổi váng",
+          "Chóng mặt / Mất thăng bằng",
+          "Lảo đảo muốn ngã",
+          "Liên quan đến tai trái",
+          "Chảy mủ tai trái thối và đi lảo đảo.",
+          "Tai trái chảy mủ hôi kinh khủng, mùi như chuột chết.",
+          "Trong mủ vớt ra được vảy trắng lấp lánh như váng mỡ, thả vào nước nổi lềnh bềnh."
+        ],
+        "service_terms": [
+          "Khám tai dưới kính hiển vi",
+          "Nghiệm pháp rò mê nhĩ",
+          "CT Scan xương thái dương"
+        ],
+        "query_terms": [
+          "viem",
+          "giua",
+          "cholesteatoma",
+          "chay",
+          "thoi",
+          "khan",
+          "lon",
+          "nhon",
+          "trang",
+          "manh",
+          "ong",
+          "anh",
+          "nhu",
+          "tha",
+          "vao",
+          "nuoc",
+          "tan",
+          "noi",
+          "vang",
+          "kham",
+          "duoi",
+          "kinh",
+          "hien",
+          "nghiem",
+          "phap",
+          "nhi",
+          "scan",
+          "xuong",
+          "thai",
+          "duong"
+        ],
+        "evidence": {
+          "top1_disease": "Viêm tai giữa mạn tính có cholesteatoma",
+          "service_count": 3,
+          "overlap_codes": [
+            "END-ENS-041"
+          ],
+          "report_json": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_001_test_report.json"
+        },
+        "match_score": 10.7114
+      },
+      {
+        "experience_id": "exp_6be049ab775d",
+        "created_at": "2026-03-29T19:41:46.727004+07:00",
+        "category": "service_code_gap",
+        "severity": "medium",
+        "specialty": "Tai",
+        "source_request_id": "tc_onto_005",
+        "source_case_title": "TC_Onto_Meniere_vs_AcousticNeuroma",
+        "disease_name": "Bệnh Ménière",
+        "trigger_summary": "Only 1/3 services reached high-confidence code mapping",
+        "recommendation": "Giữ family-first, nhưng bổ sung alias/canonical code cho 'Bệnh Ménière'. Ưu tiên code hóa các dịch vụ: Điện động nhãn đồ (ENG), MRI sọ não - xương đá có tiêm thuốc.",
+        "sign_terms": [
+          "Nghe kém / Điếc",
+          "Đột ngột",
+          "Tiếp nhận",
+          "Một bên",
+          "Ù tai",
+          "Tiếng trầm",
+          "Như tiếng xay lúa",
+          "Chóng mặt",
+          "Kịch phát quay cuồng",
+          "Kèm nôn",
+          "Kéo dài hàng giờ",
+          "Chóng mặt kịch phát quay cuồng, ù tai tiếng xay lúa và điếc đột ngột tai phải."
+        ],
+        "service_terms": [
+          "Đo thính lực đồ",
+          "Điện động nhãn đồ (ENG)",
+          "MRI sọ não - xương đá có tiêm thuốc"
+        ],
+        "query_terms": [
+          "meniere",
+          "nghe",
+          "kem",
+          "diec",
+          "dot",
+          "ngot",
+          "tiep",
+          "nhan",
+          "mot",
+          "ben",
+          "tieng",
+          "tram",
+          "thinh",
+          "luc",
+          "dien",
+          "dong",
+          "eng",
+          "mri",
+          "nao",
+          "xuong",
+          "tiem",
+          "thuoc"
+        ],
+        "evidence": {
+          "service_count": 3,
+          "coded_high": 1,
+          "unresolved_services": [
+            "Điện động nhãn đồ (ENG)",
+            "MRI sọ não - xương đá có tiêm thuốc"
+          ],
+          "report_json": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_005_test_report.json"
+        },
+        "match_score": 1.7324
+      },
+      {
+        "experience_id": "exp_e372172688ed",
+        "created_at": "2026-03-29T19:41:46.727004+07:00",
+        "category": "successful_pattern",
+        "severity": "low",
+        "specialty": "Tai",
+        "source_request_id": "tc_onto_005",
+        "source_case_title": "TC_Onto_Meniere_vs_AcousticNeuroma",
+        "disease_name": "Bệnh Ménière",
+        "trigger_summary": "Stable pattern for Bệnh Ménière",
+        "recommendation": "Giữ pattern hiện tại cho 'Bệnh Ménière': signs Nghe kém / Điếc, Đột ngột, Tiếp nhận, Một bên -> services Đo thính lực đồ, Điện động nhãn đồ (ENG), MRI sọ não - xương đá có tiêm thuốc.",
+        "sign_terms": [
+          "Nghe kém / Điếc",
+          "Đột ngột",
+          "Tiếp nhận",
+          "Một bên",
+          "Ù tai",
+          "Tiếng trầm",
+          "Như tiếng xay lúa",
+          "Chóng mặt",
+          "Kịch phát quay cuồng",
+          "Kèm nôn",
+          "Kéo dài hàng giờ",
+          "Chóng mặt kịch phát quay cuồng, ù tai tiếng xay lúa và điếc đột ngột tai phải."
+        ],
+        "service_terms": [
+          "Đo thính lực đồ",
+          "Điện động nhãn đồ (ENG)",
+          "MRI sọ não - xương đá có tiêm thuốc"
+        ],
+        "query_terms": [
+          "meniere",
+          "nghe",
+          "kem",
+          "diec",
+          "dot",
+          "ngot",
+          "tiep",
+          "nhan",
+          "mot",
+          "ben",
+          "tieng",
+          "tram",
+          "thinh",
+          "luc",
+          "dien",
+          "dong",
+          "eng",
+          "mri",
+          "nao",
+          "xuong",
+          "tiem",
+          "thuoc"
+        ],
+        "evidence": {
+          "top1_disease": "Bệnh Ménière",
+          "service_count": 3,
+          "overlap_codes": [
+            "FUN-DFT-006",
+            "FUN-DFT-028",
+            "IMG-CTN-013"
+          ],
+          "report_json": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_005_test_report.json"
+        },
+        "match_score": 1.7324
+      },
+      {
+        "experience_id": "exp_2a77a43720ed",
+        "created_at": "2026-03-29T19:41:46.683565+07:00",
+        "category": "service_family_gap",
+        "severity": "high",
+        "specialty": "Cấp cứu",
+        "source_request_id": "tc_onto_003",
+        "source_case_title": "TC_Onto_Croup_Peds",
+        "disease_name": "Viêm thanh quản cấp tính hạ thanh môn",
+        "trigger_summary": "Only 2/3 services reached family resolution",
+        "recommendation": "Expand service family taxonomy/aliases cho 'Viêm thanh quản cấp tính hạ thanh môn'. Dịch vụ còn hở: Khí dung Adrenaline 1/1000, Tiêm tĩnh mạch Corticoid, Soi thanh quản bằng ống cứng.",
+        "sign_terms": [
+          "Ho",
+          "Ông ổng",
+          "Tiếng ho cứng",
+          "Như chó sủa",
+          "Khó thở thanh quản",
+          "Đột ngột về đêm",
+          "Thở rít khi khóc",
+          "Co rút lõm ngực",
+          "Độ IIB",
+          "Trẻ 2 tuổi khó thở rít và ho ông ổng về đêm.",
+          "Nửa đêm ho ré lên, tiếng ho cứng dội vang như chó sủa.",
+          "Khi khóc thở rít lên từng hồi, ngực lõm cả vào."
+        ],
+        "service_terms": [
+          "Khí dung Adrenaline 1/1000",
+          "Tiêm tĩnh mạch Corticoid",
+          "Soi thanh quản bằng ống cứng"
+        ],
+        "query_terms": [
+          "viem",
+          "thanh",
+          "quan",
+          "mon",
+          "cuu",
+          "ong",
+          "tieng",
+          "cung",
+          "nhu",
+          "cho",
+          "sua",
+          "kho",
+          "tho",
+          "dot",
+          "ngot",
+          "dem",
+          "khi",
+          "dung",
+          "adrenaline",
+          "1000",
+          "tiem",
+          "mach",
+          "corticoid",
+          "soi",
+          "bang"
+        ],
+        "evidence": {
+          "service_count": 3,
+          "family_resolved": 2,
+          "unresolved_services": [
+            "Khí dung Adrenaline 1/1000",
+            "Tiêm tĩnh mạch Corticoid",
+            "Soi thanh quản bằng ống cứng"
+          ],
+          "report_json": "D:\\desktop_folder\\12_Claude_Code\\pathway\\notebooklm\\data\\script\\testcase_11_batch\\tc_onto_003_test_report.json"
+        },
+        "match_score": 0.9633
+      }
+    ],
+    "recommendations": [
+      "Giữ family-first, nhưng bổ sung alias/canonical code cho 'Viêm tai giữa mạn tính có cholesteatoma'. Ưu tiên code hóa các dịch vụ: Khám tai dưới kính hiển vi, Nghiệm pháp rò mê nhĩ, CT Scan xương thái dương.",
+      "Giữ pattern hiện tại cho 'Viêm tai giữa mạn tính có cholesteatoma': signs Chảy mủ tai, Thối khẳn, Lổn nhổn trắng, Mảnh óng ánh như xà cừ -> services Khám tai dưới kính hiển vi, Nghiệm pháp rò mê nhĩ, CT Scan xương thái dương.",
+      "Giữ family-first, nhưng bổ sung alias/canonical code cho 'Bệnh Ménière'. Ưu tiên code hóa các dịch vụ: Điện động nhãn đồ (ENG), MRI sọ não - xương đá có tiêm thuốc."
+    ]
+  }
+}

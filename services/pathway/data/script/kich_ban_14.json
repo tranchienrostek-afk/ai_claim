@@ -1,0 +1,156 @@
+```json
+{
+  "cau_chuyen_y_khoa": {
+    "tieu_de": "Test 11: Viêm mũi họng cấp tính nghi do vi khuẩn liên cầu ở trẻ em",
+    "benh_nhan": {
+      "gioi_tinh": "Nam",
+      "tuoi": 8
+    },
+    "benh_su_va_trieu_chung": {
+      "raw_sign_mentions": [
+        "Bệnh khởi phát đột ngột với triệu chứng sốt cao 40oC, ớn lạnh, nhức đầu và mệt mỏi.",
+        "Bệnh nhân than nuốt đau, đau nhói lan lên tai, ho khan và ngạt mũi, chảy mũi nước nhầy.",
+        "Khám thực thể thấy niêm mạc họng đỏ rực, hai amidan sưng to sung huyết, có các chấm mủ trắng và bựa trắng phủ trên bề mặt.",
+        "Có biểu hiện sưng hạch góc hàm, ấn đau nhẹ."
+      ],
+      "ontology_extraction": {
+        "sign_concepts": [
+          {
+            "concept": "Triệu chứng toàn thân",
+            "modifiers": [
+              "Sốt cao 40oC",
+              "Ớn lạnh",
+              "Nhức đầu",
+              "Mệt mỏi"
+            ]
+          },
+          {
+            "concept": "Triệu chứng cơ năng",
+            "modifiers": [
+              "Nuốt đau lan lên tai",
+              "Ho khan",
+              "Ngạt mũi",
+              "Chảy mũi nước"
+            ]
+          },
+          {
+            "concept": "Triệu chứng thực thể",
+            "modifiers": [
+              "Niêm mạc họng đỏ rực",
+              "Amidan sưng to",
+              "Chấm mủ trắng/bựa trắng trên amidan",
+              "Sưng hạch góc hàm"
+            ]
+          },
+          {
+            "concept": "Yếu tố nguy cơ (Risk Factor)",
+            "modifiers": [
+              "Mùa lạnh",
+              "Thời tiết thay đổi"
+            ]
+          }
+        ]
+      }
+    },
+    "nhan_dinh_ban_dau": "Bệnh nhân khởi phát đột ngột với sốt cao và sưng amidan có chấm mủ trắng, bựa trắng. Dù chưa có xét nghiệm vi khuẩn học, trường hợp này cần được đánh giá và điều trị như viêm mũi họng đỏ cấp do liên cầu khuẩn (đặc biệt là liên cầu bê-ta tan huyết nhóm A) để phòng ngừa biến chứng.",
+    "chi_dinh_can_lam_sang": {
+      "xet_nghiem_loai_tru_negative_exclusion_clue": [
+        {
+          "ten_xet_nghiem": "1. Khám lâm sàng và chẩn đoán phân biệt",
+          "muc_dich": "Loại trừ dị vật mũi (thường chỉ viêm một bên) và giai đoạn đầu của các bệnh nhiễm trùng lây như sởi, thủy đậu, cảm cúm, hay bệnh bạch hầu.",
+          "ket_qua": "Tổn thương hai bên, có mủ trắng điển hình, loại trừ dị vật và các bệnh lý nhiễm trùng lây khác."
+        }
+      ],
+      "xet_nghiem_truc_tiep_tim_ra_benh_direct_positive_clue": [
+        {
+          "ten_xet_nghiem": "2. Phản ứng ASLO",
+          "muc_dich": "Tìm kháng thể trong máu để xác định tình trạng nhiễm liên cầu bê-ta tan huyết.",
+          "ket_qua": "Chỉ số ASLO tăng cao, xác nhận nhiễm liên cầu khuẩn."
+        },
+        {
+          "ten_xet_nghiem": "3. Xét nghiệm vi trùng học và kháng sinh đồ",
+          "muc_dich": "Nuôi cấy dịch tỵ họng để xác định chính xác chủng vi khuẩn gây bệnh và đánh giá mức độ nhạy cảm với kháng sinh khi bệnh có xu hướng nặng.",
+          "ket_qua": "Dương tính với liên cầu bê-ta tan huyết nhóm A."
+        }
+      ],
+      "xet_nghiem_toan_than": [
+        {
+          "ten_xet_nghiem": "4. Công thức bạch cầu",
+          "muc_dich": "Đánh giá tình trạng nhiễm trùng qua số lượng bạch cầu và tỷ lệ đa nhân trung tính.",
+          "ket_qua": "Số lượng bạch cầu tăng cao, chủ yếu là đa nhân trung tính, phù hợp với tình trạng nhiễm vi trùng."
+        }
+      ]
+    },
+    "chan_doan_cuoi_cung": "Viêm mũi họng đỏ cấp tính kết hợp bựa trắng do vi khuẩn (Liên cầu bê-ta tan huyết nhóm A), có nguy cơ biến chứng gần (viêm tai giữa cấp) và biến chứng xa (viêm cầu thận, viêm khớp)."
+  },
+  "du_lieu_labeling_mau": {
+    "case_level": {
+      "request_id": "tc_viemmuihong_011",
+      "selected_profile_id": "prof_vmh_11",
+      "testcase_title": "TC_ViemMuiHongCap_LienCau_BuaTrang",
+      "main_disease_name_vi": "Viêm mũi họng cấp tính",
+      "primary_icd10": "J00",
+      "secondary_icd10_list_pipe": "J02.0",
+      "specialty": "Tai Mũi Họng / Nhi khoa",
+      "message_hash_id": "msg_vmh_011",
+      "claim_id_or_sohoso": "claim_azinsu_011",
+      "why_this_case_was_selected": "Kịch bản nhấn mạnh việc chẩn đoán và áp dụng nguyên tắc điều trị kháng sinh ngay cho bệnh nhân viêm mũi họng có bựa trắng trên amidan nghi do liên cầu, nhằm tránh các biến chứng xa nguy hiểm như thấp tim hay viêm cầu thận.",
+      "claim_raw_json": "claim_azinsu_011.json",
+      "icd_source": "phac_do_viem_mui_hong_cap",
+      "signs_history_source": "phac_do_viem_mui_hong_cap",
+      "lab_result_source": "phac_do_viem_mui_hong_cap",
+      "reviewer_or_insurer_note_source": "note_vmh_011",
+      "contract_or_plan_source": "plan_vmh_011",
+      "chief_complaint": "Sốt cao 40oC, nuốt đau nhói lên tai, ngạt mũi và họng có mủ trắng.",
+      "initial_signs_pipe": "Sốt cao 40oC | Nuốt đau lan lên tai | Amidan sưng to, có bựa trắng | Sưng hạch góc hàm",
+      "medical_history_pipe": "Không có",
+      "initial_clinical_question": "Chẩn đoán phân biệt với bạch hầu, xác định nhiễm vi khuẩn qua xét nghiệm máu và chỉ định kháng sinh kinh nghiệm chống liên cầu bê-ta tan huyết nhóm A.",
+      "total_lines": 4,
+      "target_lines_for_labeling": 4,
+      "panel_services_present_pipe": "Kháng sinh Peniciline/Amoxicilline | Thuốc hạ sốt giảm đau Paracetamol | Xét nghiệm công thức máu & ASLO | Bổ sung Vitamin C, B1",
+      "delivery_deadline": "2026-04-15",
+      "employee_name": "ai_engineer_hieu",
+      "review_status": "submitted",
+      "manager_note": "Test 11 - Đánh giá năng lực nhận diện viêm mũi họng cấp có mủ trắng và nguyên tắc chỉ định kháng sinh sớm (Peniciline) mà không cần đợi kết quả kháng sinh đồ."
+    },
+    "service_lines": [
+      {
+        "line_no": 1,
+        "service_name_raw": "Kháng sinh (Peniciline V / Amoxicilline / Cephalosporine thế hệ 1)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Theo nguyên tắc, mọi viêm mũi họng đỏ cấp có chấm mủ hoặc bựa trắng trên amidan đều phải điều trị kháng sinh (như Peniciline V 50-100 UI/kg cho trẻ, chia 3 lần/ngày trong 10 ngày) để tiêu diệt liên cầu ngay cả khi chưa có kết quả xét nghiệm vi khuẩn.",
+        "evidence_source": "phac_do_viem_mui_hong_cap",
+        "confidence": "strong"
+      },
+      {
+        "line_no": 2,
+        "service_name_raw": "Thuốc hạ sốt, giảm đau (Paracetamol)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Bệnh nhân có triệu chứng sốt cao 40oC và nuốt đau nhói, cần sử dụng thuốc hạ sốt, giảm đau sau ăn liều phù hợp với trẻ em để kiểm soát triệu chứng.",
+        "evidence_source": "phac_do_viem_mui_hong_cap",
+        "confidence": "strong"
+      },
+      {
+        "line_no": 3,
+        "service_name_raw": "Xét nghiệm công thức bạch cầu và phản ứng ASLO",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Giúp chẩn đoán phân biệt nhiễm vi trùng (số lượng bạch cầu tăng, chủ yếu đa nhân trung tính) và tìm kháng thể chống liên cầu bê-ta, hỗ trợ xác định chính xác nguyên nhân và phòng ngừa biến chứng xa.",
+        "evidence_source": "phac_do_viem_mui_hong_cap",
+        "confidence": "strong"
+      },
+      {
+        "line_no": 4,
+        "service_name_raw": "Bổ sung Vitamin C, B1",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Cần cung cấp chế độ dinh dưỡng giàu năng lượng và bổ sung sinh tố (Vitamin C, B1) để nâng cao thể trạng, tăng sức đề kháng, hỗ trợ cơ thể chống lại bệnh tật.",
+        "evidence_source": "phac_do_viem_mui_hong_cap",
+        "confidence": "strong"
+      }
+    ]
+  }
+}
+```

@@ -1,0 +1,604 @@
+{
+  "generated_at": "2026-03-25T07:44:20.309200+00:00",
+  "sources": {
+    "input_mentions": "06_insurance\\exclusion_claim_signals.jsonl",
+    "service_codebook": "02_standardize\\service_codebook.json",
+    "service_disease_matrix": "03_enrich\\service_disease_matrix.json",
+    "observation_concepts": "05_observations\\observation_concept_catalog_seed.json"
+  },
+  "stats": {
+    "mention_rows": 1859,
+    "unique_mention_names": 1031,
+    "unique_claim_lines": 800,
+    "service_mapped_rows": 1156,
+    "service_mapped_pct": 62.18,
+    "observation_mapped_rows": 95,
+    "observation_mapped_pct": 5.11,
+    "clinical_linked_rows": 789,
+    "clinical_linked_pct": 42.44,
+    "unique_mapped_services": 252,
+    "unique_mapped_observation_concepts": 4
+  },
+  "top_mention_names": [
+    {
+      "mention_name": "Glucose",
+      "rows": 45
+    },
+    {
+      "mention_name": "ALT",
+      "rows": 33
+    },
+    {
+      "mention_name": "Creatinin",
+      "rows": 31
+    },
+    {
+      "mention_name": "AST",
+      "rows": 31
+    },
+    {
+      "mention_name": "chụp XQ ngực thẳng",
+      "rows": 28
+    },
+    {
+      "mention_name": "HBsAg",
+      "rows": 26
+    },
+    {
+      "mention_name": "Triglycerid",
+      "rows": 26
+    },
+    {
+      "mention_name": "siêu âm ổ bụng",
+      "rows": 24
+    },
+    {
+      "mention_name": "Cholesterol",
+      "rows": 23
+    },
+    {
+      "mention_name": "điện giải đồ",
+      "rows": 22
+    },
+    {
+      "mention_name": "HIV",
+      "rows": 18
+    },
+    {
+      "mention_name": "Ure",
+      "rows": 16
+    },
+    {
+      "mention_name": "HbA1c",
+      "rows": 16
+    },
+    {
+      "mention_name": "TSH",
+      "rows": 16
+    },
+    {
+      "mention_name": "HDL",
+      "rows": 15
+    },
+    {
+      "mention_name": "HCV",
+      "rows": 14
+    },
+    {
+      "mention_name": "LDL",
+      "rows": 14
+    },
+    {
+      "mention_name": "Calci toàn phần",
+      "rows": 14
+    },
+    {
+      "mention_name": "FT4",
+      "rows": 14
+    },
+    {
+      "mention_name": "Chụp Xquang ngực thẳng",
+      "rows": 13
+    }
+  ],
+  "top_mapped_services": [
+    {
+      "service_code": "IMG-XRY-002",
+      "canonical_name": "chụp xquang ngực thẳng",
+      "rows": 50
+    },
+    {
+      "service_code": "LAB-BIO-016",
+      "canonical_name": "glucose",
+      "rows": 49
+    },
+    {
+      "service_code": "LAB-BIO-030",
+      "canonical_name": "creatinin",
+      "rows": 41
+    },
+    {
+      "service_code": "IMG-USG-002",
+      "canonical_name": "siêu âm ổ bụng",
+      "rows": 37
+    },
+    {
+      "service_code": "LAB-BIO-598",
+      "canonical_name": "alt",
+      "rows": 35
+    },
+    {
+      "service_code": "LAB-BIO-149",
+      "canonical_name": "điện giải đồ (máu)",
+      "rows": 33
+    },
+    {
+      "service_code": "LAB-BIO-034",
+      "canonical_name": "triglycerid",
+      "rows": 31
+    },
+    {
+      "service_code": "LAB-BIO-597",
+      "canonical_name": "ast",
+      "rows": 31
+    },
+    {
+      "service_code": "LAB-IMM-046",
+      "canonical_name": "hbsag",
+      "rows": 30
+    },
+    {
+      "service_code": "LAB-BIO-018",
+      "canonical_name": "cholesterol",
+      "rows": 25
+    },
+    {
+      "service_code": "LAB-IMM-132",
+      "canonical_name": "hiv",
+      "rows": 21
+    },
+    {
+      "service_code": "LAB-MIC-193",
+      "canonical_name": "hcv",
+      "rows": 19
+    },
+    {
+      "service_code": "IMG-USG-008",
+      "canonical_name": "siêu âm doppler tim",
+      "rows": 19
+    },
+    {
+      "service_code": "LAB-BIO-020",
+      "canonical_name": "acid uric",
+      "rows": 19
+    },
+    {
+      "service_code": "LAB-BIO-572",
+      "canonical_name": "ure",
+      "rows": 18
+    },
+    {
+      "service_code": "LAB-BIO-036",
+      "canonical_name": "hba1c",
+      "rows": 17
+    },
+    {
+      "service_code": "LAB-IMM-236",
+      "canonical_name": "tsh",
+      "rows": 16
+    },
+    {
+      "service_code": "LAB-IMM-202",
+      "canonical_name": "ft4",
+      "rows": 15
+    },
+    {
+      "service_code": "LAB-BIO-196",
+      "canonical_name": "hdl.c",
+      "rows": 15
+    },
+    {
+      "service_code": "LAB-IMM-006",
+      "canonical_name": "crp",
+      "rows": 15
+    }
+  ],
+  "top_service_categories": [
+    {
+      "category_code": "LAB-BIO",
+      "rows": 559
+    },
+    {
+      "category_code": "LAB-MIC",
+      "rows": 147
+    },
+    {
+      "category_code": "LAB-IMM",
+      "rows": 130
+    },
+    {
+      "category_code": "IMG-USG",
+      "rows": 121
+    },
+    {
+      "category_code": "IMG-XRY",
+      "rows": 64
+    },
+    {
+      "category_code": "GEN-OTH",
+      "rows": 42
+    },
+    {
+      "category_code": "LAB-HEM",
+      "rows": 25
+    },
+    {
+      "category_code": "FUN-DFT",
+      "rows": 19
+    },
+    {
+      "category_code": "PRO-THT",
+      "rows": 18
+    },
+    {
+      "category_code": "END-ENS",
+      "rows": 13
+    },
+    {
+      "category_code": "PAT-PAT",
+      "rows": 9
+    },
+    {
+      "category_code": "IMG-CTN",
+      "rows": 6
+    },
+    {
+      "category_code": "LAB-URI",
+      "rows": 3
+    }
+  ],
+  "top_observation_concepts": [
+    {
+      "concept_code": "OBS-URI-GLUCOSE",
+      "canonical_name": "duong niu (glucose)",
+      "rows": 47
+    },
+    {
+      "concept_code": "OBS-URI-BILIRUBIN",
+      "canonical_name": "bilirubin",
+      "rows": 26
+    },
+    {
+      "concept_code": "OBS-URI-PROTEIN",
+      "canonical_name": "protein nuoc tieu",
+      "rows": 21
+    },
+    {
+      "concept_code": "OBS-BIO-NA",
+      "canonical_name": "natri (Na+)",
+      "rows": 1
+    }
+  ],
+  "top_contracts": [
+    {
+      "contract_name": "FPT-NV",
+      "rows": 929
+    },
+    {
+      "contract_name": "FPT-NT 2025",
+      "rows": 832
+    },
+    {
+      "contract_name": "TIN-PNC",
+      "rows": 42
+    },
+    {
+      "contract_name": "TCGIns",
+      "rows": 37
+    },
+    {
+      "contract_name": "BHV",
+      "rows": 11
+    },
+    {
+      "contract_name": "UIC",
+      "rows": 8
+    }
+  ],
+  "top_atomic_reasons": [
+    {
+      "atomic_reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+      "rows": 1399
+    },
+    {
+      "atomic_reason": "Áp dụng đồng chi trả",
+      "rows": 530
+    },
+    {
+      "atomic_reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+      "rows": 504
+    },
+    {
+      "atomic_reason": "Chưa cung cấp đủ chứng từ",
+      "rows": 138
+    },
+    {
+      "atomic_reason": "Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+      "rows": 128
+    },
+    {
+      "atomic_reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+      "rows": 95
+    },
+    {
+      "atomic_reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+      "rows": 40
+    },
+    {
+      "atomic_reason": "Đơn thuốc kê quá 30 ngày theo quy định của BYT",
+      "rows": 28
+    },
+    {
+      "atomic_reason": "Đang trong thời gian chờ với bệnh đặc biệt/bệnh có sẵn",
+      "rows": 28
+    },
+    {
+      "atomic_reason": "Vượt quá quyền lợi một ngày nằm viện",
+      "rows": 15
+    },
+    {
+      "atomic_reason": "Vượt quá quyền lợi một lần khám",
+      "rows": 10
+    },
+    {
+      "atomic_reason": "Từ chối do chưa qua thời gian chờ bệnh thông thường",
+      "rows": 10
+    },
+    {
+      "atomic_reason": "Không thuộc đối tượng được bảo hiểm",
+      "rows": 8
+    },
+    {
+      "atomic_reason": "Chi phí thuốc bổ, vitamin, hỗ trợ vượt quá chi phí thuốc điều trị chính",
+      "rows": 7
+    },
+    {
+      "atomic_reason": "Thuốc không phù hợp",
+      "rows": 6
+    },
+    {
+      "atomic_reason": "Mua thuốc dư/ khác với bác sĩ kê đơn",
+      "rows": 6
+    },
+    {
+      "atomic_reason": "Vượt quá hạn mức bảo hiểm trong năm hợp đồng",
+      "rows": 6
+    },
+    {
+      "atomic_reason": "Dịch vụ không phù hợp",
+      "rows": 6
+    },
+    {
+      "atomic_reason": "Thuốc kê không nhằm mục đích điều trị",
+      "rows": 4
+    },
+    {
+      "atomic_reason": "Vượt hạn mức",
+      "rows": 3
+    }
+  ],
+  "top_reason_groups": [
+    {
+      "group": "Cận lâm sàng",
+      "rows": 1399
+    },
+    {
+      "group": "Loại trừ - Quyền lợi",
+      "rows": 647
+    },
+    {
+      "group": "Quy tắc bảo hiểm và hợp đồng bảo hiểm",
+      "rows": 532
+    },
+    {
+      "group": "Thuốc",
+      "rows": 188
+    },
+    {
+      "group": "Thiếu chứng từ",
+      "rows": 142
+    },
+    {
+      "group": "Thời gian chờ",
+      "rows": 38
+    },
+    {
+      "group": "Hạn mức bảo hiểm",
+      "rows": 19
+    }
+  ],
+  "top_clinically_linked_diseases": [
+    {
+      "icd10_or_group": "E78",
+      "disease_name": "Rối loạn chuyển hoá lipoprotein và tình trạng tăng lipid máu khác",
+      "rows": 260
+    },
+    {
+      "icd10_or_group": "E11",
+      "disease_name": "Bệnh đái tháo đường type 2",
+      "rows": 254
+    },
+    {
+      "icd10_or_group": "I10",
+      "disease_name": "Tăng huyết áp vô căn (nguyên phát)",
+      "rows": 201
+    },
+    {
+      "icd10_or_group": "D50",
+      "disease_name": "Thiếu máu do thiếu sắt",
+      "rows": 189
+    },
+    {
+      "icd10_or_group": "A04",
+      "disease_name": "Nhiễm trùng đường ruột do vi khuẩn khác",
+      "rows": 147
+    },
+    {
+      "icd10_or_group": "A08",
+      "disease_name": "Nhiễm trùng đường ruột do virus và tác nhân xác định khác",
+      "rows": 142
+    },
+    {
+      "icd10_or_group": "A09",
+      "disease_name": "Viêm dạ dày- ruột và đại tràng do nguyên nhân nhiễm trùng và chưa xác định được nguồn gốc nhiễm trùng.\n(Điều chỉnh lại \"Tên chẩn đoán bệnh\" của A09 theo đúng ICD10)",
+      "rows": 142
+    },
+    {
+      "icd10_or_group": "E05",
+      "disease_name": "Nhiễm độc giáp (cường giáp)",
+      "rows": 134
+    },
+    {
+      "icd10_or_group": "A97",
+      "disease_name": "Sốt xuất huyết Dengue\n(Điều chỉnh thành A97 căn cứ vào Quyết định 4469/QĐ-BYT và https://icd.kcb.vn/#/icd-10/icd10)",
+      "rows": 99
+    },
+    {
+      "icd10_or_group": "K29",
+      "disease_name": "Viêm dạ dày và tá tràng",
+      "rows": 91
+    },
+    {
+      "icd10_or_group": "E03",
+      "disease_name": "Suy giáp khác",
+      "rows": 89
+    },
+    {
+      "icd10_or_group": "C50",
+      "disease_name": "Bướu ác vú",
+      "rows": 88
+    },
+    {
+      "icd10_or_group": "B18.1",
+      "disease_name": "Viêm gan virus B mạn, không có đồng nhiễm viêm gan virus D",
+      "rows": 77
+    },
+    {
+      "icd10_or_group": "B18",
+      "disease_name": "Viêm gan virus mạn",
+      "rows": 77
+    },
+    {
+      "icd10_or_group": "J20",
+      "disease_name": "Viêm phế quản cấp",
+      "rows": 70
+    },
+    {
+      "icd10_or_group": "K21",
+      "disease_name": "Bệnh trào ngược dạ dày- thực quản",
+      "rows": 60
+    },
+    {
+      "icd10_or_group": "Z35",
+      "disease_name": "Theo dõi thai có nguy cơ cao",
+      "rows": 55
+    },
+    {
+      "icd10_or_group": "J18.0",
+      "disease_name": "Viêm phế quản phổi, không đặc hiệu",
+      "rows": 55
+    },
+    {
+      "icd10_or_group": "E78.2",
+      "disease_name": "Tăng lipid máu hỗn hợp",
+      "rows": 53
+    },
+    {
+      "icd10_or_group": "A94",
+      "disease_name": "Sốt virus không xác định do tiết túc truyền",
+      "rows": 53
+    }
+  ],
+  "top_unmapped_mentions": [
+    {
+      "mention_name": "sổ khám bệnh",
+      "rows": 9
+    },
+    {
+      "mention_name": "bhCG",
+      "rows": 7
+    },
+    {
+      "mention_name": "thời gian PT",
+      "rows": 6
+    },
+    {
+      "mention_name": "thời gian APTT",
+      "rows": 6
+    },
+    {
+      "mention_name": "người nhà ở lại",
+      "rows": 6
+    },
+    {
+      "mention_name": "HBsAb",
+      "rows": 5
+    },
+    {
+      "mention_name": "Bảng kê chi tiết",
+      "rows": 5
+    },
+    {
+      "mention_name": "Giá trị tích điểm VinClub",
+      "rows": 4
+    },
+    {
+      "mention_name": "HPV",
+      "rows": 4
+    },
+    {
+      "mention_name": "Thời gian PT",
+      "rows": 3
+    },
+    {
+      "mention_name": "1, Hóa đơn GTGT",
+      "rows": 3
+    },
+    {
+      "mention_name": "02 ngày",
+      "rows": 3
+    },
+    {
+      "mention_name": "Sắt",
+      "rows": 3
+    },
+    {
+      "mention_name": "Kẽm",
+      "rows": 3
+    },
+    {
+      "mention_name": "2/3 chi phí Khám mắt",
+      "rows": 3
+    },
+    {
+      "mention_name": "xét nghiệm thời gian PT",
+      "rows": 3
+    },
+    {
+      "mention_name": "ALP",
+      "rows": 3
+    },
+    {
+      "mention_name": "Grandaxin",
+      "rows": 3
+    },
+    {
+      "mention_name": "Cordarone",
+      "rows": 3
+    },
+    {
+      "mention_name": "Telsol Plus",
+      "rows": 3
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "generated_at": "2026-03-25T08:50:39.243309+00:00",
+  "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx",
+  "stats": {
+    "rows": 14,
+    "entries": 14,
+    "aliases": 19,
+    "groups": 5
+  },
+  "entries": [
+    {
+      "entry_id": "BEN-001",
+      "row_index": 1,
+      "group_name": "Răng",
+      "canonical_name": "Quyền lợi răng",
+      "aliases": [
+        "Quyền lợi răng",
+        "Chăm sóc răng cơ bản"
+      ],
+      "definition_text": "Là các trường hợp đi khám có chẩn đoán liên quan tới răng ( VD: trám răng sâu số.., điều trị tủy răng số, nhổ răng số ...), viêm nướu, viêm nha chu, viêm lợi, cao răng - Loại khám chữa bệnh : răng. - Hồ sơ khám ở nha khoa - Mỗi hợp đồng sẽ có name list các mục được chi trả của quyền lợi này",
+      "interpretation_text": "Các chi phí của hồ sơ khám răng thì sẽ được đưa vào quyền lợi răng , nếu hợp đồng có thêm quyền lợi nhỏ \" cạo vôi răng\" hoặc \"Điều trị viêm lợi bằng việc lấy cao răng\" thì bóc tách từng chi phí riêng của cạo vôi răng để đưa vào quyền lợi nhỏ này, các chi phí còn lại đưa vào quyền lợi tổng \" Quyền lợi răng\"",
+      "evidence_hints": [
+        "Hóa đơn.",
+        "Bảng kê chi tiết",
+        "Phiếu khám răng"
+      ],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    },
+    {
+      "entry_id": "BEN-002",
+      "row_index": 2,
+      "group_name": "Răng",
+      "canonical_name": "Cạo vôi răng",
+      "aliases": [
+        "Cạo vôi răng"
+      ],
+      "definition_text": "Đây là quyền lợi mở rộng của hợp đồng, các hồ sơ có chi phí cạo vôi răng sẽ được chi trả theo quyền lợi này",
+      "interpretation_text": "Là các chi phí có tên : cạo vôi răng/ lấy cao răng/ lấy vôi/ vôi răng",
+      "evidence_hints": [],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    },
+    {
+      "entry_id": "BEN-003",
+      "row_index": 3,
+      "group_name": "Răng",
+      "canonical_name": "Điều trị viêm lợi bằng việc lấy cao răng",
+      "aliases": [
+        "Điều trị viêm lợi bằng việc lấy cao răng"
+      ],
+      "definition_text": "Đây là quyền lợi mở rộng của hợp đồng, các hồ sơ có chẩn đoán viêm nướu/viêm lợi/viêm nha chu.. do cao răng/vôi răng thì mới được chi trả quyền lợi này",
+      "interpretation_text": "là các chi phí cạo vôi răng/ lấy cao răng/ lấy vôi/ vôi răng hoặc chi phí điều trị viêm nướu/ viêm lợi/viêm nha chu nếu trong phiếu khám có thể hiện nguyên nhân viêm nướu/viêm lợi/viêm nha chu là do cao răng",
+      "evidence_hints": [],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    },
+    {
+      "entry_id": "BEN-004",
+      "row_index": 4,
+      "group_name": "Chi phí khám ngoại trú",
+      "canonical_name": "Chi phí điều trị ngoại trú",
+      "aliases": [
+        "Chi phí điều trị ngoại trú",
+        "Chi phí khám, xét nghiệm, chẩn đoán, thuốc kê toa"
+      ],
+      "definition_text": "\"- Là các chi phí thành phần thuộc nhóm điều trị ngoại trú, phát sinh trong quá trình khám và điều trị mà không cần nằm viện, điều trị trong ngày - Với các hợp đồng trên thị trường hiện này thì chủ yếu chỉ có một quyền lợi này. Tuy nhiên với hợp đồng của FPT thì gồm thiều nhiều quyền lợi khác nhau, nhưng quyền lợi này chiếm hơn 80% số lượng hồ sơ đã phát sinh",
+      "interpretation_text": "- Thỏa điều kiện hồ sơ không phát sinh chi phí mua thuốc tại Nhà thuốc Long Châu và không bao gồm các chi phí sau: + Vật tư y tế + Vật lý trị liệu + Có chẩn đoán nhưng chưa cần điều trị '- Thông thường các hợp đồng bảo hiểm sẽ có định nghĩa về việc quyền lợi này chi trả cho các chi phí nào,thường sẽ bao gồm: Chi phí khám bệnh/tiền công khám, Chi phí thuốc theo đơn của bác sĩ; Các chi phí cận lâm sàng (như là chụp X-quang, xét nghiệm, siêu âm, nội soi...);Chi phí thủ thuật ngoại trú (tiêm, truyền dịch, thay băng...)và các điều trị cần thiết khác theo chỉ định của bác sĩ trong quá trình điều trị ngoại trú.",
+      "evidence_hints": [
+        "Hóa đơn.",
+        "Bảng kê chi tiết",
+        "Đơn thuốc"
+      ],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    },
+    {
+      "entry_id": "BEN-005",
+      "row_index": 5,
+      "group_name": "Chi phí khám ngoại trú",
+      "canonical_name": "Vật tư y tế (nước muối sinh lý, nước muối biển, nước sát trùng, nước rửa vệ sinh…)",
+      "aliases": [
+        "Vật tư y tế (nước muối sinh lý, nước muối biển, nước sát trùng, nước rửa vệ sinh…)"
+      ],
+      "definition_text": "Đây là quyền lợi mở rộng của hợp đồng, các hồ sơ phát sinh chi phí vật tư y tế sẽ được đưa vào quyền lợi này",
+      "interpretation_text": "Các chi phí mua các sản phẩm được đăng ký là vật tư y tế sẽ được đưa vào quyền lợi này. Lưu ý: - Nếu mua ở Long Châu thì đưa vào quyền lợi vật tư y tế tại nhà thuốc Long Châu. - Nếu hợp đồng không có code này thì đưa hết vào quyền lợi ngoại trú",
+      "evidence_hints": [],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    },
+    {
+      "entry_id": "BEN-006",
+      "row_index": 6,
+      "group_name": "Chi phí khám ngoại trú mua thuốc ở Long Châu",
+      "canonical_name": "Chi phí/lần khám nếu hồ sơ bồi thường có mua thuốc tại hệ thống chuỗi nhà thuốc FPT Long Châu",
+      "aliases": [
+        "Chi phí/lần khám nếu hồ sơ bồi thường có mua thuốc tại hệ thống chuỗi nhà thuốc FPT Long Châu",
+        "Chi phí khám nếu mua thuốc tại hệ thống chuỗi nhà thuốc Long Châu"
+      ],
+      "definition_text": "\"- Là các chi phí thành phần thuộc nhóm điều trị ngoại trú, phát sinh trong quá trình khám và điều trị mà không cần nằm viện, điều trị trong ngày và có phát sinh hóa đơn mua thuốc tại nhà thuốc Long Châu",
+      "interpretation_text": "- Thỏa điều kiện hồ sơ phát sinh chi phí mua thuốc tại Nhà thuốc Long Châu và không bao gồm các chi phí sau: + Vật tư y tế + Vật lý trị liệu '- Thông thường các hợp đồng bảo hiểm sẽ có định nghĩa về việc quyền lợi này chi trả cho các chi phí nào,thường sẽ bao gồm: Chi phí khám bệnh/tiền công khám, Chi phí thuốc theo đơn của bác sĩ; Các chi phí cận lâm sàng (như là chụp X-quang, xét nghiệm, siêu âm, nội soi...);Chi phí thủ thuật ngoại trú (tiêm, truyền dịch, thay băng...)và các điều trị cần thiết khác theo chỉ định của bác sĩ trong quá trình điều trị ngoại trú.",
+      "evidence_hints": [
+        "Hóa đơn.",
+        "Hóa đơn thuốc tại nhà thuốc Long Châu",
+        "Bảng kê chi tiết",
+        "Đơn thuốc"
+      ],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    },
+    {
+      "entry_id": "BEN-007",
+      "row_index": 7,
+      "group_name": "Chi phí khám ngoại trú mua thuốc ở Long Châu",
+      "canonical_name": "Vật tư y tế (nước muối sinh lý, nước muối biển, nước sát trùng, nước rửa vệ sinh…) tại nhà thuốc Long Châu",
+      "aliases": [
+        "Vật tư y tế (nước muối sinh lý, nước muối biển, nước sát trùng, nước rửa vệ sinh…) tại nhà thuốc Long Châu"
+      ],
+      "definition_text": "Đây là quyền lợi mở rộng của hợp đồng, các hồ sơ phát sinh chi phí vật tư y tế được mua ở Long Châu sẽ được đưa vào quyền lợi này",
+      "interpretation_text": "Các chi phí mua các sản phẩm được đăng ký là vật tư y tế tại nhà thuốc Long Châu sẽ được đưa vào quyền lợi này. Lưu ý: - Nếu hợp đồng không có code này thì đưa hết vào quyền lợi ngoại trú",
+      "evidence_hints": [],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    },
+    {
+      "entry_id": "BEN-008",
+      "row_index": 8,
+      "group_name": "Có chẩn đoán nhưng chưa cần điều trị",
+      "canonical_name": "Có chẩn đoán bệnh nhưng chưa cần điều trị (chưa có đơn thuốc hoặc chưa thực hiện điều trị theo chỉ định).",
+      "aliases": [
+        "Có chẩn đoán bệnh nhưng chưa cần điều trị (chưa có đơn thuốc hoặc chưa thực hiện điều trị theo chỉ định).",
+        "Có chẩn đoán bệnh nhưng chưa cần điều trị (chưa có đơn thuốc)",
+        "Khám có kết luận bệnh nhưng chưa cần điều trị"
+      ],
+      "definition_text": "-Là các chi phí phát sinh ( thường là tiền công khám, tiền làm cận lâm sàng) phục vụ cho chẩn đoán xác định cuối cùng của khách hàng và chẩn đoán này chưa cần phải điều trị. - Chưa cần điều trị được hiểu là chưa cần can thiệp về mặt y tế như : dùng thuốc, chỉ định phẫu thuật, làm vật lý trị liệu,laser, truyền dịch hoặc các lời khuyên ( rửa mũi, xúc họng...)....",
+      "interpretation_text": "KH có thể có khám ra nhiều bệnh và trong đó có 2 trường hợp xảy ra như sau: - TH1: Tất các các chẩn đoán đều không cần điều trị. Lúc này trong hồ sơ sẽ không có đơn thuốc hoặc có đơn thuốc nhưng bác sĩ không kê thuốc và trên đơn thuốc/ phiếu khám sẽ có thể có ghi \"tái khám sau .../ theo dõi thêm/ hẹn khám lại sau... - TH2: Khách hàng có nhiều chẩn đoán nhưng trong đó chỉ có một số chẩn đoán chưa cần điều trị ( chẩn đoán A), thì cần xác định được chi phí nào phục vụ để bác sĩ đưa ra chẩn đoán A thì sẽ đưa vào quyền lợi này. Để xác định được cần xem hướng điều trị bác sĩ đang đưa ra trong hồ sơ điều trị cho chẩn đoán nào của khách hàng. VD: nếu bác sĩ kê đơn thuốc thì cần kiểm tra lại thuốc đang điều trị cho chẩn đoán nào",
+      "evidence_hints": [
+        "Hóa đơn.",
+        "Bảng kê chi tiết",
+        "Đơn thuốc",
+        "Phiếu khám bệnh"
+      ],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    },
+    {
+      "entry_id": "BEN-009",
+      "row_index": 9,
+      "group_name": "Điều khoản mở rộng",
+      "canonical_name": "Trường hợp có triệu chứng, đi khám nhưng không có kết luận bệnh cụ thể",
+      "aliases": [
+        "Trường hợp có triệu chứng, đi khám nhưng không có kết luận bệnh cụ thể"
+      ],
+      "definition_text": "Phát sinh dưới 1% nên tạm pending",
+      "interpretation_text": "",
+      "evidence_hints": [],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    },
+    {
+      "entry_id": "BEN-010",
+      "row_index": 10,
+      "group_name": "Điều khoản mở rộng",
+      "canonical_name": "Khám thai định kỳ",
+      "aliases": [
+        "Khám thai định kỳ"
+      ],
+      "definition_text": "Phát sinh dưới 1% nên tạm pending",
+      "interpretation_text": "",
+      "evidence_hints": [],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    },
+    {
+      "entry_id": "BEN-011",
+      "row_index": 11,
+      "group_name": "Điều khoản mở rộng",
+      "canonical_name": "Phòng khám tư có dấu nhưng không có hóa đơn tài chính (hoạt động hợp pháp)",
+      "aliases": [
+        "Phòng khám tư có dấu nhưng không có hóa đơn tài chính (hoạt động hợp pháp)"
+      ],
+      "definition_text": "Phát sinh dưới 1% nên tạm pending",
+      "interpretation_text": "",
+      "evidence_hints": [],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    },
+    {
+      "entry_id": "BEN-012",
+      "row_index": 12,
+      "group_name": "Điều khoản mở rộng",
+      "canonical_name": "Phòng khám tư không có hóa đơn tài chính & không dấu (Điều khoản này áp dụng cho phòng khám bác sỹ tư có giấy phép hành nghề nhưng không có đăng ký kinh doanh)",
+      "aliases": [
+        "Phòng khám tư không có hóa đơn tài chính & không dấu (Điều khoản này áp dụng cho phòng khám bác sỹ tư có giấy phép hành nghề nhưng không có đăng ký kinh doanh)"
+      ],
+      "definition_text": "Phát sinh dưới 1% nên tạm pending",
+      "interpretation_text": "",
+      "evidence_hints": [],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    },
+    {
+      "entry_id": "BEN-013",
+      "row_index": 13,
+      "group_name": "Điều khoản mở rộng",
+      "canonical_name": "Rửa mũi xoang tại bệnh viện",
+      "aliases": [
+        "Rửa mũi xoang tại bệnh viện"
+      ],
+      "definition_text": "Là các chi phí có nội dung \" rửa mũi\" sẽ được đưa vào quyền lợi này",
+      "interpretation_text": "",
+      "evidence_hints": [
+        "Hóa đơn.",
+        "Bảng kê chi tiết",
+        "Đơn thuốc",
+        "Phiếu chỉ định cận lâm sàng"
+      ],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    },
+    {
+      "entry_id": "BEN-014",
+      "row_index": 14,
+      "group_name": "Điều khoản mở rộng",
+      "canonical_name": "Vật lý trị liệu",
+      "aliases": [
+        "Vật lý trị liệu"
+      ],
+      "definition_text": "Vật lý trị liệu là phương pháp chữa trị sử dụng các biện pháp vật lý để giảm đau, phục hồi chức năng của cơ bắp hay các hoạt động bình thường hàng ngày của người bệnh - Chiếm 1.5%",
+      "interpretation_text": "- Các chi phí này sẽ có đơn vị tính là số lần và thường được thực hiện/ chỉ định tại các khoa phục hồi chức năng ( Lưu ý với các chi phí khác có đơn vị tính là lần như tiêm, truyền thì đưa vào quyền lợi ngoại trú) và thường có các phiếu theo dõi vật lý trị liệu trong hồ sơ",
+      "evidence_hints": [
+        "Hóa đơn.",
+        "Bảng kê chi tiết",
+        "Đơn thuốc",
+        "Phiếu chỉ định CLS"
+      ],
+      "source_file": "06_insurance\\Mapping quyền lợi + Loại trừ\\mapping quyền lợi\\Diễn giải chi tiết về các quyền lợi bảo hiểm 7.10.25.xlsx"
+    }
+  ]
+}

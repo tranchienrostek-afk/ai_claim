@@ -1,0 +1,119 @@
+{
+  "cau_chuyen_y_khoa": {
+    "tieu_de": "Cơn chóng mặt kịch phát và hành trình tìm dấu vết căn bệnh ẩn nấp",
+    "benh_nhan": {
+      "gioi_tinh": "Nữ",
+      "tuoi": 45
+    },
+    "benh_su_va_trieu_chung": {
+      "trieu_chung_co_nang": [
+        "Chóng mặt kịch phát quay cuồng, kéo dài hơn 2 giờ đồng hồ.",
+        "Nhắm nghiền hai mắt, buồn nôn dữ dội và không thể tự đi lại.",
+        "Tai phải ù đặc như có tiếng ve kêu (ù tai tiếng trầm).",
+        "Sức nghe giảm hẳn và có cảm giác bưng bít đầy trong tai."
+      ],
+      "tien_su": "Thỉnh thoảng có cơn chóng mặt nhẹ từ vài tháng trước."
+    },
+    "nhan_dinh_ban_dau": "Bệnh cảnh của hội chứng tiền đình ngoại biên, tuy nhiên có sự kết hợp của cả triệu chứng thính giác (ù tai, nghe kém) và tiền đình (chóng mặt). Cần đặt nghi vấn và phân biệt giữa tổn thương tiền đình ngoại biên (như Ménière), tổn thương đường dẫn truyền thính giác trung ương, hay nguy hiểm nhất là khối u mọc ở dây thần kinh sọ não (U dây thần kinh số VIII).",
+    "chi_dinh_can_lam_sang": {
+      "xet_nghiem_loai_tru_benh_nguy_hiem": [
+        {
+          "ten_xet_nghiem": "Chụp cộng hưởng từ (MRI) sọ não - xương đá có tiêm thuốc",
+          "muc_dich": "Xét nghiệm hình ảnh học then chốt mang tính chất loại trừ khối u dây thần kinh thính giác (u góc cầu tiểu não), vì bệnh lý này có triệu chứng cực kỳ giống với bệnh Ménière.",
+          "ket_qua": "Không có khối u nào ở góc cầu tiểu não hay trên đường đi của dây thần kinh số VIII."
+        },
+        {
+          "ten_xet_nghiem": "Đo điện thính giác thân não (ABR)",
+          "muc_dich": "Khảo sát đường dẫn truyền của dây thần kinh thính giác từ ốc tai lên não bộ nhằm loại trừ tổn thương lan truyền dọc đường đi thần kinh trung ương.",
+          "ket_qua": "Đường dẫn truyền thần kinh hoàn toàn bình thường."
+        }
+      ],
+      "xet_nghiem_truc_tiep_tim_ra_benh": [
+        {
+          "ten_xet_nghiem": "Đo thính lực đồ đơn âm",
+          "muc_dich": "Đánh giá chức năng nghe của ốc tai và tìm dấu hiệu đặc trưng.",
+          "ket_qua": "Bệnh nhân bị điếc tiếp nhận (điếc thần kinh cảm giác) ở các tần số thấp tại tai phải."
+        },
+        {
+          "ten_xet_nghiem": "Đo điện động nhãn đồ (ENG)",
+          "muc_dich": "Khảo sát các cử động của nhãn cầu (động mắt) để đánh giá chức năng của hệ thống tiền đình.",
+          "ket_qua": "Ghi nhận có sự bất thường ở hệ thống tiền đình ngoại biên (động mắt tự phát)."
+        }
+      ]
+    },
+    "chan_doan_cuoi_cung": "Bệnh Ménière (Ứ nước nội dịch mê đạo)."
+  },
+  "du_lieu_labeling_mau": {
+    "case_level": {
+      "request_id": "tc_258",
+      "selected_profile_id": "prof_258",
+      "testcase_title": "TC258_Meniere_MultipleTests",
+      "main_disease_name_vi": "Bệnh Ménière",
+      "primary_icd10": "<chua_co_ICD>",
+      "secondary_icd10_list_pipe": "",
+      "specialty": "Tai",
+      "message_hash_id": "msg_258",
+      "claim_id_or_sohoso": "claim_258",
+      "why_this_case_was_selected": "Ca bệnh yêu cầu sử dụng tổ hợp nhiều xét nghiệm thính học chuyên sâu và chẩn đoán hình ảnh đắt tiền (MRI) chủ yếu để loại trừ u não trước khi khẳng định chẩn đoán bệnh lý tiền đình ngoại biên.",
+      "claim_raw_json": "claim_258.json",
+      "icd_source": "phac_do_tmh_2015",
+      "signs_history_source": "phac_do_tmh_2015",
+      "lab_result_source": "phac_do_tmh_2015",
+      "reviewer_or_insurer_note_source": "note_258",
+      "contract_or_plan_source": "plan_258",
+      "chief_complaint": "Chóng mặt kịch phát quay cuồng kèm buồn nôn và ù đặc tai phải.",
+      "initial_signs_pipe": "Cơn chóng mặt kéo dài 2 giờ | Ù tai tiếng trầm | Nghe kém tai phải | Động mắt tự phát",
+      "medical_history_pipe": "Thỉnh thoảng có cơn chóng mặt nhẹ vài tháng trước",
+      "initial_clinical_question": "Bác sĩ cần phân biệt đây là tổn thương tiền đình ngoại biên (Ménière) hay do khối u dây thần kinh số VIII chèn ép ở góc cầu tiểu não.",
+      "total_lines": 4,
+      "target_lines_for_labeling": 4,
+      "panel_services_present_pipe": "Đo thính lực đồ | Điện động nhãn đồ (ENG) | Điện thính giác thân não (ABR) | Chụp MRI sọ não - xương đá",
+      "delivery_deadline": "2026-03-28",
+      "employee_name": "bs_demo_5",
+      "review_status": "submitted",
+      "manager_note": "Ví dụ chuẩn chỉ cho tư duy dùng xét nghiệm loại trừ bệnh nguy hiểm."
+    },
+    "service_lines": [
+      {
+        "line_no": 1,
+        "service_name_raw": "Đo thính lực đồ đơn âm",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Chỉ định bắt buộc để đánh giá sức nghe. Xét nghiệm giúp bộc lộ dấu hiệu điển hình của bệnh Ménière là điếc do thần kinh cảm giác (điếc tiếp nhận) ở các tần số thấp tại tai bệnh.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm trực tiếp tìm ra triệu chứng bệnh."
+      },
+      {
+        "line_no": 2,
+        "service_name_raw": "Điện động nhãn đồ (ENG)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Chỉ định cần thiết để khảo sát cử động của nhãn cầu (động mắt) qua đó đánh giá khách quan các rối loạn của hệ thống tiền đình ngoại biên gây ra cơn chóng mặt kịch phát.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm đặc hiệu cho chức năng tiền đình."
+      },
+      {
+        "line_no": 3,
+        "service_name_raw": "Điện thính giác thân não (ABR)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Chỉ định cần thiết để khảo sát đường dẫn truyền của dây thần kinh thính giác từ ốc tai lên não bộ nhằm loại trừ các tổn thương lan truyền dọc đường đi của dây thần kinh trung ương.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Kiểm tra sự toàn vẹn của đường thần kinh."
+      },
+      {
+        "line_no": 4,
+        "service_name_raw": "Chụp MRI sọ não - xương đá có tiêm thuốc",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Đây là chỉ định cực kỳ quan trọng mang tính chất loại trừ. Bệnh lý u dây thần kinh thính giác (u dây thần kinh VIII) có các triệu chứng tương tự như bệnh Ménière (ù tai, chóng mặt, nghe kém). Phải chụp MRI hoặc CT xương đá để loại trừ u não trước khi chẩn đoán xác định Ménière.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm loại trừ bệnh lý nguy hiểm đe dọa tính mạng."
+      }
+    ]
+  }
+}

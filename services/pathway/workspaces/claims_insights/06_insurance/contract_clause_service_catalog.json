@@ -1,0 +1,3104 @@
+{
+  "generated_at": "2026-03-25T07:44:20.311470+00:00",
+  "sources": {
+    "input_mentions": "06_insurance\\exclusion_claim_signals.jsonl",
+    "service_codebook": "02_standardize\\service_codebook.json",
+    "service_disease_matrix": "03_enrich\\service_disease_matrix.json",
+    "observation_concepts": "05_observations\\observation_concept_catalog_seed.json"
+  },
+  "contracts": [
+    {
+      "contract_name": "FPT-NT 2025",
+      "insurer": "FPT",
+      "mention_rows": 1597,
+      "reason_profiles": [
+        {
+          "atomic_reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "rows": 618,
+          "mapped_service_rows": 490,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-016",
+              "canonical_name": "glucose",
+              "rows": 23
+            },
+            {
+              "service_code": "LAB-BIO-030",
+              "canonical_name": "creatinin",
+              "rows": 17
+            },
+            {
+              "service_code": "IMG-USG-002",
+              "canonical_name": "siêu âm ổ bụng",
+              "rows": 17
+            },
+            {
+              "service_code": "LAB-BIO-598",
+              "canonical_name": "alt",
+              "rows": 17
+            },
+            {
+              "service_code": "LAB-BIO-149",
+              "canonical_name": "điện giải đồ (máu)",
+              "rows": 17
+            },
+            {
+              "service_code": "IMG-XRY-002",
+              "canonical_name": "chụp xquang ngực thẳng",
+              "rows": 14
+            },
+            {
+              "service_code": "LAB-BIO-597",
+              "canonical_name": "ast",
+              "rows": 14
+            },
+            {
+              "service_code": "LAB-MIC-019",
+              "canonical_name": "adeno virus test nhanh",
+              "rows": 13
+            },
+            {
+              "service_code": "LAB-BIO-036",
+              "canonical_name": "hba1c",
+              "rows": 12
+            },
+            {
+              "service_code": "LAB-MIC-026",
+              "canonical_name": "rsv",
+              "rows": 11
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-GLUCOSE",
+              "canonical_name": "duong niu (glucose)",
+              "rows": 21
+            },
+            {
+              "concept_code": "OBS-URI-PROTEIN",
+              "canonical_name": "protein nuoc tieu",
+              "rows": 12
+            },
+            {
+              "concept_code": "OBS-URI-BILIRUBIN",
+              "canonical_name": "bilirubin",
+              "rows": 8
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Kẽm",
+              "rows": 3
+            },
+            {
+              "mention_name": "Cordarone",
+              "rows": 3
+            },
+            {
+              "mention_name": "Telsol Plus",
+              "rows": 3
+            },
+            {
+              "mention_name": "Vincerol",
+              "rows": 3
+            },
+            {
+              "mention_name": "thời gian PT",
+              "rows": 2
+            },
+            {
+              "mention_name": "(3/6)",
+              "rows": 2
+            },
+            {
+              "mention_name": "Calci TP",
+              "rows": 2
+            },
+            {
+              "mention_name": "chụp XQ xương cổ tay",
+              "rows": 2
+            },
+            {
+              "mention_name": "EV71",
+              "rows": 2
+            },
+            {
+              "mention_name": "Thời gian PT",
+              "rows": 2
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Áp dụng đồng chi trả",
+          "rows": 510,
+          "mapped_service_rows": 303,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-598",
+              "canonical_name": "alt",
+              "rows": 14
+            },
+            {
+              "service_code": "LAB-BIO-016",
+              "canonical_name": "glucose",
+              "rows": 13
+            },
+            {
+              "service_code": "LAB-BIO-030",
+              "canonical_name": "creatinin",
+              "rows": 12
+            },
+            {
+              "service_code": "LAB-BIO-597",
+              "canonical_name": "ast",
+              "rows": 11
+            },
+            {
+              "service_code": "LAB-MIC-026",
+              "canonical_name": "rsv",
+              "rows": 11
+            },
+            {
+              "service_code": "LAB-MIC-046",
+              "canonical_name": "virus test nhanh rsv",
+              "rows": 9
+            },
+            {
+              "service_code": "LAB-MIC-019",
+              "canonical_name": "adeno virus test nhanh",
+              "rows": 9
+            },
+            {
+              "service_code": "LAB-BIO-149",
+              "canonical_name": "điện giải đồ (máu)",
+              "rows": 9
+            },
+            {
+              "service_code": "IMG-USG-002",
+              "canonical_name": "siêu âm ổ bụng",
+              "rows": 8
+            },
+            {
+              "service_code": "IMG-XRY-002",
+              "canonical_name": "chụp xquang ngực thẳng",
+              "rows": 7
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-GLUCOSE",
+              "canonical_name": "duong niu (glucose)",
+              "rows": 12
+            },
+            {
+              "concept_code": "OBS-URI-PROTEIN",
+              "canonical_name": "protein nuoc tieu",
+              "rows": 5
+            },
+            {
+              "concept_code": "OBS-URI-BILIRUBIN",
+              "canonical_name": "bilirubin",
+              "rows": 3
+            },
+            {
+              "concept_code": "OBS-BIO-NA",
+              "canonical_name": "natri (Na+)",
+              "rows": 1
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "người nhà ở lại",
+              "rows": 5
+            },
+            {
+              "mention_name": "Kẽm",
+              "rows": 3
+            },
+            {
+              "mention_name": "Cordarone",
+              "rows": 3
+            },
+            {
+              "mention_name": "Telsol Plus",
+              "rows": 3
+            },
+            {
+              "mention_name": "Vincerol",
+              "rows": 3
+            },
+            {
+              "mention_name": "02 ngày",
+              "rows": 2
+            },
+            {
+              "mention_name": "sổ khám bệnh",
+              "rows": 2
+            },
+            {
+              "mention_name": "Giá trị tích điểm VinClub",
+              "rows": 2
+            },
+            {
+              "mention_name": "2/3 chi phí Khám mắt",
+              "rows": 2
+            },
+            {
+              "mention_name": "Ixatin-K",
+              "rows": 2
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "rows": 202,
+          "mapped_service_rows": 61,
+          "top_services": [
+            {
+              "service_code": "LAB-MIC-019",
+              "canonical_name": "adeno virus test nhanh",
+              "rows": 6
+            },
+            {
+              "service_code": "LAB-IMM-046",
+              "canonical_name": "hbsag",
+              "rows": 3
+            },
+            {
+              "service_code": "LAB-BIO-030",
+              "canonical_name": "creatinin",
+              "rows": 3
+            },
+            {
+              "service_code": "LAB-BIO-149",
+              "canonical_name": "điện giải đồ (máu)",
+              "rows": 3
+            },
+            {
+              "service_code": "LAB-MIC-002",
+              "canonical_name": "dengue virus ns1ag test nhanh",
+              "rows": 3
+            },
+            {
+              "service_code": "LAB-BIO-598",
+              "canonical_name": "alt",
+              "rows": 3
+            },
+            {
+              "service_code": "LAB-BIO-597",
+              "canonical_name": "ast",
+              "rows": 3
+            },
+            {
+              "service_code": "IMG-USG-008",
+              "canonical_name": "siêu âm doppler tim",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-MIC-193",
+              "canonical_name": "hcv",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-BIO-572",
+              "canonical_name": "ure",
+              "rows": 2
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-GLUCOSE",
+              "canonical_name": "duong niu (glucose)",
+              "rows": 2
+            },
+            {
+              "concept_code": "OBS-URI-BILIRUBIN",
+              "canonical_name": "bilirubin",
+              "rows": 1
+            },
+            {
+              "concept_code": "OBS-BIO-NA",
+              "canonical_name": "natri (Na+)",
+              "rows": 1
+            },
+            {
+              "concept_code": "OBS-URI-PROTEIN",
+              "canonical_name": "protein nuoc tieu",
+              "rows": 1
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "sổ khám bệnh",
+              "rows": 6
+            },
+            {
+              "mention_name": "người nhà ở lại",
+              "rows": 5
+            },
+            {
+              "mention_name": "Dịch vụ người nhà bệnh nhân",
+              "rows": 2
+            },
+            {
+              "mention_name": "hỗ trợ người bệnh thanh toán viện phí nội trú",
+              "rows": 2
+            },
+            {
+              "mention_name": "cháo NNBN",
+              "rows": 2
+            },
+            {
+              "mention_name": "EV71",
+              "rows": 2
+            },
+            {
+              "mention_name": "phòng mổ gia đình",
+              "rows": 2
+            },
+            {
+              "mention_name": "vì không có số đăng ký thuốc và Tiêm gối gối",
+              "rows": 1
+            },
+            {
+              "mention_name": "thuốc Atihepam điều trị các bệnh lý về gan",
+              "rows": 1
+            },
+            {
+              "mention_name": "Thay ga giường",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+          "rows": 93,
+          "mapped_service_rows": 36,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-149",
+              "canonical_name": "điện giải đồ (máu)",
+              "rows": 4
+            },
+            {
+              "service_code": "PRO-THT-028",
+              "canonical_name": "đo khúc xạ máy",
+              "rows": 3
+            },
+            {
+              "service_code": "PRO-THT-030",
+              "canonical_name": "đo thị lực",
+              "rows": 3
+            },
+            {
+              "service_code": "LAB-BIO-020",
+              "canonical_name": "acid uric",
+              "rows": 3
+            },
+            {
+              "service_code": "LAB-BIO-016",
+              "canonical_name": "glucose",
+              "rows": 3
+            },
+            {
+              "service_code": "FUN-DFT-001",
+              "canonical_name": "điện tim thường",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-BIO-030",
+              "canonical_name": "creatinin",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-BIO-028",
+              "canonical_name": "định lượng ferritin (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-022",
+              "canonical_name": "định lượng protein toàn phần (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-019",
+              "canonical_name": "adeno virus test nhanh",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-GLUCOSE",
+              "canonical_name": "duong niu (glucose)",
+              "rows": 3
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "2/3 chi phí Khám mắt",
+              "rows": 2
+            },
+            {
+              "mention_name": "Ixatin-K",
+              "rows": 2
+            },
+            {
+              "mention_name": "SEROQUEL XR TAB 50mg",
+              "rows": 2
+            },
+            {
+              "mention_name": "Zoloft",
+              "rows": 2
+            },
+            {
+              "mention_name": "Grandaxin",
+              "rows": 2
+            },
+            {
+              "mention_name": "proBNP",
+              "rows": 2
+            },
+            {
+              "mention_name": "Cordarone",
+              "rows": 2
+            },
+            {
+              "mention_name": "Telsol Plus",
+              "rows": 2
+            },
+            {
+              "mention_name": "Vincerol",
+              "rows": 2
+            },
+            {
+              "mention_name": "Sulpirid IMP 5mg",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+          "rows": 50,
+          "mapped_service_rows": 14,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-572",
+              "canonical_name": "ure",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-BIO-030",
+              "canonical_name": "creatinin",
+              "rows": 2
+            },
+            {
+              "service_code": "IMG-USG-022",
+              "canonical_name": "siêu âm phần mềm",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-IMM-025",
+              "canonical_name": "định lượng ige",
+              "rows": 1
+            },
+            {
+              "service_code": "FUN-DFT-001",
+              "canonical_name": "điện tim thường",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-121",
+              "canonical_name": "calci ion",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-259",
+              "canonical_name": "calci toàn phần (calcium)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-IMM-205",
+              "canonical_name": "vitamin d total",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-USG-002",
+              "canonical_name": "siêu âm ổ bụng",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-046",
+              "canonical_name": "virus test nhanh rsv",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-BIO-NA",
+              "canonical_name": "natri (Na+)",
+              "rows": 1
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "DLHOCA",
+              "rows": 1
+            },
+            {
+              "mention_name": "khám bệnh nhi gia hạn",
+              "rows": 1
+            },
+            {
+              "mention_name": "Bioderma Atoderm Huile De Douche",
+              "rows": 1
+            },
+            {
+              "mention_name": "1, Normal isolate (Phí cách ly)",
+              "rows": 1
+            },
+            {
+              "mention_name": "Phí ở lại đêm cho thân nhân",
+              "rows": 1
+            },
+            {
+              "mention_name": "Shower Oil 270ml",
+              "rows": 1
+            },
+            {
+              "mention_name": "shower oil",
+              "rows": 1
+            },
+            {
+              "mention_name": "TDF-GEL rửa mặt da dầu",
+              "rows": 1
+            },
+            {
+              "mention_name": "được đăng ký là mỹ phẩm, sản phẩm Wellbaby Multi-Vitamin Liquid",
+              "rows": 1
+            },
+            {
+              "mention_name": "Enterogermina",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Chưa cung cấp đủ chứng từ",
+          "rows": 49,
+          "mapped_service_rows": 21,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-020",
+              "canonical_name": "acid uric",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-BIO-354",
+              "canonical_name": "bilirubin tp (máu)",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-HEM-039",
+              "canonical_name": "tổng phân tích tế bào máu",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-BIO-030",
+              "canonical_name": "creatinin",
+              "rows": 2
+            },
+            {
+              "service_code": "PRO-THT-030",
+              "canonical_name": "đo thị lực",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-USG-008",
+              "canonical_name": "siêu âm doppler tim",
+              "rows": 1
+            },
+            {
+              "service_code": "GEN-OTH-572",
+              "canonical_name": "beta-hcg",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-149",
+              "canonical_name": "điện giải đồ (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "FUN-DFT-001",
+              "canonical_name": "điện tim thường",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-USG-017",
+              "canonical_name": "siêu âm tim",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-BILIRUBIN",
+              "canonical_name": "bilirubin",
+              "rows": 2
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Bảng kê chi tiết",
+              "rows": 2
+            },
+            {
+              "mention_name": "Biên bản điều chỉnh hóa đơn GTGT",
+              "rows": 2
+            },
+            {
+              "mention_name": "54 viên Betaloc Zok, 54 viên Metformin Lek S.A, 54 viên Rosutrox và 54 viên Wamlox",
+              "rows": 1
+            },
+            {
+              "mention_name": "a, Hóa đơn GTGT tiền thuốc",
+              "rows": 1
+            },
+            {
+              "mention_name": "để khớp với hóa đơn GTGT",
+              "rows": 1
+            },
+            {
+              "mention_name": "a, Bảng kê chi tiết gói uống hạ sốt",
+              "rows": 1
+            },
+            {
+              "mention_name": "Vitamin A",
+              "rows": 1
+            },
+            {
+              "mention_name": "Kary Uni",
+              "rows": 1
+            },
+            {
+              "mention_name": "Incepavit",
+              "rows": 1
+            },
+            {
+              "mention_name": "Hoạt huyết dưỡng não",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+          "rows": 18,
+          "mapped_service_rows": 8,
+          "top_services": [
+            {
+              "service_code": "LAB-MIC-046",
+              "canonical_name": "virus test nhanh rsv",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-IMM-006",
+              "canonical_name": "crp",
+              "rows": 1
+            },
+            {
+              "service_code": "GEN-OTH-179",
+              "canonical_name": "test hợp bào hô hấp",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-XRY-002",
+              "canonical_name": "chụp xquang ngực thẳng",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-026",
+              "canonical_name": "rsv",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-060",
+              "canonical_name": "ldl.c",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-018",
+              "canonical_name": "cholesterol",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-196",
+              "canonical_name": "hdl.c",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "lấy ráy tai",
+              "rows": 1
+            },
+            {
+              "mention_name": "mua thuốc Atussin Siro",
+              "rows": 1
+            },
+            {
+              "mention_name": "30 viên và chi phí thuốc Philliver",
+              "rows": 1
+            },
+            {
+              "mention_name": "Latopic Body and Hair",
+              "rows": 1
+            },
+            {
+              "mention_name": "tương ứng với 5 ngày sử dụng thuốc chính",
+              "rows": 1
+            },
+            {
+              "mention_name": "1 ống Pulmicort",
+              "rows": 1
+            },
+            {
+              "mention_name": "mặt nạ xông khí dung",
+              "rows": 1
+            },
+            {
+              "mention_name": "Vaseline",
+              "rows": 1
+            },
+            {
+              "mention_name": "thuốc Dedrogyl",
+              "rows": 1
+            },
+            {
+              "mention_name": "Bơm tiếp thuốc MPV",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Đơn thuốc kê quá 30 ngày theo quy định của BYT",
+          "rows": 15,
+          "mapped_service_rows": 8,
+          "top_services": [
+            {
+              "service_code": "LAB-IMM-006",
+              "canonical_name": "crp",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-058",
+              "canonical_name": "ferritin",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-260",
+              "canonical_name": "protein toàn phần",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-089",
+              "canonical_name": "sắt huyết thanh",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-193",
+              "canonical_name": "hcv",
+              "rows": 1
+            },
+            {
+              "service_code": "GEN-OTH-783",
+              "canonical_name": "afp",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-USG-025",
+              "canonical_name": "siêu âm đàn hồi mô gan",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-IMM-046",
+              "canonical_name": "hbsag",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-PROTEIN",
+              "canonical_name": "protein nuoc tieu",
+              "rows": 1
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "xét nghiệm Kẽm",
+              "rows": 1
+            },
+            {
+              "mention_name": "30 viên Calvin Plus",
+              "rows": 1
+            },
+            {
+              "mention_name": "30 viên thuốc Serovula",
+              "rows": 1
+            },
+            {
+              "mention_name": "HBsAb",
+              "rows": 1
+            },
+            {
+              "mention_name": "HBc",
+              "rows": 1
+            },
+            {
+              "mention_name": "ALP",
+              "rows": 1
+            },
+            {
+              "mention_name": "84 viên thuốc Rosutrox",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Đang trong thời gian chờ với bệnh đặc biệt/bệnh có sẵn",
+          "rows": 13,
+          "mapped_service_rows": 5,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-030",
+              "canonical_name": "creatinin",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-BIO-426",
+              "canonical_name": "sgpt (alt)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-016",
+              "canonical_name": "glucose",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-598",
+              "canonical_name": "alt",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-GLUCOSE",
+              "canonical_name": "duong niu (glucose)",
+              "rows": 1
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "160.000 VNĐ, các xét nghiệm dị ứng chứng dương",
+              "rows": 1
+            },
+            {
+              "mention_name": "chứng âm",
+              "rows": 1
+            },
+            {
+              "mention_name": "trứng",
+              "rows": 1
+            },
+            {
+              "mention_name": "Bột đậu nành",
+              "rows": 1
+            },
+            {
+              "mention_name": "thuốc Daleston-D",
+              "rows": 1
+            },
+            {
+              "mention_name": "Fucicort cream",
+              "rows": 1
+            },
+            {
+              "mention_name": "bằng khám 330.000VNĐ/3",
+              "rows": 1
+            },
+            {
+              "mention_name": "Cyplosart FC Tablets 50mg",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Vượt quá quyền lợi một ngày nằm viện",
+          "rows": 9,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "02 ngày",
+              "rows": 2
+            },
+            {
+              "mention_name": "04 ngày",
+              "rows": 2
+            },
+            {
+              "mention_name": "06 ngày",
+              "rows": 1
+            },
+            {
+              "mention_name": "03 ngày",
+              "rows": 1
+            },
+            {
+              "mention_name": "05 ngày",
+              "rows": 1
+            },
+            {
+              "mention_name": "8.550.000 VNĐ, không chi trả chi phí người nhà ở lại",
+              "rows": 1
+            },
+            {
+              "mention_name": "Tấm lót",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Vượt quá quyền lợi một lần khám",
+          "rows": 5,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "không dấu (Điều khoản này áp dụng cho phòng khám bác sỹ tư có giấy phép hành nghề nhưng không có đăng ký kinh doanh)",
+              "rows": 2
+            },
+            {
+              "mention_name": ") tối đa",
+              "rows": 1
+            },
+            {
+              "mention_name": "1, Thanh toán tối đa chi phí sản phẩm Linaflon",
+              "rows": 1
+            },
+            {
+              "mention_name": ") với sản phẩm Clinitas tối đa",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Không thuộc đối tượng được bảo hiểm",
+          "rows": 3,
+          "mapped_service_rows": 2,
+          "top_services": [
+            {
+              "service_code": "IMG-USG-127",
+              "canonical_name": "siêu âm tử cung buồng trứng",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-USG-005",
+              "canonical_name": "siêu âm tử cung buồng trứng qua đường âm đạo",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "a, Vi sinh vật định danh PCR đa tác nhân",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Chi phí cho người nhà",
+          "rows": 3,
+          "mapped_service_rows": 1,
+          "top_services": [
+            {
+              "service_code": "IMG-XRY-002",
+              "canonical_name": "chụp xquang ngực thẳng",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Người nhà lưu trú phòng theo yêu cầu",
+              "rows": 1
+            },
+            {
+              "mention_name": "Zopistad",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Quyền lợi bảo hiểm đã được thanh toán/ sử dụng",
+          "rows": 2,
+          "mapped_service_rows": 2,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-570",
+              "canonical_name": "got",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-569",
+              "canonical_name": "gpt",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": []
+        },
+        {
+          "atomic_reason": "Áp dụng giảm trừ theo quy định của hợp đồng",
+          "rows": 2,
+          "mapped_service_rows": 1,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-259",
+              "canonical_name": "calci toàn phần (calcium)",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Chụp cộng hưởng tử não - mạch não",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Mua thuốc dư/ khác với bác sĩ kê đơn",
+          "rows": 1,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "54 viên Betaloc Zok, 54 viên Metformin Lek S.A, 54 viên Rosutrox và 54 viên Wamlox",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Vượt quá hạn mức bảo hiểm trong năm hợp đồng",
+          "rows": 1,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "xét nghiệm tổng phân tích máu, lấy máu, CRP, Dengue virus NS1Ag, Dengue virus IgM, ALT, AST",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Thuốc kê không nhằm mục đích điều trị",
+          "rows": 1,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "L-Lysin",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Chứng từ thanh toán chưa hợp lệ",
+          "rows": 1,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Hóa đơn tài chính chi phí thuốc",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Thuốc không phù hợp",
+          "rows": 1,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "AZKA nhỏ mũi",
+              "rows": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "contract_name": "FPT-NV",
+      "insurer": "FPT",
+      "mention_rows": 1227,
+      "reason_profiles": [
+        {
+          "atomic_reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "rows": 740,
+          "mapped_service_rows": 572,
+          "top_services": [
+            {
+              "service_code": "IMG-XRY-002",
+              "canonical_name": "chụp xquang ngực thẳng",
+              "rows": 31
+            },
+            {
+              "service_code": "LAB-BIO-016",
+              "canonical_name": "glucose",
+              "rows": 25
+            },
+            {
+              "service_code": "LAB-BIO-030",
+              "canonical_name": "creatinin",
+              "rows": 23
+            },
+            {
+              "service_code": "LAB-IMM-046",
+              "canonical_name": "hbsag",
+              "rows": 22
+            },
+            {
+              "service_code": "LAB-BIO-034",
+              "canonical_name": "triglycerid",
+              "rows": 20
+            },
+            {
+              "service_code": "IMG-USG-002",
+              "canonical_name": "siêu âm ổ bụng",
+              "rows": 20
+            },
+            {
+              "service_code": "LAB-IMM-132",
+              "canonical_name": "hiv",
+              "rows": 18
+            },
+            {
+              "service_code": "LAB-BIO-018",
+              "canonical_name": "cholesterol",
+              "rows": 15
+            },
+            {
+              "service_code": "LAB-BIO-598",
+              "canonical_name": "alt",
+              "rows": 15
+            },
+            {
+              "service_code": "LAB-BIO-149",
+              "canonical_name": "điện giải đồ (máu)",
+              "rows": 15
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-GLUCOSE",
+              "canonical_name": "duong niu (glucose)",
+              "rows": 25
+            },
+            {
+              "concept_code": "OBS-URI-BILIRUBIN",
+              "canonical_name": "bilirubin",
+              "rows": 18
+            },
+            {
+              "concept_code": "OBS-URI-PROTEIN",
+              "canonical_name": "protein nuoc tieu",
+              "rows": 9
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "bhCG",
+              "rows": 6
+            },
+            {
+              "mention_name": "thời gian PT",
+              "rows": 4
+            },
+            {
+              "mention_name": "HPV",
+              "rows": 4
+            },
+            {
+              "mention_name": "thời gian APTT",
+              "rows": 4
+            },
+            {
+              "mention_name": "HBsAb",
+              "rows": 3
+            },
+            {
+              "mention_name": "xét nghiệm thời gian PT",
+              "rows": 3
+            },
+            {
+              "mention_name": "khăn giấy Napkin",
+              "rows": 2
+            },
+            {
+              "mention_name": "LDH",
+              "rows": 2
+            },
+            {
+              "mention_name": "AFB",
+              "rows": 2
+            },
+            {
+              "mention_name": "Sắt",
+              "rows": 2
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "rows": 265,
+          "mapped_service_rows": 140,
+          "top_services": [
+            {
+              "service_code": "IMG-XRY-002",
+              "canonical_name": "chụp xquang ngực thẳng",
+              "rows": 15
+            },
+            {
+              "service_code": "LAB-IMM-132",
+              "canonical_name": "hiv",
+              "rows": 8
+            },
+            {
+              "service_code": "IMG-USG-002",
+              "canonical_name": "siêu âm ổ bụng",
+              "rows": 6
+            },
+            {
+              "service_code": "LAB-IMM-046",
+              "canonical_name": "hbsag",
+              "rows": 5
+            },
+            {
+              "service_code": "LAB-MIC-001",
+              "canonical_name": "influenza virus a, b test nhanh",
+              "rows": 3
+            },
+            {
+              "service_code": "LAB-BIO-045",
+              "canonical_name": "định lượng triglycerid",
+              "rows": 3
+            },
+            {
+              "service_code": "LAB-BIO-034",
+              "canonical_name": "triglycerid",
+              "rows": 3
+            },
+            {
+              "service_code": "LAB-MIC-193",
+              "canonical_name": "hcv",
+              "rows": 3
+            },
+            {
+              "service_code": "LAB-IMM-202",
+              "canonical_name": "ft4",
+              "rows": 3
+            },
+            {
+              "service_code": "LAB-IMM-236",
+              "canonical_name": "tsh",
+              "rows": 3
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-PROTEIN",
+              "canonical_name": "protein nuoc tieu",
+              "rows": 3
+            },
+            {
+              "concept_code": "OBS-URI-GLUCOSE",
+              "canonical_name": "duong niu (glucose)",
+              "rows": 1
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "thời gian PT",
+              "rows": 3
+            },
+            {
+              "mention_name": "thời gian APTT",
+              "rows": 3
+            },
+            {
+              "mention_name": "sổ khám bệnh",
+              "rows": 2
+            },
+            {
+              "mention_name": "suất ăn không có bệnh lý đặc biệt",
+              "rows": 2
+            },
+            {
+              "mention_name": "quần lót giấy",
+              "rows": 2
+            },
+            {
+              "mention_name": "giảm đau sau mổ",
+              "rows": 2
+            },
+            {
+              "mention_name": "túi chứa thuốc giảm đau",
+              "rows": 2
+            },
+            {
+              "mention_name": "Vòng đeo tay người bệnh",
+              "rows": 1
+            },
+            {
+              "mention_name": "02 viên Melopower, 01 viên Sita Met, 02 viên Teburap, 02 viên Fynkhepar, 01 viên Fozvir",
+              "rows": 1
+            },
+            {
+              "mention_name": "Kim lấy máu Accu-Check",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Chưa cung cấp đủ chứng từ",
+          "rows": 74,
+          "mapped_service_rows": 30,
+          "top_services": [
+            {
+              "service_code": "IMG-USG-003",
+              "canonical_name": "siêu âm",
+              "rows": 3
+            },
+            {
+              "service_code": "LAB-MIC-106",
+              "canonical_name": "chlamydia",
+              "rows": 2
+            },
+            {
+              "service_code": "IMG-USG-127",
+              "canonical_name": "siêu âm tử cung buồng trứng",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-IMM-132",
+              "canonical_name": "hiv",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-HEM-018",
+              "canonical_name": "định nhóm máu hệ abo, rh(d)",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-MIC-193",
+              "canonical_name": "hcv",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-HEM-023",
+              "canonical_name": "đông máu cơ bản",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-IMM-007",
+              "canonical_name": "hiv ab test nhanh",
+              "rows": 1
+            },
+            {
+              "service_code": "END-ENS-001",
+              "canonical_name": "nội soi tai mũi họng",
+              "rows": 1
+            },
+            {
+              "service_code": "GEN-OTH-002",
+              "canonical_name": "chẩn đoán hình ảnh",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "1, Hóa đơn GTGT",
+              "rows": 3
+            },
+            {
+              "mention_name": "Bảng kê chi tiết",
+              "rows": 3
+            },
+            {
+              "mention_name": "1, Bảng kê chi tiết",
+              "rows": 2
+            },
+            {
+              "mention_name": "gói khám sức khỏe sinh sản nam",
+              "rows": 1
+            },
+            {
+              "mention_name": "do hồ sơ không đầy đủ chứng từ Biên lai thu tiền thuốc",
+              "rows": 1
+            },
+            {
+              "mention_name": "chỉ định thực hiện các xét nghiệm",
+              "rows": 1
+            },
+            {
+              "mention_name": "xét nghiệm bhCG",
+              "rows": 1
+            },
+            {
+              "mention_name": "làm thuốc âm đạo",
+              "rows": 1
+            },
+            {
+              "mention_name": "tế bào máu ngoại vi, FT4, TSH, TG, anti TG, siêu âm hạch cổ",
+              "rows": 1
+            },
+            {
+              "mention_name": "rất tiếc từ chối thanh toán chi phí phát sinh do hồ sơ không đầy đủ chứng từ Hóa đơn GTGT",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+          "rows": 44,
+          "mapped_service_rows": 31,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-045",
+              "canonical_name": "định lượng triglycerid",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-BIO-018",
+              "canonical_name": "cholesterol",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-BIO-016",
+              "canonical_name": "glucose",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-BIO-413",
+              "canonical_name": "định lượng canxi ion hóa (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-447",
+              "canonical_name": "canxi toàn phần",
+              "rows": 1
+            },
+            {
+              "service_code": "FUN-DFT-072",
+              "canonical_name": "đo mật độ xương 3 vị trí",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-014",
+              "canonical_name": "định lượng bilirubin trực tiếp (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-010",
+              "canonical_name": "định lượng acid uric (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-004",
+              "canonical_name": "định lượng glucose (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-094",
+              "canonical_name": "định lượng ldl-c (máu)",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-GLUCOSE",
+              "canonical_name": "duong niu (glucose)",
+              "rows": 2
+            },
+            {
+              "concept_code": "OBS-URI-PROTEIN",
+              "canonical_name": "protein nuoc tieu",
+              "rows": 1
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Roberta",
+              "rows": 1
+            },
+            {
+              "mention_name": "Viêm ngậm Bách bộ la hán",
+              "rows": 1
+            },
+            {
+              "mention_name": "Stanhome -Soft Shower Gel Douche Corps Et Visage Tous Types De Peaux",
+              "rows": 1
+            },
+            {
+              "mention_name": "Soothing Shampoo",
+              "rows": 1
+            },
+            {
+              "mention_name": "Canova Rivescal DS Soothing Gel",
+              "rows": 1
+            },
+            {
+              "mention_name": "Canova Salipil Detergente",
+              "rows": 1
+            },
+            {
+              "mention_name": "Enzymax Duo Biotics",
+              "rows": 1
+            },
+            {
+              "mention_name": "Dầu mù u Puls",
+              "rows": 1
+            },
+            {
+              "mention_name": "Ghế (giường gấp) người nhà",
+              "rows": 1
+            },
+            {
+              "mention_name": "là thực phẩm chức năng và chi phí sản phẩm Thymomodulin",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+          "rows": 27,
+          "mapped_service_rows": 12,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-417",
+              "canonical_name": "đo hoạt độ ast",
+              "rows": 2
+            },
+            {
+              "service_code": "PRO-THT-029",
+              "canonical_name": "đo nhãn áp",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-BIO-016",
+              "canonical_name": "glucose",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-597",
+              "canonical_name": "ast",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-598",
+              "canonical_name": "alt",
+              "rows": 1
+            },
+            {
+              "service_code": "PRO-THT-028",
+              "canonical_name": "đo khúc xạ máy",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-149",
+              "canonical_name": "điện giải đồ (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "PRO-THT-001",
+              "canonical_name": "soi đáy mắt trực tiếp",
+              "rows": 1
+            },
+            {
+              "service_code": "GEN-OTH-210",
+              "canonical_name": "đo đa ký hô hấp",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-XRY-002",
+              "canonical_name": "chụp xquang ngực thẳng",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Bequantene",
+              "rows": 1
+            },
+            {
+              "mention_name": "Thuốc Rotudin",
+              "rows": 1
+            },
+            {
+              "mention_name": "2/3 chi phí Khám mắt",
+              "rows": 1
+            },
+            {
+              "mention_name": "gội đầu dưỡng sinh",
+              "rows": 1
+            },
+            {
+              "mention_name": "thuốc Bequantene",
+              "rows": 1
+            },
+            {
+              "mention_name": "thuốc Clealine",
+              "rows": 1
+            },
+            {
+              "mention_name": "evaldez",
+              "rows": 1
+            },
+            {
+              "mention_name": "Mirzaten",
+              "rows": 1
+            },
+            {
+              "mention_name": "Grandaxin",
+              "rows": 1
+            },
+            {
+              "mention_name": "Vòng đeo tay điện tử nhận diện người bệnh màu xanh",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+          "rows": 17,
+          "mapped_service_rows": 12,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-259",
+              "canonical_name": "calci toàn phần (calcium)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-260",
+              "canonical_name": "protein toàn phần",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-200",
+              "canonical_name": "albumin",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-020",
+              "canonical_name": "acid uric",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-059",
+              "canonical_name": "bilirubin toàn phần",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-055",
+              "canonical_name": "bilirubin trực tiếp",
+              "rows": 1
+            },
+            {
+              "service_code": "GEN-OTH-236",
+              "canonical_name": "điện di huyết sắc tố",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-059",
+              "canonical_name": "xét nghiệm sars-cov-2 ag test nhanh",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-598",
+              "canonical_name": "alt",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-597",
+              "canonical_name": "ast",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-BILIRUBIN",
+              "canonical_name": "bilirubin",
+              "rows": 2
+            },
+            {
+              "concept_code": "OBS-URI-PROTEIN",
+              "canonical_name": "protein nuoc tieu",
+              "rows": 1
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "LDH",
+              "rows": 1
+            },
+            {
+              "mention_name": "G6PD",
+              "rows": 1
+            },
+            {
+              "mention_name": "điều dưỡng",
+              "rows": 1
+            },
+            {
+              "mention_name": "Bảng kê chi tiết chi phí vật tư gói truyền dịch tinh thể cơ bản",
+              "rows": 1
+            },
+            {
+              "mention_name": "1, Định lượng PIVKA",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Đơn thuốc kê quá 30 ngày theo quy định của BYT",
+          "rows": 13,
+          "mapped_service_rows": 8,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-259",
+              "canonical_name": "calci toàn phần (calcium)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-260",
+              "canonical_name": "protein toàn phần",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-200",
+              "canonical_name": "albumin",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-020",
+              "canonical_name": "acid uric",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-059",
+              "canonical_name": "bilirubin toàn phần",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-055",
+              "canonical_name": "bilirubin trực tiếp",
+              "rows": 1
+            },
+            {
+              "service_code": "GEN-OTH-236",
+              "canonical_name": "điện di huyết sắc tố",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-016",
+              "canonical_name": "glucose",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-BILIRUBIN",
+              "canonical_name": "bilirubin",
+              "rows": 3
+            },
+            {
+              "concept_code": "OBS-URI-PROTEIN",
+              "canonical_name": "protein nuoc tieu",
+              "rows": 1
+            },
+            {
+              "concept_code": "OBS-URI-GLUCOSE",
+              "canonical_name": "duong niu (glucose)",
+              "rows": 1
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Bilirubin trực tiếp, Protein toàn phần, Albumin, điện giải đồ, Calci toàn phần, LDH, siêu âm ổ bụng",
+              "rows": 1
+            },
+            {
+              "mention_name": "LDH",
+              "rows": 1
+            },
+            {
+              "mention_name": "G6PD",
+              "rows": 1
+            },
+            {
+              "mention_name": "Hafenthyl",
+              "rows": 1
+            },
+            {
+              "mention_name": "Procoralan",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Chi phí thuốc bổ, vitamin, hỗ trợ vượt quá chi phí thuốc điều trị chính",
+          "rows": 7,
+          "mapped_service_rows": 5,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-010",
+              "canonical_name": "định lượng acid uric (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-021",
+              "canonical_name": "định lượng calci toàn phần",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-028",
+              "canonical_name": "định lượng ferritin (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-004",
+              "canonical_name": "định lượng glucose (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-026",
+              "canonical_name": "định lượng sắt huyết thanh",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Ghế (giường gấp) người nhà",
+              "rows": 1
+            },
+            {
+              "mention_name": "điện giải đồ, Acid uric, Cholesterol, Glucose, HbA1c, HDL-C, LDL-C, Triglycerid",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Dịch vụ không phù hợp",
+          "rows": 6,
+          "mapped_service_rows": 5,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-149",
+              "canonical_name": "điện giải đồ (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-318",
+              "canonical_name": "bilirubine",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-016",
+              "canonical_name": "glucose",
+              "rows": 1
+            },
+            {
+              "service_code": "GEN-OTH-656",
+              "canonical_name": "protein",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-USG-003",
+              "canonical_name": "siêu âm",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-BILIRUBIN",
+              "canonical_name": "bilirubin",
+              "rows": 1
+            },
+            {
+              "concept_code": "OBS-URI-GLUCOSE",
+              "canonical_name": "duong niu (glucose)",
+              "rows": 1
+            },
+            {
+              "concept_code": "OBS-URI-PROTEIN",
+              "canonical_name": "protein nuoc tieu",
+              "rows": 1
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "bhCG",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Thuốc không phù hợp",
+          "rows": 5,
+          "mapped_service_rows": 4,
+          "top_services": [
+            {
+              "service_code": "END-ENS-001",
+              "canonical_name": "nội soi tai mũi họng",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-025",
+              "canonical_name": "xét nghiệm nhanh influenza virus a, b",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-XRY-002",
+              "canonical_name": "chụp xquang ngực thẳng",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-USG-002",
+              "canonical_name": "siêu âm ổ bụng",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "1, Chi phí Dengue vius NS1Ag",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Vượt quá quyền lợi một ngày nằm viện",
+          "rows": 5,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "3.16 ngày",
+              "rows": 1
+            },
+            {
+              "mention_name": "05 ngày",
+              "rows": 1
+            },
+            {
+              "mention_name": "6 ngày",
+              "rows": 1
+            },
+            {
+              "mention_name": "02 ngày",
+              "rows": 1
+            },
+            {
+              "mention_name": "Lactat (tĩnh mạch)",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Vượt quá quyền lợi một lần khám",
+          "rows": 3,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Neilmed sinus rinse, DD xịt mũi Promax, Zecuf Herbal Drops sugar tối đa",
+              "rows": 1
+            },
+            {
+              "mention_name": "HPV genotype PCR hệ thống tự động",
+              "rows": 1
+            },
+            {
+              "mention_name": "Sterimar blocked nose 50 ml",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Vượt hạn mức",
+          "rows": 3,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Sterimar và SMC Ag+ tối đa",
+              "rows": 1
+            },
+            {
+              "mention_name": "2,5 ngày",
+              "rows": 1
+            },
+            {
+              "mention_name": "/ ngày x 2 ngày",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Mua thuốc dư/ khác với bác sĩ kê đơn",
+          "rows": 3,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "AMMG",
+              "rows": 1
+            },
+            {
+              "mention_name": "mua chi phí 14 viên Drocardyl",
+              "rows": 1
+            },
+            {
+              "mention_name": "28 viên Calciumzindo 500mg",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Không thuộc đối tượng được bảo hiểm",
+          "rows": 3,
+          "mapped_service_rows": 2,
+          "top_services": [
+            {
+              "service_code": "IMG-USG-004",
+              "canonical_name": "siêu âm tuyến giáp",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-046",
+              "canonical_name": "cholesterol toàn phần",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "HPV genotype PCR hệ thống tự động",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "(không có lý do atomic)",
+          "rows": 3,
+          "mapped_service_rows": 3,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-597",
+              "canonical_name": "ast",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-598",
+              "canonical_name": "alt",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-XRY-011",
+              "canonical_name": "x-quang",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": []
+        },
+        {
+          "atomic_reason": "Chứng từ thanh toán chưa hợp lệ",
+          "rows": 2,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "AMMG",
+              "rows": 1
+            },
+            {
+              "mention_name": "Hóa đơn GTGT",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Mua thuốc quá 05 ngày theo quy định Bộ Y Tế",
+          "rows": 2,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "chụp CLVT động mạch vành",
+              "rows": 1
+            },
+            {
+              "mention_name": "thuốc cản quang Ultravist",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Vượt quá hạn mức bảo hiểm trong năm hợp đồng",
+          "rows": 1,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Thanh toán chi phí Chụp CLVT sọ não tối đa",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Thuốc kê không nhằm mục đích điều trị",
+          "rows": 1,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "a, Sổ khám bệnh",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Chứng từ y tế chưa hợp lệ",
+          "rows": 1,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "mua thuốc ngày 28/07/2025",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Điều trị theo yêu cầu của người được bảo hiểm",
+          "rows": 1,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Ghế (giường gấp) người nhà",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Lý do khác",
+          "rows": 1,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Hóa đơn GTGT",
+              "rows": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "contract_name": "TCGIns",
+      "insurer": "TCGIns",
+      "mention_rows": 74,
+      "reason_profiles": [
+        {
+          "atomic_reason": "Áp dụng đồng chi trả",
+          "rows": 20,
+          "mapped_service_rows": 9,
+          "top_services": [
+            {
+              "service_code": "LAB-MIC-002",
+              "canonical_name": "dengue virus ns1ag test nhanh",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-MIC-006",
+              "canonical_name": "rotavirus test nhanh",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-HEM-016",
+              "canonical_name": "thời gian prothrombin (pt)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-HEM-012",
+              "canonical_name": "thời gian thromboplastin một phần hoạt hóa (aptt)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-074",
+              "canonical_name": "xét nghiệm test nhanh cúm ab",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-001",
+              "canonical_name": "influenza virus a, b test nhanh",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-046",
+              "canonical_name": "virus test nhanh rsv",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-015",
+              "canonical_name": "vi khuẩn nuôi cấy và định danh phương pháp thông thường",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "TCGIns chi trả Nebusal Spray",
+              "rows": 1
+            },
+            {
+              "mention_name": "Giá trị tích điểm VinClub",
+              "rows": 1
+            },
+            {
+              "mention_name": "a, Chi phí RSV",
+              "rows": 1
+            },
+            {
+              "mention_name": "RT PCR phát hiện các vi khuẩn gây bệnh đường hô hấp",
+              "rows": 1
+            },
+            {
+              "mention_name": "TCGIns chi trả Sterimar Nose",
+              "rows": 1
+            },
+            {
+              "mention_name": "TCGIns chi trả Boncinco",
+              "rows": 1
+            },
+            {
+              "mention_name": "không thanh toán phần chênh lệch",
+              "rows": 1
+            },
+            {
+              "mention_name": "SARS-COV2",
+              "rows": 1
+            },
+            {
+              "mention_name": "TCGIns thanh toán chi phí Lycalci",
+              "rows": 1
+            },
+            {
+              "mention_name": "Enterogermina",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "rows": 17,
+          "mapped_service_rows": 12,
+          "top_services": [
+            {
+              "service_code": "LAB-MIC-001",
+              "canonical_name": "influenza virus a, b test nhanh",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-MIC-002",
+              "canonical_name": "dengue virus ns1ag test nhanh",
+              "rows": 2
+            },
+            {
+              "service_code": "LAB-MIC-006",
+              "canonical_name": "rotavirus test nhanh",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-HEM-016",
+              "canonical_name": "thời gian prothrombin (pt)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-HEM-012",
+              "canonical_name": "thời gian thromboplastin một phần hoạt hóa (aptt)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-074",
+              "canonical_name": "xét nghiệm test nhanh cúm ab",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-IMM-013",
+              "canonical_name": "dengue virus igm/igg test nhanh",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-024",
+              "canonical_name": "virus test nhanh (xn test nhanh covid-19)",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-046",
+              "canonical_name": "virus test nhanh rsv",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-015",
+              "canonical_name": "vi khuẩn nuôi cấy và định danh phương pháp thông thường",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Giá trị tích điểm VinClub",
+              "rows": 1
+            },
+            {
+              "mention_name": "a, Chi phí RSV",
+              "rows": 1
+            },
+            {
+              "mention_name": "RT PCR phát hiện các vi khuẩn gây bệnh đường hô hấp",
+              "rows": 1
+            },
+            {
+              "mention_name": "không thanh toán phần chênh lệch",
+              "rows": 1
+            },
+            {
+              "mention_name": "SARS-COV2",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "rows": 11,
+          "mapped_service_rows": 3,
+          "top_services": [
+            {
+              "service_code": "LAB-MIC-074",
+              "canonical_name": "xét nghiệm test nhanh cúm ab",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-046",
+              "canonical_name": "virus test nhanh rsv",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-015",
+              "canonical_name": "vi khuẩn nuôi cấy và định danh phương pháp thông thường",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "TCGIns thanh toán 1/2 chi phí phát sinh thuộc phạm vi bảo hiểm",
+              "rows": 1
+            },
+            {
+              "mention_name": "Giá trị tích điểm VinClub",
+              "rows": 1
+            },
+            {
+              "mention_name": "a, Chi phí RSV",
+              "rows": 1
+            },
+            {
+              "mention_name": "RT PCR phát hiện các vi khuẩn gây bệnh đường hô hấp",
+              "rows": 1
+            },
+            {
+              "mention_name": "Bỏng tại thân độ ba), chi phí Tiền giường thuộc phạm vi bảo hiểm",
+              "rows": 1
+            },
+            {
+              "mention_name": "không thanh toán phần chênh lệch",
+              "rows": 1
+            },
+            {
+              "mention_name": "SARS-COV2",
+              "rows": 1
+            },
+            {
+              "mention_name": "Vòng đeo tay điện tử nhận diện người bệnh màu xanh",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Từ chối do chưa qua thời gian chờ bệnh thông thường",
+          "rows": 10,
+          "mapped_service_rows": 2,
+          "top_services": [
+            {
+              "service_code": "LAB-MIC-019",
+              "canonical_name": "adeno virus test nhanh",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-XRY-002",
+              "canonical_name": "chụp xquang ngực thẳng",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "chi phí",
+              "rows": 2
+            },
+            {
+              "mention_name": "Duchat",
+              "rows": 1
+            },
+            {
+              "mention_name": "(Tổng phân tích tế bào máu ngoại vi + Định lượng CRP + Taromentin theo tỷ lệ 1/2)",
+              "rows": 1
+            },
+            {
+              "mention_name": "Ambromed",
+              "rows": 1
+            },
+            {
+              "mention_name": "SRK Saltmax",
+              "rows": 1
+            },
+            {
+              "mention_name": "TCGIns thanh toán chi phí Pezypex",
+              "rows": 1
+            },
+            {
+              "mention_name": "Klacid",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+          "rows": 6,
+          "mapped_service_rows": 2,
+          "top_services": [
+            {
+              "service_code": "LAB-MIC-019",
+              "canonical_name": "adeno virus test nhanh",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-XRY-002",
+              "canonical_name": "chụp xquang ngực thẳng",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Duchat",
+              "rows": 1
+            },
+            {
+              "mention_name": "(Tổng phân tích tế bào máu ngoại vi + Định lượng CRP + Taromentin theo tỷ lệ 1/2)",
+              "rows": 1
+            },
+            {
+              "mention_name": "Ambromed",
+              "rows": 1
+            },
+            {
+              "mention_name": "SRK Saltmax",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Đang trong thời gian chờ với bệnh đặc biệt/bệnh có sẵn",
+          "rows": 6,
+          "mapped_service_rows": 2,
+          "top_services": [
+            {
+              "service_code": "LAB-MIC-046",
+              "canonical_name": "virus test nhanh rsv",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-MIC-015",
+              "canonical_name": "vi khuẩn nuôi cấy và định danh phương pháp thông thường",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "TCGIns thanh toán 2/5 chi phí trợ cấp nằm viện",
+              "rows": 1
+            },
+            {
+              "mention_name": "TCGIns thanh toán 4/6 chi phí trợ cấp nằm viện",
+              "rows": 1
+            },
+            {
+              "mention_name": "không thanh toán phần chênh lệch",
+              "rows": 1
+            },
+            {
+              "mention_name": "SARS-COV2",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Vượt quá hạn mức bảo hiểm trong năm hợp đồng",
+          "rows": 4,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "TCGIns thanh toán chi phí Pezypex",
+              "rows": 1
+            },
+            {
+              "mention_name": "chi phí",
+              "rows": 1
+            },
+            {
+              "mention_name": "TCGIns thanh toán chi phí Lycalci",
+              "rows": 1
+            },
+            {
+              "mention_name": "Enterogermina",
+              "rows": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "contract_name": "TIN-PNC",
+      "insurer": "TIN",
+      "mention_rows": 69,
+      "reason_profiles": [
+        {
+          "atomic_reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "rows": 24,
+          "mapped_service_rows": 4,
+          "top_services": [
+            {
+              "service_code": "IMG-XRY-002",
+              "canonical_name": "chụp xquang ngực thẳng",
+              "rows": 2
+            },
+            {
+              "service_code": "GEN-OTH-235",
+              "canonical_name": "chi phí xét nghiệm",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-IMM-088",
+              "canonical_name": "xn miễn dịch - hbsag miễn dịch tự động",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Khám lâm sàng cho trẻ sơ sinh, Dịch vụ tắm bé, Viêm gan B",
+              "rows": 1
+            },
+            {
+              "mention_name": "Chi phí Tóm tắt bệnh án, Cơm BT01, Vòng đeo tay bệnh nhân",
+              "rows": 1
+            },
+            {
+              "mention_name": "Chi phí xét nghiệm Định lượng Cholesterol, HCV Ab test nhanh, Chụp Xquang ngực thẳng",
+              "rows": 1
+            },
+            {
+              "mention_name": "Sàng lọc dị tật bẩm sinh, Gói sàng lọc 5 bệnh, Bộ sản phẩm đón bé chào đời",
+              "rows": 1
+            },
+            {
+              "mention_name": "dịch vụ giường bạt người nhà",
+              "rows": 1
+            },
+            {
+              "mention_name": "Định lượng Acid uric, CRP, Canxi toàn phần, Điện giải đồ",
+              "rows": 1
+            },
+            {
+              "mention_name": "Chụp Xquang ngực thẳng ngày 27/12/2024, Điện tim thường, Siêu âm Doppler tim",
+              "rows": 1
+            },
+            {
+              "mention_name": "(6.379.711 - 4.715.899 - 191.980 - 70.000)/12 ngày x 6,5 ngày",
+              "rows": 1
+            },
+            {
+              "mention_name": "a, chi phí xét nghiệm Troponin, Dengue",
+              "rows": 1
+            },
+            {
+              "mention_name": "b, chi phí vòng đeo tay",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "rows": 20,
+          "mapped_service_rows": 6,
+          "top_services": [
+            {
+              "service_code": "IMG-XRY-002",
+              "canonical_name": "chụp xquang ngực thẳng",
+              "rows": 2
+            },
+            {
+              "service_code": "IMG-USG-026",
+              "canonical_name": "siêu âm doppler xuyên sọ",
+              "rows": 1
+            },
+            {
+              "service_code": "END-ENS-001",
+              "canonical_name": "nội soi tai mũi họng",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-004",
+              "canonical_name": "định lượng glucose (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-USG-127",
+              "canonical_name": "siêu âm tử cung buồng trứng",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [
+            {
+              "concept_code": "OBS-URI-GLUCOSE",
+              "canonical_name": "duong niu (glucose)",
+              "rows": 1
+            }
+          ],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Glucose, Điện giải đồ, Định lượng Triglycerid, Định lượng LDL-C",
+              "rows": 1
+            },
+            {
+              "mention_name": "Chi phí xét nghiệm Thời gian prothrombin, Định lượng AFP phát sinh",
+              "rows": 1
+            },
+            {
+              "mention_name": "Chi phí Tóm tắt bệnh án, Cơm BT01, Vòng đeo tay bệnh nhân",
+              "rows": 1
+            },
+            {
+              "mention_name": "Chi phí xét nghiệm Định lượng Cholesterol, HCV Ab test nhanh, Chụp Xquang ngực thẳng",
+              "rows": 1
+            },
+            {
+              "mention_name": "Sàng lọc dị tật bẩm sinh, Gói sàng lọc 5 bệnh, Bộ sản phẩm đón bé chào đời",
+              "rows": 1
+            },
+            {
+              "mention_name": "a, chi phí xét nghiệm Troponin, Dengue",
+              "rows": 1
+            },
+            {
+              "mention_name": "b, chi phí vòng đeo tay",
+              "rows": 1
+            },
+            {
+              "mention_name": "Chi phí Sổ khám bệnh",
+              "rows": 1
+            },
+            {
+              "mention_name": "giun đũa chó",
+              "rows": 1
+            },
+            {
+              "mention_name": "xét nghiệm Mycobacterium tuberculosis tại Bệnh viện E và tại Trung tâm xét nghiệm Medlatec",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Chưa cung cấp đủ chứng từ",
+          "rows": 15,
+          "mapped_service_rows": 2,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-004",
+              "canonical_name": "định lượng glucose (máu)",
+              "rows": 1
+            },
+            {
+              "service_code": "IMG-USG-127",
+              "canonical_name": "siêu âm tử cung buồng trứng",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Chi phí Tóm tắt bệnh án, Cơm BT01, Vòng đeo tay bệnh nhân",
+              "rows": 1
+            },
+            {
+              "mention_name": "phát sinh",
+              "rows": 1
+            },
+            {
+              "mention_name": "Định lượng Acid uric, CRP, Canxi toàn phần, Điện giải đồ",
+              "rows": 1
+            },
+            {
+              "mention_name": "1, Hóa đơn tài chính chi phí thuốc",
+              "rows": 1
+            },
+            {
+              "mention_name": "Bảng kê chi tiết tương ướng các hóa đơn",
+              "rows": 1
+            },
+            {
+              "mention_name": "xét nghiệm Mycobacterium tuberculosis tại Bệnh viện E và tại Trung tâm xét nghiệm Medlatec",
+              "rows": 1
+            },
+            {
+              "mention_name": "Chi phí Chuyển viện Bệnh viện Chợ Rẫy",
+              "rows": 1
+            },
+            {
+              "mention_name": "Tiền nước",
+              "rows": 1
+            },
+            {
+              "mention_name": "Định lượng CRP, Glucose, Điện giải đồ phát sinh",
+              "rows": 1
+            },
+            {
+              "mention_name": "Chi phí xét nghiệm định lượng Albumin, HCV Ab test nhanh, Siêu âm ổ bụng",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Mua thuốc dư/ khác với bác sĩ kê đơn",
+          "rows": 2,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Chi phí xét nghiệm Thời gian prothrombin, Định lượng AFP phát sinh",
+              "rows": 1
+            },
+            {
+              "mention_name": "do vượt quá số lượng được kê trên đơn thuốc (6 ống) và chi phí 10 lọ Resonet",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+          "rows": 2,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Chi phí Tóm tắt bệnh án, Cơm BT01, Vòng đeo tay bệnh nhân",
+              "rows": 1
+            },
+            {
+              "mention_name": "20 gói Eroleucin",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Thuốc kê không nhằm mục đích điều trị",
+          "rows": 2,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Chi phí Chuyển viện Bệnh viện Chợ Rẫy",
+              "rows": 1
+            },
+            {
+              "mention_name": "Tiền nước",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Thuộc điểm loại trừ của Quy tắc bảo hiểm/Hợp đồng bảo hiểm",
+          "rows": 2,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Chi phí thuốc Opzen và V.phonte",
+              "rows": 1
+            },
+            {
+              "mention_name": "Hóa đơn tài chính hợp lệ cho Hóa đơn bán lẻ chi phí thuốc",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Vượt quá quyền lợi một ngày nằm viện",
+          "rows": 1,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "/ ngày x 3 ngày",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Thực phẩm chức năng/mỹ phẩm và các sản phẩm không phải là thuốc",
+          "rows": 1,
+          "mapped_service_rows": 1,
+          "top_services": [
+            {
+              "service_code": "END-ENS-001",
+              "canonical_name": "nội soi tai mũi họng",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": []
+        }
+      ]
+    },
+    {
+      "contract_name": "UIC",
+      "insurer": "UIC",
+      "mention_rows": 11,
+      "reason_profiles": [
+        {
+          "atomic_reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "rows": 3,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "AZINSU rất tiếc không bảo lãnh chi phí xét nghiệm IgE, ure, creatinin",
+              "rows": 1
+            },
+            {
+              "mention_name": "người nhà ở lại",
+              "rows": 1
+            },
+            {
+              "mention_name": "Băng vệ sinh",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Không thuộc quyền lợi của hợp đồng bảo hiểm",
+          "rows": 2,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "UIC không thanh toán chi phí Enterogermina 4billion/5ml",
+              "rows": 1
+            },
+            {
+              "mention_name": "Betax",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Vượt quá quyền lợi một lần khám",
+          "rows": 2,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "UIC thanh toán Tonimer BABY",
+              "rows": 2
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+          "rows": 2,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Betax",
+              "rows": 1
+            },
+            {
+              "mention_name": "UIC không thanh toán Chi phí Lycalci",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Không thuộc đối tượng được bảo hiểm",
+          "rows": 2,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "người nhà ở lại",
+              "rows": 1
+            },
+            {
+              "mention_name": "Băng vệ sinh",
+              "rows": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "contract_name": "BHV",
+      "insurer": "BHV",
+      "mention_rows": 11,
+      "reason_profiles": [
+        {
+          "atomic_reason": "Đang trong thời gian chờ với bệnh đặc biệt/bệnh có sẵn",
+          "rows": 9,
+          "mapped_service_rows": 5,
+          "top_services": [
+            {
+              "service_code": "LAB-BIO-046",
+              "canonical_name": "cholesterol toàn phần",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-066",
+              "canonical_name": "hdl cholesterol",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-062",
+              "canonical_name": "ldl cholesterol",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-034",
+              "canonical_name": "triglycerid",
+              "rows": 1
+            },
+            {
+              "service_code": "LAB-BIO-020",
+              "canonical_name": "acid uric",
+              "rows": 1
+            }
+          ],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Lipitor 4mg",
+              "rows": 1
+            },
+            {
+              "mention_name": "Allopurinol",
+              "rows": 1
+            },
+            {
+              "mention_name": "Colchicine",
+              "rows": 1
+            },
+            {
+              "mention_name": "Khảm bệnh đặc biệt",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+          "rows": 1,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "Định lượng canxi máu, Xquang ngực thẳng, Xét nghiệm mô bệnh học",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "atomic_reason": "Số ngày sử dụng thuốc hỗ trợ, vitamin, thuốc bổ quá số ngày sử dụng thuốc điều trị chính",
+          "rows": 1,
+          "mapped_service_rows": 0,
+          "top_services": [],
+          "top_observation_concepts": [],
+          "top_unmapped_mentions": [
+            {
+              "mention_name": "BHV rất tiếc không chi trả chi phí 15 ống Gadacal",
+              "rows": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

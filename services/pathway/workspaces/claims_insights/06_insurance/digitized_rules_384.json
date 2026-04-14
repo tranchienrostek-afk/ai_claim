@@ -1,0 +1,42 @@
+{
+  "rulebook_id": "PJICO-384",
+  "digitized_at": "2026-04-08T08:15:00Z",
+  "clauses": [
+    {
+      "id": "PJICO-384-C3-K3",
+      "hierarchy": {
+        "chapter": "III",
+        "clause": "3",
+        "title": "Các điểm loại trừ chung"
+      },
+      "natural_language_vi": "Kiểm tra sức khỏe định kỳ, tầm soát bệnh, các xét nghiệm, chụp X-quang, chụp cắt lớp vi tính, cộng hưởng từ, siêu âm không nhằm mục đích điều trị bệnh (trừ trường hợp khám thai định kỳ)...",
+      "logic": {
+        "denial_code": "ma06",
+        "denial_reason": "Chi phí cận lâm sàng mang tính chất kiểm tra/tầm soát",
+        "conditions": [
+          {
+            "field": "claim.care_type",
+            "operator": "==",
+            "value": "screening"
+          },
+          {
+            "field": "medical_necessity_score",
+            "operator": "<",
+            "value": 0.2,
+            "description": "Calculated based on signs_to_service correlation"
+          }
+        ],
+        "exceptions": [
+          {
+            "description": "Routine pregnancy check-up",
+            "condition": "claim.benefit_category == 'Maternity'"
+          }
+        ]
+      },
+      "references": [
+        "exclusion_claim_signals.jsonl line 131",
+        "contract_rules.json line 79 (QT 711 template)"
+      ]
+    }
+  ]
+}

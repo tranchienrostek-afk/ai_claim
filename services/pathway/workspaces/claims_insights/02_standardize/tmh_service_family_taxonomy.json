@@ -1,0 +1,180 @@
+{
+  "version": "2026-03-28",
+  "families": [
+    {
+      "family_id": "exam_consult",
+      "label": "Exam / Consult",
+      "aliases": [
+        "kham tai mui hong",
+        "kham chuyen khoa tai mui hong",
+        "kham chuyen khoa tmh",
+        "kham tien dinh",
+        "romberg"
+      ]
+    },
+    {
+      "family_id": "endoscopy",
+      "label": "Endoscopy",
+      "aliases": [
+        "noi soi tai mui hong",
+        "noi soi thanh quan",
+        "noi soi thanh quan ong mem",
+        "noi soi thanh quan ong cung",
+        "noi soi mui",
+        "noi soi mui hong",
+        "noi soi mui hong phong dai",
+        "noi soi mui vom hong",
+        "noi soi mui vom hong phong dai",
+        "noi soi mui xoang",
+        "noi soi thanh khi phe quan",
+        "noi soi phe quan ong mem",
+        "noi soi thuc quan",
+        "noi soi thuc quan da day",
+        "noi soi gap di vat"
+      ]
+    },
+    {
+      "family_id": "functional_test",
+      "label": "Functional test",
+      "aliases": [
+        "thinh luc do",
+        "do thinh luc",
+        "do thinh luc do don am",
+        "do nhi luong",
+        "oae",
+        "do am oc tai",
+        "abr",
+        "do dien thinh giac than nao",
+        "eng",
+        "dien dong mat do",
+        "nghiem phap nhiet",
+        "nghiem phap epley",
+        "do phan xa xuong ban dap",
+        "do da ky giac ngu",
+        "polysomnography",
+        "test tiet nuoc mat schirmer",
+        "phan tich am cua giong noi"
+      ]
+    },
+    {
+      "family_id": "imaging",
+      "label": "Imaging",
+      "aliases": [
+        "ct scan mui xoang",
+        "ct scan so mat",
+        "ct scan so mat co can quang",
+        "ct scan xuong thai duong",
+        "ct scan xuong chum",
+        "ct scan so nao",
+        "ct scan vung co",
+        "ct scan co can quang",
+        "ct scan co co can quang",
+        "ct scan co co can quang tinh mach",
+        "ct scan vung thanh khi quan",
+        "mri mui xoang",
+        "mri so nao",
+        "mri xuong da",
+        "x quang blondeau hirtz",
+        "x quang co nghieng",
+        "x quang phoi thang",
+        "x quang",
+        "sieu am",
+        "sieu am vung co",
+        "sieu am hach co"
+      ]
+    },
+    {
+      "family_id": "lab",
+      "label": "Laboratory",
+      "aliases": [
+        "cong thuc mau",
+        "tong phan tich te bao mau",
+        "cbc",
+        "xet nghiem cong thuc mau",
+        "crp",
+        "nuoi cay nam dinh danh",
+        "test lay da",
+        "prick test",
+        "test khang nguyen vi khuan"
+      ]
+    },
+    {
+      "family_id": "procedure_surgery",
+      "label": "Procedure / Surgery",
+      "aliases": [
+        "cat amidan",
+        "phau thuat cat amidan",
+        "nao va",
+        "phau thuat nao va",
+        "fess",
+        "phau thuat noi soi chuc nang mui xoang",
+        "mo khi quan",
+        "mo khi quan cap cuu",
+        "rach dan luu hach",
+        "khoet rong da chum",
+        "sinh thiet",
+        "chich rach mang nhi",
+        "choc hut te bao bang kim nho",
+        "fna",
+        "choc hut dich nang dieu tri",
+        "thu thuat choc rua xoang ham",
+        "dat meche vo khuan ong tai",
+        "cat u nhu",
+        "cat u xo vom",
+        "lay u nhay",
+        "nao vet hach co",
+        "hup rua tai",
+        "chich rach nhot ong tai ngoai",
+        "choc hut o ap xe duoi sieu am",
+        "phau thuat tiet can xuong chum",
+        "phau thuat mo de dap va dat piston",
+        "phau thuat vi phau cat hat xo day thanh",
+        "phau thuat cat thanh quan toan phan",
+        "phau thuat vi phau thanh quan",
+        "phau thuat mo sao bao dan luu",
+        "phau thuat cat toan bo tuyen giap",
+        "chich rach ap xe bo luoi"
+      ]
+    },
+    {
+      "family_id": "drug_medication",
+      "label": "Drug / Medication",
+      "aliases": [
+        "thuoc khang sinh",
+        "khang sinh toan than",
+        "khang sinh pho rong",
+        "beta lactam",
+        "ppi",
+        "thuoc uc che bom proton",
+        "corticoid",
+        "amphotericin b",
+        "adrenaline",
+        "khi dung adrenaline",
+        "solumedrol",
+        "ephedrin",
+        "thuoc co mach ephedrin"
+      ]
+    },
+    {
+      "family_id": "therapy_rehab",
+      "label": "Therapy / Rehab",
+      "aliases": [
+        "tri lieu giong noi",
+        "luyen giong",
+        "may tro thinh"
+      ]
+    },
+    {
+      "family_id": "oncology_treatment",
+      "label": "Oncology treatment",
+      "aliases": [
+        "xa tri vung co",
+        "truyen hoa chat phac do chop",
+        "truyen hoa chat phac do r chop",
+        "dieu tri bang iod phong xa i131",
+        "i131",
+        "iod phong xa"
+      ]
+    }
+  ]
+}

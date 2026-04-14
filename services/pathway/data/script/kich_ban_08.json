@@ -1,0 +1,103 @@
+{
+  "cau_chuyen_y_khoa": {
+    "tieu_de": "Cơn đau đầu 'lai vãng' và bí ẩn từ chiếc răng hàm",
+    "benh_nhan": {
+      "gioi_tinh": "Nữ",
+      "tuoi": 35
+    },
+    "benh_su_va_trieu_chung": {
+      "trieu_chung_co_nang": [
+        "Đau nhức dữ dội vùng mặt bên trái, cơn đau nhói từng cơn lan lên trán và lan xuống hàm trên bên trái.",
+        "Có cảm giác căng nặng vùng trán và mỏi mắt trái, mi mắt trái hơi nề nhẹ.",
+        "Ngạt mũi bên trái nhưng không thấy chảy nước mũi rõ rệt đợt này."
+      ],
+      "tien_su": "Cách đây 2 tuần bị 'cảm cúm' với triệu chứng sổ mũi, ho, hắt hơi. Đã tự mua thuốc uống thấy đỡ, nhưng 3 ngày nay đột nhiên đau nhức mặt và răng dữ dội. Đã đi khám Nha khoa không phát hiện sâu răng, khám Nội thần kinh được chẩn đoán nghi ngờ đau nửa đầu Migraine và cho thuốc nhưng không giảm."
+    },
+    "nhan_dinh_ban_dau": "Bệnh nhân có biểu hiện đau nhức sọ mặt một bên rất dễ nhầm lẫn với hội chứng Migraine, đau răng hoặc đau dây thần kinh số V. Tuy nhiên, chi tiết 'chìa khóa' là bệnh nhân có tiền sử nhiễm virus đường hô hấp trên kéo dài hơn 10 ngày và triệu chứng đột ngột xấu đi. Việc mi mắt trái hơi sưng nề đặt ra nghi vấn viêm mũi xoang cấp tính đang đe dọa biến chứng vào ổ mắt. Bác sĩ cần các xét nghiệm hình ảnh và nội soi để tìm bằng chứng xác đáng, loại trừ khối u xoang và các bệnh lý thần kinh.",
+    "chi_dinh_can_lam_sang": {
+      "xet_nghiem_truc_tiep_tim_ra_benh": [
+        {
+          "ten_xet_nghiem": "Nội soi tai mũi họng",
+          "muc_dich": "Quan sát trực tiếp hốc mũi để tìm dấu hiệu sung huyết và dịch mủ nhầy ở phức hợp lỗ ngách, vốn là tiêu chuẩn vàng trên lâm sàng.",
+          "ket_qua": "Cuốn mũi giữa bên trái nề, khe giữa trái có dải mủ đặc màu vàng xanh chảy từ trên xuống, niêm mạc mũi sung huyết mạnh."
+        },
+        {
+          "ten_xet_nghiem": "Nuôi cấy vi khuẩn và làm kháng sinh đồ từ dịch mủ khe giữa",
+          "muc_dich": "Định danh vi khuẩn gây bệnh (như S. Pneumoniae, H. Influenzae) trong trường hợp bệnh cảnh nặng, kéo dài và kém đáp ứng với các thuốc điều trị triệu chứng ban đầu.",
+          "ket_qua": "Dương tính với vi khuẩn Streptococcus pneumoniae kháng Penicillin."
+        }
+      ],
+      "xet_nghiem_loai_tru_benh_nguy_hiem": [
+        {
+          "ten_xet_nghiem": "Chụp cắt lớp vi tính (CT Scan) sọ mặt",
+          "muc_dich": "Phân biệt đau do viêm xoang với khối u tân sinh trong xoang, đồng thời đánh giá nguy cơ biến chứng ổ mắt (viêm mô tế bào ổ mắt) do bệnh nhân có dấu hiệu nề mi mắt.",
+          "ket_qua": "Hình ảnh mờ đặc xoang hàm và xoang sàng trái, có mức khí - dịch. Xương giấy còn nguyên vẹn, chưa có ổ áp xe trong hốc mắt, chỉ có thâm nhiễm viêm tổ chức trước vách ngăn ổ mắt. Không có khối u hay tiêu xương."
+        }
+      ]
+    },
+    "chan_doan_cuoi_cung": "Viêm mũi xoang cấp tính do vi khuẩn (S. Pneumoniae), đe dọa biến chứng viêm phần trước ổ mắt."
+  },
+  "du_lieu_labeling_mau": {
+    "case_level": {
+      "request_id": "tc_262",
+      "selected_profile_id": "prof_262",
+      "testcase_title": "TC262_AcuteBacterialRhinosinusitis_AtypicalPain",
+      "main_disease_name_vi": "Viêm mũi xoang cấp tính",
+      "primary_icd10": "<chua_co_ICD>",
+      "secondary_icd10_list_pipe": "",
+      "specialty": "Mũi xoang",
+      "message_hash_id": "msg_262",
+      "claim_id_or_sohoso": "claim_262",
+      "why_this_case_was_selected": "Kịch bản đưa ra thử thách chẩn đoán phân biệt đau nhức vùng mặt do viêm xoang cấp với đau răng, đau nửa đầu (Migraine) hay đau dây thần kinh V. Minh họa việc áp dụng CT Scan và Nội soi để chẩn đoán chính xác và loại trừ biến chứng ổ mắt.",
+      "claim_raw_json": "claim_262.json",
+      "icd_source": "phac_do_tmh_2015",
+      "signs_history_source": "phac_do_tmh_2015",
+      "lab_result_source": "phac_do_tmh_2015",
+      "reviewer_or_insurer_note_source": "note_262",
+      "contract_or_plan_source": "plan_262",
+      "chief_complaint": "Đau nhức mặt trái dữ dội lan lên trán, đau răng hàm và sưng nhẹ mi mắt.",
+      "initial_signs_pipe": "Đau nửa mặt trái | Mi mắt trái phù nề nhẹ | Ngạt mũi trái",
+      "medical_history_pipe": "Cảm cúm cách đây 2 tuần, khám nha khoa và thần kinh không tìm ra bệnh",
+      "initial_clinical_question": "Phân biệt đau mặt do viêm mũi xoang cấp tính với các nguyên nhân thần kinh/răng hàm mặt, và xác định có biến chứng ổ mắt hay không.",
+      "total_lines": 3,
+      "target_lines_for_labeling": 3,
+      "panel_services_present_pipe": "Nội soi tai mũi họng | Chụp cắt lớp vi tính (CT Scan) sọ mặt | Nuôi cấy dịch mủ tìm vi khuẩn",
+      "delivery_deadline": "2026-03-28",
+      "employee_name": "bs_demo_9",
+      "review_status": "submitted",
+      "manager_note": "Testcase rèn luyện tư duy phân biệt các loại đau đầu sọ mặt và chỉ định CT Scan hợp lý trong viêm xoang cấp có dấu hiệu nặng."
+    },
+    "service_lines": [
+      {
+        "line_no": 1,
+        "service_name_raw": "Nội soi tai mũi họng",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Nội soi là chỉ định cần thiết để xác định viêm mũi xoang cấp tính do nhiễm khuẩn. Việc phát hiện mủ nhầy tại khe giữa và phức hợp lỗ ngách giúp chẩn đoán phân biệt rõ ràng với đau nửa đầu Migraine hay đau dây thần kinh V.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Khám xét trực tiếp tìm dấu hiệu mủ đặc hiệu."
+      },
+      {
+        "line_no": 2,
+        "service_name_raw": "Chụp cắt lớp vi tính (CT Scanner) sọ mặt",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Mặc dù CT Scanner không dùng thường quy cho viêm xoang cấp, nhưng khi bệnh nhân có biểu hiện đau nhức một bên dữ dội kèm theo phù nề mi mắt, CT Scanner là bắt buộc để đánh giá nguy cơ biến chứng ổ mắt (viêm mô tế bào) và loại trừ u xoang.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Chỉ định loại trừ biến chứng và u tân sinh."
+      },
+      {
+        "line_no": 3,
+        "service_name_raw": "Nuôi cấy vi khuẩn và kháng sinh đồ dịch tỵ hầu",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Bệnh nhân có triệu chứng viêm nhiễm đường hô hấp trên kéo dài hơn 10 ngày, triệu chứng xấu đi đột ngột và có biểu hiện đau dữ dội dọa biến chứng. Việc nuôi cấy dịch mủ từ khe giữa qua nội soi là cần thiết để xác định chính xác vi khuẩn và lựa chọn kháng sinh đúng, tránh thất bại điều trị.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm vi sinh tìm tác nhân gây bệnh nặng."
+      }
+    ]
+  }
+}

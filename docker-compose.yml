@@ -49,7 +49,7 @@ services:
       neo4j:
         condition: service_healthy
     volumes:
-      - pathway_data:/app/data
+      - pathway_data:/app/data/uploads
       - pathway_logs:/app/logs
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9600/health"]
@@ -98,11 +98,11 @@ services:
     volumes:
       - 9router_data:/app/data
     healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:20128 || exit 1"]
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 -O /dev/null http://localhost:20128 || exit 1"]
       interval: 30s
       timeout: 5s
-      start_period: 60s
-      retries: 3
+      start_period: 90s
+      retries: 5
 
   # ─── 5. ai_claim (Reasoning Agent + Dashboard) ────────────────────
   ai_claim:
@@ -139,7 +139,11 @@ services:
 
 volumes:
   neo4j_data:
+    external: true
+    name: pathway_neo4j_data
   neo4j_logs:
+    external: true
+    name: pathway_neo4j_logs
   pathway_data:
   pathway_logs:
   9router_data:

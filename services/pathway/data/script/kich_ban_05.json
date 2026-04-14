@@ -1,0 +1,113 @@
+{
+  "cau_chuyen_y_khoa": {
+    "tieu_de": "Lời cảnh báo từ những vết loét họng bí ẩn",
+    "benh_nhan": {
+      "gioi_tinh": "Nữ",
+      "tuoi": 18
+    },
+    "benh_su_va_trieu_chung": {
+      "trieu_chung_co_nang": [
+        "Sốt cao 39.5 độ C, rét run, mệt mỏi suy kiệt nhanh chóng.",
+        "Đau họng dữ dội, nuốt đau nhói lên tai, hoàn toàn không ăn uống được.",
+        "Hơi thở rất hôi, thỉnh thoảng khạc ra chút máu đen."
+      ],
+      "tien_su": "Khỏe mạnh, mới thi đợt thi đại học căng thẳng, tự mua thuốc cảm cúm uống 3 ngày không đỡ."
+    },
+    "nhan_dinh_ban_dau": "Thăm khám họng ban đầu thấy niêm mạc họng đỏ rực, cả hai amiđan và niêm mạc họng có nhiều vết loét sâu, bề mặt phủ lớp giả mạc hoại tử màu xám bẩn, kèm theo chảy máu rỉ rả ở chân răng. Bệnh nhân có biểu hiện da xanh tái và nhiều hạch cổ sưng to. Bác sĩ Tai Mũi Họng nhận định đây là một ca viêm họng loét thể nặng. Tuy nhiên, vết loét xuất hiện ở cả hai bên kèm theo da xanh xao bất thường khiến bác sĩ phải cảnh giác cao độ: Đây có thể là bệnh bạch hầu nguy hiểm, viêm họng Vincent, hoặc đáng sợ nhất là một biểu hiện tại họng của bệnh lý huyết học ác tính.",
+    "chi_dinh_can_lam_sang": {
+      "xet_nghiem_loai_tru_benh_nguy_hiem": [
+        {
+          "ten_xet_nghiem": "Phết dịch họng soi tươi và nuôi cấy vi khuẩn",
+          "muc_dich": "Tìm trực khuẩn Klebs-Loeffer để loại trừ bệnh bạch hầu, hoặc xoắn khuẩn gây viêm họng Vincent.",
+          "ket_qua": "Âm tính với trực khuẩn bạch hầu, chỉ có hệ vi khuẩn chí bình thường vùng họng."
+        }
+      ],
+      "xet_nghiem_truc_tiep_tim_ra_benh": [
+        {
+          "ten_xet_nghiem": "Tổng phân tích tế bào máu ngoại vi (CBC) và phết lam máu",
+          "muc_dich": "Đánh giá tình trạng nhiễm trùng và kiểm tra các dòng tế bào máu. Đây là xét nghiệm then chốt khi nghi ngờ viêm họng do các bệnh về máu.",
+          "ket_qua": "Bạch cầu tăng vọt lên 50 G/L nhưng chủ yếu là tế bào non (Blast), hồng cầu giảm nặng (thiếu máu), tiểu cầu giảm sâu (gây chảy máu chân răng)."
+        },
+        {
+          "ten_xet_nghiem": "Huyết tủy đồ (Chọc hút tủy xương)",
+          "muc_dich": "Khẳng định chẩn đoán bệnh lý ác tính của hệ tạo máu.",
+          "ket_qua": "Tủy xương bị lấn át bởi các tế bào bạch cầu non ác tính."
+        }
+      ]
+    },
+    "chan_doan_cuoi_cung": "Viêm họng loét hoại tử thứ phát do Bệnh bạch cầu cấp (Leucose / Acute Leukemia)."
+  },
+  "du_lieu_labeling_mau": {
+    "case_level": {
+      "request_id": "tc_260",
+      "selected_profile_id": "prof_260",
+      "testcase_title": "TC260_NecrotizingPharyngitis_Leukemia",
+      "main_disease_name_vi": "Viêm mũi họng cấp tính (Viêm họng do bệnh máu)",
+      "primary_icd10": "<chua_co_ICD>",
+      "secondary_icd10_list_pipe": "",
+      "specialty": "Họng thanh quản",
+      "message_hash_id": "msg_260",
+      "claim_id_or_sohoso": "claim_260",
+      "why_this_case_was_selected": "Kịch bản siêu khó minh họa cạm bẫy lâm sàng: bệnh nhân đến khám Tai Mũi Họng vì đau họng loét hoại tử, nhưng nguyên nhân gốc rễ lại là ung thư máu (Leucose). Đòi hỏi bác sĩ phải nhạy bén chỉ định xét nghiệm máu để không bỏ sót bệnh tử vong.",
+      "claim_raw_json": "claim_260.json",
+      "icd_source": "phac_do_tmh_2015",
+      "signs_history_source": "phac_do_tmh_2015",
+      "lab_result_source": "phac_do_tmh_2015",
+      "reviewer_or_insurer_note_source": "note_260",
+      "contract_or_plan_source": "plan_260",
+      "chief_complaint": "Sốt cao, đau họng dữ dội, mệt mỏi suy kiệt và loét niêm mạc miệng họng.",
+      "initial_signs_pipe": "Sốt 39.5 độ | Niêm mạc họng và amiđan loét hoại tử hai bên | Da xanh tái | Chảy máu chân răng",
+      "medical_history_pipe": "Căng thẳng mệt mỏi kéo dài",
+      "initial_clinical_question": "Phân biệt viêm họng loét hoại tử do nhiễm khuẩn nặng (bạch hầu) hay do bệnh lý huyết học ác tính (bệnh bạch cầu cấp) ẩn dưới triệu chứng tai mũi họng.",
+      "total_lines": 4,
+      "target_lines_for_labeling": 4,
+      "panel_services_present_pipe": "Nội soi tai mũi họng | Phết dịch họng nuôi cấy | Tổng phân tích tế bào máu ngoại vi | Huyết tủy đồ",
+      "delivery_deadline": "2026-03-28",
+      "employee_name": "bs_demo_7",
+      "review_status": "submitted",
+      "manager_note": "Testcase xuất sắc về tư duy chẩn đoán phân biệt viêm họng loét do bệnh hệ thống."
+    },
+    "service_lines": [
+      {
+        "line_no": 1,
+        "service_name_raw": "Nội soi tai mũi họng",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Chỉ định thăm khám ban đầu bắt buộc để đánh giá trực tiếp tổn thương. Phát hiện niêm mạc họng loét hoại tử ở cả hai bên amiđan và thành họng giúp định hướng đến các nguyên nhân viêm họng đặc hiệu hoặc do bệnh máu.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Thăm khám lâm sàng đánh giá tổn thương tại chỗ."
+      },
+      {
+        "line_no": 2,
+        "service_name_raw": "Phết dịch họng nuôi cấy vi khuẩn",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Bệnh nhân có màng giả và vết loét sâu, chẩn đoán phân biệt đầu tiên cần loại trừ là bệnh bạch hầu (tìm trực khuẩn Klebs-Loeffer) hoặc viêm họng Vincent, nhằm tránh nguy cơ lây nhiễm và biến chứng độc tố.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm loại trừ vi khuẩn nguy hiểm."
+      },
+      {
+        "line_no": 3,
+        "service_name_raw": "Tổng phân tích tế bào máu ngoại vi (CBC)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Trong trường hợp viêm họng loét cả hai bên kèm theo da xanh tái, chảy máu chân răng, xét nghiệm máu là chìa khóa vàng phát hiện sự bất thường của các dòng tế bào (tăng bạch cầu non, giảm hồng cầu, tiểu cầu), giúp chẩn đoán Viêm họng trong bệnh bạch cầu cấp.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm trực tiếp bộc lộ nguyên nhân gốc của bệnh."
+      },
+      {
+        "line_no": 4,
+        "service_name_raw": "Huyết tủy đồ (Chọc hút tủy xương)",
+        "final_label": "PAYMENT",
+        "reason_layer": "medical",
+        "reason_text": "Khi công thức máu có tế bào blast bất thường, tủy đồ là xét nghiệm chuyên sâu bắt buộc được chỉ định tiếp theo để chẩn đoán xác định bệnh bạch cầu cấp (Leucose) - nguyên nhân gốc rễ gây ra triệu chứng loét họng hoại tử.",
+        "evidence_source": "phac_do_tmh_2015",
+        "confidence": "strong",
+        "reviewer_note": "Xét nghiệm khẳng định bản chất ung thư hệ tạo máu."
+      }
+    ]
+  }
+}
